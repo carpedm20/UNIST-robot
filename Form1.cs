@@ -120,7 +120,7 @@ namespace robot
             if (e.Url.ToString().IndexOf("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardLst.jsp?boardid=")!=-1)
             {
                 // 헤더 바꿔줌
-                gridView.Columns[3].HeaderText = "조회수";
+                gridView.Columns[4].HeaderText = "조회수";
 
                 string url=e.Url.ToString().Substring(e.Url.ToString().IndexOf("&nfirst="));
                 int page=Convert.ToInt32(url.Substring(8));
@@ -133,7 +133,7 @@ namespace robot
 
                 for (int i = 0; i < docNum / BOARDTAGNUM; i++)
                 {
-                    string[] rows = new string[4];
+                    string[] rows = new string[5];
                     HtmlElement title = titles.ElementAt(i);
 
                     // title 길이 조정
@@ -148,18 +148,33 @@ namespace robot
                     }
                     else*/
                     {
-                        rows[0] = title.InnerText;
+                        rows[1] = title.InnerText;
                     }
-                    rows[1] = elements.ElementAt(i * BOARDTAGNUM + 5).InnerText;
-                    rows[2] = elements.ElementAt(i * BOARDTAGNUM + 7).InnerText;
-                    rows[3] = elements.ElementAt(i * BOARDTAGNUM + 9).InnerText;
+                    rows[2] = elements.ElementAt(i * BOARDTAGNUM + 5).InnerText;
+                    rows[3] = elements.ElementAt(i * BOARDTAGNUM + 7).InnerText;
+                    rows[4] = elements.ElementAt(i * BOARDTAGNUM + 9).InnerText;
+                    rows[0] = "";
 
                     index = (page - 1) * 10 + i;
 
-                    board[index].title = rows[0];
-                    board[index].writer = rows[1];
-                    board[index].date = rows[2];
-                    board[index].viewCount = Convert.ToInt32(rows[3]);
+                    // new글 체크
+                    if (title.GetElementsByTagName("img").Count > 0)
+                    {
+                        board[index].newPost = true;
+                        rows[0] = "new";
+                    }
+
+                    // 공지글 체크
+                    if (elements.ElementAt(i * BOARDTAGNUM + 1).GetElementsByTagName("img").Count > 0)
+                    {
+                        board[index].anouncement = true;
+                        rows[0] = "공지";
+                    }
+
+                    board[index].title = rows[1];
+                    board[index].writer = rows[2];
+                    board[index].date = rows[3];
+                    board[index].viewCount = Convert.ToInt32(rows[4]);
                     board[index].page = page;
                     board[index].boardId = boardId;
 
@@ -202,7 +217,7 @@ namespace robot
             else if (e.Url.ToString().IndexOf("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_MyBoardLst.jsp") != -1)
             {
                 // 헤더 바꿔줌
-                gridView.Columns[3].HeaderText = "게시판";
+                gridView.Columns[4].HeaderText = "게시판";
 
                 string url = e.Url.ToString().Substring(e.Url.ToString().IndexOf("nfirst="));
                 int page = Convert.ToInt32(url.Substring(7));
@@ -215,7 +230,7 @@ namespace robot
 
                 for (int i = 0; i < docNum / 11; i++)
                 {
-                    string[] rows = new string[4];
+                    string[] rows = new string[5];
                     HtmlElement title = titles.ElementAt(i);
 
                     // title 길이 조정
@@ -230,18 +245,19 @@ namespace robot
                     }
                     else*/
                     {
-                        rows[0] = title.InnerText;
+                        rows[1] = title.InnerText;
                     }
-                    rows[1] = elements.ElementAt(i * 11 + 5).InnerText;
-                    rows[2] = elements.ElementAt(i * 11 + 7).InnerText;
-                    rows[3] = elements.ElementAt(i * 11 + 3).InnerText;
+                    rows[2] = elements.ElementAt(i * 11 + 5).InnerText;
+                    rows[3] = elements.ElementAt(i * 11 + 7).InnerText;
+                    rows[4] = elements.ElementAt(i * 11 + 3).InnerText;
+                    //rows[0] = ""; // 전체공지, 학사공지, 대학원공지에서 new, 공지글 표시용
 
                     index = (page - 1) * 10 + i;
 
-                    board[index].title = rows[0];
-                    board[index].writer = rows[1];
-                    board[index].date = rows[2];
-                    board[index].boardName = rows[3];
+                    board[index].title = rows[1];
+                    board[index].writer = rows[2];
+                    board[index].date = rows[3];
+                    board[index].boardName = rows[4];
                     //board[index].viewCount = Convert.ToInt32(rows[3]);
                     board[index].page = page;
                     board[index].boardId = boardId;
@@ -606,7 +622,7 @@ namespace robot
 
             if (check.Checked == true && count!=0)
             {
-                DialogResult result = MessageBox.Show("개인정보가 유출될 수 있습니다.\r\n\r\n자동 로그인을 하시겠습니까? :[", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                DialogResult result = MessageBox.Show("개인정보가 유출될 수 있습니다.\r\n자동 로그인을 하시겠습니까? :[", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                 if (result == DialogResult.No)
                 {
                     check.Checked = false;

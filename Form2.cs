@@ -87,7 +87,7 @@ namespace robot
 
             if (check.Checked == true)
             {
-                DialogResult result = MessageBox.Show("개인정보가 유출될 수 있습니다.\r\n\r\n자동 로그인을 하시겠습니까? :[", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                DialogResult result = MessageBox.Show("개인정보가 유출될 수 있습니다.\r\n자동 로그인을 하시겠습니까? :[", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
                 if (result == DialogResult.No)
                 {
                     check.Checked = false;

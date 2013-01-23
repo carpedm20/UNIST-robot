@@ -65,6 +65,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.studyPhoneNumber = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.bookInfoGroup = new System.Windows.Forms.GroupBox();
+            this.button1 = new System.Windows.Forms.Button();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.bookPic = new System.Windows.Forms.PictureBox();
+            this.bookListGrid = new System.Windows.Forms.DataGridView();
+            this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.studyGrid = new System.Windows.Forms.DataGridView();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -94,49 +104,37 @@
             this.roomNumberBox = new System.Windows.Forms.ComboBox();
             this.roomNumberLabel = new System.Windows.Forms.Label();
             this.bookGroup = new System.Windows.Forms.GroupBox();
-            this.bookGridView = new System.Windows.Forms.DataGridView();
-            this.bookTitle = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
-            this.bookAuthor = new System.Windows.Forms.TextBox();
-            this.label10 = new System.Windows.Forms.Label();
-            this.bookPublisher = new System.Windows.Forms.TextBox();
-            this.label11 = new System.Windows.Forms.Label();
-            this.comboBox1 = new System.Windows.Forms.ComboBox();
-            this.comboBox2 = new System.Windows.Forms.ComboBox();
+            this.bookOperator = new System.Windows.Forms.ComboBox();
+            this.bookOption2 = new System.Windows.Forms.ComboBox();
+            this.bookQuery2 = new System.Windows.Forms.TextBox();
+            this.bookOption1 = new System.Windows.Forms.ComboBox();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.dataGridView2 = new System.Windows.Forms.DataGridView();
+            this.Column40 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column41 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.Column30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column39 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.bookSearch = new System.Windows.Forms.Button();
-            this.bookInfoGroup = new System.Windows.Forms.GroupBox();
-            this.bookListGrid = new System.Windows.Forms.DataGridView();
-            this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bookQuery1 = new System.Windows.Forms.TextBox();
+            this.bookGridView = new System.Windows.Forms.DataGridView();
             this.Column31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column32 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.label12 = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
-            this.dataGridView2 = new System.Windows.Forms.DataGridView();
-            this.label13 = new System.Windows.Forms.Label();
-            this.label14 = new System.Windows.Forms.Label();
-            this.Column30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column39 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column40 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column41 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.w = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.studyGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.bookInfoGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bookPic)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookListGrid)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.studyGrid)).BeginInit();
             this.bookGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bookGridView)).BeginInit();
-            this.bookInfoGroup.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bookListGrid)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookGridView)).BeginInit();
             this.SuspendLayout();
             // 
             // browser
@@ -342,7 +340,6 @@
             // 
             // studyGroup
             // 
-            this.studyGroup.Controls.Add(this.bookInfoGroup);
             this.studyGroup.Controls.Add(this.label7);
             this.studyGroup.Controls.Add(this.groupBox1);
             this.studyGroup.Controls.Add(this.label4);
@@ -530,6 +527,104 @@
             this.label1.TabIndex = 0;
             this.label1.Text = "전화 번호";
             // 
+            // bookInfoGroup
+            // 
+            this.bookInfoGroup.Controls.Add(this.button1);
+            this.bookInfoGroup.Controls.Add(this.label12);
+            this.bookInfoGroup.Controls.Add(this.label8);
+            this.bookInfoGroup.Controls.Add(this.bookPic);
+            this.bookInfoGroup.Controls.Add(this.bookListGrid);
+            this.bookInfoGroup.Location = new System.Drawing.Point(150, 32);
+            this.bookInfoGroup.Name = "bookInfoGroup";
+            this.bookInfoGroup.Size = new System.Drawing.Size(672, 178);
+            this.bookInfoGroup.TabIndex = 14;
+            this.bookInfoGroup.TabStop = false;
+            this.bookInfoGroup.Text = "책 정보";
+            this.bookInfoGroup.Visible = false;
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(580, 20);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "리뷰 보기";
+            this.button1.UseVisualStyleBackColor = true;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(397, 23);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(75, 14);
+            this.label12.TabIndex = 4;
+            this.label12.Text = "네티즌 평점 : ";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(139, 23);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(53, 14);
+            this.label8.TabIndex = 3;
+            this.label8.Text = "책 제목 : ";
+            // 
+            // bookPic
+            // 
+            this.bookPic.Location = new System.Drawing.Point(13, 23);
+            this.bookPic.Name = "bookPic";
+            this.bookPic.Size = new System.Drawing.Size(112, 145);
+            this.bookPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.bookPic.TabIndex = 2;
+            this.bookPic.TabStop = false;
+            // 
+            // bookListGrid
+            // 
+            this.bookListGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.bookListGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.bookListGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column35,
+            this.Column36,
+            this.Column37,
+            this.Column38});
+            this.bookListGrid.Location = new System.Drawing.Point(142, 49);
+            this.bookListGrid.Name = "bookListGrid";
+            this.bookListGrid.RowHeadersVisible = false;
+            this.bookListGrid.RowTemplate.Height = 23;
+            this.bookListGrid.Size = new System.Drawing.Size(513, 117);
+            this.bookListGrid.TabIndex = 1;
+            // 
+            // Column35
+            // 
+            this.Column35.Frozen = true;
+            this.Column35.HeaderText = "등록 번호";
+            this.Column35.Name = "Column35";
+            this.Column35.ReadOnly = true;
+            // 
+            // Column36
+            // 
+            this.Column36.Frozen = true;
+            this.Column36.HeaderText = "소장 위치";
+            this.Column36.Name = "Column36";
+            this.Column36.ReadOnly = true;
+            this.Column36.Width = 170;
+            // 
+            // Column37
+            // 
+            this.Column37.Frozen = true;
+            this.Column37.HeaderText = "상태";
+            this.Column37.Name = "Column37";
+            this.Column37.ReadOnly = true;
+            this.Column37.Width = 70;
+            // 
+            // Column38
+            // 
+            this.Column38.Frozen = true;
+            this.Column38.HeaderText = "청구 기호";
+            this.Column38.Name = "Column38";
+            this.Column38.ReadOnly = true;
+            this.Column38.Width = 150;
+            // 
             // studyGrid
             // 
             this.studyGrid.AllowUserToAddRows = false;
@@ -577,6 +672,7 @@
             this.studyGrid.Size = new System.Drawing.Size(808, 457);
             this.studyGrid.TabIndex = 18;
             this.studyGrid.Visible = false;
+            this.studyGrid.RowsAdded += new System.Windows.Forms.DataGridViewRowsAddedEventHandler(this.studyGrid_RowsAdded);
             // 
             // Date
             // 
@@ -780,7 +876,6 @@
             // 
             // roomNumberBox
             // 
-            this.roomNumberBox.FormattingEnabled = true;
             this.roomNumberBox.Items.AddRange(new object[] {
             "1 (3-6)",
             "2 (3-6)",
@@ -812,19 +907,16 @@
             // 
             // bookGroup
             // 
+            this.bookGroup.Controls.Add(this.bookOperator);
+            this.bookGroup.Controls.Add(this.bookOption2);
+            this.bookGroup.Controls.Add(this.bookQuery2);
+            this.bookGroup.Controls.Add(this.bookOption1);
             this.bookGroup.Controls.Add(this.label14);
             this.bookGroup.Controls.Add(this.label13);
             this.bookGroup.Controls.Add(this.dataGridView2);
             this.bookGroup.Controls.Add(this.dataGridView1);
             this.bookGroup.Controls.Add(this.bookSearch);
-            this.bookGroup.Controls.Add(this.comboBox2);
-            this.bookGroup.Controls.Add(this.comboBox1);
-            this.bookGroup.Controls.Add(this.bookPublisher);
-            this.bookGroup.Controls.Add(this.label11);
-            this.bookGroup.Controls.Add(this.bookAuthor);
-            this.bookGroup.Controls.Add(this.label10);
-            this.bookGroup.Controls.Add(this.bookTitle);
-            this.bookGroup.Controls.Add(this.label9);
+            this.bookGroup.Controls.Add(this.bookQuery1);
             this.bookGroup.Controls.Add(this.bookGridView);
             this.bookGroup.Location = new System.Drawing.Point(20, 224);
             this.bookGroup.Name = "bookGroup";
@@ -834,166 +926,169 @@
             this.bookGroup.Text = "도서 검색";
             this.bookGroup.Visible = false;
             // 
+            // bookOperator
+            // 
+            this.bookOperator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.bookOperator.Items.AddRange(new object[] {
+            "AND",
+            "OR",
+            "NOT"});
+            this.bookOperator.Location = new System.Drawing.Point(313, 27);
+            this.bookOperator.Name = "bookOperator";
+            this.bookOperator.Size = new System.Drawing.Size(56, 22);
+            this.bookOperator.TabIndex = 3;
+            // 
+            // bookOption2
+            // 
+            this.bookOption2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.bookOption2.Items.AddRange(new object[] {
+            "제목",
+            "저자",
+            "출판사"});
+            this.bookOption2.Location = new System.Drawing.Point(388, 27);
+            this.bookOption2.Name = "bookOption2";
+            this.bookOption2.Size = new System.Drawing.Size(100, 22);
+            this.bookOption2.TabIndex = 4;
+            this.bookOption2.SelectedIndexChanged += new System.EventHandler(this.bookOption2_SelectedIndexChanged);
+            // 
+            // bookQuery2
+            // 
+            this.bookQuery2.Location = new System.Drawing.Point(505, 28);
+            this.bookQuery2.Name = "bookQuery2";
+            this.bookQuery2.Size = new System.Drawing.Size(163, 21);
+            this.bookQuery2.TabIndex = 5;
+            this.bookQuery2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.bookQuery2_KeyDown);
+            // 
+            // bookOption1
+            // 
+            this.bookOption1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.bookOption1.Items.AddRange(new object[] {
+            "제목",
+            "저자",
+            "출판사"});
+            this.bookOption1.Location = new System.Drawing.Point(13, 26);
+            this.bookOption1.Name = "bookOption1";
+            this.bookOption1.Size = new System.Drawing.Size(100, 22);
+            this.bookOption1.TabIndex = 1;
+            this.bookOption1.SelectedIndexChanged += new System.EventHandler(this.bookOption1_SelectedIndexChanged);
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Location = new System.Drawing.Point(662, 279);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(101, 14);
+            this.label14.TabIndex = 22;
+            this.label14.Text = "분야별 검색어 순위";
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(660, 65);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(101, 14);
+            this.label13.TabIndex = 21;
+            this.label13.Text = "실시간 검색어 순위";
+            // 
+            // dataGridView2
+            // 
+            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column40,
+            this.Column41});
+            this.dataGridView2.Location = new System.Drawing.Point(652, 301);
+            this.dataGridView2.Name = "dataGridView2";
+            this.dataGridView2.RowHeadersVisible = false;
+            this.dataGridView2.RowTemplate.Height = 23;
+            this.dataGridView2.Size = new System.Drawing.Size(123, 177);
+            this.dataGridView2.TabIndex = 20;
+            // 
+            // Column40
+            // 
+            this.Column40.Frozen = true;
+            this.Column40.HeaderText = "#";
+            this.Column40.Name = "Column40";
+            this.Column40.ReadOnly = true;
+            this.Column40.Width = 30;
+            // 
+            // Column41
+            // 
+            this.Column41.Frozen = true;
+            this.Column41.HeaderText = "검색어";
+            this.Column41.Name = "Column41";
+            this.Column41.ReadOnly = true;
+            // 
+            // dataGridView1
+            // 
+            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column30,
+            this.Column39});
+            this.dataGridView1.Location = new System.Drawing.Point(652, 88);
+            this.dataGridView1.Name = "dataGridView1";
+            this.dataGridView1.RowHeadersVisible = false;
+            this.dataGridView1.RowTemplate.Height = 23;
+            this.dataGridView1.Size = new System.Drawing.Size(123, 177);
+            this.dataGridView1.TabIndex = 19;
+            // 
+            // Column30
+            // 
+            this.Column30.Frozen = true;
+            this.Column30.HeaderText = "#";
+            this.Column30.Name = "Column30";
+            this.Column30.ReadOnly = true;
+            this.Column30.Width = 30;
+            // 
+            // Column39
+            // 
+            this.Column39.Frozen = true;
+            this.Column39.HeaderText = "검색어";
+            this.Column39.Name = "Column39";
+            this.Column39.ReadOnly = true;
+            // 
+            // bookSearch
+            // 
+            this.bookSearch.Location = new System.Drawing.Point(693, 26);
+            this.bookSearch.Name = "bookSearch";
+            this.bookSearch.Size = new System.Drawing.Size(65, 23);
+            this.bookSearch.TabIndex = 6;
+            this.bookSearch.Text = "검색";
+            this.bookSearch.UseVisualStyleBackColor = true;
+            this.bookSearch.Click += new System.EventHandler(this.bookSearch_Click);
+            // 
+            // bookQuery1
+            // 
+            this.bookQuery1.Location = new System.Drawing.Point(130, 27);
+            this.bookQuery1.Name = "bookQuery1";
+            this.bookQuery1.Size = new System.Drawing.Size(163, 21);
+            this.bookQuery1.TabIndex = 2;
+            this.bookQuery1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.bookQuery1_KeyDown);
+            // 
             // bookGridView
             // 
+            this.bookGridView.AllowUserToAddRows = false;
+            this.bookGridView.AllowUserToDeleteRows = false;
+            this.bookGridView.AllowUserToResizeColumns = false;
+            this.bookGridView.AllowUserToResizeRows = false;
             this.bookGridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.bookGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.bookGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column31,
             this.Column32,
             this.Column33,
-            this.Column34});
+            this.Column34,
+            this.w});
             this.bookGridView.Location = new System.Drawing.Point(13, 65);
+            this.bookGridView.MultiSelect = false;
             this.bookGridView.Name = "bookGridView";
             this.bookGridView.RowHeadersVisible = false;
             this.bookGridView.RowTemplate.Height = 23;
+            this.bookGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.bookGridView.Size = new System.Drawing.Size(625, 413);
             this.bookGridView.TabIndex = 0;
-            // 
-            // bookTitle
-            // 
-            this.bookTitle.Location = new System.Drawing.Point(79, 25);
-            this.bookTitle.Name = "bookTitle";
-            this.bookTitle.Size = new System.Drawing.Size(151, 21);
-            this.bookTitle.TabIndex = 1;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(25, 28);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(43, 14);
-            this.label9.TabIndex = 14;
-            this.label9.Text = "책 제목";
-            // 
-            // bookAuthor
-            // 
-            this.bookAuthor.Location = new System.Drawing.Point(352, 25);
-            this.bookAuthor.Name = "bookAuthor";
-            this.bookAuthor.Size = new System.Drawing.Size(94, 21);
-            this.bookAuthor.TabIndex = 3;
-            // 
-            // label10
-            // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(313, 28);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(29, 14);
-            this.label10.TabIndex = 16;
-            this.label10.Text = "작가";
-            // 
-            // bookPublisher
-            // 
-            this.bookPublisher.Location = new System.Drawing.Point(583, 24);
-            this.bookPublisher.Name = "bookPublisher";
-            this.bookPublisher.Size = new System.Drawing.Size(120, 21);
-            this.bookPublisher.TabIndex = 5;
-            // 
-            // label11
-            // 
-            this.label11.AutoSize = true;
-            this.label11.Location = new System.Drawing.Point(532, 27);
-            this.label11.Name = "label11";
-            this.label11.Size = new System.Drawing.Size(40, 14);
-            this.label11.TabIndex = 18;
-            this.label11.Text = "출판사";
-            // 
-            // comboBox1
-            // 
-            this.comboBox1.FormattingEnabled = true;
-            this.comboBox1.Items.AddRange(new object[] {
-            "AND",
-            "OR",
-            "NOT"});
-            this.comboBox1.Location = new System.Drawing.Point(245, 25);
-            this.comboBox1.Name = "comboBox1";
-            this.comboBox1.Size = new System.Drawing.Size(54, 22);
-            this.comboBox1.TabIndex = 2;
-            this.comboBox1.Text = "AND";
-            // 
-            // comboBox2
-            // 
-            this.comboBox2.FormattingEnabled = true;
-            this.comboBox2.Items.AddRange(new object[] {
-            "AND",
-            "OR",
-            "NOT"});
-            this.comboBox2.Location = new System.Drawing.Point(463, 24);
-            this.comboBox2.Name = "comboBox2";
-            this.comboBox2.Size = new System.Drawing.Size(54, 22);
-            this.comboBox2.TabIndex = 4;
-            this.comboBox2.Text = "AND";
-            // 
-            // bookSearch
-            // 
-            this.bookSearch.Location = new System.Drawing.Point(715, 23);
-            this.bookSearch.Name = "bookSearch";
-            this.bookSearch.Size = new System.Drawing.Size(52, 23);
-            this.bookSearch.TabIndex = 6;
-            this.bookSearch.Text = "검색";
-            this.bookSearch.UseVisualStyleBackColor = true;
-            // 
-            // bookInfoGroup
-            // 
-            this.bookInfoGroup.Controls.Add(this.button1);
-            this.bookInfoGroup.Controls.Add(this.label12);
-            this.bookInfoGroup.Controls.Add(this.label8);
-            this.bookInfoGroup.Controls.Add(this.pictureBox1);
-            this.bookInfoGroup.Controls.Add(this.bookListGrid);
-            this.bookInfoGroup.Location = new System.Drawing.Point(0, 0);
-            this.bookInfoGroup.Name = "bookInfoGroup";
-            this.bookInfoGroup.Size = new System.Drawing.Size(672, 178);
-            this.bookInfoGroup.TabIndex = 14;
-            this.bookInfoGroup.TabStop = false;
-            this.bookInfoGroup.Text = "책 정보";
-            this.bookInfoGroup.Visible = false;
-            // 
-            // bookListGrid
-            // 
-            this.bookListGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.bookListGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.bookListGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column35,
-            this.Column36,
-            this.Column37,
-            this.Column38});
-            this.bookListGrid.Location = new System.Drawing.Point(142, 49);
-            this.bookListGrid.Name = "bookListGrid";
-            this.bookListGrid.RowHeadersVisible = false;
-            this.bookListGrid.RowTemplate.Height = 23;
-            this.bookListGrid.Size = new System.Drawing.Size(513, 117);
-            this.bookListGrid.TabIndex = 1;
-            // 
-            // Column35
-            // 
-            this.Column35.Frozen = true;
-            this.Column35.HeaderText = "등록 번호";
-            this.Column35.Name = "Column35";
-            this.Column35.ReadOnly = true;
-            // 
-            // Column36
-            // 
-            this.Column36.Frozen = true;
-            this.Column36.HeaderText = "소장 위치";
-            this.Column36.Name = "Column36";
-            this.Column36.ReadOnly = true;
-            this.Column36.Width = 170;
-            // 
-            // Column37
-            // 
-            this.Column37.Frozen = true;
-            this.Column37.HeaderText = "상태";
-            this.Column37.Name = "Column37";
-            this.Column37.ReadOnly = true;
-            this.Column37.Width = 70;
-            // 
-            // Column38
-            // 
-            this.Column38.Frozen = true;
-            this.Column38.HeaderText = "청구 기호";
-            this.Column38.Name = "Column38";
-            this.Column38.ReadOnly = true;
-            this.Column38.Width = 150;
+            this.bookGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.bookGridView_CellClick);
             // 
             // Column31
             // 
@@ -1023,124 +1118,22 @@
             this.Column34.HeaderText = "출판년도";
             this.Column34.Name = "Column34";
             this.Column34.ReadOnly = true;
+            this.Column34.Width = 80;
             // 
-            // pictureBox1
+            // w
             // 
-            this.pictureBox1.Location = new System.Drawing.Point(13, 23);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(112, 145);
-            this.pictureBox1.TabIndex = 2;
-            this.pictureBox1.TabStop = false;
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(139, 23);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(53, 14);
-            this.label8.TabIndex = 3;
-            this.label8.Text = "책 제목 : ";
-            // 
-            // label12
-            // 
-            this.label12.AutoSize = true;
-            this.label12.Location = new System.Drawing.Point(397, 23);
-            this.label12.Name = "label12";
-            this.label12.Size = new System.Drawing.Size(75, 14);
-            this.label12.TabIndex = 4;
-            this.label12.Text = "네티즌 평점 : ";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(580, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "리뷰 보기";
-            this.button1.UseVisualStyleBackColor = true;
-            // 
-            // dataGridView1
-            // 
-            this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column30,
-            this.Column39});
-            this.dataGridView1.Location = new System.Drawing.Point(652, 88);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersVisible = false;
-            this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(123, 177);
-            this.dataGridView1.TabIndex = 19;
-            // 
-            // dataGridView2
-            // 
-            this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column40,
-            this.Column41});
-            this.dataGridView2.Location = new System.Drawing.Point(652, 301);
-            this.dataGridView2.Name = "dataGridView2";
-            this.dataGridView2.RowHeadersVisible = false;
-            this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(123, 177);
-            this.dataGridView2.TabIndex = 20;
-            // 
-            // label13
-            // 
-            this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(660, 65);
-            this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(101, 14);
-            this.label13.TabIndex = 21;
-            this.label13.Text = "실시간 검색어 순위";
-            // 
-            // label14
-            // 
-            this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(662, 279);
-            this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(101, 14);
-            this.label14.TabIndex = 22;
-            this.label14.Text = "분야별 검색어 순위";
-            // 
-            // Column30
-            // 
-            this.Column30.Frozen = true;
-            this.Column30.HeaderText = "#";
-            this.Column30.Name = "Column30";
-            this.Column30.ReadOnly = true;
-            this.Column30.Width = 30;
-            // 
-            // Column39
-            // 
-            this.Column39.Frozen = true;
-            this.Column39.HeaderText = "검색어";
-            this.Column39.Name = "Column39";
-            this.Column39.ReadOnly = true;
-            // 
-            // Column40
-            // 
-            this.Column40.Frozen = true;
-            this.Column40.HeaderText = "#";
-            this.Column40.Name = "Column40";
-            this.Column40.ReadOnly = true;
-            this.Column40.Width = 30;
-            // 
-            // Column41
-            // 
-            this.Column41.Frozen = true;
-            this.Column41.HeaderText = "검색어";
-            this.Column41.Name = "Column41";
-            this.Column41.ReadOnly = true;
+            this.w.Frozen = true;
+            this.w.HeaderText = "종류";
+            this.w.Name = "w";
+            this.w.ReadOnly = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(834, 725);
+            this.ClientSize = new System.Drawing.Size(834, 696);
+            this.Controls.Add(this.bookInfoGroup);
             this.Controls.Add(this.bookGroup);
             this.Controls.Add(this.roomNumberLabel);
             this.Controls.Add(this.roomNumberBox);
@@ -1168,16 +1161,16 @@
             this.studyGroup.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            this.bookInfoGroup.ResumeLayout(false);
+            this.bookInfoGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bookPic)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookListGrid)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.studyGrid)).EndInit();
             this.bookGroup.ResumeLayout(false);
             this.bookGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bookGridView)).EndInit();
-            this.bookInfoGroup.ResumeLayout(false);
-            this.bookInfoGroup.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.bookListGrid)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.bookGridView)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1253,27 +1246,16 @@
         private System.Windows.Forms.GroupBox bookGroup;
         private System.Windows.Forms.DataGridView bookGridView;
         private System.Windows.Forms.Button bookSearch;
-        private System.Windows.Forms.ComboBox comboBox2;
-        private System.Windows.Forms.ComboBox comboBox1;
-        private System.Windows.Forms.TextBox bookPublisher;
-        private System.Windows.Forms.Label label11;
-        private System.Windows.Forms.TextBox bookAuthor;
-        private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.TextBox bookTitle;
-        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox bookQuery1;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridView dataGridView1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column31;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column32;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column33;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column34;
         private System.Windows.Forms.GroupBox bookInfoGroup;
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox bookPic;
         private System.Windows.Forms.DataGridView bookListGrid;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column35;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column36;
@@ -1283,6 +1265,15 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column41;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column30;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column39;
+        private System.Windows.Forms.ComboBox bookOperator;
+        private System.Windows.Forms.ComboBox bookOption2;
+        private System.Windows.Forms.TextBox bookQuery2;
+        private System.Windows.Forms.ComboBox bookOption1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column31;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column32;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column33;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column34;
+        private System.Windows.Forms.DataGridViewTextBoxColumn w;
     }
 }
 

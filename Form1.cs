@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using mshtml;
+using System.Web;
+using System.Xml;
 
 namespace robot
 {
@@ -33,6 +35,9 @@ namespace robot
         int bbCount = 0;
 
         int iconCount = 0; // welcomeLabel 이모티콘 모양
+
+        string bookQuery = ""; // 책 검색 쿼리
+        Book[] books;
 
         Random r = new Random();
         Say say;
@@ -77,6 +82,11 @@ namespace robot
                 board[i] = new Board();
 
             browser.Navigate("https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp");
+
+            // 책 검색 옵션 초기화
+            bookOption1.SelectedIndex = 0;
+            bookOption2.SelectedIndex = 1;
+            bookOperator.SelectedIndex = 0;
         }
 
         private void login()
@@ -496,8 +506,60 @@ namespace robot
                 studyGrid.Visible = true;
                 roomNumberBox.Visible = true;
                 roomNumberLabel.Visible = true;
-
             }
+
+            // 책 검색 쿼리
+            if (e.Url.ToString().IndexOf("http://library.unist.ac.kr/DLiWeb25Eng/comp/search/Results.aspx?") != -1)
+            {
+                browser.Visible = true;
+                while (bookGridView.Rows.Count != 0)
+                {
+                    bookGridView.Rows.RemoveAt(0);
+                }
+
+                bookListGrid.Visible = true;
+
+                IEnumerable<HtmlElement> elements = ElementsByClass(doc, "item");
+
+                books = new Book[elements.Count()];
+
+                string[] rows = new string[5];
+
+                for (int i = 0; i < elements.Count(); i++)
+                {
+
+                    books[i] = new Book();
+                    string html = elements.ElementAt(i).InnerHtml;
+
+                    if (html.IndexOf("no thumbnail") != -1)
+                    {
+                        books[i].thumbnail = "";
+                    }
+                    else
+                    {
+                        books[i].thumbnail = html.Substring(html.IndexOf("thumb.axd?url=")).Split('\"')[0];
+                    }
+
+                    rows[0] = books[i].title = elements.ElementAt(i).GetElementsByTagName("label")[0].GetAttribute("title");
+                    rows[1] = books[i].author = html.Substring(html.IndexOf("author\">")).Split('>')[1].Split('<')[0];
+                    rows[2] = books[i].publisher = html.Substring(html.IndexOf("publisher\">")).Split('>')[1].Split('<')[0];
+                    rows[3] = books[i].publishYear = html.Substring(html.IndexOf("publishyear\">")).Split('>')[1].Split('<')[0];
+                    rows[4] = books[i].isbn = html.Substring(html.IndexOf("isbn\">")).Split('>')[1].Split('<')[0];
+
+                    if (html.IndexOf("Domestic Books") != -1)
+                    {
+                        books[i].kind = "국내 서적";
+                    }
+
+                    bookGridView.Rows.Add(rows);
+                }
+            }
+
+            // 책 이미지 뽑아오기
+            /*if (e.Url.ToString().IndexOf("http://library.unist.ac.kr/DLiWeb25/comp/search/thumb.axd?url=") != -1)
+            {
+                bookPic.Visible = true;
+            }*/
         }
         /*
         public void parsing(int page)
@@ -552,7 +614,8 @@ namespace robot
                 gridView.Rows.Add(rows);
             }
         }*/
-
+        
+        // 클래스 이름으로 htmlelment 받는 함수
         static IEnumerable<HtmlElement> ElementsByClass(HtmlDocument doc, string className)
         {
             foreach (HtmlElement e in doc.All)
@@ -948,6 +1011,176 @@ namespace robot
             blue = Convert.ToInt32(Convert.ToByte(photoShopColor.Substring(5, 2), 16));
 
             return Color.FromArgb(red, green, blue);
+        }
+
+        // study room gridv
+        private void studyGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
+        {
+            DataGridView grid = (DataGridView)sender;
+            DataGridViewRow row = grid.Rows[grid.Rows.Count - 1];
+
+            for (int i = 0; i < row.Cells.Count; i++)
+            {
+                if (row.Cells[i].Value == "E")
+                {
+                    row.Cells[i].Style = new DataGridViewCellStyle { ForeColor=Color.White, BackColor=Color.CadetBlue };
+                }
+                if (row.Cells[i].Value == "R")
+                {
+                    row.Cells[i].Style = new DataGridViewCellStyle { ForeColor = Color.White, BackColor = Color.IndianRed };
+                }
+            }
+        }
+
+        private void bookSearch_Click(object sender, EventArgs e)
+        {
+            queryMake(); // 쿼리 만듬
+            if (bookQuery != "")
+            {
+                string url = "http://library.unist.ac.kr/DLiWeb25Eng/comp/search/Results.aspx?" + bookQuery;
+                browser.Navigate(url);
+            }
+            //http://library.unist.ac.kr/DLiWeb25Eng/comp/search/Results.aspx?method=2&field=TITL,AUTH,PUBN&keyword=%ED%95%B4%ED%82%B9,%ED%95%B4%ED%82%B9,%ED%95%B4%ED%82%B9&operator=0,1,3&branch=01&classid=24,27,1,60,32,65,21,23,25,39,75,2,22,41,38,74,88,52,33,6,19,80,29,59,85,89,63,5,28,16,77,30,73,53,34,64,79,26,90,35,3,4,15,20,42,76,86,91&max=300&classifyname=KDC&classify=&cntperpage=20&viewoption=1&sort=DEFAULT
+        }
+
+        public void queryMake()
+        {
+            string query = "method=2";
+
+            if (bookQuery1 != null && bookQuery2 == null)
+            {
+                query += "&keyword=" + HttpUtility.UrlEncode(bookQuery1.Text);
+                query += "&field=";
+
+                if (bookOption1.SelectedItem.ToString() == "제목")
+                    query += "TITL";
+                else if (bookOption1.SelectedItem.ToString() == "저자")
+                    query += "AUTH";
+                else
+                {
+                    query += "PUBL";
+                }
+                query += "&operator=0";
+            }
+            else if (bookQuery1 == null && bookQuery2 != null)
+            {
+                query += "&keyword=" + HttpUtility.UrlEncode(bookQuery2.Text);
+                query += "&field=";
+
+                if (bookOption2.SelectedItem.ToString() == "제목")
+                    query += "TITL";
+                else if (bookOption2.SelectedItem.ToString() == "저자")
+                    query += "AUTH";
+                else
+                {
+                    query += "PUBL";
+                }
+                query += "&operator=0";
+            }
+            else
+            {
+                query += "&keyword=" + HttpUtility.UrlEncode(bookQuery1.Text) + "," + HttpUtility.UrlEncode(bookQuery2.Text);
+                query += "&field=";
+
+                if (bookOption1.SelectedItem.ToString() == "제목")
+                    query += "TITL";
+                else if (bookOption1.SelectedItem.ToString() == "저자")
+                    query += "AUTH";
+                else
+                {
+                    query += "PUBL";
+                }
+
+                if (bookOption2.SelectedItem.ToString() == "제목")
+                    query += ",TITL";
+                else if (bookOption2.SelectedItem.ToString() == "저자")
+                    query += ",AUTH";
+                else
+                {
+                    query += ",PUBL";
+                }
+
+                query+="&operator=0,";
+
+                if (bookOperator.SelectedItem.ToString() == "AND")
+                {
+                    query += "1";
+                }
+                else if (bookOperator.SelectedItem.ToString() == "OR")
+                {
+                    query += "2";
+                }
+                else
+                {
+                    query += "3";
+                }
+            }
+
+            query += "&cntperpage=100&viewoption=1&sort=DEFAULT";
+
+            bookQuery = query; // 최종 쿼리 넘겨줌
+        }
+
+        // 한쪽에서 옵션 고르면 다른 쪽에선 그 옵션 제거
+        private void bookOption1_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+
+            if (bookOption2.SelectedItem != null)
+            {
+                if (bookOption2.SelectedItem.ToString() == comboBox.SelectedItem.ToString())
+                {
+                    MessageBox.Show("두 옵션이 같습니다 >:[", "Robot의 경고");
+                }
+            }
+        }
+
+        // 한쪽에서 옵션 고르면 다른 쪽에선 그 옵션 제거
+        private void bookOption2_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+
+            if (bookOption1.SelectedItem != null)
+            {
+                if (bookOption1.SelectedItem.ToString() == comboBox.SelectedItem.ToString())
+                {
+                    MessageBox.Show("두 옵션이 같습니다 >:[", "Robot의 경고");
+                }
+            }
+        }
+
+        // 책 검색에서 엔터 입력
+        private void bookQuery1_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                bookSearch_Click(sender, e);
+            }
+        }
+
+        private void bookQuery2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                bookSearch_Click(sender, e);
+            }
+        }
+
+        private void bookGridView_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            bookPic.Visible = false;
+
+            DataGridView grid = (DataGridView)sender;
+            //http://openapi.naver.com/search?key=6053ca2ccd452f386a6e2eb44375d160&query=art&target=book_adv&d_isbn=9788996427513
+
+            // 책 이미지 가져옴
+            string url = books[grid.SelectedRows[0].Index].thumbnail;
+
+            if (url != "")
+            {
+                bookPic.Load("http://library.unist.ac.kr/DLiWeb25/comp/search/thumb.axd?url=" + url.Split('=')[1]);
+                bookPic.Visible = true;
+            }
         } 
     }
 }

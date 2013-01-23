@@ -99,6 +99,10 @@ namespace robot
             //mshtml.HTMLDocument hdoc = doc.DomDocument as mshtml.HTMLDocument;
             //hdoc.execCommand("FontSize", false, "12pt");
 
+            studyGrid.Visible = false;
+            roomNumberLabel.Visible = false;
+            roomNumberBox.Visible = false;
+
             // 첫 로그인, 이름 저장, 학사 공지로 이동
             if (e.Url.ToString() == "http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp") {
                 userName=browser.DocumentTitle.ToString().Split('-')[1].Split('/')[0];
@@ -417,12 +421,56 @@ namespace robot
             {
                 HtmlElement table = doc.GetElementsByTagName("table")[1];
 
-                browser.DocumentText = "<html>\r\n<style type=\"text/css\">\r\nbody { font-family:'Arial'; }\r\n.font-test { font:bold 24pt 'Arial'; }\r\n</style>" + 
+                /*browser.DocumentText = "<html>\r\n<style type=\"text/css\">\r\nbody { font-family:'Arial'; }\r\n.font-test { font:bold 24pt 'Arial'; }\r\n</style>" + 
                     //http://library.unist.ac.kr/DLiWeb25Eng/html/images/ico/icoA.gif
                     //table.OuterHtml.ToString().Replace("/DLiWeb25Eng/html/images/ico/icoA.gif", "http://library.unist.ac.kr/DLiWeb25Eng/html/images/ico/icoA.gif").Replace("DLiWeb25Eng/html/images/ico/icoN.gif", "http://library.unist.ac.kr/DLiWeb25Eng/html/images/ico/icoN.gif")
                     table.OuterHtml.ToString().Replace("<IMG src=\"/DLiWeb25Eng/html/images/ico/icoA.gif\" alert=\"Expire\">", "E").Replace("<IMG src=\"/DLiWeb25Eng/html/images/ico/icoN.gif\" alert=\"Reserved\">", "R").Replace("<IMG src=\"/DLiWeb25Eng/html/images/ico/icoU.gif\" alert=\"Commit\">", "E")
-                    + "\r\n</html>";
-                browser.Visible = true;
+                    + "\r\n</html>";*/
+                //string parsing = table.OuterHtml.ToString().Replace("<IMG src=\"/DLiWeb25Eng/html/images/ico/icoA.gif\" alert=\"Expire\">", "E").Replace("<IMG src=\"/DLiWeb25Eng/html/images/ico/icoN.gif\" alert=\"Reserved\">", "R").Replace("<IMG src=\"/DLiWeb25Eng/html/images/ico/icoU.gif\" alert=\"Commit\">", "E");
+                
+                HtmlElementCollection tds = table.GetElementsByTagName("td");
+
+                // study grid 내용 지우기
+                while (studyGrid.Rows.Count != 0)
+                {
+                    studyGrid.Rows.RemoveAt(0);
+                }
+
+                for (int i = 0; i < tds.Count; i+=25)
+                {
+                    string[] rows = new string[25];
+
+                    for (int j = 0; j < 25; j++)
+                    {
+                        if (j % 25 == 0)
+                        {
+                            rows[0] = tds[i+j].InnerText;
+                        }
+                        else
+                        {
+                            if (tds[i+j].GetElementsByTagName("a")[0].InnerHtml.IndexOf("icoA.gif") != -1)
+                            {
+                                rows[j] = "E";
+                            }
+                            else if (tds[i+j].GetElementsByTagName("a")[0].InnerHtml.IndexOf("icoN.gif") != -1)
+                            {
+                                rows[j] = "R";
+                            }
+                            else
+                            {
+                                rows[j] = "-";
+                            }
+                        }
+                    }
+
+                    studyGrid.Rows.Add(rows);
+                }
+
+                browser.Visible = false;
+                studyGrid.Visible = true;
+                roomNumberBox.Visible = true;
+                roomNumberLabel.Visible = true;
+
             }
         }
         /*
@@ -675,7 +723,7 @@ namespace robot
                         break;
                     case 1:
                         // 스터디룸 예약
-                        browser.Navigate("http://library.unist.ac.kr/dliweb25eng/html/EN/studyRoom.html");
+                        browser.Navigate("http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=1");
                         gridView.Visible = false;
                         studyGroup.Visible = true;
                         break;
@@ -774,10 +822,33 @@ namespace robot
 
         private void browser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
+            iconCount++;
+
             // 스터디룸 리스트 볼 때 브라우저 잠시 숨기기
             if (e.Url.ToString().IndexOf("http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?") != -1)
             {
                 browser.Visible = false;
+            }
+
+            if (iconCount % 5 == 0)
+            {
+                loadingLabel.Text = "o_O";
+            }
+            else if (iconCount % 5 == 1)
+            {
+                loadingLabel.Text = "o_o";
+            }
+            else if (iconCount % 5 == 2)
+            {
+                loadingLabel.Text = "o_o";
+            }
+            else if (iconCount % 5 == 3)
+            {
+                loadingLabel.Text = "O_o";
+            }
+            else if (iconCount % 5 == 4)
+            {
+                loadingLabel.Text = "o_o";
             }
 
             if (welcomeLabel.Text.IndexOf("님") > 0)
@@ -785,25 +856,29 @@ namespace robot
                 return;
             }
 
-            if (iconCount % 5 == 0)
+            if (iconCount % 6 == 0)
             {
-                welcomeLabel.Text = "이름을 확인 중 입니다  o_o?";
+                welcomeLabel.Text = "이름을 확인 중 입니다.";
             }
-            else if (iconCount % 5 == 1)
+            else if (iconCount % 6 == 1)
             {
-                welcomeLabel.Text = "이름을 확인 중 입니다  O_o?";
+                welcomeLabel.Text = "이름을 확인 중 입니다..";
             }
-            else if (iconCount % 5 == 2)
+            else if (iconCount % 6 == 2)
             {
-                welcomeLabel.Text = "이름을 확인 중 입니다  o_o?";
+                welcomeLabel.Text = "이름을 확인 중 입니다...";
             }
-            else if (iconCount % 5 == 3)
+            else if (iconCount % 6 == 3)
             {
-                welcomeLabel.Text = "이름을 확인 중 입니다  o_o?";
+                welcomeLabel.Text = "이름을 확인 중 입니다..";
             }
-            else if (iconCount % 5 == 4)
+            else if (iconCount % 6 == 4)
             {
-                welcomeLabel.Text = "이름을 확인 중 입니다  o_O?";
+                welcomeLabel.Text = "이름을 확인 중 입니다.";
+            }
+            else if (iconCount % 6 == 5)
+            {
+                welcomeLabel.Text = "이름을 확인 중 입니다";
             }
             /*else if (iconCount % 8 == 4)
             {
@@ -821,8 +896,13 @@ namespace robot
             {
                 welcomeLabel.Text = "당신의 이름을 확인 중 입니다  o_O";
             }*/
+        }
 
-            iconCount++;
+        private void roomNumberBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            ComboBox comboBox = (ComboBox)sender;
+
+            browser.Navigate("http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=" + comboBox.SelectedIndex.ToString());
         }
     }
 }

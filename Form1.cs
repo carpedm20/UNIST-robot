@@ -15,6 +15,7 @@ namespace robot
     public partial class Form1 : Form
     {
         HtmlDocument doc = null;
+        int PORTALBOARDNUM = 4;
         int count = 0; // 첫 화면 오류 제거 카운터
         int BOARDTAGNUM = 13;
         int PAGENUM = 3; // board 배열 선언 숫자도 바꿔주어야 함
@@ -27,6 +28,12 @@ namespace robot
         int rowIndex; // cell  클릭 후 인덱스 저장 -> row 추가할 때 사용
         int rowIndexBefore;
         int cellClickMode = 0;
+
+        int bbDeletedCount = 0; // bb anouncement에서 빠진 게시글 수
+        int bbCount = 0;
+
+        int iconCount = 0; // welcomeLabel 이모티콘 모양
+
         Random r = new Random();
         Say say;
         
@@ -95,7 +102,6 @@ namespace robot
             // 첫 로그인, 이름 저장, 학사 공지로 이동
             if (e.Url.ToString() == "http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp") {
                 userName=browser.DocumentTitle.ToString().Split('-')[1].Split('/')[0];
-                welcomeLabel.Text = userName + " 님 환영합니다 ^^";
 
                 webNavigate();
                 //this.Show();
@@ -352,6 +358,7 @@ namespace robot
                 int j = 0;
                 string n;
 
+                portalList.Items.Add("-------------------");
                 for (int i = 3; i < options.Count; i++)
                 {
                     n = options[i].InnerText.Replace("-", "");
@@ -359,12 +366,18 @@ namespace robot
                     if (n.IndexOf("Open Study") != -1 || n.IndexOf("Organizations") != -1)
                     {
                         j++;
+                        bbDeletedCount++;
                         continue;
                     }
                     bbboard[i - 3 - j] = new BBBoard();
                     bbboard[i - 3 - j].url = options[i].OuterHtml.Split('=')[1].Split('>')[0];
                     bbboard[i - 3 - j].name = n;
-                    bbList.Items.Add(bbboard[i - 3 - j].name);
+                    portalList.Items.Add(bbboard[i - 3 - j].name);
+
+                    if (count < 3)
+                    {
+                        bbCount++;
+                    }
                 }
 
                 //bb.unist.ac.kr/webapps/blackboard/execute/announcement?&method=search&viewChoice=3&searchSelect=_11194_1
@@ -374,6 +387,11 @@ namespace robot
 
             if (e.Url.ToString() == "http://library.unist.ac.kr/DLiWeb25Eng/default.aspx")
             {
+                portalList.Items.Add("-------------------");
+                portalList.Items.Add("도서 검색");
+                portalList.Items.Add("스터디룸 예약");
+                portalList.Items.Add("열람실 좌석 현황");
+
                 // bb 에서 포탈 anouncement로 이동
                 contentBox.Text = "";
                 rowIndexBefore = rowIndex;
@@ -390,6 +408,8 @@ namespace robot
 
                 // gridview 로딩 끝난 후 클릭 가능하게
                 gridView.Enabled = true;
+
+                welcomeLabel.Text = userName + " 님 환영합니다 :-)";
             }
         }
         /*
@@ -458,8 +478,9 @@ namespace robot
             
         }
 
+        // 보드 리스트 박스
         private void boardBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {/*
             browser.Visible = false;
             ComboBox comboBox = (ComboBox) sender;
 
@@ -505,7 +526,7 @@ namespace robot
                     boardId = "B200806120956049151016";
                     webNavigate();
                     break;
-            }
+            }*/
         }
 
         private void gridView_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -549,7 +570,8 @@ namespace robot
             ListBox comboBox = (ListBox)sender;
 
             // bb 클릭 클리어
-            bbList.ClearSelected();
+            bbList.SelectedIndex = -1;
+            libraryList.SelectedIndex = -1;
 
             // 이전 데이터 삭제
             for (int i = 0; i < PAGENUM * 10; i++)
@@ -560,6 +582,7 @@ namespace robot
                 gridView.Rows.RemoveAt(0);
             }
 
+            // 포탈 리스트
             switch (comboBox.SelectedIndex)
             {
                 case 0:
@@ -584,6 +607,8 @@ namespace robot
                     boardId = "B201003111719010571299";
                     browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_MyBoardLst.jsp?nfirst=1");
                     break;
+                case 4:
+                    return;
                 /*case 4:
                     // 개선 및 제안
                     boardId = "B200805221624473331040";
@@ -595,12 +620,56 @@ namespace robot
                     webNavigate();
                     break;*/
             }
+
+            // BB 리스트
+            if (comboBox.SelectedIndex > PORTALBOARDNUM && comboBox.SelectedIndex < PORTALBOARDNUM + bbboard.Count() - 4)
+            {
+                if (comboBox.SelectedIndex != -1)
+                {
+                    while (gridView.Rows.Count != 0)
+                    {
+                        gridView.Rows.RemoveAt(0);
+                    }
+
+                   browser.Navigate("http://bb.unist.ac.kr/webapps/blackboard/execute/announcement?&method=search&viewChoice=3&searchSelect=" + bbboard[comboBox.SelectedIndex - PORTALBOARDNUM - 1].url);
+                }
+
+                browser.Visible=true;
+                return;
+            }
+
+            // ------------ 스킵
+            if (comboBox.SelectedIndex == PORTALBOARDNUM + bbboard.Count() - 4)
+            {
+                browser.Visible = true;
+                return;
+            }
+
+            // library 리스트
+            switch (comboBox.SelectedIndex - PORTALBOARDNUM - bbCount - 2)
+            {
+                case 0:
+                    // 도서 검색
+                    browser.Visible = true;
+                    break;
+                case 1:
+                    // 스터디룸 예약
+                    browser.Navigate("http://library.unist.ac.kr/dliweb25eng/html/EN/studyRoom.html");
+                    browser.Visible = true;
+                    break;
+                case 2:
+                    // 열람실 좌석 현황
+                    browser.Navigate("http://seat.unist.ac.kr/EZ5500/RoomStatus/room_status.asp");
+                    browser.Visible = true;
+                    break;
+            }
         }
 
         private void bbList_SelectedIndexChanged(object sender, EventArgs e)
-        {
+        {/*
             // bb 클릭 클리어
-            // portalList.ClearSelected();
+            portalList.SelectedIndex = -1;
+            libraryList.SelectedIndex = -1;
 
             ListBox comboBox = (ListBox)sender;
 
@@ -612,7 +681,7 @@ namespace robot
                 }
 
                 browser.Navigate("http://bb.unist.ac.kr/webapps/blackboard/execute/announcement?&method=search&viewChoice=3&searchSelect=" + bbboard[comboBox.SelectedIndex].url);
-            }
+            }*/
         }
 
         // 자동 로그인 체크 박스
@@ -634,7 +703,7 @@ namespace robot
                 Program.ini.SetIniValue("Login", "Id", Program.id);
                 Program.ini.SetIniValue("Login", "Password", Program.password);
             }
-            else
+            if (check.Checked == false)
             {
                 Program.ini.SetIniValue("Login", "Auto", "false");
                 Program.ini.SetIniValue("Login", "Save", "false");
@@ -650,13 +719,12 @@ namespace robot
 
         private void libraryList_SelectedIndexChanged(object sender, EventArgs e)
         {
-            browser.Visible = false;
+            /*browser.Visible = false;
             ListBox comboBox = (ListBox)sender;
 
             // bb 클릭 클리어
             bbList.ClearSelected();
-
-            
+            portalList.ClearSelected();
 
             switch (comboBox.SelectedIndex)
             {
@@ -674,12 +742,55 @@ namespace robot
                     browser.Navigate("http://seat.unist.ac.kr/EZ5500/RoomStatus/room_status.asp");
                     break;
             }
-            browser.Visible = true;
+            browser.Visible = true;*/
         }
 
         private void settingLabel_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Designed by Kim Tae Hoon.");
+        }
+
+        private void browser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            if (welcomeLabel.Text.IndexOf("님") > 0)
+            {
+                return;
+            }
+
+            if (iconCount % 4 == 0)
+            {
+                welcomeLabel.Text = "당신의 이름을 확인 중 입니다  o_o";
+            }
+            else if (iconCount % 4 == 1)
+            {
+                welcomeLabel.Text = "당신의 이름을 확인 중 입니다  O_o";
+            }
+            else if (iconCount % 4 == 2)
+            {
+                welcomeLabel.Text = "당신의 이름을 확인 중 입니다  o_o";
+            }
+            else if (iconCount % 4 == 3)
+            {
+                welcomeLabel.Text = "당신의 이름을 확인 중 입니다  o_O";
+            }
+            /*else if (iconCount % 8 == 4)
+            {
+                welcomeLabel.Text = "당신의 이름을 확인 중 입니다  0_o";
+            }
+            else if (iconCount % 8 == 5)
+            {
+                welcomeLabel.Text = "당신의 이름을 확인 중 입니다  o_o";
+            }
+            else if (iconCount % 8 == 6)
+            {
+                welcomeLabel.Text = "당신의 이름을 확인 중 입니다  o_0";
+            }
+            else if (iconCount % 8 == 7)
+            {
+                welcomeLabel.Text = "당신의 이름을 확인 중 입니다  o_O";
+            }*/
+
+            iconCount++;
         }
     }
 }

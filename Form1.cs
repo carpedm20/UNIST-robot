@@ -193,7 +193,32 @@ namespace robot
                         string javaUrl = title.InnerHtml.Substring(title.InnerHtml.IndexOf("javascript:"));
                         board[index].javascript[j] = javaUrl.Split('\"')[j * 2 + 1];
                     }
+                    
                     gridView.Rows.Add(rows);
+
+                    // 셀 글자 색 추가
+                    if (title.GetElementsByTagName("font")[0].GetAttribute("color").IndexOf("#") != -1)
+                    {
+                        // 글자 볼드 추가
+                        if (title.OuterHtml.IndexOf("FONT-WEIGHT: bold") != -1)
+                        {
+                            gridView.Rows[i].Cells[1].Style = new DataGridViewCellStyle
+                            {
+                                ForeColor = ConvertColor_PhotoShopStyle_toRGB(title.GetElementsByTagName("font")[0].GetAttribute("color")),
+                                    Font = new Font(gridView.DefaultCellStyle.Font, FontStyle.Bold)
+                            };
+                        }
+                        else
+                        {
+                            gridView.Rows[i].Cells[1].Style = new DataGridViewCellStyle { ForeColor = ConvertColor_PhotoShopStyle_toRGB(title.GetElementsByTagName("font")[0].GetAttribute("color")) };
+                        }
+                    }
+
+                    // 글자 볼드 추가
+                    if (title.OuterHtml.IndexOf("FONT-WEIGHT: bold") != -1)
+                    {
+                        gridView.Rows[i].Cells[1].Style.Font = new Font(gridView.DefaultCellStyle.Font, FontStyle.Bold);
+                    }
                 }
                 if (page != PAGENUM)
                 {
@@ -436,6 +461,7 @@ namespace robot
                     studyGrid.Rows.RemoveAt(0);
                 }
 
+                // study room grid 내용 추가
                 for (int i = 0; i < tds.Count; i+=25)
                 {
                     string[] rows = new string[25];
@@ -630,6 +656,8 @@ namespace robot
             gridView.Visible = true;
             browser.Visible = false;
             studyGroup.Visible = false;
+            bookGroup.Visible = false;
+            bookInfoGroup.Visible = false;
             ListBox comboBox = (ListBox)sender;
 
             // bb 클릭 클리어
@@ -720,12 +748,19 @@ namespace robot
                     case 0:
                         // 도서 검색
                         browser.Navigate("http://library.unist.ac.kr/DLiWeb25Eng/comp/search/Advance.aspx?");
+                        bookGroup.Visible = true;
+                        bookInfoGroup.Visible = true;
+                        gridView.Visible = false;
+                        studyGroup.Visible = false;
+                        browser.Visible = false;
                         break;
                     case 1:
                         // 스터디룸 예약
                         browser.Navigate("http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=1");
                         gridView.Visible = false;
                         studyGroup.Visible = true;
+                        bookGroup.Visible = false;
+                        bookInfoGroup.Visible = false;
                         break;
                     case 2:
                         // 열람실 좌석 현황
@@ -904,5 +939,15 @@ namespace robot
 
             browser.Navigate("http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=" + comboBox.SelectedIndex.ToString());
         }
+
+        private Color ConvertColor_PhotoShopStyle_toRGB(string photoShopColor)
+        {
+            int red, green, blue;
+            red = Convert.ToInt32(Convert.ToByte(photoShopColor.Substring(1, 2), 16));
+            green = Convert.ToInt32(Convert.ToByte(photoShopColor.Substring(3, 2), 16));
+            blue = Convert.ToInt32(Convert.ToByte(photoShopColor.Substring(5, 2), 16));
+
+            return Color.FromArgb(red, green, blue);
+        } 
     }
 }

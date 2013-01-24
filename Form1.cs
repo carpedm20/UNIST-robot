@@ -38,6 +38,12 @@ namespace robot
 
         string bookQuery = ""; // 책 검색 쿼리
         Book[] books;
+        string bookReviewUrl = "";
+        string isbn = ""; // 책 평점을 위한 변수
+
+        string phoneNum = ""; // 스터디룸 예약을 위한 변수
+        string email = ""; // 스터디룸 예약을 위한 변수
+        string thisYear = "2013";
 
         Random r = new Random();
         Say say;
@@ -109,7 +115,8 @@ namespace robot
             //mshtml.HTMLDocument hdoc = doc.DomDocument as mshtml.HTMLDocument;
             //hdoc.execCommand("FontSize", false, "12pt");
 
-            studyGrid.Visible = false;
+            if(portalList.SelectedValue!=null && portalList.SelectedValue.ToString()!="스터디룸 예약")
+                studyGrid.Visible = false;
             roomNumberLabel.Visible = false;
             roomNumberBox.Visible = false;
 
@@ -475,7 +482,6 @@ namespace robot
                 for (int i = 0; i < tds.Count; i+=25)
                 {
                     string[] rows = new string[25];
-
                     for (int j = 0; j < 25; j++)
                     {
                         if (j % 25 == 0)
@@ -500,6 +506,10 @@ namespace robot
                     }
 
                     studyGrid.Rows.Add(rows);
+
+                    // 오늘 날짜 줄 표시
+                    if (Convert.ToInt32(rows[0].Substring(0, 2)) == DateTime.Now.Month && Convert.ToInt32(rows[0].Substring(3)) == DateTime.Now.Day)
+                        studyGrid.Rows[i / 25].DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.PowderBlue };
                 }
 
                 browser.Visible = false;
@@ -540,11 +550,14 @@ namespace robot
                         books[i].thumbnail = html.Substring(html.IndexOf("thumb.axd?url=")).Split('\"')[0];
                     }
 
-                    rows[0] = books[i].title = elements.ElementAt(i).GetElementsByTagName("label")[0].GetAttribute("title");
+                    rows[0] = books[i].title = elements.ElementAt(i).GetElementsByTagName("label")[0].GetAttribute("title").Split('/')[0].Replace("선택하기","");
                     rows[1] = books[i].author = html.Substring(html.IndexOf("author\">")).Split('>')[1].Split('<')[0];
                     rows[2] = books[i].publisher = html.Substring(html.IndexOf("publisher\">")).Split('>')[1].Split('<')[0];
                     rows[3] = books[i].publishYear = html.Substring(html.IndexOf("publishyear\">")).Split('>')[1].Split('<')[0];
                     rows[4] = books[i].isbn = html.Substring(html.IndexOf("isbn\">")).Split('>')[1].Split('<')[0];
+
+                    // 도서 상태를 위한 cid
+                    books[i].cid = elements.ElementAt(i).GetElementsByTagName("input")[0].GetAttribute("value");
 
                     if (html.IndexOf("Domestic Books") != -1)
                     {
@@ -553,6 +566,12 @@ namespace robot
 
                     bookGridView.Rows.Add(rows);
                 }
+
+                // 첫번째 책 클릭 후 사진 보여줌
+                if (bookGridView.RowCount == 0)
+                    return;
+
+                bookGridView.Rows[0].Selected = true;
             }
 
             // 책 이미지 뽑아오기
@@ -560,6 +579,62 @@ namespace robot
             {
                 bookPic.Visible = true;
             }*/
+
+            // 도서 평점 추가
+            if (e.Url.ToString().IndexOf("http://book.naver.com/bookdb/book_detail.nhn?bid=") != -1)
+            {
+                bookReview.Text = "평점 : ";
+                string html = doc.ToString();
+                bookReviewUrl="";
+
+                HtmlElement element = ElementsByClass(doc, "txt_desc").ElementAt(0);
+                //bookReview.Text += element.GetElementsByTagName("strong")[0].InnerText;
+                //bookReview.Text += html.Substring(html.IndexOf("네티즌리뷰")).Split('건')[0];
+                bookReview.Text += element.InnerText.Split('|')[0] + "(" + element.InnerText.Split('|')[1].Substring(6) + ")";
+                bookReviewUrl = element.GetElementsByTagName("a")[0].GetAttribute("href");
+            }
+
+            // 도서 상태 추가
+            if (e.Url.ToString().IndexOf("http://library.unist.ac.kr/DLiWeb25Eng/comp/search/SearchHandler.aspx?action=stock&cid=") != -1)
+            {
+                string[] rows = new string[4];
+
+                while (bookListGrid.Rows.Count != 0)
+                {
+                    bookListGrid.Rows.RemoveAt(0);
+                }
+
+                //IEnumerable<HtmlElement> elements = ElementsByClass(doc, "stock_callnumber");
+
+                for (int i = 1; i < doc.GetElementsByTagName("tr").Count; i++)
+                {
+                    rows[0] = doc.GetElementsByTagName("tr")[i].GetElementsByTagName("td")[1].InnerText;
+                    rows[1] = doc.GetElementsByTagName("tr")[i].GetElementsByTagName("td")[2].InnerText;
+                    rows[2] = doc.GetElementsByTagName("tr")[i].GetElementsByTagName("td")[3].InnerText;
+                    rows[3] = doc.GetElementsByTagName("tr")[i].GetElementsByTagName("td")[4].InnerText;
+
+                    bookListGrid.Rows.Add(rows);
+                }
+
+                XmlDocument docX = new XmlDocument();
+                docX.Load("http://openapi.naver.com/search?key=6053ca2ccd452f386a6e2eb44375d160&query=art&target=book_adv&d_isbn=" + isbn);
+
+                XmlNodeList elemList = docX.GetElementsByTagName("link");
+                for (int i = 0; i < elemList.Count; i++)
+                {
+                    browser.Navigate(elemList[i].InnerXml);
+                }
+            }
+
+            // 스터디 날짜 선택 시 이벤트
+            if (e.Url.ToString().IndexOf("http://library.unist.ac.kr/DLiWeb25Eng/studyroom/reserve.aspx?m_var=112&roomid=1&rdate=") != -1)
+            {
+                IEnumerable<HtmlElement> elements = ElementsByClass(doc, "empty_trbg");
+                HtmlElement info = elements.ElementAt(6);
+
+                studyPhoneNumber.Text = phoneNum = info.GetElementsByTagName("input")[0].GetAttribute("value");
+                studyEmail.Text = email = info.GetElementsByTagName("input")[1].GetAttribute("value");
+            }
         }
         /*
         public void parsing(int page)
@@ -816,18 +891,24 @@ namespace robot
                         gridView.Visible = false;
                         studyGroup.Visible = false;
                         browser.Visible = false;
+                        studyGrid.Visible = false;
                         break;
                     case 1:
                         // 스터디룸 예약
                         browser.Navigate("http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=1");
+                        roomNumberBox.SelectedIndex = 0;
                         gridView.Visible = false;
                         studyGroup.Visible = true;
                         bookGroup.Visible = false;
                         bookInfoGroup.Visible = false;
+                        browser.Visible = false;
                         break;
                     case 2:
                         // 열람실 좌석 현황
                         browser.Navigate("http://seat.unist.ac.kr/EZ5500/RoomStatus/room_status.asp");
+                        browser.Visible = true;
+                        studyGroup.Visible = false;
+                        studyGrid.Visible = false;
                         break;
                 }
             }
@@ -1000,7 +1081,7 @@ namespace robot
         {
             ComboBox comboBox = (ComboBox)sender;
 
-            browser.Navigate("http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=" + comboBox.SelectedIndex.ToString());
+            browser.Navigate("http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=" + (comboBox.SelectedIndex+1).ToString());
         }
 
         private Color ConvertColor_PhotoShopStyle_toRGB(string photoShopColor)
@@ -1035,6 +1116,17 @@ namespace robot
         private void bookSearch_Click(object sender, EventArgs e)
         {
             queryMake(); // 쿼리 만듬
+
+            // 도서 상태 초기화
+            while (bookListGrid.Rows.Count != 0)
+            {
+                bookListGrid.Rows.RemoveAt(0);
+            }
+
+            bookTitle.Text = "책 제목";
+            bookReview.Text = "";
+            bookReviewUrl = "";
+
             if (bookQuery != "")
             {
                 string url = "http://library.unist.ac.kr/DLiWeb25Eng/comp/search/Results.aspx?" + bookQuery;
@@ -1058,7 +1150,7 @@ namespace robot
                     query += "AUTH";
                 else
                 {
-                    query += "PUBL";
+                    query += "PUBN";
                 }
                 query += "&operator=0";
             }
@@ -1073,7 +1165,7 @@ namespace robot
                     query += "AUTH";
                 else
                 {
-                    query += "PUBL";
+                    query += "PUBN";
                 }
                 query += "&operator=0";
             }
@@ -1088,7 +1180,7 @@ namespace robot
                     query += "AUTH";
                 else
                 {
-                    query += "PUBL";
+                    query += "PUBN";
                 }
 
                 if (bookOption2.SelectedItem.ToString() == "제목")
@@ -1097,7 +1189,7 @@ namespace robot
                     query += ",AUTH";
                 else
                 {
-                    query += ",PUBL";
+                    query += ",PUBN";
                 }
 
                 query+="&operator=0,";
@@ -1166,9 +1258,12 @@ namespace robot
             }
         }
 
+        // 책 클릭 시 책 사진 보여줌
         private void bookGridView_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             bookPic.Visible = false;
+            bookReviewUrl = "";
+            bookReview.Text = "...";
 
             DataGridView grid = (DataGridView)sender;
             //http://openapi.naver.com/search?key=6053ca2ccd452f386a6e2eb44375d160&query=art&target=book_adv&d_isbn=9788996427513
@@ -1181,6 +1276,107 @@ namespace robot
                 bookPic.Load("http://library.unist.ac.kr/DLiWeb25/comp/search/thumb.axd?url=" + url.Split('=')[1]);
                 bookPic.Visible = true;
             }
-        } 
+
+            string title = books[grid.SelectedRows[0].Index].title;
+
+            if (title.Length > 35)
+            {
+                bookTitle.Text = title.ToString().Substring(0, 35) + "\r\n" + title.ToString().Substring(35);
+            }
+            else {
+                bookTitle.Text = title.ToString();
+            }
+
+            // 도서 상태 확인 추가
+            loadBookStat(books[grid.SelectedRows[0].Index].cid);
+
+            isbn = books[grid.SelectedRows[0].Index].isbn;
+        }
+
+        // 키보드 이동할 때도 이미지 바뀜.
+        private void bookGridView_SelectionChanged(object sender, EventArgs e)
+        {
+            bookPic.Visible = false;
+            string url ="";
+            bookReviewUrl = "";
+            bookReview.Text = "...";
+
+            DataGridView grid = (DataGridView)sender;
+            //http://openapi.naver.com/search?key=6053ca2ccd452f386a6e2eb44375d160&query=art&target=book_adv&d_isbn=9788996427513
+
+            // 책 이미지 가져옴
+            if (grid.RowCount == 0)
+                return;
+
+            if(grid.SelectedRows[0] !=null)
+                url = books[grid.SelectedRows[0].Index].thumbnail;
+
+            if (url != "")
+            {
+                bookPic.Load("http://library.unist.ac.kr/DLiWeb25/comp/search/thumb.axd?url=" + url.Split('=')[1]);
+                bookPic.Visible = true;
+            }
+
+            string title = books[grid.SelectedRows[0].Index].title;
+
+            if (title.Length > 35)
+            {
+                bookTitle.Text = title.ToString().Substring(0, 35) + "\r\n" + title.ToString().Substring(35);
+            }
+            else
+            {
+                bookTitle.Text = title.ToString();
+            }
+
+            // 도서 상태 추가
+            loadBookStat(books[grid.SelectedRows[0].Index].cid);
+
+            isbn= books[grid.SelectedRows[0].Index].isbn;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (bookReviewUrl == "")
+            {
+                MessageBox.Show("리뷰가 0건입니다 :-(", "Robot의 경고");
+            }
+            else
+            {
+                System.Diagnostics.Process.Start(bookReviewUrl);
+            }
+        }
+
+        // 도서 상태 불러오기
+        private void loadBookStat(string cid)
+        {
+            //http://library.unist.ac.kr/DLiWeb25Eng/comp/search/SearchHandler.aspx?action=stock&cid=357465
+            browser.Navigate("http://library.unist.ac.kr/DLiWeb25Eng/comp/search/SearchHandler.aspx?action=stock&cid="+cid);
+            /*
+            XmlDocument doc = new XmlDocument();
+            doc.Load("http://openapi.naver.com/search?key=6053ca2ccd452f386a6e2eb44375d160&query=art&target=book_adv&d_isbn=" + isbn);
+
+            XmlNodeList elemList = doc.GetElementsByTagName("link");
+            for (int i = 0; i < elemList.Count; i++)
+            {
+                browser.Navigate(elemList[i].InnerXml);
+            }*/
+        }
+
+        private void studyGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (browser.Url.ToString().IndexOf("http://library.unist.ac.kr/DLiWeb25Eng/studyroom/reserve.aspx?m_var=112&roomid=1&rdate=") != -1)
+            {
+                browser.Navigate("http://library.unist.ac.kr/dliweb25/studyroom/detail.aspx?m_var=112&roomid=" + (roomNumberBox.SelectedIndex + 1).ToString());
+            }
+            DataGridView grid = (DataGridView)sender;
+            studyGroup.Enabled = true;
+
+            string hour = grid.Columns[grid.SelectedCells[0].ColumnIndex].HeaderText.ToString();
+            string date = grid.Rows[grid.SelectedCells[0].RowIndex].Cells[0].Value.ToString().Replace("-", "");
+
+            doc.InvokeScript("fnReserve", new object[] { thisYear + date, hour });
+
+            studyDateLabel.Text = thisYear + "년 " + date.Substring(0, 2) + "월 " + date.Substring(2) + "일 " + hour + "시 ~ ";
+        }
     }
 }

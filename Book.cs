@@ -15,6 +15,7 @@ namespace robot
         public string isbn;
         public string thumbnail;
         public string kind;
+        public string cid; // 도서 상태 확인용
 
         public Book()
         {
@@ -25,6 +26,7 @@ namespace robot
             isbn = "";
             thumbnail = "";
             kind = "";
+            cid = "";
         }
     }
 }

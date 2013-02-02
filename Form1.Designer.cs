@@ -28,11 +28,17 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.browser = new System.Windows.Forms.WebBrowser();
             this.gridView = new System.Windows.Forms.DataGridView();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contentBox = new System.Windows.Forms.TextBox();
             this.portalBox = new System.Windows.Forms.ComboBox();
-            this.portalList = new System.Windows.Forms.ListBox();
             this.bbList = new System.Windows.Forms.ListBox();
             this.loadingLabel = new System.Windows.Forms.Label();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
@@ -121,11 +127,18 @@
             this.Column33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.w = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.boardSlide = new DevComponents.DotNetBar.SideBar();
+            this.slidePortal = new DevComponents.DotNetBar.SideBarPanelItem();
+            this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem2 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem4 = new DevComponents.DotNetBar.ButtonItem();
+            this.slideBlackBoard = new DevComponents.DotNetBar.SideBarPanelItem();
+            this.slideLibrary = new DevComponents.DotNetBar.SideBarPanelItem();
+            this.buttonItem5 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem6 = new DevComponents.DotNetBar.ButtonItem();
+            this.portalList = new System.Windows.Forms.ListBox();
+            this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.studyGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -186,8 +199,52 @@
             this.gridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellClick);
             this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellContentClick);
             // 
+            // Column5
+            // 
+            this.Column5.Frozen = true;
+            this.Column5.HeaderText = "";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column5.Width = 33;
+            // 
+            // Column1
+            // 
+            this.Column1.Frozen = true;
+            this.Column1.HeaderText = "제목";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 430;
+            // 
+            // Column2
+            // 
+            this.Column2.Frozen = true;
+            this.Column2.HeaderText = "작성자";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column2.Width = 70;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "작성일";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column3.Width = 80;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "조회수";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column4.Width = 70;
+            // 
             // contentBox
             // 
+            this.contentBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.contentBox.ForeColor = System.Drawing.Color.Black;
             this.contentBox.Location = new System.Drawing.Point(12, 268);
             this.contentBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.contentBox.Multiline = true;
@@ -198,8 +255,10 @@
             // 
             // portalBox
             // 
+            this.portalBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.portalBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.portalBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.portalBox.ForeColor = System.Drawing.Color.Black;
             this.portalBox.FormattingEnabled = true;
             this.portalBox.Items.AddRange(new object[] {
             "학사 공지",
@@ -216,28 +275,11 @@
             this.portalBox.Visible = false;
             this.portalBox.SelectedIndexChanged += new System.EventHandler(this.boardBox_SelectedIndexChanged);
             // 
-            // portalList
-            // 
-            this.portalList.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.portalList.Enabled = false;
-            this.portalList.FormattingEnabled = true;
-            this.portalList.ItemHeight = 15;
-            this.portalList.Items.AddRange(new object[] {
-            "학사 공지",
-            "전체 공지",
-            "대학원 공지",
-            "최신 게시물"});
-            this.portalList.Location = new System.Drawing.Point(14, 39);
-            this.portalList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.portalList.Name = "portalList";
-            this.portalList.Size = new System.Drawing.Size(119, 184);
-            this.portalList.TabIndex = 10;
-            this.portalList.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
-            // 
             // bbList
             // 
-            this.bbList.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.bbList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bbList.Enabled = false;
+            this.bbList.ForeColor = System.Drawing.Color.Black;
             this.bbList.FormattingEnabled = true;
             this.bbList.ItemHeight = 15;
             this.bbList.Location = new System.Drawing.Point(250, 109);
@@ -250,7 +292,9 @@
             // loadingLabel
             // 
             this.loadingLabel.AutoSize = true;
+            this.loadingLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.loadingLabel.Font = new System.Drawing.Font("NanumGothicExtraBold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.loadingLabel.ForeColor = System.Drawing.Color.Black;
             this.loadingLabel.Location = new System.Drawing.Point(397, 475);
             this.loadingLabel.Name = "loadingLabel";
             this.loadingLabel.Size = new System.Drawing.Size(56, 28);
@@ -260,18 +304,22 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
+            this.checkBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.checkBox1.ForeColor = System.Drawing.Color.Black;
             this.checkBox1.Location = new System.Drawing.Point(18, 12);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(90, 19);
             this.checkBox1.TabIndex = 14;
             this.checkBox1.Text = "자동 로그인";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.UseVisualStyleBackColor = false;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // settingLabel
             // 
             this.settingLabel.AutoSize = true;
+            this.settingLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.settingLabel.ForeColor = System.Drawing.Color.Black;
             this.settingLabel.Location = new System.Drawing.Point(793, 11);
             this.settingLabel.Name = "settingLabel";
             this.settingLabel.Size = new System.Drawing.Size(31, 15);
@@ -282,6 +330,8 @@
             // welcomeLabel
             // 
             this.welcomeLabel.AutoSize = true;
+            this.welcomeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.welcomeLabel.ForeColor = System.Drawing.Color.Black;
             this.welcomeLabel.Location = new System.Drawing.Point(166, 11);
             this.welcomeLabel.Name = "welcomeLabel";
             this.welcomeLabel.Size = new System.Drawing.Size(162, 15);
@@ -290,8 +340,9 @@
             // 
             // libraryList
             // 
-            this.libraryList.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.libraryList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.libraryList.Enabled = false;
+            this.libraryList.ForeColor = System.Drawing.Color.Black;
             this.libraryList.FormattingEnabled = true;
             this.libraryList.ItemHeight = 15;
             this.libraryList.Items.AddRange(new object[] {
@@ -308,6 +359,7 @@
             // 
             // studyGroup
             // 
+            this.studyGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyGroup.Controls.Add(this.studyDateLabel);
             this.studyGroup.Controls.Add(this.studyEtc);
             this.studyGroup.Controls.Add(this.label7);
@@ -321,6 +373,7 @@
             this.studyGroup.Controls.Add(this.studyPhoneNumber);
             this.studyGroup.Controls.Add(this.label1);
             this.studyGroup.Enabled = false;
+            this.studyGroup.ForeColor = System.Drawing.Color.Black;
             this.studyGroup.Location = new System.Drawing.Point(150, 34);
             this.studyGroup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyGroup.Name = "studyGroup";
@@ -334,6 +387,8 @@
             // studyDateLabel
             // 
             this.studyDateLabel.AutoSize = true;
+            this.studyDateLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.studyDateLabel.ForeColor = System.Drawing.Color.Black;
             this.studyDateLabel.Location = new System.Drawing.Point(83, 38);
             this.studyDateLabel.Name = "studyDateLabel";
             this.studyDateLabel.Size = new System.Drawing.Size(142, 15);
@@ -342,6 +397,8 @@
             // 
             // studyEtc
             // 
+            this.studyEtc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.studyEtc.ForeColor = System.Drawing.Color.Black;
             this.studyEtc.Location = new System.Drawing.Point(86, 119);
             this.studyEtc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyEtc.Name = "studyEtc";
@@ -351,6 +408,8 @@
             // label7
             // 
             this.label7.AutoSize = true;
+            this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label7.ForeColor = System.Drawing.Color.Black;
             this.label7.Location = new System.Drawing.Point(16, 122);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(31, 15);
@@ -359,16 +418,19 @@
             // 
             // studyReserveBtn
             // 
+            this.studyReserveBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.studyReserveBtn.ForeColor = System.Drawing.Color.Black;
             this.studyReserveBtn.Location = new System.Drawing.Point(202, 151);
             this.studyReserveBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyReserveBtn.Name = "studyReserveBtn";
             this.studyReserveBtn.Size = new System.Drawing.Size(84, 25);
             this.studyReserveBtn.TabIndex = 23;
             this.studyReserveBtn.Text = "예약";
-            this.studyReserveBtn.UseVisualStyleBackColor = true;
+            this.studyReserveBtn.UseVisualStyleBackColor = false;
             // 
             // groupBox1
             // 
+            this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.groupBox1.Controls.Add(this.studyStudentId8);
             this.groupBox1.Controls.Add(this.studyStudentId6);
             this.groupBox1.Controls.Add(this.studyStudentId4);
@@ -379,6 +441,7 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.studyStudentId1);
+            this.groupBox1.ForeColor = System.Drawing.Color.Black;
             this.groupBox1.Location = new System.Drawing.Point(312, 21);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
@@ -390,6 +453,8 @@
             // 
             // studyStudentId8
             // 
+            this.studyStudentId8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.studyStudentId8.ForeColor = System.Drawing.Color.Black;
             this.studyStudentId8.Location = new System.Drawing.Point(181, 109);
             this.studyStudentId8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId8.Name = "studyStudentId8";
@@ -398,6 +463,8 @@
             // 
             // studyStudentId6
             // 
+            this.studyStudentId6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.studyStudentId6.ForeColor = System.Drawing.Color.Black;
             this.studyStudentId6.Location = new System.Drawing.Point(181, 79);
             this.studyStudentId6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId6.Name = "studyStudentId6";
@@ -406,6 +473,8 @@
             // 
             // studyStudentId4
             // 
+            this.studyStudentId4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.studyStudentId4.ForeColor = System.Drawing.Color.Black;
             this.studyStudentId4.Location = new System.Drawing.Point(181, 50);
             this.studyStudentId4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId4.Name = "studyStudentId4";
@@ -414,6 +483,8 @@
             // 
             // studyStudentId2
             // 
+            this.studyStudentId2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.studyStudentId2.ForeColor = System.Drawing.Color.Black;
             this.studyStudentId2.Location = new System.Drawing.Point(181, 21);
             this.studyStudentId2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId2.Name = "studyStudentId2";
@@ -422,6 +493,8 @@
             // 
             // studyStudentId7
             // 
+            this.studyStudentId7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.studyStudentId7.ForeColor = System.Drawing.Color.Black;
             this.studyStudentId7.Location = new System.Drawing.Point(21, 109);
             this.studyStudentId7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId7.Name = "studyStudentId7";
@@ -430,6 +503,8 @@
             // 
             // studyStudentId5
             // 
+            this.studyStudentId5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.studyStudentId5.ForeColor = System.Drawing.Color.Black;
             this.studyStudentId5.Location = new System.Drawing.Point(21, 79);
             this.studyStudentId5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId5.Name = "studyStudentId5";
@@ -438,6 +513,8 @@
             // 
             // studyStudentId3
             // 
+            this.studyStudentId3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.studyStudentId3.ForeColor = System.Drawing.Color.Black;
             this.studyStudentId3.Location = new System.Drawing.Point(21, 50);
             this.studyStudentId3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId3.Name = "studyStudentId3";
@@ -447,6 +524,8 @@
             // label6
             // 
             this.label6.AutoSize = true;
+            this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label6.ForeColor = System.Drawing.Color.Black;
             this.label6.Location = new System.Drawing.Point(8, 25);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(0, 15);
@@ -455,6 +534,8 @@
             // label5
             // 
             this.label5.AutoSize = true;
+            this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label5.ForeColor = System.Drawing.Color.Black;
             this.label5.Location = new System.Drawing.Point(8, 54);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(0, 15);
@@ -462,6 +543,8 @@
             // 
             // studyStudentId1
             // 
+            this.studyStudentId1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.studyStudentId1.ForeColor = System.Drawing.Color.Black;
             this.studyStudentId1.Location = new System.Drawing.Point(21, 21);
             this.studyStudentId1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId1.Name = "studyStudentId1";
@@ -471,6 +554,8 @@
             // label4
             // 
             this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label4.ForeColor = System.Drawing.Color.Black;
             this.label4.Location = new System.Drawing.Point(16, 38);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 15);
@@ -480,6 +565,8 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(16, 154);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 15);
@@ -488,7 +575,9 @@
             // 
             // studyTimeBox
             // 
+            this.studyTimeBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyTimeBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.studyTimeBox.ForeColor = System.Drawing.Color.Black;
             this.studyTimeBox.FormattingEnabled = true;
             this.studyTimeBox.Items.AddRange(new object[] {
             "1 시간",
@@ -502,6 +591,8 @@
             // 
             // studyEmail
             // 
+            this.studyEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.studyEmail.ForeColor = System.Drawing.Color.Black;
             this.studyEmail.Location = new System.Drawing.Point(86, 90);
             this.studyEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyEmail.Name = "studyEmail";
@@ -511,6 +602,8 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(16, 94);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 15);
@@ -519,6 +612,8 @@
             // 
             // studyPhoneNumber
             // 
+            this.studyPhoneNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.studyPhoneNumber.ForeColor = System.Drawing.Color.Black;
             this.studyPhoneNumber.Location = new System.Drawing.Point(86, 61);
             this.studyPhoneNumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyPhoneNumber.Name = "studyPhoneNumber";
@@ -528,6 +623,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(16, 64);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 15);
@@ -536,11 +633,13 @@
             // 
             // bookInfoGroup
             // 
+            this.bookInfoGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookInfoGroup.Controls.Add(this.bookReview);
             this.bookInfoGroup.Controls.Add(this.button1);
             this.bookInfoGroup.Controls.Add(this.bookTitle);
             this.bookInfoGroup.Controls.Add(this.bookPic);
             this.bookInfoGroup.Controls.Add(this.bookListGrid);
+            this.bookInfoGroup.ForeColor = System.Drawing.Color.Black;
             this.bookInfoGroup.Location = new System.Drawing.Point(150, 32);
             this.bookInfoGroup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookInfoGroup.Name = "bookInfoGroup";
@@ -554,6 +653,8 @@
             // bookReview
             // 
             this.bookReview.AutoSize = true;
+            this.bookReview.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.bookReview.ForeColor = System.Drawing.Color.Black;
             this.bookReview.Location = new System.Drawing.Point(458, 26);
             this.bookReview.Name = "bookReview";
             this.bookReview.Size = new System.Drawing.Size(11, 15);
@@ -562,18 +663,22 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Location = new System.Drawing.Point(580, 21);
             this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 25);
             this.button1.TabIndex = 5;
             this.button1.Text = "리뷰 보기";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // bookTitle
             // 
             this.bookTitle.AutoSize = true;
+            this.bookTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.bookTitle.ForeColor = System.Drawing.Color.Black;
             this.bookTitle.Location = new System.Drawing.Point(139, 25);
             this.bookTitle.Name = "bookTitle";
             this.bookTitle.Size = new System.Drawing.Size(47, 15);
@@ -582,6 +687,8 @@
             // 
             // bookPic
             // 
+            this.bookPic.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.bookPic.ForeColor = System.Drawing.Color.Black;
             this.bookPic.Location = new System.Drawing.Point(13, 25);
             this.bookPic.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookPic.Name = "bookPic";
@@ -895,7 +1002,9 @@
             // 
             // roomNumberBox
             // 
+            this.roomNumberBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.roomNumberBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.roomNumberBox.ForeColor = System.Drawing.Color.Black;
             this.roomNumberBox.Items.AddRange(new object[] {
             "1 (3-6)",
             "2 (3-6)",
@@ -918,6 +1027,8 @@
             // roomNumberLabel
             // 
             this.roomNumberLabel.AutoSize = true;
+            this.roomNumberLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.roomNumberLabel.ForeColor = System.Drawing.Color.Black;
             this.roomNumberLabel.Location = new System.Drawing.Point(27, 240);
             this.roomNumberLabel.Name = "roomNumberLabel";
             this.roomNumberLabel.Size = new System.Drawing.Size(47, 15);
@@ -927,6 +1038,7 @@
             // 
             // bookGroup
             // 
+            this.bookGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookGroup.Controls.Add(this.bookOperator);
             this.bookGroup.Controls.Add(this.bookOption2);
             this.bookGroup.Controls.Add(this.bookQuery2);
@@ -938,6 +1050,7 @@
             this.bookGroup.Controls.Add(this.bookSearch);
             this.bookGroup.Controls.Add(this.bookQuery1);
             this.bookGroup.Controls.Add(this.bookGridView);
+            this.bookGroup.ForeColor = System.Drawing.Color.Black;
             this.bookGroup.Location = new System.Drawing.Point(12, 236);
             this.bookGroup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookGroup.Name = "bookGroup";
@@ -950,7 +1063,9 @@
             // 
             // bookOperator
             // 
+            this.bookOperator.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookOperator.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.bookOperator.ForeColor = System.Drawing.Color.Black;
             this.bookOperator.Items.AddRange(new object[] {
             "AND",
             "OR",
@@ -963,7 +1078,9 @@
             // 
             // bookOption2
             // 
+            this.bookOption2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookOption2.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.bookOption2.ForeColor = System.Drawing.Color.Black;
             this.bookOption2.Items.AddRange(new object[] {
             "제목",
             "저자",
@@ -977,6 +1094,8 @@
             // 
             // bookQuery2
             // 
+            this.bookQuery2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.bookQuery2.ForeColor = System.Drawing.Color.Black;
             this.bookQuery2.Location = new System.Drawing.Point(505, 30);
             this.bookQuery2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookQuery2.Name = "bookQuery2";
@@ -986,7 +1105,9 @@
             // 
             // bookOption1
             // 
+            this.bookOption1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookOption1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.bookOption1.ForeColor = System.Drawing.Color.Black;
             this.bookOption1.Items.AddRange(new object[] {
             "제목",
             "저자",
@@ -1001,6 +1122,8 @@
             // label14
             // 
             this.label14.AutoSize = true;
+            this.label14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label14.ForeColor = System.Drawing.Color.Black;
             this.label14.Location = new System.Drawing.Point(670, 298);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(111, 15);
@@ -1010,6 +1133,8 @@
             // label13
             // 
             this.label13.AutoSize = true;
+            this.label13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label13.ForeColor = System.Drawing.Color.Black;
             this.label13.Location = new System.Drawing.Point(670, 70);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(111, 15);
@@ -1078,17 +1203,21 @@
             // 
             // bookSearch
             // 
+            this.bookSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.bookSearch.ForeColor = System.Drawing.Color.Black;
             this.bookSearch.Location = new System.Drawing.Point(688, 28);
             this.bookSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookSearch.Name = "bookSearch";
             this.bookSearch.Size = new System.Drawing.Size(100, 25);
             this.bookSearch.TabIndex = 6;
             this.bookSearch.Text = "검색";
-            this.bookSearch.UseVisualStyleBackColor = true;
+            this.bookSearch.UseVisualStyleBackColor = false;
             this.bookSearch.Click += new System.EventHandler(this.bookSearch_Click);
             // 
             // bookQuery1
             // 
+            this.bookQuery1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.bookQuery1.ForeColor = System.Drawing.Color.Black;
             this.bookQuery1.Location = new System.Drawing.Point(130, 29);
             this.bookQuery1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookQuery1.Name = "bookQuery1";
@@ -1159,54 +1288,121 @@
             this.w.Name = "w";
             this.w.ReadOnly = true;
             // 
-            // Column5
+            // boardSlide
             // 
-            this.Column5.Frozen = true;
-            this.Column5.HeaderText = "";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column5.Width = 33;
+            this.boardSlide.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
+            this.boardSlide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.boardSlide.BorderStyle = DevComponents.DotNetBar.eBorderType.None;
+            this.boardSlide.ExpandedPanel = this.slidePortal;
+            this.boardSlide.ForeColor = System.Drawing.Color.Black;
+            this.boardSlide.Location = new System.Drawing.Point(93, 39);
+            this.boardSlide.Name = "boardSlide";
+            this.boardSlide.Panels.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.slidePortal,
+            this.slideBlackBoard,
+            this.slideLibrary});
+            this.boardSlide.Size = new System.Drawing.Size(151, 206);
+            this.boardSlide.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.boardSlide.TabIndex = 8;
+            this.boardSlide.Text = "sideBar1";
+            this.boardSlide.UsingSystemColors = true;
             // 
-            // Column1
+            // slidePortal
             // 
-            this.Column1.Frozen = true;
-            this.Column1.HeaderText = "제목";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 430;
+            this.slidePortal.FontBold = true;
+            this.slidePortal.Name = "slidePortal";
+            this.slidePortal.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem1,
+            this.buttonItem2,
+            this.buttonItem3,
+            this.buttonItem4});
+            this.slidePortal.Text = "포탈";
             // 
-            // Column2
+            // buttonItem1
             // 
-            this.Column2.Frozen = true;
-            this.Column2.HeaderText = "작성자";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column2.Width = 70;
+            this.buttonItem1.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem1.CanCustomize = false;
+            this.buttonItem1.Name = "buttonItem1";
+            this.buttonItem1.Text = "학사공지";
             // 
-            // Column3
+            // buttonItem2
             // 
-            this.Column3.HeaderText = "작성일";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column3.Width = 80;
+            this.buttonItem2.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem2.CanCustomize = false;
+            this.buttonItem2.Name = "buttonItem2";
+            this.buttonItem2.Text = "전체 공지";
             // 
-            // Column4
+            // buttonItem3
             // 
-            this.Column4.HeaderText = "조회수";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column4.Width = 70;
+            this.buttonItem3.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem3.Name = "buttonItem3";
+            this.buttonItem3.Text = "대학원 공지";
+            // 
+            // buttonItem4
+            // 
+            this.buttonItem4.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem4.Name = "buttonItem4";
+            this.buttonItem4.Text = "최신 게시물";
+            // 
+            // slideBlackBoard
+            // 
+            this.slideBlackBoard.FontBold = true;
+            this.slideBlackBoard.Name = "slideBlackBoard";
+            this.slideBlackBoard.Text = "블랙보드";
+            // 
+            // slideLibrary
+            // 
+            this.slideLibrary.FontBold = true;
+            this.slideLibrary.Name = "slideLibrary";
+            this.slideLibrary.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem5,
+            this.buttonItem6});
+            this.slideLibrary.Text = "학정";
+            // 
+            // buttonItem5
+            // 
+            this.buttonItem5.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem5.CanCustomize = false;
+            this.buttonItem5.Name = "buttonItem5";
+            this.buttonItem5.Text = "도서 검색";
+            // 
+            // buttonItem6
+            // 
+            this.buttonItem6.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem6.Name = "buttonItem6";
+            this.buttonItem6.Text = "스터디룸 예약";
+            // 
+            // portalList
+            // 
+            this.portalList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.portalList.Enabled = false;
+            this.portalList.ForeColor = System.Drawing.Color.Black;
+            this.portalList.FormattingEnabled = true;
+            this.portalList.ItemHeight = 15;
+            this.portalList.Items.AddRange(new object[] {
+            "학사 공지",
+            "전체 공지",
+            "대학원 공지",
+            "최신 게시물"});
+            this.portalList.Location = new System.Drawing.Point(14, 39);
+            this.portalList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.portalList.Name = "portalList";
+            this.portalList.Size = new System.Drawing.Size(119, 184);
+            this.portalList.TabIndex = 10;
+            this.portalList.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            // 
+            // styleManager1
+            // 
+            this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Metro;
+            this.styleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))), System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(230)))), ((int)(((byte)(255))))));
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(834, 759);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.ClientSize = new System.Drawing.Size(834, 670);
+            this.Controls.Add(this.boardSlide);
             this.Controls.Add(this.bookInfoGroup);
             this.Controls.Add(this.bookGroup);
             this.Controls.Add(this.roomNumberLabel);
@@ -1224,8 +1420,9 @@
             this.Controls.Add(this.portalBox);
             this.Controls.Add(this.contentBox);
             this.Controls.Add(this.gridView);
+            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Malgun Gothic", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "Form1";
@@ -1257,7 +1454,6 @@
         private System.Windows.Forms.DataGridView gridView;
         private System.Windows.Forms.TextBox contentBox;
         private System.Windows.Forms.ComboBox portalBox;
-        private System.Windows.Forms.ListBox portalList;
         private System.Windows.Forms.ListBox bbList;
         private System.Windows.Forms.Label loadingLabel;
         private System.Windows.Forms.CheckBox checkBox1;
@@ -1351,6 +1547,18 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private DevComponents.DotNetBar.SideBar boardSlide;
+        private DevComponents.DotNetBar.SideBarPanelItem slidePortal;
+        private DevComponents.DotNetBar.ButtonItem buttonItem1;
+        private DevComponents.DotNetBar.ButtonItem buttonItem2;
+        private DevComponents.DotNetBar.ButtonItem buttonItem3;
+        private DevComponents.DotNetBar.ButtonItem buttonItem4;
+        private DevComponents.DotNetBar.SideBarPanelItem slideBlackBoard;
+        private DevComponents.DotNetBar.SideBarPanelItem slideLibrary;
+        private DevComponents.DotNetBar.ButtonItem buttonItem5;
+        private DevComponents.DotNetBar.ButtonItem buttonItem6;
+        private System.Windows.Forms.ListBox portalList;
+        private DevComponents.DotNetBar.StyleManager styleManager1;
     }
 }
 

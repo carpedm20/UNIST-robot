@@ -13,7 +13,7 @@ using System.Xml;
 
 namespace robot
 {
-    public partial class Form1 : Form
+    public partial class Form1 : DevComponents.DotNetBar.Metro.MetroForm
     {
         HtmlDocument doc = null;
         int PORTALBOARDNUM = 4;
@@ -46,12 +46,12 @@ namespace robot
 
         /****************************/
         Portal portal;
-        Board[] board = new Board[3 * 10];
-        int PAGENUM = 3; // board 배열 선언 숫자도 바꿔주어야 함
+
         /****************************/
 
         public Form1()
         {
+
             InitializeComponent();
 
             // 브라우저 스크립트 에러 무시
@@ -65,6 +65,7 @@ namespace robot
             bookOption1.SelectedIndex = 0;
             bookOption2.SelectedIndex = 1;
             bookOperator.SelectedIndex = 0;
+
         }
 
         private void autoLoginSetup()
@@ -324,7 +325,6 @@ namespace robot
 
                 // bb 게시판 id
                 bbboard = new BB[options.Count-3];
-
                 int j = 0;
                 string n;
 
@@ -343,6 +343,15 @@ namespace robot
                     bbboard[i - 3 - j].url = options[i].OuterHtml.Split('=')[1].Split('>')[0];
                     bbboard[i - 3 - j].name = n;
                     portalList.Items.Add(bbboard[i - 3 - j].name);
+
+                    DevComponents.DotNetBar.ButtonItem butItem = new DevComponents.DotNetBar.ButtonItem();
+
+                    butItem.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+                    butItem.CanCustomize = false;
+                    butItem.Name = "buttonItem1";
+                    butItem.Text = bbboard[i - 3 - j].name;
+
+                    slideBlackBoard.SubItems.Add(butItem);
 
                     if (count < 3)
                     {
@@ -723,8 +732,8 @@ namespace robot
             libraryList.SelectedIndex = -1;
 
             // 이전 데이터 삭제
-            for (int i = 0; i < PAGENUM * 10; i++)
-                board[i] = new Board();
+            //for (int i = 0; i < PAGENUM * 10; i++)
+                //board[i] = new Board();
 
             while (gridView.Rows.Count != 0)
             {

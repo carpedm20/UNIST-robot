@@ -46,16 +46,6 @@
             this.libraryList = new System.Windows.Forms.ListBox();
             this.studyGroup = new System.Windows.Forms.GroupBox();
             this.studyDateLabel = new System.Windows.Forms.Label();
-            this.bookInfoGroup = new System.Windows.Forms.GroupBox();
-            this.bookReview = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
-            this.bookTitle = new System.Windows.Forms.Label();
-            this.bookPic = new System.Windows.Forms.PictureBox();
-            this.bookListGrid = new System.Windows.Forms.DataGridView();
-            this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.studyEtc = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.studyReserveBtn = new System.Windows.Forms.Button();
@@ -77,6 +67,16 @@
             this.label2 = new System.Windows.Forms.Label();
             this.studyPhoneNumber = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.bookInfoGroup = new System.Windows.Forms.GroupBox();
+            this.bookReview = new System.Windows.Forms.Label();
+            this.button1 = new System.Windows.Forms.Button();
+            this.bookTitle = new System.Windows.Forms.Label();
+            this.bookPic = new System.Windows.Forms.PictureBox();
+            this.bookListGrid = new System.Windows.Forms.DataGridView();
+            this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.studyGrid = new System.Windows.Forms.DataGridView();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -128,10 +128,10 @@
             this.w = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.studyGroup.SuspendLayout();
+            this.groupBox1.SuspendLayout();
             this.bookInfoGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bookPic)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookListGrid)).BeginInit();
-            this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.studyGrid)).BeginInit();
             this.bookGroup.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
@@ -343,7 +343,6 @@
             // studyGroup
             // 
             this.studyGroup.Controls.Add(this.studyDateLabel);
-            this.studyGroup.Controls.Add(this.bookInfoGroup);
             this.studyGroup.Controls.Add(this.studyEtc);
             this.studyGroup.Controls.Add(this.label7);
             this.studyGroup.Controls.Add(this.studyReserveBtn);
@@ -372,109 +371,6 @@
             this.studyDateLabel.Size = new System.Drawing.Size(131, 14);
             this.studyDateLabel.TabIndex = 21;
             this.studyDateLabel.Text = "날짜를 선택해 주세요 ;^)";
-            // 
-            // bookInfoGroup
-            // 
-            this.bookInfoGroup.Controls.Add(this.bookReview);
-            this.bookInfoGroup.Controls.Add(this.button1);
-            this.bookInfoGroup.Controls.Add(this.bookTitle);
-            this.bookInfoGroup.Controls.Add(this.bookPic);
-            this.bookInfoGroup.Controls.Add(this.bookListGrid);
-            this.bookInfoGroup.Location = new System.Drawing.Point(6, 114);
-            this.bookInfoGroup.Name = "bookInfoGroup";
-            this.bookInfoGroup.Size = new System.Drawing.Size(672, 178);
-            this.bookInfoGroup.TabIndex = 14;
-            this.bookInfoGroup.TabStop = false;
-            this.bookInfoGroup.Text = "책 정보";
-            this.bookInfoGroup.Visible = false;
-            // 
-            // bookReview
-            // 
-            this.bookReview.AutoSize = true;
-            this.bookReview.Location = new System.Drawing.Point(458, 24);
-            this.bookReview.Name = "bookReview";
-            this.bookReview.Size = new System.Drawing.Size(10, 14);
-            this.bookReview.TabIndex = 7;
-            this.bookReview.Text = " ";
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(580, 20);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "리뷰 보기";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // bookTitle
-            // 
-            this.bookTitle.AutoSize = true;
-            this.bookTitle.Location = new System.Drawing.Point(139, 23);
-            this.bookTitle.Name = "bookTitle";
-            this.bookTitle.Size = new System.Drawing.Size(43, 14);
-            this.bookTitle.TabIndex = 3;
-            this.bookTitle.Text = "책 제목";
-            // 
-            // bookPic
-            // 
-            this.bookPic.Location = new System.Drawing.Point(13, 23);
-            this.bookPic.Name = "bookPic";
-            this.bookPic.Size = new System.Drawing.Size(112, 145);
-            this.bookPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.bookPic.TabIndex = 2;
-            this.bookPic.TabStop = false;
-            // 
-            // bookListGrid
-            // 
-            this.bookListGrid.AllowUserToAddRows = false;
-            this.bookListGrid.AllowUserToDeleteRows = false;
-            this.bookListGrid.AllowUserToResizeColumns = false;
-            this.bookListGrid.AllowUserToResizeRows = false;
-            this.bookListGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.bookListGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.bookListGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column35,
-            this.Column36,
-            this.Column37,
-            this.Column38});
-            this.bookListGrid.Location = new System.Drawing.Point(142, 60);
-            this.bookListGrid.Name = "bookListGrid";
-            this.bookListGrid.RowHeadersVisible = false;
-            this.bookListGrid.RowTemplate.Height = 23;
-            this.bookListGrid.Size = new System.Drawing.Size(513, 106);
-            this.bookListGrid.TabIndex = 1;
-            // 
-            // Column35
-            // 
-            this.Column35.Frozen = true;
-            this.Column35.HeaderText = "등록 번호";
-            this.Column35.Name = "Column35";
-            this.Column35.ReadOnly = true;
-            // 
-            // Column36
-            // 
-            this.Column36.Frozen = true;
-            this.Column36.HeaderText = "소장 위치";
-            this.Column36.Name = "Column36";
-            this.Column36.ReadOnly = true;
-            this.Column36.Width = 170;
-            // 
-            // Column37
-            // 
-            this.Column37.Frozen = true;
-            this.Column37.HeaderText = "상태";
-            this.Column37.Name = "Column37";
-            this.Column37.ReadOnly = true;
-            this.Column37.Width = 70;
-            // 
-            // Column38
-            // 
-            this.Column38.Frozen = true;
-            this.Column38.HeaderText = "청구 기호";
-            this.Column38.Name = "Column38";
-            this.Column38.ReadOnly = true;
-            this.Column38.Width = 150;
             // 
             // studyEtc
             // 
@@ -654,6 +550,109 @@
             this.label1.Size = new System.Drawing.Size(54, 14);
             this.label1.TabIndex = 0;
             this.label1.Text = "전화 번호";
+            // 
+            // bookInfoGroup
+            // 
+            this.bookInfoGroup.Controls.Add(this.bookReview);
+            this.bookInfoGroup.Controls.Add(this.button1);
+            this.bookInfoGroup.Controls.Add(this.bookTitle);
+            this.bookInfoGroup.Controls.Add(this.bookPic);
+            this.bookInfoGroup.Controls.Add(this.bookListGrid);
+            this.bookInfoGroup.Location = new System.Drawing.Point(150, 30);
+            this.bookInfoGroup.Name = "bookInfoGroup";
+            this.bookInfoGroup.Size = new System.Drawing.Size(672, 178);
+            this.bookInfoGroup.TabIndex = 14;
+            this.bookInfoGroup.TabStop = false;
+            this.bookInfoGroup.Text = "책 정보";
+            this.bookInfoGroup.Visible = false;
+            // 
+            // bookReview
+            // 
+            this.bookReview.AutoSize = true;
+            this.bookReview.Location = new System.Drawing.Point(458, 24);
+            this.bookReview.Name = "bookReview";
+            this.bookReview.Size = new System.Drawing.Size(10, 14);
+            this.bookReview.TabIndex = 7;
+            this.bookReview.Text = " ";
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(580, 20);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.TabIndex = 5;
+            this.button1.Text = "리뷰 보기";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // bookTitle
+            // 
+            this.bookTitle.AutoSize = true;
+            this.bookTitle.Location = new System.Drawing.Point(139, 23);
+            this.bookTitle.Name = "bookTitle";
+            this.bookTitle.Size = new System.Drawing.Size(43, 14);
+            this.bookTitle.TabIndex = 3;
+            this.bookTitle.Text = "책 제목";
+            // 
+            // bookPic
+            // 
+            this.bookPic.Location = new System.Drawing.Point(13, 23);
+            this.bookPic.Name = "bookPic";
+            this.bookPic.Size = new System.Drawing.Size(112, 145);
+            this.bookPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.bookPic.TabIndex = 2;
+            this.bookPic.TabStop = false;
+            // 
+            // bookListGrid
+            // 
+            this.bookListGrid.AllowUserToAddRows = false;
+            this.bookListGrid.AllowUserToDeleteRows = false;
+            this.bookListGrid.AllowUserToResizeColumns = false;
+            this.bookListGrid.AllowUserToResizeRows = false;
+            this.bookListGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.bookListGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.bookListGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.Column35,
+            this.Column36,
+            this.Column37,
+            this.Column38});
+            this.bookListGrid.Location = new System.Drawing.Point(142, 60);
+            this.bookListGrid.Name = "bookListGrid";
+            this.bookListGrid.RowHeadersVisible = false;
+            this.bookListGrid.RowTemplate.Height = 23;
+            this.bookListGrid.Size = new System.Drawing.Size(513, 106);
+            this.bookListGrid.TabIndex = 1;
+            // 
+            // Column35
+            // 
+            this.Column35.Frozen = true;
+            this.Column35.HeaderText = "등록 번호";
+            this.Column35.Name = "Column35";
+            this.Column35.ReadOnly = true;
+            // 
+            // Column36
+            // 
+            this.Column36.Frozen = true;
+            this.Column36.HeaderText = "소장 위치";
+            this.Column36.Name = "Column36";
+            this.Column36.ReadOnly = true;
+            this.Column36.Width = 170;
+            // 
+            // Column37
+            // 
+            this.Column37.Frozen = true;
+            this.Column37.HeaderText = "상태";
+            this.Column37.Name = "Column37";
+            this.Column37.ReadOnly = true;
+            this.Column37.Width = 70;
+            // 
+            // Column38
+            // 
+            this.Column38.Frozen = true;
+            this.Column38.HeaderText = "청구 기호";
+            this.Column38.Name = "Column38";
+            this.Column38.ReadOnly = true;
+            this.Column38.Width = 150;
             // 
             // studyGrid
             // 
@@ -1165,6 +1164,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
             this.ClientSize = new System.Drawing.Size(834, 727);
+            this.Controls.Add(this.bookInfoGroup);
             this.Controls.Add(this.bookGroup);
             this.Controls.Add(this.roomNumberLabel);
             this.Controls.Add(this.roomNumberBox);
@@ -1190,12 +1190,12 @@
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
             this.studyGroup.ResumeLayout(false);
             this.studyGroup.PerformLayout();
+            this.groupBox1.ResumeLayout(false);
+            this.groupBox1.PerformLayout();
             this.bookInfoGroup.ResumeLayout(false);
             this.bookInfoGroup.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bookPic)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookListGrid)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.studyGrid)).EndInit();
             this.bookGroup.ResumeLayout(false);
             this.bookGroup.PerformLayout();

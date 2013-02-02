@@ -5,7 +5,6 @@ using System.Data;
 using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.IO;
 using mshtml;
@@ -117,8 +116,12 @@ namespace robot
 
             if(portalList.SelectedValue!=null && portalList.SelectedValue.ToString()!="스터디룸 예약")
                 studyGrid.Visible = false;
-            roomNumberLabel.Visible = false;
-            roomNumberBox.Visible = false;
+
+            if (portalList.SelectedValue != null && portalList.SelectedValue.ToString() != "스터디룸 예약")
+            {
+                roomNumberBox.Visible = false;
+                roomNumberLabel.Visible = false;
+            }
 
             // 첫 로그인, 이름 저장, 학사 공지로 이동
             if (e.Url.ToString() == "http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp") {
@@ -389,6 +392,21 @@ namespace robot
             }
 
             //====================== black board ===========================//
+
+            if (e.Url.ToString().IndexOf("http://bb.unist.ac.kr/webapps/blackboard/execute/announcement?&method=search&viewChoice=3&searchSelect=") != -1)
+            {
+                IEnumerable<HtmlElement> elements = ElementsByClass(doc, "clearfix");
+
+                /*string html = "<html  lang=\"en-US\"><style type=\"text/css\">\r\nbody { font-family:'Arial'; }\r\n.font-test { font:bold 24pt 'Arial'; }\r\n</style><meta http-equiv=\"Content-Type\" content=\"text/html; charset=UTF-8\">";
+
+                foreach (HtmlElement ele in elements) {
+                    html+=ele.InnerHtml.ToString();
+                    html += "<hr/>";
+                }
+
+                browser.DocumentText = html;*/
+                browser.Visible = true;
+            }
 
             if (e.Url.ToString() == "http://bb.unist.ac.kr/webapps/portal/frameset.jsp")
             {
@@ -776,7 +794,7 @@ namespace robot
                 rowIndex = e.RowIndex;
                 browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid=" + boardId + "&bullid=" + board[e.RowIndex].javascript[1]);
             }
-            //browser.Url = new Uri("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardToHtml.jsp?boardid=B200902281833482321051&bullid=BB201301181146301438492&comp_id=7007886&tablename=tBB_basic");
+            //browser.Url = new Uri("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardToHtml.jsp?boardid=B200902281833482321051&bullid=BB01181146301438492&comp_id=7007886&tablename=tBB_basic");
             //doc.InvokeScript("changePage", new object[] {2});
             //string[] arg = board[e.RowIndex].javascript;
             //doc.InvokeScript("clickBulletin", new object[] {arg[0], arg[1], arg[2], arg[3], arg[4]});
@@ -795,6 +813,7 @@ namespace robot
             browser.Visible = false;
             studyGroup.Visible = false;
             bookGroup.Visible = false;
+            studyGrid.Visible = false;
             bookInfoGroup.Visible = false;
             ListBox comboBox = (ListBox)sender;
 
@@ -866,6 +885,7 @@ namespace robot
                 }
 
                 browser.Visible=true;
+                studyGrid.Visible = false;
                 return;
             }
 
@@ -892,6 +912,8 @@ namespace robot
                         studyGroup.Visible = false;
                         browser.Visible = false;
                         studyGrid.Visible = false;
+                        roomNumberBox.Visible = false;
+                        roomNumberLabel.Visible = false;
                         break;
                     case 1:
                         // 스터디룸 예약
@@ -909,6 +931,8 @@ namespace robot
                         browser.Visible = true;
                         studyGroup.Visible = false;
                         studyGrid.Visible = false;
+                        roomNumberBox.Visible = false;
+                        roomNumberLabel.Visible = false;
                         break;
                 }
             }
@@ -1002,6 +1026,11 @@ namespace robot
         private void browser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
             iconCount++;
+
+            if (e.Url.ToString().IndexOf("http://bb.unist.ac.kr/webapps/blackboard/execute/announcement?&method=search&viewChoice=3&searchSelect=") != -1)
+            {
+                browser.Visible = false;
+            }
 
             // 스터디룸 리스트 볼 때 브라우저 잠시 숨기기
             if (e.Url.ToString().IndexOf("http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?") != -1)
@@ -1279,9 +1308,9 @@ namespace robot
 
             string title = books[grid.SelectedRows[0].Index].title;
 
-            if (title.Length > 35)
+            if (title.Length > 30)
             {
-                bookTitle.Text = title.ToString().Substring(0, 35) + "\r\n" + title.ToString().Substring(35);
+                bookTitle.Text = title.ToString().Substring(0, 30) + "\r\n" + title.ToString().Substring(30);
             }
             else {
                 bookTitle.Text = title.ToString();
@@ -1319,9 +1348,9 @@ namespace robot
 
             string title = books[grid.SelectedRows[0].Index].title;
 
-            if (title.Length > 35)
+            if (title.Length > 30)
             {
-                bookTitle.Text = title.ToString().Substring(0, 35) + "\r\n" + title.ToString().Substring(35);
+                bookTitle.Text = title.ToString().Substring(0, 30) + "\r\n" + title.ToString().Substring(30);
             }
             else
             {

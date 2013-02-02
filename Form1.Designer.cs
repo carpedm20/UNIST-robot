@@ -30,11 +30,6 @@
         {
             this.browser = new System.Windows.Forms.WebBrowser();
             this.gridView = new System.Windows.Forms.DataGridView();
-            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.contentBox = new System.Windows.Forms.TextBox();
             this.portalBox = new System.Windows.Forms.ComboBox();
             this.portalList = new System.Windows.Forms.ListBox();
@@ -126,6 +121,11 @@
             this.Column33 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.w = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
             this.studyGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -141,10 +141,11 @@
             // 
             // browser
             // 
-            this.browser.Location = new System.Drawing.Point(12, 224);
-            this.browser.MinimumSize = new System.Drawing.Size(20, 23);
+            this.browser.Location = new System.Drawing.Point(12, 240);
+            this.browser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.browser.MinimumSize = new System.Drawing.Size(20, 25);
             this.browser.Name = "browser";
-            this.browser.Size = new System.Drawing.Size(810, 483);
+            this.browser.Size = new System.Drawing.Size(810, 518);
             this.browser.TabIndex = 1;
             this.browser.Visible = false;
             this.browser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.browser_DocumentCompleted);
@@ -165,7 +166,8 @@
             this.Column3,
             this.Column4});
             this.gridView.Enabled = false;
-            this.gridView.Location = new System.Drawing.Point(150, 32);
+            this.gridView.Location = new System.Drawing.Point(150, 34);
+            this.gridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.gridView.MultiSelect = false;
             this.gridView.Name = "gridView";
             this.gridView.ReadOnly = true;
@@ -179,59 +181,18 @@
             this.gridView.ShowCellToolTips = false;
             this.gridView.ShowEditingIcon = false;
             this.gridView.ShowRowErrors = false;
-            this.gridView.Size = new System.Drawing.Size(672, 178);
+            this.gridView.Size = new System.Drawing.Size(672, 191);
             this.gridView.TabIndex = 2;
             this.gridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellClick);
             this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellContentClick);
             // 
-            // Column5
-            // 
-            this.Column5.Frozen = true;
-            this.Column5.HeaderText = "";
-            this.Column5.Name = "Column5";
-            this.Column5.ReadOnly = true;
-            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column5.Width = 33;
-            // 
-            // Column1
-            // 
-            this.Column1.Frozen = true;
-            this.Column1.HeaderText = "제목";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Width = 430;
-            // 
-            // Column2
-            // 
-            this.Column2.Frozen = true;
-            this.Column2.HeaderText = "작성자";
-            this.Column2.Name = "Column2";
-            this.Column2.ReadOnly = true;
-            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column2.Width = 65;
-            // 
-            // Column3
-            // 
-            this.Column3.HeaderText = "작성일";
-            this.Column3.Name = "Column3";
-            this.Column3.ReadOnly = true;
-            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column3.Width = 80;
-            // 
-            // Column4
-            // 
-            this.Column4.HeaderText = "조회수";
-            this.Column4.Name = "Column4";
-            this.Column4.ReadOnly = true;
-            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
-            this.Column4.Width = 65;
-            // 
             // contentBox
             // 
-            this.contentBox.Location = new System.Drawing.Point(12, 250);
+            this.contentBox.Location = new System.Drawing.Point(12, 268);
+            this.contentBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.contentBox.Multiline = true;
             this.contentBox.Name = "contentBox";
-            this.contentBox.Size = new System.Drawing.Size(76, 53);
+            this.contentBox.Size = new System.Drawing.Size(76, 56);
             this.contentBox.TabIndex = 8;
             this.contentBox.Visible = false;
             // 
@@ -247,9 +208,10 @@
             "최신 게시물",
             "개선 및 제안",
             "Q & A"});
-            this.portalBox.Location = new System.Drawing.Point(150, 216);
+            this.portalBox.Location = new System.Drawing.Point(150, 231);
+            this.portalBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.portalBox.Name = "portalBox";
-            this.portalBox.Size = new System.Drawing.Size(103, 22);
+            this.portalBox.Size = new System.Drawing.Size(103, 23);
             this.portalBox.TabIndex = 3;
             this.portalBox.Visible = false;
             this.portalBox.SelectedIndexChanged += new System.EventHandler(this.boardBox_SelectedIndexChanged);
@@ -259,15 +221,16 @@
             this.portalList.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.portalList.Enabled = false;
             this.portalList.FormattingEnabled = true;
-            this.portalList.ItemHeight = 14;
+            this.portalList.ItemHeight = 15;
             this.portalList.Items.AddRange(new object[] {
             "학사 공지",
             "전체 공지",
             "대학원 공지",
             "최신 게시물"});
-            this.portalList.Location = new System.Drawing.Point(14, 36);
+            this.portalList.Location = new System.Drawing.Point(14, 39);
+            this.portalList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.portalList.Name = "portalList";
-            this.portalList.Size = new System.Drawing.Size(119, 172);
+            this.portalList.Size = new System.Drawing.Size(119, 184);
             this.portalList.TabIndex = 10;
             this.portalList.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
             // 
@@ -276,10 +239,11 @@
             this.bbList.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.bbList.Enabled = false;
             this.bbList.FormattingEnabled = true;
-            this.bbList.ItemHeight = 14;
-            this.bbList.Location = new System.Drawing.Point(250, 102);
+            this.bbList.ItemHeight = 15;
+            this.bbList.Location = new System.Drawing.Point(250, 109);
+            this.bbList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bbList.Name = "bbList";
-            this.bbList.Size = new System.Drawing.Size(110, 46);
+            this.bbList.Size = new System.Drawing.Size(110, 49);
             this.bbList.TabIndex = 11;
             this.bbList.Visible = false;
             // 
@@ -287,7 +251,7 @@
             // 
             this.loadingLabel.AutoSize = true;
             this.loadingLabel.Font = new System.Drawing.Font("NanumGothicExtraBold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.loadingLabel.Location = new System.Drawing.Point(397, 443);
+            this.loadingLabel.Location = new System.Drawing.Point(397, 475);
             this.loadingLabel.Name = "loadingLabel";
             this.loadingLabel.Size = new System.Drawing.Size(56, 28);
             this.loadingLabel.TabIndex = 12;
@@ -297,8 +261,9 @@
             // 
             this.checkBox1.AutoSize = true;
             this.checkBox1.Location = new System.Drawing.Point(18, 12);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(84, 18);
+            this.checkBox1.Size = new System.Drawing.Size(90, 19);
             this.checkBox1.TabIndex = 14;
             this.checkBox1.Text = "자동 로그인";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -307,9 +272,9 @@
             // settingLabel
             // 
             this.settingLabel.AutoSize = true;
-            this.settingLabel.Location = new System.Drawing.Point(793, 10);
+            this.settingLabel.Location = new System.Drawing.Point(793, 11);
             this.settingLabel.Name = "settingLabel";
-            this.settingLabel.Size = new System.Drawing.Size(29, 14);
+            this.settingLabel.Size = new System.Drawing.Size(31, 15);
             this.settingLabel.TabIndex = 15;
             this.settingLabel.Text = "설정";
             this.settingLabel.Click += new System.EventHandler(this.settingLabel_Click);
@@ -317,9 +282,9 @@
             // welcomeLabel
             // 
             this.welcomeLabel.AutoSize = true;
-            this.welcomeLabel.Location = new System.Drawing.Point(166, 10);
+            this.welcomeLabel.Location = new System.Drawing.Point(166, 11);
             this.welcomeLabel.Name = "welcomeLabel";
-            this.welcomeLabel.Size = new System.Drawing.Size(151, 14);
+            this.welcomeLabel.Size = new System.Drawing.Size(162, 15);
             this.welcomeLabel.TabIndex = 16;
             this.welcomeLabel.Text = "이름을 확인 중 입니다  o_O?";
             // 
@@ -328,14 +293,15 @@
             this.libraryList.BackColor = System.Drawing.SystemColors.ButtonHighlight;
             this.libraryList.Enabled = false;
             this.libraryList.FormattingEnabled = true;
-            this.libraryList.ItemHeight = 14;
+            this.libraryList.ItemHeight = 15;
             this.libraryList.Items.AddRange(new object[] {
             "도서 검색",
             "스터디룸 예약",
             "열람실 좌석 현황"});
-            this.libraryList.Location = new System.Drawing.Point(250, 154);
+            this.libraryList.Location = new System.Drawing.Point(250, 165);
+            this.libraryList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.libraryList.Name = "libraryList";
-            this.libraryList.Size = new System.Drawing.Size(110, 32);
+            this.libraryList.Size = new System.Drawing.Size(110, 34);
             this.libraryList.TabIndex = 12;
             this.libraryList.Visible = false;
             this.libraryList.SelectedIndexChanged += new System.EventHandler(this.libraryList_SelectedIndexChanged);
@@ -355,9 +321,11 @@
             this.studyGroup.Controls.Add(this.studyPhoneNumber);
             this.studyGroup.Controls.Add(this.label1);
             this.studyGroup.Enabled = false;
-            this.studyGroup.Location = new System.Drawing.Point(150, 32);
+            this.studyGroup.Location = new System.Drawing.Point(150, 34);
+            this.studyGroup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyGroup.Name = "studyGroup";
-            this.studyGroup.Size = new System.Drawing.Size(672, 178);
+            this.studyGroup.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.studyGroup.Size = new System.Drawing.Size(672, 191);
             this.studyGroup.TabIndex = 17;
             this.studyGroup.TabStop = false;
             this.studyGroup.Text = "스터디 룸 예약";
@@ -366,33 +334,35 @@
             // studyDateLabel
             // 
             this.studyDateLabel.AutoSize = true;
-            this.studyDateLabel.Location = new System.Drawing.Point(83, 35);
+            this.studyDateLabel.Location = new System.Drawing.Point(83, 38);
             this.studyDateLabel.Name = "studyDateLabel";
-            this.studyDateLabel.Size = new System.Drawing.Size(131, 14);
+            this.studyDateLabel.Size = new System.Drawing.Size(142, 15);
             this.studyDateLabel.TabIndex = 21;
             this.studyDateLabel.Text = "날짜를 선택해 주세요 ;^)";
             // 
             // studyEtc
             // 
-            this.studyEtc.Location = new System.Drawing.Point(86, 111);
+            this.studyEtc.Location = new System.Drawing.Point(86, 119);
+            this.studyEtc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyEtc.Name = "studyEtc";
-            this.studyEtc.Size = new System.Drawing.Size(154, 21);
+            this.studyEtc.Size = new System.Drawing.Size(154, 23);
             this.studyEtc.TabIndex = 25;
             // 
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(16, 114);
+            this.label7.Location = new System.Drawing.Point(16, 122);
             this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(29, 14);
+            this.label7.Size = new System.Drawing.Size(31, 15);
             this.label7.TabIndex = 24;
             this.label7.Text = "비고";
             // 
             // studyReserveBtn
             // 
-            this.studyReserveBtn.Location = new System.Drawing.Point(202, 141);
+            this.studyReserveBtn.Location = new System.Drawing.Point(202, 151);
+            this.studyReserveBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyReserveBtn.Name = "studyReserveBtn";
-            this.studyReserveBtn.Size = new System.Drawing.Size(84, 23);
+            this.studyReserveBtn.Size = new System.Drawing.Size(84, 25);
             this.studyReserveBtn.TabIndex = 23;
             this.studyReserveBtn.Text = "예약";
             this.studyReserveBtn.UseVisualStyleBackColor = true;
@@ -409,100 +379,110 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.studyStudentId1);
-            this.groupBox1.Location = new System.Drawing.Point(312, 20);
+            this.groupBox1.Location = new System.Drawing.Point(312, 21);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(338, 134);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Size = new System.Drawing.Size(338, 144);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "학생 번호";
             // 
             // studyStudentId8
             // 
-            this.studyStudentId8.Location = new System.Drawing.Point(181, 101);
+            this.studyStudentId8.Location = new System.Drawing.Point(181, 109);
+            this.studyStudentId8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId8.Name = "studyStudentId8";
-            this.studyStudentId8.Size = new System.Drawing.Size(135, 21);
+            this.studyStudentId8.Size = new System.Drawing.Size(135, 23);
             this.studyStudentId8.TabIndex = 17;
             // 
             // studyStudentId6
             // 
-            this.studyStudentId6.Location = new System.Drawing.Point(181, 74);
+            this.studyStudentId6.Location = new System.Drawing.Point(181, 79);
+            this.studyStudentId6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId6.Name = "studyStudentId6";
-            this.studyStudentId6.Size = new System.Drawing.Size(135, 21);
+            this.studyStudentId6.Size = new System.Drawing.Size(135, 23);
             this.studyStudentId6.TabIndex = 16;
             // 
             // studyStudentId4
             // 
-            this.studyStudentId4.Location = new System.Drawing.Point(181, 47);
+            this.studyStudentId4.Location = new System.Drawing.Point(181, 50);
+            this.studyStudentId4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId4.Name = "studyStudentId4";
-            this.studyStudentId4.Size = new System.Drawing.Size(135, 21);
+            this.studyStudentId4.Size = new System.Drawing.Size(135, 23);
             this.studyStudentId4.TabIndex = 15;
             // 
             // studyStudentId2
             // 
-            this.studyStudentId2.Location = new System.Drawing.Point(181, 20);
+            this.studyStudentId2.Location = new System.Drawing.Point(181, 21);
+            this.studyStudentId2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId2.Name = "studyStudentId2";
-            this.studyStudentId2.Size = new System.Drawing.Size(135, 21);
+            this.studyStudentId2.Size = new System.Drawing.Size(135, 23);
             this.studyStudentId2.TabIndex = 14;
             // 
             // studyStudentId7
             // 
-            this.studyStudentId7.Location = new System.Drawing.Point(21, 101);
+            this.studyStudentId7.Location = new System.Drawing.Point(21, 109);
+            this.studyStudentId7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId7.Name = "studyStudentId7";
-            this.studyStudentId7.Size = new System.Drawing.Size(135, 21);
+            this.studyStudentId7.Size = new System.Drawing.Size(135, 23);
             this.studyStudentId7.TabIndex = 13;
             // 
             // studyStudentId5
             // 
-            this.studyStudentId5.Location = new System.Drawing.Point(21, 74);
+            this.studyStudentId5.Location = new System.Drawing.Point(21, 79);
+            this.studyStudentId5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId5.Name = "studyStudentId5";
-            this.studyStudentId5.Size = new System.Drawing.Size(135, 21);
+            this.studyStudentId5.Size = new System.Drawing.Size(135, 23);
             this.studyStudentId5.TabIndex = 12;
             // 
             // studyStudentId3
             // 
-            this.studyStudentId3.Location = new System.Drawing.Point(21, 47);
+            this.studyStudentId3.Location = new System.Drawing.Point(21, 50);
+            this.studyStudentId3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId3.Name = "studyStudentId3";
-            this.studyStudentId3.Size = new System.Drawing.Size(135, 21);
+            this.studyStudentId3.Size = new System.Drawing.Size(135, 23);
             this.studyStudentId3.TabIndex = 11;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(8, 23);
+            this.label6.Location = new System.Drawing.Point(8, 25);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(0, 14);
+            this.label6.Size = new System.Drawing.Size(0, 15);
             this.label6.TabIndex = 8;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(8, 50);
+            this.label5.Location = new System.Drawing.Point(8, 54);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(0, 14);
+            this.label5.Size = new System.Drawing.Size(0, 15);
             this.label5.TabIndex = 10;
             // 
             // studyStudentId1
             // 
-            this.studyStudentId1.Location = new System.Drawing.Point(21, 20);
+            this.studyStudentId1.Location = new System.Drawing.Point(21, 21);
+            this.studyStudentId1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId1.Name = "studyStudentId1";
-            this.studyStudentId1.Size = new System.Drawing.Size(135, 21);
+            this.studyStudentId1.Size = new System.Drawing.Size(135, 23);
             this.studyStudentId1.TabIndex = 9;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(16, 35);
+            this.label4.Location = new System.Drawing.Point(16, 38);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(54, 14);
+            this.label4.Size = new System.Drawing.Size(59, 15);
             this.label4.TabIndex = 7;
             this.label4.Text = "예약 날짜";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(16, 144);
+            this.label3.Location = new System.Drawing.Point(16, 154);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 14);
+            this.label3.Size = new System.Drawing.Size(59, 15);
             this.label3.TabIndex = 5;
             this.label3.Text = "사용 시간";
             // 
@@ -514,40 +494,43 @@
             "1 시간",
             "2 시간",
             "3 시간"});
-            this.studyTimeBox.Location = new System.Drawing.Point(86, 141);
+            this.studyTimeBox.Location = new System.Drawing.Point(86, 151);
+            this.studyTimeBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyTimeBox.Name = "studyTimeBox";
-            this.studyTimeBox.Size = new System.Drawing.Size(81, 22);
+            this.studyTimeBox.Size = new System.Drawing.Size(81, 23);
             this.studyTimeBox.TabIndex = 4;
             // 
             // studyEmail
             // 
-            this.studyEmail.Location = new System.Drawing.Point(86, 84);
+            this.studyEmail.Location = new System.Drawing.Point(86, 90);
+            this.studyEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyEmail.Name = "studyEmail";
-            this.studyEmail.Size = new System.Drawing.Size(154, 21);
+            this.studyEmail.Size = new System.Drawing.Size(154, 23);
             this.studyEmail.TabIndex = 3;
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(16, 87);
+            this.label2.Location = new System.Drawing.Point(16, 94);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(42, 14);
+            this.label2.Size = new System.Drawing.Size(41, 15);
             this.label2.TabIndex = 2;
             this.label2.Text = "E-mail";
             // 
             // studyPhoneNumber
             // 
-            this.studyPhoneNumber.Location = new System.Drawing.Point(86, 57);
+            this.studyPhoneNumber.Location = new System.Drawing.Point(86, 61);
+            this.studyPhoneNumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyPhoneNumber.Name = "studyPhoneNumber";
-            this.studyPhoneNumber.Size = new System.Drawing.Size(154, 21);
+            this.studyPhoneNumber.Size = new System.Drawing.Size(154, 23);
             this.studyPhoneNumber.TabIndex = 1;
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(16, 60);
+            this.label1.Location = new System.Drawing.Point(16, 64);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(54, 14);
+            this.label1.Size = new System.Drawing.Size(59, 15);
             this.label1.TabIndex = 0;
             this.label1.Text = "전화 번호";
             // 
@@ -558,9 +541,11 @@
             this.bookInfoGroup.Controls.Add(this.bookTitle);
             this.bookInfoGroup.Controls.Add(this.bookPic);
             this.bookInfoGroup.Controls.Add(this.bookListGrid);
-            this.bookInfoGroup.Location = new System.Drawing.Point(150, 30);
+            this.bookInfoGroup.Location = new System.Drawing.Point(150, 32);
+            this.bookInfoGroup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookInfoGroup.Name = "bookInfoGroup";
-            this.bookInfoGroup.Size = new System.Drawing.Size(672, 178);
+            this.bookInfoGroup.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.bookInfoGroup.Size = new System.Drawing.Size(672, 191);
             this.bookInfoGroup.TabIndex = 14;
             this.bookInfoGroup.TabStop = false;
             this.bookInfoGroup.Text = "책 정보";
@@ -569,17 +554,18 @@
             // bookReview
             // 
             this.bookReview.AutoSize = true;
-            this.bookReview.Location = new System.Drawing.Point(458, 24);
+            this.bookReview.Location = new System.Drawing.Point(458, 26);
             this.bookReview.Name = "bookReview";
-            this.bookReview.Size = new System.Drawing.Size(10, 14);
+            this.bookReview.Size = new System.Drawing.Size(11, 15);
             this.bookReview.TabIndex = 7;
             this.bookReview.Text = " ";
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(580, 20);
+            this.button1.Location = new System.Drawing.Point(580, 21);
+            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
+            this.button1.Size = new System.Drawing.Size(75, 25);
             this.button1.TabIndex = 5;
             this.button1.Text = "리뷰 보기";
             this.button1.UseVisualStyleBackColor = true;
@@ -588,17 +574,18 @@
             // bookTitle
             // 
             this.bookTitle.AutoSize = true;
-            this.bookTitle.Location = new System.Drawing.Point(139, 23);
+            this.bookTitle.Location = new System.Drawing.Point(139, 25);
             this.bookTitle.Name = "bookTitle";
-            this.bookTitle.Size = new System.Drawing.Size(43, 14);
+            this.bookTitle.Size = new System.Drawing.Size(47, 15);
             this.bookTitle.TabIndex = 3;
             this.bookTitle.Text = "책 제목";
             // 
             // bookPic
             // 
-            this.bookPic.Location = new System.Drawing.Point(13, 23);
+            this.bookPic.Location = new System.Drawing.Point(13, 25);
+            this.bookPic.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookPic.Name = "bookPic";
-            this.bookPic.Size = new System.Drawing.Size(112, 145);
+            this.bookPic.Size = new System.Drawing.Size(112, 155);
             this.bookPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.bookPic.TabIndex = 2;
             this.bookPic.TabStop = false;
@@ -616,11 +603,12 @@
             this.Column36,
             this.Column37,
             this.Column38});
-            this.bookListGrid.Location = new System.Drawing.Point(142, 60);
+            this.bookListGrid.Location = new System.Drawing.Point(142, 64);
+            this.bookListGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookListGrid.Name = "bookListGrid";
             this.bookListGrid.RowHeadersVisible = false;
             this.bookListGrid.RowTemplate.Height = 23;
-            this.bookListGrid.Size = new System.Drawing.Size(513, 106);
+            this.bookListGrid.Size = new System.Drawing.Size(513, 114);
             this.bookListGrid.TabIndex = 1;
             // 
             // Column35
@@ -688,7 +676,8 @@
             this.Column26,
             this.Column27,
             this.Column28});
-            this.studyGrid.Location = new System.Drawing.Point(14, 250);
+            this.studyGrid.Location = new System.Drawing.Point(14, 268);
+            this.studyGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyGrid.MultiSelect = false;
             this.studyGrid.Name = "studyGrid";
             this.studyGrid.ReadOnly = true;
@@ -698,7 +687,7 @@
             this.studyGrid.ShowCellToolTips = false;
             this.studyGrid.ShowEditingIcon = false;
             this.studyGrid.ShowRowErrors = false;
-            this.studyGrid.Size = new System.Drawing.Size(808, 457);
+            this.studyGrid.Size = new System.Drawing.Size(808, 490);
             this.studyGrid.TabIndex = 18;
             this.studyGrid.Visible = false;
             this.studyGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.studyGrid_CellClick);
@@ -918,9 +907,10 @@
             "8 (3-6)",
             "9 (3-6)",
             "10 (3-6)"});
-            this.roomNumberBox.Location = new System.Drawing.Point(99, 220);
+            this.roomNumberBox.Location = new System.Drawing.Point(99, 236);
+            this.roomNumberBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.roomNumberBox.Name = "roomNumberBox";
-            this.roomNumberBox.Size = new System.Drawing.Size(121, 22);
+            this.roomNumberBox.Size = new System.Drawing.Size(121, 23);
             this.roomNumberBox.TabIndex = 19;
             this.roomNumberBox.Visible = false;
             this.roomNumberBox.SelectedIndexChanged += new System.EventHandler(this.roomNumberBox_SelectedIndexChanged);
@@ -928,9 +918,9 @@
             // roomNumberLabel
             // 
             this.roomNumberLabel.AutoSize = true;
-            this.roomNumberLabel.Location = new System.Drawing.Point(27, 224);
+            this.roomNumberLabel.Location = new System.Drawing.Point(27, 240);
             this.roomNumberLabel.Name = "roomNumberLabel";
-            this.roomNumberLabel.Size = new System.Drawing.Size(43, 14);
+            this.roomNumberLabel.Size = new System.Drawing.Size(47, 15);
             this.roomNumberLabel.TabIndex = 14;
             this.roomNumberLabel.Text = "방 번호";
             this.roomNumberLabel.Visible = false;
@@ -948,9 +938,11 @@
             this.bookGroup.Controls.Add(this.bookSearch);
             this.bookGroup.Controls.Add(this.bookQuery1);
             this.bookGroup.Controls.Add(this.bookGridView);
-            this.bookGroup.Location = new System.Drawing.Point(12, 221);
+            this.bookGroup.Location = new System.Drawing.Point(12, 236);
+            this.bookGroup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookGroup.Name = "bookGroup";
-            this.bookGroup.Size = new System.Drawing.Size(810, 489);
+            this.bookGroup.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.bookGroup.Size = new System.Drawing.Size(810, 524);
             this.bookGroup.TabIndex = 20;
             this.bookGroup.TabStop = false;
             this.bookGroup.Text = "도서 검색";
@@ -963,9 +955,10 @@
             "AND",
             "OR",
             "NOT"});
-            this.bookOperator.Location = new System.Drawing.Point(313, 27);
+            this.bookOperator.Location = new System.Drawing.Point(313, 29);
+            this.bookOperator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookOperator.Name = "bookOperator";
-            this.bookOperator.Size = new System.Drawing.Size(56, 22);
+            this.bookOperator.Size = new System.Drawing.Size(56, 23);
             this.bookOperator.TabIndex = 3;
             // 
             // bookOption2
@@ -975,17 +968,19 @@
             "제목",
             "저자",
             "출판사"});
-            this.bookOption2.Location = new System.Drawing.Point(388, 27);
+            this.bookOption2.Location = new System.Drawing.Point(388, 29);
+            this.bookOption2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookOption2.Name = "bookOption2";
-            this.bookOption2.Size = new System.Drawing.Size(100, 22);
+            this.bookOption2.Size = new System.Drawing.Size(100, 23);
             this.bookOption2.TabIndex = 4;
             this.bookOption2.SelectedIndexChanged += new System.EventHandler(this.bookOption2_SelectedIndexChanged);
             // 
             // bookQuery2
             // 
-            this.bookQuery2.Location = new System.Drawing.Point(505, 28);
+            this.bookQuery2.Location = new System.Drawing.Point(505, 30);
+            this.bookQuery2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookQuery2.Name = "bookQuery2";
-            this.bookQuery2.Size = new System.Drawing.Size(163, 21);
+            this.bookQuery2.Size = new System.Drawing.Size(163, 23);
             this.bookQuery2.TabIndex = 5;
             this.bookQuery2.KeyDown += new System.Windows.Forms.KeyEventHandler(this.bookQuery2_KeyDown);
             // 
@@ -996,27 +991,28 @@
             "제목",
             "저자",
             "출판사"});
-            this.bookOption1.Location = new System.Drawing.Point(13, 26);
+            this.bookOption1.Location = new System.Drawing.Point(13, 28);
+            this.bookOption1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookOption1.Name = "bookOption1";
-            this.bookOption1.Size = new System.Drawing.Size(100, 22);
+            this.bookOption1.Size = new System.Drawing.Size(100, 23);
             this.bookOption1.TabIndex = 1;
             this.bookOption1.SelectedIndexChanged += new System.EventHandler(this.bookOption1_SelectedIndexChanged);
             // 
             // label14
             // 
             this.label14.AutoSize = true;
-            this.label14.Location = new System.Drawing.Point(670, 278);
+            this.label14.Location = new System.Drawing.Point(670, 298);
             this.label14.Name = "label14";
-            this.label14.Size = new System.Drawing.Size(101, 14);
+            this.label14.Size = new System.Drawing.Size(111, 15);
             this.label14.TabIndex = 22;
             this.label14.Text = "분야별 검색어 순위";
             // 
             // label13
             // 
             this.label13.AutoSize = true;
-            this.label13.Location = new System.Drawing.Point(670, 65);
+            this.label13.Location = new System.Drawing.Point(670, 70);
             this.label13.Name = "label13";
-            this.label13.Size = new System.Drawing.Size(101, 14);
+            this.label13.Size = new System.Drawing.Size(111, 15);
             this.label13.TabIndex = 21;
             this.label13.Text = "실시간 검색어 순위";
             // 
@@ -1027,11 +1023,12 @@
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column40,
             this.Column41});
-            this.dataGridView2.Location = new System.Drawing.Point(652, 301);
+            this.dataGridView2.Location = new System.Drawing.Point(652, 322);
+            this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(141, 177);
+            this.dataGridView2.Size = new System.Drawing.Size(141, 190);
             this.dataGridView2.TabIndex = 20;
             // 
             // Column40
@@ -1056,11 +1053,12 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column30,
             this.Column39});
-            this.dataGridView1.Location = new System.Drawing.Point(652, 88);
+            this.dataGridView1.Location = new System.Drawing.Point(652, 94);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(141, 177);
+            this.dataGridView1.Size = new System.Drawing.Size(141, 190);
             this.dataGridView1.TabIndex = 19;
             // 
             // Column30
@@ -1080,9 +1078,10 @@
             // 
             // bookSearch
             // 
-            this.bookSearch.Location = new System.Drawing.Point(688, 26);
+            this.bookSearch.Location = new System.Drawing.Point(688, 28);
+            this.bookSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookSearch.Name = "bookSearch";
-            this.bookSearch.Size = new System.Drawing.Size(100, 23);
+            this.bookSearch.Size = new System.Drawing.Size(100, 25);
             this.bookSearch.TabIndex = 6;
             this.bookSearch.Text = "검색";
             this.bookSearch.UseVisualStyleBackColor = true;
@@ -1090,9 +1089,10 @@
             // 
             // bookQuery1
             // 
-            this.bookQuery1.Location = new System.Drawing.Point(130, 27);
+            this.bookQuery1.Location = new System.Drawing.Point(130, 29);
+            this.bookQuery1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookQuery1.Name = "bookQuery1";
-            this.bookQuery1.Size = new System.Drawing.Size(163, 21);
+            this.bookQuery1.Size = new System.Drawing.Size(163, 23);
             this.bookQuery1.TabIndex = 2;
             this.bookQuery1.KeyDown += new System.Windows.Forms.KeyEventHandler(this.bookQuery1_KeyDown);
             // 
@@ -1110,13 +1110,14 @@
             this.Column33,
             this.Column34,
             this.w});
-            this.bookGridView.Location = new System.Drawing.Point(13, 65);
+            this.bookGridView.Location = new System.Drawing.Point(13, 70);
+            this.bookGridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookGridView.MultiSelect = false;
             this.bookGridView.Name = "bookGridView";
             this.bookGridView.RowHeadersVisible = false;
             this.bookGridView.RowTemplate.Height = 23;
             this.bookGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.bookGridView.Size = new System.Drawing.Size(625, 413);
+            this.bookGridView.Size = new System.Drawing.Size(625, 442);
             this.bookGridView.TabIndex = 0;
             this.bookGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.bookGridView_CellClick);
             this.bookGridView.SelectionChanged += new System.EventHandler(this.bookGridView_SelectionChanged);
@@ -1158,12 +1159,54 @@
             this.w.Name = "w";
             this.w.ReadOnly = true;
             // 
+            // Column5
+            // 
+            this.Column5.Frozen = true;
+            this.Column5.HeaderText = "";
+            this.Column5.Name = "Column5";
+            this.Column5.ReadOnly = true;
+            this.Column5.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column5.Width = 33;
+            // 
+            // Column1
+            // 
+            this.Column1.Frozen = true;
+            this.Column1.HeaderText = "제목";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Width = 430;
+            // 
+            // Column2
+            // 
+            this.Column2.Frozen = true;
+            this.Column2.HeaderText = "작성자";
+            this.Column2.Name = "Column2";
+            this.Column2.ReadOnly = true;
+            this.Column2.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column2.Width = 70;
+            // 
+            // Column3
+            // 
+            this.Column3.HeaderText = "작성일";
+            this.Column3.Name = "Column3";
+            this.Column3.ReadOnly = true;
+            this.Column3.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column3.Width = 80;
+            // 
+            // Column4
+            // 
+            this.Column4.HeaderText = "조회수";
+            this.Column4.Name = "Column4";
+            this.Column4.ReadOnly = true;
+            this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
+            this.Column4.Width = 70;
+            // 
             // Form1
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.ControlLightLight;
-            this.ClientSize = new System.Drawing.Size(834, 727);
+            this.ClientSize = new System.Drawing.Size(834, 759);
             this.Controls.Add(this.bookInfoGroup);
             this.Controls.Add(this.bookGroup);
             this.Controls.Add(this.roomNumberLabel);
@@ -1181,8 +1224,9 @@
             this.Controls.Add(this.portalBox);
             this.Controls.Add(this.contentBox);
             this.Controls.Add(this.gridView);
-            this.Font = new System.Drawing.Font("NanumGothic", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Font = new System.Drawing.Font("Malgun Gothic", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -1219,11 +1263,6 @@
         private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label settingLabel;
         private System.Windows.Forms.Label welcomeLabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.ListBox libraryList;
         private System.Windows.Forms.GroupBox studyGroup;
         private System.Windows.Forms.GroupBox groupBox1;
@@ -1307,6 +1346,11 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button studyReserveBtn;
         private System.Windows.Forms.Label studyDateLabel;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
     }
 }
 

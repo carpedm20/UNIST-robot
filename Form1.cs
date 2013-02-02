@@ -19,10 +19,8 @@ namespace robot
         int PORTALBOARDNUM = 4;
         int count = 0; // 첫 화면 오류 제거 카운터
         int BOARDTAGNUM = 13;
-        int PAGENUM = 3; // board 배열 선언 숫자도 바꿔주어야 함
 
-        Board[] board = new Board[3 * 10];
-        BBBoard[] bbboard;
+        BB[] bbboard;
 
         string boardId = "B200902281833482321051";
         string userName = "";
@@ -45,8 +43,13 @@ namespace robot
         string thisYear = "2013";
 
         Random r = new Random();
-        Say say;
-        
+
+        /****************************/
+        Portal portal;
+        Board[] board = new Board[3 * 10];
+        int PAGENUM = 3; // board 배열 선언 숫자도 바꿔주어야 함
+        /****************************/
+
         public Form1()
         {
             InitializeComponent();
@@ -54,9 +57,18 @@ namespace robot
             // 브라우저 스크립트 에러 무시
             browser.ScriptErrorsSuppressed = true;
 
-            // say 초기화
-            say = new Say();
+            autoLoginSetup();
 
+            browser.Navigate("https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp");
+
+            // 책 검색 옵션 초기화
+            bookOption1.SelectedIndex = 0;
+            bookOption2.SelectedIndex = 1;
+            bookOperator.SelectedIndex = 0;
+        }
+
+        private void autoLoginSetup()
+        {
             // 아이디 ini에 저장
             if (Program.loginSave == true)
             {
@@ -81,31 +93,43 @@ namespace robot
                 Program.ini.SetIniValue("Login", "Id", "");
                 Program.ini.SetIniValue("Login", "Save", "false");
             }
-
-            // board 초기화
-            for (int i = 0; i < PAGENUM * 10; i++)
-                board[i] = new Board();
-
-            browser.Navigate("https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp");
-
-            // 책 검색 옵션 초기화
-            bookOption1.SelectedIndex = 0;
-            bookOption2.SelectedIndex = 1;
-            bookOperator.SelectedIndex = 0;
         }
 
-        private void login()
+        private void showGridView(int boardId = 1)
         {
-            doc = browser.Document as HtmlDocument;
+            Board[] boards=portal.getBoard(boardId);
+            int i = 0;
 
-            doc.GetElementById("id").SetAttribute("value", Program.id);
-            doc.GetElementsByTagName("input")["UserPassWord"].SetAttribute("value", Program.password);
-            doc.InvokeScript("doLogin");
-        }
+            foreach (Board b in boards)
+            {
+                gridView.Rows.Add(b.rows);
 
-        private void webNavigate()
-        {
-           browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardLst.jsp?boardid=" + boardId + "&nfirst=1");
+                // 셀 글자 색 추가
+                if (b.color != Color.Black)
+                 {
+                    // 글자 볼드 추가
+                    if (b.bold == true)
+                    {
+                        gridView.Rows[i].Cells[1].Style = new DataGridViewCellStyle
+                        {
+                            ForeColor = b.color,
+                            Font = new Font(gridView.DefaultCellStyle.Font, FontStyle.Bold)
+                        };
+                    }
+                    else
+                    {
+                        gridView.Rows[i].Cells[1].Style = new DataGridViewCellStyle { ForeColor = b.color };
+                    }
+                }
+
+                // 글자 볼드 추가
+                if (b.bold == true)
+                {
+                    gridView.Rows[i].Cells[1].Style.Font = new Font(gridView.DefaultCellStyle.Font, FontStyle.Bold);
+                }
+
+                i++;
+            }
         }
 
         private void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
@@ -127,16 +151,20 @@ namespace robot
             if (e.Url.ToString() == "http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp") {
                 userName=browser.DocumentTitle.ToString().Split('-')[1].Split('/')[0];
 
-                webNavigate();
-                //this.Show();
-                //Parent.Hide();
-                count++;
+                portal = new Portal(browser.Document.Cookie);
+                showGridView();
+
+                browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
             }
 
             // 로그인 화면 접속 후 로그인
             if (e.Url.ToString() == "https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp")
             {
-                login();
+                doc = browser.Document as HtmlDocument;
+
+                doc.GetElementById("id").SetAttribute("value", Program.id);
+                doc.GetElementsByTagName("input")["UserPassWord"].SetAttribute("value", Program.password);
+                doc.InvokeScript("doLogin");
             }
 
             // 최신 게시물 셀 클릭시 글 이동
@@ -146,131 +174,9 @@ namespace robot
                 return;
             }
 
-            // 게시판에 접속후 파싱 (최신 게시글은 따로)
-            if (e.Url.ToString().IndexOf("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardLst.jsp?boardid=")!=-1)
-            {
-                // 헤더 바꿔줌
-                gridView.Columns[4].HeaderText = "조회수";
-
-                string url=e.Url.ToString().Substring(e.Url.ToString().IndexOf("&nfirst="));
-                int page=Convert.ToInt32(url.Substring(8));
-
-                IEnumerable<HtmlElement> titles = ElementsByClass(doc, "ltb_left");
-                IEnumerable<HtmlElement> elements = ElementsByClass(doc, "ltb_center");
-
-                int docNum = elements.Count();
-                int index;
-
-                for (int i = 0; i < docNum / BOARDTAGNUM; i++)
-                {
-                    string[] rows = new string[5];
-                    HtmlElement title = titles.ElementAt(i);
-
-                    // title 길이 조정
-                    // row.DefaultCellStyle.WrapMode = DataGridViewTriState.True;
-                    /*int titleLen = 30;
-
-                    if (title.InnerText.Count() > titleLen)
-                    {
-                        rows[0] += title.InnerText.Substring(0, titleLen);
-                        rows[0] += "\r\n";
-                        rows[0] += title.InnerText.Substring(titleLen);
-                    }
-                    else*/
-                    {
-                        rows[1] = title.InnerText;
-                    }
-                    rows[2] = elements.ElementAt(i * BOARDTAGNUM + 5).InnerText;
-                    rows[3] = elements.ElementAt(i * BOARDTAGNUM + 7).InnerText;
-                    rows[4] = elements.ElementAt(i * BOARDTAGNUM + 9).InnerText;
-                    rows[0] = "";
-
-                    index = (page - 1) * 10 + i;
-
-                    // new글 체크
-                    if (title.GetElementsByTagName("img").Count > 0)
-                    {
-                        board[index].newPost = true;
-                        rows[0] = "new";
-                    }
-
-                    // 공지글 체크
-                    if (elements.ElementAt(i * BOARDTAGNUM + 1).GetElementsByTagName("img").Count > 0)
-                    {
-                        board[index].anouncement = true;
-                        rows[0] = "공지";
-                    }
-
-                    board[index].title = rows[1];
-                    board[index].writer = rows[2];
-                    board[index].date = rows[3];
-                    board[index].viewCount = Convert.ToInt32(rows[4]);
-                    board[index].page = page;
-                    board[index].boardId = boardId;
-
-                    for (int j = 0; j < 5; j++)
-                    {
-                        string javaUrl = title.InnerHtml.Substring(title.InnerHtml.IndexOf("javascript:"));
-                        board[index].javascript[j] = javaUrl.Split('\"')[j * 2 + 1];
-                    }
-                    
-                    gridView.Rows.Add(rows);
-
-                    // 셀 글자 색 추가
-                    if (title.GetElementsByTagName("font")[0].GetAttribute("color").IndexOf("#") != -1)
-                    {
-                        // 글자 볼드 추가
-                        if (title.OuterHtml.IndexOf("FONT-WEIGHT: bold") != -1)
-                        {
-                            gridView.Rows[i].Cells[1].Style = new DataGridViewCellStyle
-                            {
-                                ForeColor = ConvertColor_PhotoShopStyle_toRGB(title.GetElementsByTagName("font")[0].GetAttribute("color")),
-                                    Font = new Font(gridView.DefaultCellStyle.Font, FontStyle.Bold)
-                            };
-                        }
-                        else
-                        {
-                            gridView.Rows[i].Cells[1].Style = new DataGridViewCellStyle { ForeColor = ConvertColor_PhotoShopStyle_toRGB(title.GetElementsByTagName("font")[0].GetAttribute("color")) };
-                        }
-                    }
-
-                    // 글자 볼드 추가
-                    if (title.OuterHtml.IndexOf("FONT-WEIGHT: bold") != -1)
-                    {
-                        gridView.Rows[i].Cells[1].Style.Font = new Font(gridView.DefaultCellStyle.Font, FontStyle.Bold);
-                    }
-                }
-                if (page != PAGENUM)
-                {
-                    page++;
-                    browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardLst.jsp?boardid=" + boardId + "&nfirst=" + page);
-                    return;
-                }
-
-                // 첫 게시글 보여줌
-                contentBox.Text = "";
-                rowIndexBefore = rowIndex;
-                rowIndex = 0;
-                browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid=" + boardId + "&bullid=" + board[0].javascript[1]);
-                
-                // 첫 로딩 이후, 게시글 바꿈 로딩 끝나고 브라우저 visible로 바꾸기
-                if(count > 1)
-                    browser.Visible = true;
-
-                // 그리드 뷰 enable로 바꾸기
-                // gridView.Enabled = true;
-
-                // bb 접속
-                if (count == 1)
-                {
-                    bbNavigate();
-                    count++;
-                }
-            }
-
             // 최근 게시글 접속 후 파싱
             else if (e.Url.ToString().IndexOf("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_MyBoardLst.jsp") != -1)
-            {
+            {/*
                 // 헤더 바꿔줌
                 gridView.Columns[4].HeaderText = "게시판";
 
@@ -298,7 +204,7 @@ namespace robot
                         rows[0] += "\r\n";
                         rows[0] += title.InnerText.Substring(titleLen);
                     }
-                    else*/
+                    else*//*
                     {
                         rows[1] = title.InnerText;
                     }
@@ -319,7 +225,7 @@ namespace robot
 
                     string javaUrl=title.InnerHtml.Substring(title.InnerHtml.IndexOf("Javascript:"));
                     // amp 생기는 이유??
-                    board[index].javascript[0] = javaUrl.Split('\"')[1].Replace("amp;","");
+                    //board[index].javascript[0] = javaUrl.Split('\"')[1].Replace("amp;","");
                     
                     gridView.Rows.Add(rows);
 
@@ -333,14 +239,14 @@ namespace robot
                 }
 
                 // 첫 게시글 보여줌
-                browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/" + board[0].javascript[0]);
+                //browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/" + board[0].javascript[0]);
                 
                 // 그리드 뷰 enable로 바꾸기
                 gridView.Enabled = true;
 
                 // 첫 로딩 이후, 게시글 바꿈 로딩 끝나고 브라우저 visible로 바꾸기
                 if (count > 1)
-                    browser.Visible = true;
+                    browser.Visible = true;*/
             }
 
             // 셀 클릭했을 떄
@@ -417,7 +323,7 @@ namespace robot
                 HtmlElementCollection options = doc.GetElementsByTagName("Option");
 
                 // bb 게시판 id
-                bbboard = new BBBoard[options.Count-3];
+                bbboard = new BB[options.Count-3];
 
                 int j = 0;
                 string n;
@@ -433,7 +339,7 @@ namespace robot
                         bbDeletedCount++;
                         continue;
                     }
-                    bbboard[i - 3 - j] = new BBBoard();
+                    bbboard[i - 3 - j] = new BB();
                     bbboard[i - 3 - j].url = options[i].OuterHtml.Split('=')[1].Split('>')[0];
                     bbboard[i - 3 - j].name = n;
                     portalList.Items.Add(bbboard[i - 3 - j].name);
@@ -460,7 +366,7 @@ namespace robot
                 contentBox.Text = "";
                 rowIndexBefore = rowIndex;
                 rowIndex = 0;
-                browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid=" + boardId + "&bullid=" + board[0].javascript[1]);
+               // browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid=" + boardId + "&bullid=" + board[0].javascript[1]);
                 browser.Visible = true;
 
                 // 처음  false 이후 계속  true
@@ -785,25 +691,20 @@ namespace robot
 
             if (boardId == "B201003111719010571299")
             {
-                browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/" + board[e.RowIndex].javascript[0]);
+               // browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/" + board[e.RowIndex].javascript[0]);
             }
             else
             {
                 contentBox.Text = "";
                 rowIndexBefore = rowIndex;
                 rowIndex = e.RowIndex;
-                browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid=" + boardId + "&bullid=" + board[e.RowIndex].javascript[1]);
+               // browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid=" + boardId + "&bullid=" + board[e.RowIndex].javascript[1]);
             }
             //browser.Url = new Uri("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardToHtml.jsp?boardid=B200902281833482321051&bullid=BB01181146301438492&comp_id=7007886&tablename=tBB_basic");
             //doc.InvokeScript("changePage", new object[] {2});
             //string[] arg = board[e.RowIndex].javascript;
             //doc.InvokeScript("clickBulletin", new object[] {arg[0], arg[1], arg[2], arg[3], arg[4]});
             //doc.InvokeScript("saveToHtml");
-        }
-
-        private void bbNavigate()
-        {
-            browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
         }
 
         // 포탈 리스트 박스 클릭
@@ -836,18 +737,17 @@ namespace robot
                 case 0:
                     // 학사 공지
                     boardId = "B200902281833482321051";
-                    webNavigate();
+
                     break;
                 case 1:
                     // 전체 공지
                     boardId = "B200902281833016691048";
-                    webNavigate();
 
                     break;
                 case 2:
                     // 대학원 공지
                     boardId = "B201003111719010571299";
-                    webNavigate();
+
                     break;
                 case 3:
                     // 최신 게시물

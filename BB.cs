@@ -5,7 +5,7 @@ using System.Text;
 
 namespace robot
 {
-    class BBBoard
+    class BB
     {
         public string name;
         public string url;

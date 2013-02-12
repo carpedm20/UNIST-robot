@@ -21,7 +21,6 @@ namespace robot
 
         string bookQuery = ""; // 책 검색 쿼리
         string bookReviewUrl = "";
-        string isbn = ""; // 책 평점을 위한 변수
 
         string phoneNum = ""; // 스터디룸 예약을 위한 변수
         string email = ""; // 스터디룸 예약을 위한 변수
@@ -41,7 +40,6 @@ namespace robot
 
         public Form1()
         {
-
             InitializeComponent();
 
             // 브라우저 스크립트 에러 무시
@@ -58,6 +56,8 @@ namespace robot
             bookOption1.SelectedIndex = 0;
             bookOption2.SelectedIndex = 1;
             bookOperator.SelectedIndex = 0;
+
+            circularProgress1.IsRunning = true;
         }
 
         /**********************************************************
@@ -191,9 +191,6 @@ namespace robot
 
             browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid="
                 + portal.getBoardId(currentBoardId) + "&bullid=" + portal.getBoardbullId(currentBoardId, 0));
-
-            boardGrid.Enabled = true;
-            browser.Visible = true;
         }
 
         private void boardGrid_SelectionChanged(object sender, EventArgs e)
@@ -254,11 +251,6 @@ namespace robot
              *
              **********************************************************/
 
-            if (e.Url.ToString().IndexOf("http://bb.unist.ac.kr/webapps/blackboard/execute/announcement?&method=search&viewChoice=3&searchSelect=") != -1)
-            {
-                browser.Visible = true;
-            }
-
             if (e.Url.ToString() == "http://bb.unist.ac.kr/webapps/portal/frameset.jsp")
             {
                 bb=new BB(browser);
@@ -284,7 +276,14 @@ namespace robot
                     slideBB.SubItems.Add(bblist[i]);
                 }
 
-                browser.Navigate("http://library.unist.ac.kr/DLiWeb25Eng/tmaxsso/first_cs.aspx ");
+                circularProgress1.IsRunning = false;
+                circularProgress1.Visible = false;
+
+                System.Web.UI.WebControls.GridViewSelectEventArgs ee = new System.Web.UI.WebControls.GridViewSelectEventArgs(1);
+
+                boardGrid_SelectionChanged(boardGrid, ee);
+
+                visiblePortal();
             }
 
             // 스터디룸 예약
@@ -301,7 +300,7 @@ namespace robot
                 /*
                 HtmlElementCollection tds = table.GetElementsByTagName("td");
 
-                // study grid 내용 지우기
+                // study bookGridView_SelectionChanged 내용 지우기
                 while (studyGrid.Rows.Count != 0)
                 {
                     studyGrid.Rows.RemoveAt(0);
@@ -452,8 +451,6 @@ namespace robot
             bookReview.Text = "";
             bookReviewUrl = "";
 
-            
-
             library.bookSearch(bookQuery1.Text, bookQuery2.Text, bookOption1.Text, bookOption2.Text, bookOperator.Text);
 
             for (int i = 0; i < library.books.Length; i++)
@@ -524,10 +521,13 @@ namespace robot
         
         private void bookGridView_SelectionChanged(object sender, EventArgs e)
         {
+            if (library.books == null)
+                return;
+
             bookThumnailRefresh();
 
             loadBookStat(library.books[bookGridView.SelectedRows[0].Index].cid);
-            //loadBookReview(library.books[bookGridView.SelectedRows[0].Index].isbn);
+            loadBookReview(library.books[bookGridView.SelectedRows[0].Index].isbn);
         }
 
         private void bookThumnailRefresh() 
@@ -553,8 +553,6 @@ namespace robot
             else {
                 bookTitle.Text = title.ToString();
             }
-
-            isbn = library.books[bookGridView.SelectedRows[0].Index].isbn;
 
             //http://openapi.naver.com/search?key=6053ca2ccd452f386a6e2eb44375d160&query=art&target=book_adv&d_isbn=9788996427513
         }
@@ -587,13 +585,13 @@ namespace robot
 
         private void loadBookReview(string isbn) 
         {
-            bookReview.Text = "평점 : ";
-            bookReviewUrl="";
+            bookReviewUrl = "";
+            bookReview.Text = "...";
+            reviewStar.Visible = false;
 
-            string[] str = library.loadBookReview(isbn);
+            string url = library.loadBookReview(isbn);
 
-            bookReview.Text = str[0];
-            bookReviewUrl = str[1];
+            reviewBrowser.Navigate(url);
         }
 
         /**********************************************************
@@ -691,7 +689,7 @@ namespace robot
 
         private void visiblePortal()
         {
-            browser.Visible = false;
+            browser.Visible = true;
             boardGrid.Visible = true;
 
             studyGroup.Visible = false;
@@ -750,6 +748,43 @@ namespace robot
         private void browser_NewWindow(object sender, CancelEventArgs e)
         {
             e.Cancel = true;
+        }
+
+        /**********************************************************
+         * 
+         *  네이버 리뷰 점수
+         *  
+         **********************************************************/
+
+        private void reviewBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            if (e.Url.ToString().IndexOf("http://book.naver.com/bookdb/book_detail.nhn?bid=") != -1)
+            {
+                doc = reviewBrowser.Document as HtmlDocument;
+
+                bookReview.Text = "";
+                string html = reviewBrowser.Document.Body.InnerHtml;
+                bookReviewUrl = "";
+
+                HtmlElement element = ElementsByClass(doc, "txt_desc").ElementAt(0);
+
+                string str = element.GetElementsByTagName("strong")[0].InnerText;
+                bookReview.Text += str.Substring(0, str.IndexOf('.'));
+                bookReview.Text += str.Substring(str.IndexOf('.'), 2);
+                //bookReview.Text += html.Substring(html.IndexOf("네티즌리뷰")).Split('건')[0];
+                bookReview.Text += " (" + element.InnerText.Split('|')[1].Substring(6) + ")";
+                bookReviewUrl = element.GetElementsByTagName("a")[0].GetAttribute("href");
+
+                reviewStar.Visible = true;
+                reviewStar.Rating = (int)(Convert.ToDouble(element.GetElementsByTagName("strong")[0].InnerText) / 2);
+            }
+        }
+
+        static IEnumerable<HtmlElement> ElementsByClass(HtmlDocument doc, string className)
+        {
+            foreach (HtmlElement e in doc.All)
+                if (e.GetAttribute("className") == className)
+                    yield return e;
         }
     }
 }

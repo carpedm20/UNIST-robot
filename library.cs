@@ -90,12 +90,17 @@ namespace robot
                     books[i].thumbnail = html.Substring(html.IndexOf("thumb.axd?url=")).Split('\"')[0];
                 }
 
-                IHTMLElement title = (IHTMLElement)((IHTMLElement2)elements.ElementAt(i)).getElementsByTagName("label").item(0, 0);
+                IHTMLElement element = (IHTMLElement)((IHTMLElement2)elements.ElementAt(i)).getElementsByTagName("label").item(0, 0);
+                rows[0] = books[i].title = element.getAttribute("title").ToString().Split('/')[0].Replace("선택하기", "");
 
-                rows[0] = books[i].title = title.getAttribute("title").ToString().Split('/')[0].Replace("선택하기", "");
-                rows[1] = books[i].author = html.Substring(html.IndexOf("author\">")).Split('>')[1].Split('<')[0];
-                rows[2] = books[i].publisher = html.Substring(html.IndexOf("publisher\">")).Split('>')[1].Split('<')[0];
-                rows[3] = books[i].publishYear = html.Substring(html.IndexOf("publishyear\">")).Split('>')[1].Split('<')[0];
+                element = (IHTMLElement)((IHTMLElement2)elements.ElementAt(i)).getElementsByTagName("span").item(2, 0);
+                rows[1] = books[i].author = element.innerText;
+
+                element = (IHTMLElement)((IHTMLElement2)elements.ElementAt(i)).getElementsByTagName("span").item(3, 0);
+                rows[2] = books[i].publisher = element.innerText;
+
+                element = (IHTMLElement)((IHTMLElement2)elements.ElementAt(i)).getElementsByTagName("span").item(4, 0);
+                rows[3] = books[i].publishYear = element.innerText;
                 rows[4] = books[i].isbn = html.Substring(html.IndexOf("isbn\">")).Split('>')[1].Split('<')[0];
 
                 IHTMLElement cid = (IHTMLElement)(((IHTMLElement2)elements.ElementAt(i)).getElementsByTagName("input").item(0, 0));
@@ -153,50 +158,14 @@ namespace robot
             return rows;
         }
 
-        public string[] loadBookReview(string isbn)
+        public string loadBookReview(string isbn)
         {
-            string url="";
-            string[] review=new string[2];
-
-            review[0] = "";
-            review[1] = "";
-
             XmlDocument docX = new XmlDocument();
             docX.Load("http://openapi.naver.com/search?key=6053ca2ccd452f386a6e2eb44375d160&query=art&target=book_adv&d_isbn=" + isbn);
 
             XmlNodeList elemList = docX.GetElementsByTagName("link");
-            for (int i = 0; i < elemList.Count; i++)
-            {
-                if (elemList[i].InnerText != "http://search.naver.com")
-                {
-                    url = elemList[i].InnerXml;
-                    break;
-                }
-            }
 
-            wRes = getRespose(url);
-
-            // http 내용 추출
-            Stream respPostStream = wRes.GetResponseStream();
-            StreamReader readerPost = new StreamReader(respPostStream);
-
-            resResult = readerPost.ReadToEnd();
-
-            doc = (IHTMLDocument2)new HTMLDocument();
-            doc.clear();
-            doc.write(resResult);
-            doc.close();
-
-            string html = resResult;
-
-            IHTMLElement2 element = (IHTMLElement2)(ElementsByClass(doc, "txt_desc").ElementAt(0));
-            review[0] += element.getElementsByTagName("strong").item(0, 0).ToString();
-            review[0] += html.Substring(html.IndexOf("네티즌리뷰")).Split('건')[0];
-            review[0] += ((IHTMLElement)element).innerText.Split('|')[0] + "("
-                + ((IHTMLElement)element).innerText.Split('|')[1].Substring(6) + ")";
-            review[1] = ((IHTMLElement)(element.getElementsByTagName("a").item(0, 0))).getAttribute("href").ToString();
-
-            return review;
+            return elemList[1].InnerText;
         }
 
         public string queryMake()

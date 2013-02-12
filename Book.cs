@@ -15,6 +15,7 @@ namespace robot
         public string thumbnail;
         public string kind;
         public string cid; // 도서 상태 확인용
+        public string[] rows;
 
         public Book()
         {

@@ -9,7 +9,7 @@ using System.Windows.Forms;
 using System.Security.Cryptography;
 namespace robot
 {
-    public partial class Form2 : Form
+    public partial class Form2 : DevComponents.DotNetBar.Metro.MetroForm
     {
         public Form2()
         {

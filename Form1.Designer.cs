@@ -31,7 +31,7 @@
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.browser = new System.Windows.Forms.WebBrowser();
-            this.gridView = new System.Windows.Forms.DataGridView();
+            this.boardGrid = new System.Windows.Forms.DataGridView();
             this.Column5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -70,14 +70,10 @@
             this.label1 = new System.Windows.Forms.Label();
             this.bookInfoGroup = new System.Windows.Forms.GroupBox();
             this.bookReview = new System.Windows.Forms.Label();
-            this.button1 = new System.Windows.Forms.Button();
+            this.bookReviewBtn = new System.Windows.Forms.Button();
             this.bookTitle = new System.Windows.Forms.Label();
             this.bookPic = new System.Windows.Forms.PictureBox();
             this.bookListGrid = new System.Windows.Forms.DataGridView();
-            this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Column38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.studyGrid = new System.Windows.Forms.DataGridView();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -133,13 +129,19 @@
             this.buttonItem2 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem4 = new DevComponents.DotNetBar.ButtonItem();
-            this.slideBlackBoard = new DevComponents.DotNetBar.SideBarPanelItem();
+            this.slideBB = new DevComponents.DotNetBar.SideBarPanelItem();
             this.slideLibrary = new DevComponents.DotNetBar.SideBarPanelItem();
             this.buttonItem5 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem6 = new DevComponents.DotNetBar.ButtonItem();
-            this.portalList = new System.Windows.Forms.ListBox();
+            this.buttonItem7 = new DevComponents.DotNetBar.ButtonItem();
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).BeginInit();
+            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
+            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.Column37 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.boardGrid)).BeginInit();
             this.studyGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.bookInfoGroup.SuspendLayout();
@@ -154,50 +156,48 @@
             // 
             // browser
             // 
-            this.browser.Location = new System.Drawing.Point(12, 240);
+            this.browser.Location = new System.Drawing.Point(8, 230);
             this.browser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.browser.MinimumSize = new System.Drawing.Size(20, 25);
             this.browser.Name = "browser";
-            this.browser.Size = new System.Drawing.Size(810, 518);
+            this.browser.Size = new System.Drawing.Size(810, 506);
             this.browser.TabIndex = 1;
             this.browser.Visible = false;
             this.browser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.browser_DocumentCompleted);
-            this.browser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.browser_Navigating);
-            this.browser.VisibleChanged += new System.EventHandler(this.browser_VisibleChanged);
+            this.browser.NewWindow += new System.ComponentModel.CancelEventHandler(this.browser_NewWindow);
             // 
-            // gridView
+            // boardGrid
             // 
-            this.gridView.AllowUserToAddRows = false;
-            this.gridView.AllowUserToDeleteRows = false;
-            this.gridView.AllowUserToResizeRows = false;
-            this.gridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            this.gridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.gridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.boardGrid.AllowUserToAddRows = false;
+            this.boardGrid.AllowUserToDeleteRows = false;
+            this.boardGrid.AllowUserToResizeRows = false;
+            this.boardGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
+            this.boardGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.boardGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column5,
             this.Column1,
             this.Column2,
             this.Column3,
             this.Column4});
-            this.gridView.Enabled = false;
-            this.gridView.Location = new System.Drawing.Point(150, 34);
-            this.gridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.gridView.MultiSelect = false;
-            this.gridView.Name = "gridView";
-            this.gridView.ReadOnly = true;
-            this.gridView.RowHeadersVisible = false;
-            this.gridView.RowHeadersWidth = 30;
-            this.gridView.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
-            this.gridView.RowTemplate.Height = 23;
-            this.gridView.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.gridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.gridView.ShowCellErrors = false;
-            this.gridView.ShowCellToolTips = false;
-            this.gridView.ShowEditingIcon = false;
-            this.gridView.ShowRowErrors = false;
-            this.gridView.Size = new System.Drawing.Size(672, 191);
-            this.gridView.TabIndex = 2;
-            this.gridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellClick);
-            this.gridView.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.gridView_CellContentClick);
+            this.boardGrid.Enabled = false;
+            this.boardGrid.Location = new System.Drawing.Point(146, 24);
+            this.boardGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.boardGrid.MultiSelect = false;
+            this.boardGrid.Name = "boardGrid";
+            this.boardGrid.ReadOnly = true;
+            this.boardGrid.RowHeadersVisible = false;
+            this.boardGrid.RowHeadersWidth = 30;
+            this.boardGrid.RowHeadersWidthSizeMode = System.Windows.Forms.DataGridViewRowHeadersWidthSizeMode.DisableResizing;
+            this.boardGrid.RowTemplate.Height = 23;
+            this.boardGrid.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.boardGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.boardGrid.ShowCellErrors = false;
+            this.boardGrid.ShowCellToolTips = false;
+            this.boardGrid.ShowEditingIcon = false;
+            this.boardGrid.ShowRowErrors = false;
+            this.boardGrid.Size = new System.Drawing.Size(672, 191);
+            this.boardGrid.TabIndex = 2;
+            this.boardGrid.SelectionChanged += new System.EventHandler(this.boardGrid_SelectionChanged);
             // 
             // Column5
             // 
@@ -245,7 +245,7 @@
             // 
             this.contentBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.contentBox.ForeColor = System.Drawing.Color.Black;
-            this.contentBox.Location = new System.Drawing.Point(12, 268);
+            this.contentBox.Location = new System.Drawing.Point(8, 258);
             this.contentBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.contentBox.Multiline = true;
             this.contentBox.Name = "contentBox";
@@ -267,13 +267,12 @@
             "최신 게시물",
             "개선 및 제안",
             "Q & A"});
-            this.portalBox.Location = new System.Drawing.Point(150, 231);
+            this.portalBox.Location = new System.Drawing.Point(146, 221);
             this.portalBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.portalBox.Name = "portalBox";
             this.portalBox.Size = new System.Drawing.Size(103, 23);
             this.portalBox.TabIndex = 3;
             this.portalBox.Visible = false;
-            this.portalBox.SelectedIndexChanged += new System.EventHandler(this.boardBox_SelectedIndexChanged);
             // 
             // bbList
             // 
@@ -282,7 +281,7 @@
             this.bbList.ForeColor = System.Drawing.Color.Black;
             this.bbList.FormattingEnabled = true;
             this.bbList.ItemHeight = 15;
-            this.bbList.Location = new System.Drawing.Point(250, 109);
+            this.bbList.Location = new System.Drawing.Point(246, 99);
             this.bbList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bbList.Name = "bbList";
             this.bbList.Size = new System.Drawing.Size(110, 49);
@@ -295,7 +294,7 @@
             this.loadingLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.loadingLabel.Font = new System.Drawing.Font("NanumGothicExtraBold", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.loadingLabel.ForeColor = System.Drawing.Color.Black;
-            this.loadingLabel.Location = new System.Drawing.Point(397, 475);
+            this.loadingLabel.Location = new System.Drawing.Point(393, 465);
             this.loadingLabel.Name = "loadingLabel";
             this.loadingLabel.Size = new System.Drawing.Size(56, 28);
             this.loadingLabel.TabIndex = 12;
@@ -306,7 +305,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.checkBox1.ForeColor = System.Drawing.Color.Black;
-            this.checkBox1.Location = new System.Drawing.Point(18, 12);
+            this.checkBox1.Location = new System.Drawing.Point(14, 2);
             this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(90, 19);
@@ -320,7 +319,7 @@
             this.settingLabel.AutoSize = true;
             this.settingLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.settingLabel.ForeColor = System.Drawing.Color.Black;
-            this.settingLabel.Location = new System.Drawing.Point(793, 11);
+            this.settingLabel.Location = new System.Drawing.Point(789, 1);
             this.settingLabel.Name = "settingLabel";
             this.settingLabel.Size = new System.Drawing.Size(31, 15);
             this.settingLabel.TabIndex = 15;
@@ -332,7 +331,7 @@
             this.welcomeLabel.AutoSize = true;
             this.welcomeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.welcomeLabel.ForeColor = System.Drawing.Color.Black;
-            this.welcomeLabel.Location = new System.Drawing.Point(166, 11);
+            this.welcomeLabel.Location = new System.Drawing.Point(162, 1);
             this.welcomeLabel.Name = "welcomeLabel";
             this.welcomeLabel.Size = new System.Drawing.Size(162, 15);
             this.welcomeLabel.TabIndex = 16;
@@ -349,7 +348,7 @@
             "도서 검색",
             "스터디룸 예약",
             "열람실 좌석 현황"});
-            this.libraryList.Location = new System.Drawing.Point(250, 165);
+            this.libraryList.Location = new System.Drawing.Point(246, 155);
             this.libraryList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.libraryList.Name = "libraryList";
             this.libraryList.Size = new System.Drawing.Size(110, 34);
@@ -374,7 +373,7 @@
             this.studyGroup.Controls.Add(this.label1);
             this.studyGroup.Enabled = false;
             this.studyGroup.ForeColor = System.Drawing.Color.Black;
-            this.studyGroup.Location = new System.Drawing.Point(150, 34);
+            this.studyGroup.Location = new System.Drawing.Point(146, 24);
             this.studyGroup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyGroup.Name = "studyGroup";
             this.studyGroup.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -389,7 +388,7 @@
             this.studyDateLabel.AutoSize = true;
             this.studyDateLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyDateLabel.ForeColor = System.Drawing.Color.Black;
-            this.studyDateLabel.Location = new System.Drawing.Point(83, 38);
+            this.studyDateLabel.Location = new System.Drawing.Point(85, 44);
             this.studyDateLabel.Name = "studyDateLabel";
             this.studyDateLabel.Size = new System.Drawing.Size(142, 15);
             this.studyDateLabel.TabIndex = 21;
@@ -399,7 +398,7 @@
             // 
             this.studyEtc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyEtc.ForeColor = System.Drawing.Color.Black;
-            this.studyEtc.Location = new System.Drawing.Point(86, 119);
+            this.studyEtc.Location = new System.Drawing.Point(88, 125);
             this.studyEtc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyEtc.Name = "studyEtc";
             this.studyEtc.Size = new System.Drawing.Size(154, 23);
@@ -410,7 +409,7 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(16, 122);
+            this.label7.Location = new System.Drawing.Point(18, 128);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(31, 15);
             this.label7.TabIndex = 24;
@@ -420,7 +419,7 @@
             // 
             this.studyReserveBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyReserveBtn.ForeColor = System.Drawing.Color.Black;
-            this.studyReserveBtn.Location = new System.Drawing.Point(202, 151);
+            this.studyReserveBtn.Location = new System.Drawing.Point(204, 157);
             this.studyReserveBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyReserveBtn.Name = "studyReserveBtn";
             this.studyReserveBtn.Size = new System.Drawing.Size(84, 25);
@@ -442,7 +441,7 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.studyStudentId1);
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(312, 21);
+            this.groupBox1.Location = new System.Drawing.Point(314, 27);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -455,7 +454,7 @@
             // 
             this.studyStudentId8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId8.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId8.Location = new System.Drawing.Point(181, 109);
+            this.studyStudentId8.Location = new System.Drawing.Point(183, 115);
             this.studyStudentId8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId8.Name = "studyStudentId8";
             this.studyStudentId8.Size = new System.Drawing.Size(135, 23);
@@ -465,7 +464,7 @@
             // 
             this.studyStudentId6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId6.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId6.Location = new System.Drawing.Point(181, 79);
+            this.studyStudentId6.Location = new System.Drawing.Point(183, 85);
             this.studyStudentId6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId6.Name = "studyStudentId6";
             this.studyStudentId6.Size = new System.Drawing.Size(135, 23);
@@ -475,7 +474,7 @@
             // 
             this.studyStudentId4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId4.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId4.Location = new System.Drawing.Point(181, 50);
+            this.studyStudentId4.Location = new System.Drawing.Point(183, 56);
             this.studyStudentId4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId4.Name = "studyStudentId4";
             this.studyStudentId4.Size = new System.Drawing.Size(135, 23);
@@ -485,7 +484,7 @@
             // 
             this.studyStudentId2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId2.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId2.Location = new System.Drawing.Point(181, 21);
+            this.studyStudentId2.Location = new System.Drawing.Point(183, 27);
             this.studyStudentId2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId2.Name = "studyStudentId2";
             this.studyStudentId2.Size = new System.Drawing.Size(135, 23);
@@ -495,7 +494,7 @@
             // 
             this.studyStudentId7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId7.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId7.Location = new System.Drawing.Point(21, 109);
+            this.studyStudentId7.Location = new System.Drawing.Point(23, 115);
             this.studyStudentId7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId7.Name = "studyStudentId7";
             this.studyStudentId7.Size = new System.Drawing.Size(135, 23);
@@ -505,7 +504,7 @@
             // 
             this.studyStudentId5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId5.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId5.Location = new System.Drawing.Point(21, 79);
+            this.studyStudentId5.Location = new System.Drawing.Point(23, 85);
             this.studyStudentId5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId5.Name = "studyStudentId5";
             this.studyStudentId5.Size = new System.Drawing.Size(135, 23);
@@ -515,7 +514,7 @@
             // 
             this.studyStudentId3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId3.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId3.Location = new System.Drawing.Point(21, 50);
+            this.studyStudentId3.Location = new System.Drawing.Point(23, 56);
             this.studyStudentId3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId3.Name = "studyStudentId3";
             this.studyStudentId3.Size = new System.Drawing.Size(135, 23);
@@ -526,7 +525,7 @@
             this.label6.AutoSize = true;
             this.label6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label6.ForeColor = System.Drawing.Color.Black;
-            this.label6.Location = new System.Drawing.Point(8, 25);
+            this.label6.Location = new System.Drawing.Point(10, 31);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(0, 15);
             this.label6.TabIndex = 8;
@@ -536,7 +535,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(8, 54);
+            this.label5.Location = new System.Drawing.Point(10, 60);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(0, 15);
             this.label5.TabIndex = 10;
@@ -545,7 +544,7 @@
             // 
             this.studyStudentId1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId1.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId1.Location = new System.Drawing.Point(21, 21);
+            this.studyStudentId1.Location = new System.Drawing.Point(23, 27);
             this.studyStudentId1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId1.Name = "studyStudentId1";
             this.studyStudentId1.Size = new System.Drawing.Size(135, 23);
@@ -556,7 +555,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(16, 38);
+            this.label4.Location = new System.Drawing.Point(18, 44);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 15);
             this.label4.TabIndex = 7;
@@ -567,7 +566,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(16, 154);
+            this.label3.Location = new System.Drawing.Point(18, 160);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(59, 15);
             this.label3.TabIndex = 5;
@@ -583,7 +582,7 @@
             "1 시간",
             "2 시간",
             "3 시간"});
-            this.studyTimeBox.Location = new System.Drawing.Point(86, 151);
+            this.studyTimeBox.Location = new System.Drawing.Point(88, 157);
             this.studyTimeBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyTimeBox.Name = "studyTimeBox";
             this.studyTimeBox.Size = new System.Drawing.Size(81, 23);
@@ -593,7 +592,7 @@
             // 
             this.studyEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyEmail.ForeColor = System.Drawing.Color.Black;
-            this.studyEmail.Location = new System.Drawing.Point(86, 90);
+            this.studyEmail.Location = new System.Drawing.Point(88, 96);
             this.studyEmail.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyEmail.Name = "studyEmail";
             this.studyEmail.Size = new System.Drawing.Size(154, 23);
@@ -604,7 +603,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(16, 94);
+            this.label2.Location = new System.Drawing.Point(18, 100);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(41, 15);
             this.label2.TabIndex = 2;
@@ -614,7 +613,7 @@
             // 
             this.studyPhoneNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyPhoneNumber.ForeColor = System.Drawing.Color.Black;
-            this.studyPhoneNumber.Location = new System.Drawing.Point(86, 61);
+            this.studyPhoneNumber.Location = new System.Drawing.Point(88, 67);
             this.studyPhoneNumber.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyPhoneNumber.Name = "studyPhoneNumber";
             this.studyPhoneNumber.Size = new System.Drawing.Size(154, 23);
@@ -625,7 +624,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(16, 64);
+            this.label1.Location = new System.Drawing.Point(18, 70);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(59, 15);
             this.label1.TabIndex = 0;
@@ -635,12 +634,12 @@
             // 
             this.bookInfoGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookInfoGroup.Controls.Add(this.bookReview);
-            this.bookInfoGroup.Controls.Add(this.button1);
+            this.bookInfoGroup.Controls.Add(this.bookReviewBtn);
             this.bookInfoGroup.Controls.Add(this.bookTitle);
             this.bookInfoGroup.Controls.Add(this.bookPic);
             this.bookInfoGroup.Controls.Add(this.bookListGrid);
             this.bookInfoGroup.ForeColor = System.Drawing.Color.Black;
-            this.bookInfoGroup.Location = new System.Drawing.Point(150, 32);
+            this.bookInfoGroup.Location = new System.Drawing.Point(146, 22);
             this.bookInfoGroup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookInfoGroup.Name = "bookInfoGroup";
             this.bookInfoGroup.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -655,31 +654,31 @@
             this.bookReview.AutoSize = true;
             this.bookReview.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookReview.ForeColor = System.Drawing.Color.Black;
-            this.bookReview.Location = new System.Drawing.Point(458, 26);
+            this.bookReview.Location = new System.Drawing.Point(460, 32);
             this.bookReview.Name = "bookReview";
             this.bookReview.Size = new System.Drawing.Size(11, 15);
             this.bookReview.TabIndex = 7;
             this.bookReview.Text = " ";
             // 
-            // button1
+            // bookReviewBtn
             // 
-            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(580, 21);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 25);
-            this.button1.TabIndex = 5;
-            this.button1.Text = "리뷰 보기";
-            this.button1.UseVisualStyleBackColor = false;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.bookReviewBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.bookReviewBtn.ForeColor = System.Drawing.Color.Black;
+            this.bookReviewBtn.Location = new System.Drawing.Point(582, 27);
+            this.bookReviewBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.bookReviewBtn.Name = "bookReviewBtn";
+            this.bookReviewBtn.Size = new System.Drawing.Size(75, 25);
+            this.bookReviewBtn.TabIndex = 5;
+            this.bookReviewBtn.Text = "리뷰 보기";
+            this.bookReviewBtn.UseVisualStyleBackColor = false;
+            this.bookReviewBtn.Click += new System.EventHandler(this.bookReviewBtn_Click);
             // 
             // bookTitle
             // 
             this.bookTitle.AutoSize = true;
             this.bookTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookTitle.ForeColor = System.Drawing.Color.Black;
-            this.bookTitle.Location = new System.Drawing.Point(139, 25);
+            this.bookTitle.Location = new System.Drawing.Point(141, 31);
             this.bookTitle.Name = "bookTitle";
             this.bookTitle.Size = new System.Drawing.Size(47, 15);
             this.bookTitle.TabIndex = 3;
@@ -689,7 +688,7 @@
             // 
             this.bookPic.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookPic.ForeColor = System.Drawing.Color.Black;
-            this.bookPic.Location = new System.Drawing.Point(13, 25);
+            this.bookPic.Location = new System.Drawing.Point(15, 31);
             this.bookPic.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookPic.Name = "bookPic";
             this.bookPic.Size = new System.Drawing.Size(112, 155);
@@ -701,53 +700,21 @@
             // 
             this.bookListGrid.AllowUserToAddRows = false;
             this.bookListGrid.AllowUserToDeleteRows = false;
-            this.bookListGrid.AllowUserToResizeColumns = false;
-            this.bookListGrid.AllowUserToResizeRows = false;
             this.bookListGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             this.bookListGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.bookListGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
-            this.Column35,
-            this.Column36,
             this.Column37,
-            this.Column38});
-            this.bookListGrid.Location = new System.Drawing.Point(142, 64);
+            this.Column36,
+            this.Column38,
+            this.Column35});
+            this.bookListGrid.Location = new System.Drawing.Point(144, 70);
             this.bookListGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookListGrid.Name = "bookListGrid";
             this.bookListGrid.RowHeadersVisible = false;
             this.bookListGrid.RowTemplate.Height = 23;
+            this.bookListGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.bookListGrid.Size = new System.Drawing.Size(513, 114);
             this.bookListGrid.TabIndex = 1;
-            // 
-            // Column35
-            // 
-            this.Column35.Frozen = true;
-            this.Column35.HeaderText = "등록 번호";
-            this.Column35.Name = "Column35";
-            this.Column35.ReadOnly = true;
-            // 
-            // Column36
-            // 
-            this.Column36.Frozen = true;
-            this.Column36.HeaderText = "소장 위치";
-            this.Column36.Name = "Column36";
-            this.Column36.ReadOnly = true;
-            this.Column36.Width = 170;
-            // 
-            // Column37
-            // 
-            this.Column37.Frozen = true;
-            this.Column37.HeaderText = "상태";
-            this.Column37.Name = "Column37";
-            this.Column37.ReadOnly = true;
-            this.Column37.Width = 70;
-            // 
-            // Column38
-            // 
-            this.Column38.Frozen = true;
-            this.Column38.HeaderText = "청구 기호";
-            this.Column38.Name = "Column38";
-            this.Column38.ReadOnly = true;
-            this.Column38.Width = 150;
             // 
             // studyGrid
             // 
@@ -783,7 +750,7 @@
             this.Column26,
             this.Column27,
             this.Column28});
-            this.studyGrid.Location = new System.Drawing.Point(14, 268);
+            this.studyGrid.Location = new System.Drawing.Point(14, 258);
             this.studyGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyGrid.MultiSelect = false;
             this.studyGrid.Name = "studyGrid";
@@ -794,7 +761,7 @@
             this.studyGrid.ShowCellToolTips = false;
             this.studyGrid.ShowEditingIcon = false;
             this.studyGrid.ShowRowErrors = false;
-            this.studyGrid.Size = new System.Drawing.Size(808, 490);
+            this.studyGrid.Size = new System.Drawing.Size(804, 478);
             this.studyGrid.TabIndex = 18;
             this.studyGrid.Visible = false;
             this.studyGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.studyGrid_CellClick);
@@ -1016,7 +983,7 @@
             "8 (3-6)",
             "9 (3-6)",
             "10 (3-6)"});
-            this.roomNumberBox.Location = new System.Drawing.Point(99, 236);
+            this.roomNumberBox.Location = new System.Drawing.Point(95, 226);
             this.roomNumberBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.roomNumberBox.Name = "roomNumberBox";
             this.roomNumberBox.Size = new System.Drawing.Size(121, 23);
@@ -1029,7 +996,7 @@
             this.roomNumberLabel.AutoSize = true;
             this.roomNumberLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.roomNumberLabel.ForeColor = System.Drawing.Color.Black;
-            this.roomNumberLabel.Location = new System.Drawing.Point(27, 240);
+            this.roomNumberLabel.Location = new System.Drawing.Point(23, 230);
             this.roomNumberLabel.Name = "roomNumberLabel";
             this.roomNumberLabel.Size = new System.Drawing.Size(47, 15);
             this.roomNumberLabel.TabIndex = 14;
@@ -1051,11 +1018,11 @@
             this.bookGroup.Controls.Add(this.bookQuery1);
             this.bookGroup.Controls.Add(this.bookGridView);
             this.bookGroup.ForeColor = System.Drawing.Color.Black;
-            this.bookGroup.Location = new System.Drawing.Point(12, 236);
+            this.bookGroup.Location = new System.Drawing.Point(8, 230);
             this.bookGroup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookGroup.Name = "bookGroup";
             this.bookGroup.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.bookGroup.Size = new System.Drawing.Size(810, 524);
+            this.bookGroup.Size = new System.Drawing.Size(810, 526);
             this.bookGroup.TabIndex = 20;
             this.bookGroup.TabStop = false;
             this.bookGroup.Text = "도서 검색";
@@ -1070,7 +1037,7 @@
             "AND",
             "OR",
             "NOT"});
-            this.bookOperator.Location = new System.Drawing.Point(313, 29);
+            this.bookOperator.Location = new System.Drawing.Point(315, 35);
             this.bookOperator.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookOperator.Name = "bookOperator";
             this.bookOperator.Size = new System.Drawing.Size(56, 23);
@@ -1085,7 +1052,7 @@
             "제목",
             "저자",
             "출판사"});
-            this.bookOption2.Location = new System.Drawing.Point(388, 29);
+            this.bookOption2.Location = new System.Drawing.Point(390, 35);
             this.bookOption2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookOption2.Name = "bookOption2";
             this.bookOption2.Size = new System.Drawing.Size(100, 23);
@@ -1096,7 +1063,7 @@
             // 
             this.bookQuery2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookQuery2.ForeColor = System.Drawing.Color.Black;
-            this.bookQuery2.Location = new System.Drawing.Point(505, 30);
+            this.bookQuery2.Location = new System.Drawing.Point(507, 36);
             this.bookQuery2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookQuery2.Name = "bookQuery2";
             this.bookQuery2.Size = new System.Drawing.Size(163, 23);
@@ -1112,7 +1079,7 @@
             "제목",
             "저자",
             "출판사"});
-            this.bookOption1.Location = new System.Drawing.Point(13, 28);
+            this.bookOption1.Location = new System.Drawing.Point(15, 34);
             this.bookOption1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookOption1.Name = "bookOption1";
             this.bookOption1.Size = new System.Drawing.Size(100, 23);
@@ -1124,7 +1091,7 @@
             this.label14.AutoSize = true;
             this.label14.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label14.ForeColor = System.Drawing.Color.Black;
-            this.label14.Location = new System.Drawing.Point(670, 298);
+            this.label14.Location = new System.Drawing.Point(672, 304);
             this.label14.Name = "label14";
             this.label14.Size = new System.Drawing.Size(111, 15);
             this.label14.TabIndex = 22;
@@ -1135,7 +1102,7 @@
             this.label13.AutoSize = true;
             this.label13.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label13.ForeColor = System.Drawing.Color.Black;
-            this.label13.Location = new System.Drawing.Point(670, 70);
+            this.label13.Location = new System.Drawing.Point(672, 76);
             this.label13.Name = "label13";
             this.label13.Size = new System.Drawing.Size(111, 15);
             this.label13.TabIndex = 21;
@@ -1148,12 +1115,12 @@
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column40,
             this.Column41});
-            this.dataGridView2.Location = new System.Drawing.Point(652, 322);
+            this.dataGridView2.Location = new System.Drawing.Point(654, 328);
             this.dataGridView2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersVisible = false;
             this.dataGridView2.RowTemplate.Height = 23;
-            this.dataGridView2.Size = new System.Drawing.Size(141, 190);
+            this.dataGridView2.Size = new System.Drawing.Size(141, 184);
             this.dataGridView2.TabIndex = 20;
             // 
             // Column40
@@ -1178,7 +1145,7 @@
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column30,
             this.Column39});
-            this.dataGridView1.Location = new System.Drawing.Point(652, 94);
+            this.dataGridView1.Location = new System.Drawing.Point(654, 95);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
@@ -1205,7 +1172,7 @@
             // 
             this.bookSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookSearch.ForeColor = System.Drawing.Color.Black;
-            this.bookSearch.Location = new System.Drawing.Point(688, 28);
+            this.bookSearch.Location = new System.Drawing.Point(690, 34);
             this.bookSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookSearch.Name = "bookSearch";
             this.bookSearch.Size = new System.Drawing.Size(100, 25);
@@ -1218,7 +1185,7 @@
             // 
             this.bookQuery1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookQuery1.ForeColor = System.Drawing.Color.Black;
-            this.bookQuery1.Location = new System.Drawing.Point(130, 29);
+            this.bookQuery1.Location = new System.Drawing.Point(132, 35);
             this.bookQuery1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookQuery1.Name = "bookQuery1";
             this.bookQuery1.Size = new System.Drawing.Size(163, 23);
@@ -1239,16 +1206,15 @@
             this.Column33,
             this.Column34,
             this.w});
-            this.bookGridView.Location = new System.Drawing.Point(13, 70);
+            this.bookGridView.Location = new System.Drawing.Point(15, 76);
             this.bookGridView.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookGridView.MultiSelect = false;
             this.bookGridView.Name = "bookGridView";
             this.bookGridView.RowHeadersVisible = false;
             this.bookGridView.RowTemplate.Height = 23;
             this.bookGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.bookGridView.Size = new System.Drawing.Size(625, 442);
+            this.bookGridView.Size = new System.Drawing.Size(625, 436);
             this.bookGridView.TabIndex = 0;
-            this.bookGridView.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.bookGridView_CellClick);
             this.bookGridView.SelectionChanged += new System.EventHandler(this.bookGridView_SelectionChanged);
             // 
             // Column31
@@ -1291,17 +1257,19 @@
             // boardSlide
             // 
             this.boardSlide.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
+            this.boardSlide.AllowUserCustomize = false;
             this.boardSlide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.boardSlide.BorderStyle = DevComponents.DotNetBar.eBorderType.None;
             this.boardSlide.ExpandedPanel = this.slidePortal;
             this.boardSlide.ForeColor = System.Drawing.Color.Black;
-            this.boardSlide.Location = new System.Drawing.Point(93, 39);
+            this.boardSlide.Location = new System.Drawing.Point(8, 28);
             this.boardSlide.Name = "boardSlide";
             this.boardSlide.Panels.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.slidePortal,
-            this.slideBlackBoard,
+            this.slideBB,
             this.slideLibrary});
-            this.boardSlide.Size = new System.Drawing.Size(151, 206);
+            this.boardSlide.ShowToolTips = false;
+            this.boardSlide.Size = new System.Drawing.Size(123, 185);
             this.boardSlide.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.boardSlide.TabIndex = 8;
             this.boardSlide.Text = "sideBar1";
@@ -1324,6 +1292,7 @@
             this.buttonItem1.CanCustomize = false;
             this.buttonItem1.Name = "buttonItem1";
             this.buttonItem1.Text = "학사공지";
+            this.buttonItem1.Click += new System.EventHandler(this.buttonItem1_Click);
             // 
             // buttonItem2
             // 
@@ -1331,24 +1300,27 @@
             this.buttonItem2.CanCustomize = false;
             this.buttonItem2.Name = "buttonItem2";
             this.buttonItem2.Text = "전체 공지";
+            this.buttonItem2.Click += new System.EventHandler(this.buttonItem2_Click);
             // 
             // buttonItem3
             // 
             this.buttonItem3.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
             this.buttonItem3.Name = "buttonItem3";
             this.buttonItem3.Text = "대학원 공지";
+            this.buttonItem3.Click += new System.EventHandler(this.buttonItem3_Click);
             // 
             // buttonItem4
             // 
             this.buttonItem4.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
             this.buttonItem4.Name = "buttonItem4";
             this.buttonItem4.Text = "최신 게시물";
+            this.buttonItem4.Click += new System.EventHandler(this.buttonItem4_Click);
             // 
-            // slideBlackBoard
+            // slideBB
             // 
-            this.slideBlackBoard.FontBold = true;
-            this.slideBlackBoard.Name = "slideBlackBoard";
-            this.slideBlackBoard.Text = "블랙보드";
+            this.slideBB.FontBold = true;
+            this.slideBB.Name = "slideBB";
+            this.slideBB.Text = "블랙보드";
             // 
             // slideLibrary
             // 
@@ -1356,7 +1328,8 @@
             this.slideLibrary.Name = "slideLibrary";
             this.slideLibrary.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItem5,
-            this.buttonItem6});
+            this.buttonItem6,
+            this.buttonItem7});
             this.slideLibrary.Text = "학정";
             // 
             // buttonItem5
@@ -1365,43 +1338,75 @@
             this.buttonItem5.CanCustomize = false;
             this.buttonItem5.Name = "buttonItem5";
             this.buttonItem5.Text = "도서 검색";
+            this.buttonItem5.Click += new System.EventHandler(this.buttonItem5_Click);
             // 
             // buttonItem6
             // 
             this.buttonItem6.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
             this.buttonItem6.Name = "buttonItem6";
             this.buttonItem6.Text = "스터디룸 예약";
+            this.buttonItem6.Click += new System.EventHandler(this.buttonItem6_Click);
             // 
-            // portalList
+            // buttonItem7
             // 
-            this.portalList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.portalList.Enabled = false;
-            this.portalList.ForeColor = System.Drawing.Color.Black;
-            this.portalList.FormattingEnabled = true;
-            this.portalList.ItemHeight = 15;
-            this.portalList.Items.AddRange(new object[] {
-            "학사 공지",
-            "전체 공지",
-            "대학원 공지",
-            "최신 게시물"});
-            this.portalList.Location = new System.Drawing.Point(14, 39);
-            this.portalList.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.portalList.Name = "portalList";
-            this.portalList.Size = new System.Drawing.Size(119, 184);
-            this.portalList.TabIndex = 10;
-            this.portalList.SelectedIndexChanged += new System.EventHandler(this.listBox1_SelectedIndexChanged);
+            this.buttonItem7.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem7.Name = "buttonItem7";
+            this.buttonItem7.Text = "열람실 좌석 현황";
+            this.buttonItem7.Click += new System.EventHandler(this.buttonItem7_Click);
             // 
             // styleManager1
             // 
             this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Metro;
             this.styleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))), System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(230)))), ((int)(((byte)(255))))));
             // 
+            // notifyIcon1
+            // 
+            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
+            this.notifyIcon1.Text = "notifyIcon1";
+            this.notifyIcon1.Visible = true;
+            // 
+            // contextMenuStrip1
+            // 
+            this.contextMenuStrip1.Name = "contextMenuStrip1";
+            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // Column37
+            // 
+            this.Column37.Frozen = true;
+            this.Column37.HeaderText = "상태";
+            this.Column37.Name = "Column37";
+            this.Column37.ReadOnly = true;
+            this.Column37.Width = 80;
+            // 
+            // Column36
+            // 
+            this.Column36.Frozen = true;
+            this.Column36.HeaderText = "소장 위치";
+            this.Column36.Name = "Column36";
+            this.Column36.ReadOnly = true;
+            this.Column36.Width = 160;
+            // 
+            // Column38
+            // 
+            this.Column38.Frozen = true;
+            this.Column38.HeaderText = "청구 기호";
+            this.Column38.Name = "Column38";
+            this.Column38.ReadOnly = true;
+            this.Column38.Width = 150;
+            // 
+            // Column35
+            // 
+            this.Column35.Frozen = true;
+            this.Column35.HeaderText = "등록 번호";
+            this.Column35.Name = "Column35";
+            this.Column35.ReadOnly = true;
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(834, 670);
+            this.ClientSize = new System.Drawing.Size(834, 759);
             this.Controls.Add(this.boardSlide);
             this.Controls.Add(this.bookInfoGroup);
             this.Controls.Add(this.bookGroup);
@@ -1410,7 +1415,6 @@
             this.Controls.Add(this.studyGrid);
             this.Controls.Add(this.studyGroup);
             this.Controls.Add(this.libraryList);
-            this.Controls.Add(this.portalList);
             this.Controls.Add(this.bbList);
             this.Controls.Add(this.welcomeLabel);
             this.Controls.Add(this.settingLabel);
@@ -1419,7 +1423,7 @@
             this.Controls.Add(this.loadingLabel);
             this.Controls.Add(this.portalBox);
             this.Controls.Add(this.contentBox);
-            this.Controls.Add(this.gridView);
+            this.Controls.Add(this.boardGrid);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Malgun Gothic", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -1428,7 +1432,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Robot";
-            ((System.ComponentModel.ISupportInitialize)(this.gridView)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.boardGrid)).EndInit();
             this.studyGroup.ResumeLayout(false);
             this.studyGroup.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1451,7 +1455,7 @@
         #endregion
 
         private System.Windows.Forms.WebBrowser browser;
-        private System.Windows.Forms.DataGridView gridView;
+        private System.Windows.Forms.DataGridView boardGrid;
         private System.Windows.Forms.TextBox contentBox;
         private System.Windows.Forms.ComboBox portalBox;
         private System.Windows.Forms.ListBox bbList;
@@ -1516,14 +1520,10 @@
         private System.Windows.Forms.DataGridView dataGridView2;
         private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox bookInfoGroup;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button bookReviewBtn;
         private System.Windows.Forms.Label bookTitle;
         private System.Windows.Forms.PictureBox bookPic;
         private System.Windows.Forms.DataGridView bookListGrid;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column35;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column36;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column37;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column38;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column40;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column41;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column30;
@@ -1553,12 +1553,18 @@
         private DevComponents.DotNetBar.ButtonItem buttonItem2;
         private DevComponents.DotNetBar.ButtonItem buttonItem3;
         private DevComponents.DotNetBar.ButtonItem buttonItem4;
-        private DevComponents.DotNetBar.SideBarPanelItem slideBlackBoard;
+        private DevComponents.DotNetBar.SideBarPanelItem slideBB;
         private DevComponents.DotNetBar.SideBarPanelItem slideLibrary;
         private DevComponents.DotNetBar.ButtonItem buttonItem5;
         private DevComponents.DotNetBar.ButtonItem buttonItem6;
-        private System.Windows.Forms.ListBox portalList;
         private DevComponents.DotNetBar.StyleManager styleManager1;
+        private System.Windows.Forms.NotifyIcon notifyIcon1;
+        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private DevComponents.DotNetBar.ButtonItem buttonItem7;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column37;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column36;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column38;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column35;
     }
 }
 

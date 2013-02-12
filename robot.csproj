@@ -82,7 +82,9 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="BB.cs" />
-    <Compile Include="Board.cs" />
+    <Compile Include="BBBoard.cs" />
+    <Compile Include="library.cs" />
+    <Compile Include="PortalBoard.cs" />
     <Compile Include="Book.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>

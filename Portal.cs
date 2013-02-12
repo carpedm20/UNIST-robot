@@ -27,10 +27,11 @@ namespace robot
     class Portal
     {
         int BOARDTAGNUM = 13;
-        int PAGENUM = 3; // board 배열 선언 숫자도 바꿔주어야 함
-        Board[] board1 = new Board[3 * 10];
-        Board[] board2 = new Board[3 * 10];
-        Board[] board3 = new Board[3 * 10];
+        int PAGENUM = 3; // board 배열 선언 숫자 & setBoard의 epage도 바꿔주어야 함
+        PortalBoard[] board1 = new PortalBoard[3 * 10];
+        PortalBoard[] board2 = new PortalBoard[3 * 10];
+        PortalBoard[] board3 = new PortalBoard[3 * 10];
+        PortalBoard[] board4 = new PortalBoard[3 * 10];
 
         string a1 = "B200902281833482321051";
         string a2 = "B200902281833016691048";
@@ -43,9 +44,6 @@ namespace robot
         string cookie;
         Uri uri;
 
-        UTF8Encoding encoding;
-        byte[] bytes;
-
         public Portal(string cookie)
         {
             this.cookie = cookie;
@@ -53,9 +51,10 @@ namespace robot
             // board 초기화
             for (int i = 0; i < PAGENUM * 10; i++)
             {
-                board1[i] = new Board();
-                board2[i] = new Board();
-                board3[i] = new Board();
+                board1[i] = new PortalBoard();
+                board2[i] = new PortalBoard();
+                board3[i] = new PortalBoard();
+                board4[i] = new PortalBoard();
             }
 
             setBoard(board1, a1, 1, 3);
@@ -83,7 +82,7 @@ namespace robot
             return (HttpWebResponse)wReq.GetResponse();
         }
 
-        public Board[] getBoard(int boardId)
+        public PortalBoard[] getBoard(int boardId)
         {
             switch (boardId)
             {
@@ -93,12 +92,48 @@ namespace robot
                     return board2;
                 case 3:
                     return board3;
+                case 4:
+                    return board4;
             }
 
             return board1;
         }
 
-        public void setBoard(int boardId, int sPage, int ePage)
+        public string getBoardId(int boardId, int index=0)
+        {
+            switch (boardId)
+            {
+                case 1:
+                    return "B200902281833482321051";
+                case 2:
+                    return "B200902281833016691048";
+                case 3:
+                    return "B201003111719010571299";
+                case 4:
+                    return board4[index].boardId;
+            }
+
+            return "";
+        }
+
+        public string getBoardbullId(int boardId, int index)
+        {
+            switch (boardId)
+            {
+                case 1:
+                    return board1[index].bullId;
+                case 2:
+                    return board2[index].bullId;
+                case 3:
+                    return board3[index].bullId;
+                case 4:
+                    return board4[index].bullId;;
+            }
+
+            return "";
+        }
+
+        public void setBoard(int boardId, int sPage = 1, int ePage = 3)
         {
             switch (boardId)
             {
@@ -111,11 +146,80 @@ namespace robot
                 case 3:
                     setBoard(board3, a3, sPage, ePage);
                     break;
+                case 4:
+                    setLastestBoard(sPage, ePage);
+                    break;
             }
         }
 
-        private void setBoard(Board[] board, string boardId, int sPage, int ePage) 
+        private void setLastestBoard(int sPage, int ePage)
         {
+            for (int pageNum = sPage; pageNum <= ePage; pageNum++)
+            {
+                Form1.gridView.Columns[4].HeaderText = "게시판";
+
+                string url = "http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_MyBoardLst.jsp?nfirst=" + pageNum;
+                wRes = getRespose(url);
+
+                // http 내용 추출
+                Stream respPostStream = wRes.GetResponseStream();
+                StreamReader readerPost = new StreamReader(respPostStream, Encoding.Default);
+
+                resResult = readerPost.ReadToEnd();
+
+                doc = (IHTMLDocument2)new HTMLDocument();
+                doc.clear();
+                doc.write(resResult);
+                doc.close();
+
+                IEnumerable<IHTMLElement> titles = ElementsByClass(doc, "ltb_left");
+                IEnumerable<IHTMLElement> elements = ElementsByClass(doc, "ltb_center");
+
+                int docNum = elements.Count();
+                int index;
+
+                for (int i = 0; i < docNum / 11; i++)
+                {
+                    string[] rows = new string[5];
+                    IHTMLElement title = titles.ElementAt(i);
+                    
+                    int titleLen = 30;
+
+                    if (title.innerText.Count() > titleLen)
+                    {
+                        rows[1] += title.innerText.Substring(0, titleLen);
+                        rows[1] += "\r\n";
+                        rows[1] += title.innerText.Substring(titleLen);
+                    }
+                    else
+                    {
+                        rows[1] = title.innerText;
+                    }
+                    rows[2] = elements.ElementAt(i * 11 + 5).innerText;
+                    rows[3] = elements.ElementAt(i * 11 + 7).innerText;
+                    rows[4] = elements.ElementAt(i * 11 + 3).innerText;
+
+                    index = (pageNum - 1) * 10 + i;
+
+                    board4[index].rows = rows;
+                    //board4[index].title = rows[1];
+                    //board4[index].writer = rows[2];
+                    //board4[index].date = rows[3];
+                    board4[index].boardName = rows[4];
+                    //board[index].viewCount = Convert.ToInt32(rows[3]);
+                    board4[index].page = pageNum;
+                    board4[index].boardId = title.innerHTML.Substring(title.innerHTML.IndexOf("boardid=")).Substring(8);
+                    board4[index].boardId = board4[index].boardId.Substring(0, board4[index].boardId.IndexOf("&"));
+                    board4[index].bullId = title.innerHTML.Substring(title.innerHTML.IndexOf("bullid=")).Substring(7);
+                    board4[index].bullId = board4[index].bullId.Substring(0, board4[index].bullId.IndexOf("&"));
+                }
+            }
+        }
+
+        private void setBoard(PortalBoard[] board, string boardId, int sPage, int ePage) 
+        {
+            Form1.gridView.Columns[4].HeaderText = "조회수";
+
             for (int pageNum = sPage; pageNum <= ePage; pageNum++)
             {
                 string url = "http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardLst.jsp?boardid=" + boardId + "&nfirst=" + pageNum;

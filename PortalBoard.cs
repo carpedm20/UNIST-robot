@@ -6,7 +6,7 @@ using System.Drawing;
 
 namespace robot
 {
-    public class Board
+    public class PortalBoard
     {
         // public string title;
         // public string writer;
@@ -24,7 +24,7 @@ namespace robot
 
         public string boardName; // 최신 게시글 용 
 
-        public Board()
+        public PortalBoard()
         {
             bold = false;
             color = Color.Black;

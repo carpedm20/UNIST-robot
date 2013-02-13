@@ -8,6 +8,7 @@ using System.Text;
 using System.Windows.Forms;
 using System.IO;
 using mshtml;
+using CustomUIControls;
 
 namespace robot
 {
@@ -38,6 +39,7 @@ namespace robot
 
         static public DataGridView gridView;
         static public WebBrowser brows;
+
         /****************************/
 
         public MainForm()
@@ -144,7 +146,6 @@ namespace robot
 
             boardGrid.Enabled = true;
 
-            portal.setBoard(boardId);
             currentBoardId = boardId;
             PortalBoard[] boards=portal.getBoard(boardId);
             int i = 0;
@@ -238,7 +239,6 @@ namespace robot
 
                 portal = new Portal(browser.Document.Cookie);
                 showBoardGrid(1);
-
                 browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
             }
 
@@ -302,8 +302,6 @@ namespace robot
                 library = new Library(browser.Document.Cookie);
 
                 browser.Navigate("http://portal.unist.ac.kr/EP/web/security/jsp/SSO_unistMail.jsp");
-
-                isFirstLoading = false;
             }
 
             /**********************************************************
@@ -324,6 +322,10 @@ namespace robot
                 boardGrid_SelectionChanged(boardGrid, ee);
 
                 visiblePortal();
+
+                isFirstLoading = false;
+
+                notifyTimer.Start();
             }
         }
 
@@ -800,5 +802,12 @@ namespace robot
             return Color.FromArgb(red, green, blue);
         }
 
+        private void notifyTimer_Tick(object sender, EventArgs e)
+        {
+            if (isFirstLoading == true)
+                return;
+            else
+                portal.checkNewLastestBoard();
+        }
     }
 }

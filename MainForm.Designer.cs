@@ -144,6 +144,7 @@
             this.circularProgress1 = new DevComponents.DotNetBar.Controls.CircularProgress();
             this.mailBox = new System.Windows.Forms.PictureBox();
             this.settingBox = new System.Windows.Forms.PictureBox();
+            this.notifyTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.boardGrid)).BeginInit();
             this.studyGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -1300,7 +1301,7 @@
             this.boardSlide.AllowUserCustomize = false;
             this.boardSlide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.boardSlide.BorderStyle = DevComponents.DotNetBar.eBorderType.None;
-            this.boardSlide.ExpandedPanel = this.slideLibrary;
+            this.boardSlide.ExpandedPanel = this.slidePortal;
             this.boardSlide.ForeColor = System.Drawing.Color.Black;
             this.boardSlide.Location = new System.Drawing.Point(8, 32);
             this.boardSlide.Name = "boardSlide";
@@ -1425,7 +1426,7 @@
             // mailBox
             // 
             this.mailBox.Image = ((System.Drawing.Image)(resources.GetObject("mailBox.Image")));
-            this.mailBox.Location = new System.Drawing.Point(750, 6);
+            this.mailBox.Location = new System.Drawing.Point(751, 8);
             this.mailBox.Name = "mailBox";
             this.mailBox.Size = new System.Drawing.Size(28, 14);
             this.mailBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -1436,20 +1437,25 @@
             // settingBox
             // 
             this.settingBox.Image = ((System.Drawing.Image)(resources.GetObject("settingBox.Image")));
-            this.settingBox.Location = new System.Drawing.Point(784, 5);
+            this.settingBox.Location = new System.Drawing.Point(782, 6);
             this.settingBox.Name = "settingBox";
-            this.settingBox.Size = new System.Drawing.Size(34, 16);
-            this.settingBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.settingBox.Size = new System.Drawing.Size(18, 18);
+            this.settingBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.settingBox.TabIndex = 23;
             this.settingBox.TabStop = false;
             this.settingBox.Click += new System.EventHandler(this.settingBox_Click);
+            // 
+            // notifyTimer
+            // 
+            this.notifyTimer.Interval = 10000;
+            this.notifyTimer.Tick += new System.EventHandler(this.notifyTimer_Tick);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(834, 759);
+            this.ClientSize = new System.Drawing.Size(834, 755);
             this.Controls.Add(this.settingBox);
             this.Controls.Add(this.mailBox);
             this.Controls.Add(this.circularProgress1);
@@ -1469,12 +1475,13 @@
             this.Controls.Add(this.boardGrid);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Malgun Gothic", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Robot";
+            this.Text = "w";
             ((System.ComponentModel.ISupportInitialize)(this.boardGrid)).EndInit();
             this.studyGroup.ResumeLayout(false);
             this.studyGroup.PerformLayout();
@@ -1613,6 +1620,7 @@
         private System.Windows.Forms.Label bookInfo;
         private System.Windows.Forms.PictureBox mailBox;
         private System.Windows.Forms.PictureBox settingBox;
+        private System.Windows.Forms.Timer notifyTimer;
     }
 }
 

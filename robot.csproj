@@ -108,6 +108,9 @@
     <Compile Include="Portal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="TaskbarNotifier.cs">
+      <SubType>Form</SubType>
+    </Compile>
     <EmbeddedResource Include="MailForm.resx">
       <DependentUpon>MailForm.cs</DependentUpon>
     </EmbeddedResource>
@@ -159,7 +162,9 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="close.bmp" />
     <Content Include="favicon.ico" />
+    <EmbeddedResource Include="skin.bmp" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

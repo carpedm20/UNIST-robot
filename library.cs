@@ -24,6 +24,9 @@ namespace robot
         string bookOption2;
         string bookOperator;
 
+        public string[][] roomStat;
+        public int dayCount = 0;
+
         IHTMLDocument2 doc = null;
         HttpWebRequest wReq;
         HttpWebResponse wRes;
@@ -71,7 +74,10 @@ namespace robot
             doc.close();
 
             IEnumerable<IHTMLElement> elements = ElementsByClass(doc, "item");
-
+            IEnumerable<IHTMLElement> authors = ElementsByClass(doc, "author");
+            IEnumerable<IHTMLElement> publishers = ElementsByClass(doc, "publisher");
+            IEnumerable<IHTMLElement> publishyears = ElementsByClass(doc, "publishyear");
+            IEnumerable<IHTMLElement> cclasses = ElementsByClass(doc, "cclass");
             books = new Book[elements.Count()];
 
             for (int i = 0; i < elements.Count(); i++)
@@ -93,15 +99,12 @@ namespace robot
                 IHTMLElement element = (IHTMLElement)((IHTMLElement2)elements.ElementAt(i)).getElementsByTagName("label").item(0, 0);
                 rows[0] = books[i].title = element.getAttribute("title").ToString().Split('/')[0].Replace("선택하기", "");
 
-                element = (IHTMLElement)((IHTMLElement2)elements.ElementAt(i)).getElementsByTagName("span").item(2, 0);
-                rows[1] = books[i].author = element.innerText;
-
-                element = (IHTMLElement)((IHTMLElement2)elements.ElementAt(i)).getElementsByTagName("span").item(3, 0);
-                rows[2] = books[i].publisher = element.innerText;
-
-                element = (IHTMLElement)((IHTMLElement2)elements.ElementAt(i)).getElementsByTagName("span").item(4, 0);
-                rows[3] = books[i].publishYear = element.innerText;
-                rows[4] = books[i].isbn = html.Substring(html.IndexOf("isbn\">")).Split('>')[1].Split('<')[0];
+                rows[1] = books[i].author = ((IHTMLElement)(authors.ElementAt(i))).innerText.Replace("/ ", "");
+                rows[2] = books[i].publisher = ((IHTMLElement)(publishers.ElementAt(i))).innerText.Replace("/ ", "");
+                rows[3] = books[i].publishYear = ((IHTMLElement)(publishyears.ElementAt(i))).innerText.Replace("/ ", "");
+                rows[4] = books[i].kind = ((IHTMLElement)(cclasses.ElementAt(i))).innerText.Replace("/ ", "");
+                
+                books[i].isbn = html.Substring(html.IndexOf("isbn\">")).Split('>')[1].Split('<')[0];
 
                 IHTMLElement cid = (IHTMLElement)(((IHTMLElement2)elements.ElementAt(i)).getElementsByTagName("input").item(0, 0));
 
@@ -165,7 +168,10 @@ namespace robot
 
             XmlNodeList elemList = docX.GetElementsByTagName("link");
 
-            return elemList[1].InnerText;
+            if (elemList.Count < 2)
+                return "";
+            else
+                return elemList[elemList.Count - 1].InnerText;
         }
 
         public string queryMake()
@@ -270,6 +276,68 @@ namespace robot
             foreach (IHTMLElement e in doc.all)
                 if (e is mshtml.IHTMLTableRow)
                     yield return e;
+        }
+
+        static IEnumerable<IHTMLElement> getTd(IHTMLDocument2 doc)
+        {
+            foreach (IHTMLElement e in doc.all)
+                if (((IHTMLElement2)e).getElementsByTagName("td").length==25)
+                    yield return e;
+        }
+
+        public void loadStudyroomStatus(int roomNum)
+        {
+            //http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=1
+
+            string url = "http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=" + roomNum.ToString();
+            wRes = getRespose(url);
+
+            // http 내용 추출
+            Stream respPostStream = wRes.GetResponseStream();
+            StreamReader readerPost = new StreamReader(respPostStream);
+
+            resResult = readerPost.ReadToEnd();
+
+            doc = (IHTMLDocument2)new HTMLDocument();
+            doc.clear();
+            doc.write(resResult);
+            doc.close();
+
+            IEnumerable<IHTMLElement> e = getTd(doc);
+            IEnumerator<IHTMLElement> enumerator = e.GetEnumerator();
+
+            dayCount = e.Count();
+            roomStat=new string [dayCount][];
+
+            for(int i=0; i<roomStat.Length; i++) {
+                roomStat[i]=new string[25];
+            }
+
+            int count=0;
+
+            while(enumerator.MoveNext()) {
+                IHTMLElement2 e2 = (IHTMLElement2)enumerator.Current;
+                roomStat[count][0] = ((IHTMLElement)(e2.getElementsByTagName("td").item(0, 0))).innerText;
+
+                for(int i=1; i<25; i++) {
+                    IHTMLElement elem = ((IHTMLElement)(e2.getElementsByTagName("td").item(i, 0)));
+                    roomStat[count][i] = elem.innerText;
+
+                    if(roomStat[count][i]==null) {
+                        IHTMLElement img = (IHTMLElement)(((IHTMLElement2)elem).getElementsByTagName("img").item(0));
+
+                        if(img.getAttribute("src").ToString().IndexOf("icoA.gif") !=-1) {
+                            roomStat[count][i]="E";
+                        }
+                        else if (img.getAttribute("src").ToString().IndexOf("icoN.gif") != -1)
+                        {
+                            roomStat[count][i]="R";
+                        }
+                    }
+                }
+
+                count++;
+            }
         }
     }
 }

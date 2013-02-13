@@ -9,9 +9,9 @@ using System.Windows.Forms;
 using System.Security.Cryptography;
 namespace robot
 {
-    public partial class Form2 : DevComponents.DotNetBar.Metro.MetroForm
+    public partial class LoginForm : DevComponents.DotNetBar.Metro.MetroForm
     {
-        public Form2()
+        public LoginForm()
         {
             InitializeComponent();
 

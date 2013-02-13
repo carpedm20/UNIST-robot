@@ -12,8 +12,8 @@ namespace robot
         public static string id, password;
         public static bool loginSave = true, autoLogin = true;
         public static bool login = false;
-        public static Form2 f2;
-        public static Form1 f1;
+        public static LoginForm f2;
+        public static MainForm f1;
 
         // ini file 변수
         public static FileInfo exefileinfo;
@@ -52,17 +52,17 @@ namespace robot
 
             if (auto == "true")
             {
-                f1 = new Form1();
+                f1 = new MainForm();
                 Application.Run(f1);
             }
             else
             {
-                f2 = new Form2();
+                f2 = new LoginForm();
                 Application.Run(f2);
 
                 if (login != false)
                 {
-                    f1 = new Form1();
+                    f1 = new MainForm();
                     Application.Run(f1);
                 }
             }

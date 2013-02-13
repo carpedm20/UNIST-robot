@@ -14,7 +14,7 @@ namespace robot
         public void bbboard_click(object sender, EventArgs e)
         {
             DevComponents.DotNetBar.ButtonItem butitem = (DevComponents.DotNetBar.ButtonItem)sender;
-            Form1.brows.Navigate("bb.unist.ac.kr/webapps/blackboard/execute/announcement?&method=search&viewChoice=3&searchSelect=" + url);
+            MainForm.brows.Navigate("bb.unist.ac.kr/webapps/blackboard/execute/announcement?&method=search&viewChoice=3&searchSelect=" + url);
             //bb.unist.ac.kr/webapps/blackboard/execute/announcement?&method=search&viewChoice=3&searchSelect=_11194_1
         }
     }

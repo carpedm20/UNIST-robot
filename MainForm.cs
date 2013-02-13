@@ -11,15 +11,12 @@ using mshtml;
 
 namespace robot
 {
-    public partial class Form1 : DevComponents.DotNetBar.Metro.MetroForm
+    public partial class MainForm : DevComponents.DotNetBar.Metro.MetroForm
     {
         HtmlDocument doc = null;
 
-        string userName = "";
+        public static string userName = "";
 
-        int iconCount = 0; // welcomeLabel 이모티콘 모양
-
-        string bookQuery = ""; // 책 검색 쿼리
         string bookReviewUrl = "";
 
         string phoneNum = ""; // 스터디룸 예약을 위한 변수
@@ -29,16 +26,21 @@ namespace robot
         Random r = new Random();
 
         /****************************/
+        bool isFirstLoading = true;
+
         Portal portal;
         int currentBoardId = 1;
         BB bb;
         Library library;
 
+        static public string mailCookie = "";
+        static public bool mailFormExist = false;
+
         static public DataGridView gridView;
         static public WebBrowser brows;
         /****************************/
 
-        public Form1()
+        public MainForm()
         {
             InitializeComponent();
 
@@ -56,6 +58,7 @@ namespace robot
             bookOption1.SelectedIndex = 0;
             bookOption2.SelectedIndex = 1;
             bookOperator.SelectedIndex = 0;
+            roomNumberBox.SelectedIndex = 0;
 
             circularProgress1.IsRunning = true;
         }
@@ -68,8 +71,11 @@ namespace robot
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
         {
-            CheckBox check = (CheckBox)sender;
+            if (isFirstLoading == true)
+                return;
 
+            CheckBox check = (CheckBox)sender;
+            
             if (check.Checked == true)
             {
                 DialogResult result = MessageBox.Show("개인정보가 유출될 수 있습니다.\r\n자동 로그인을 하시겠습니까? :[", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
@@ -120,6 +126,12 @@ namespace robot
                 Program.ini.SetIniValue("Login", "Save", "false");
             }
         }
+
+        /**********************************************************
+         * 
+         *  게시판 boardGrid
+         *  
+         **********************************************************/
 
         private void showBoardGrid(int boardId)
         {
@@ -276,112 +288,43 @@ namespace robot
                     slideBB.SubItems.Add(bblist[i]);
                 }
 
+                browser.Navigate("http://library.unist.ac.kr/DLiWeb25Eng/tmaxsso/first_cs.aspx");
+            }
+
+            /**********************************************************
+             * 
+             *  도서관
+             *
+             **********************************************************/
+
+            if (e.Url.ToString().IndexOf("http://library.unist.ac.kr/DLiWeb25Eng/default.aspx") != -1)
+            {
+                library = new Library(browser.Document.Cookie);
+
+                browser.Navigate("http://portal.unist.ac.kr/EP/web/security/jsp/SSO_unistMail.jsp");
+
+                isFirstLoading = false;
+            }
+
+            /**********************************************************
+             * 
+             *  전자우편
+             *
+             **********************************************************/
+
+            if (e.Url.ToString().IndexOf("http://mail.unist.ac.kr/mail/mailList.crd") != -1)
+            {
                 circularProgress1.IsRunning = false;
                 circularProgress1.Visible = false;
 
                 System.Web.UI.WebControls.GridViewSelectEventArgs ee = new System.Web.UI.WebControls.GridViewSelectEventArgs(1);
 
+                mailCookie = browser.Document.Cookie;
+
                 boardGrid_SelectionChanged(boardGrid, ee);
 
                 visiblePortal();
             }
-
-            // 스터디룸 예약
-            /*if (e.Url.ToString().IndexOf("library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?") != -1)
-            {
-                HtmlElement table = doc.GetElementsByTagName("table")[1];
-
-                /*browser.DocumentText = "<html>\r\n<style type=\"text/css\">\r\nbody { font-family:'Arial'; }\r\n.font-test { font:bold 24pt 'Arial'; }\r\n</style>" + 
-                    //http://library.unist.ac.kr/DLiWeb25Eng/html/images/ico/icoA.gif
-                    //table.OuterHtml.ToString().Replace("/DLiWeb25Eng/html/images/ico/icoA.gif", "http://library.unist.ac.kr/DLiWeb25Eng/html/images/ico/icoA.gif").Replace("DLiWeb25Eng/html/images/ico/icoN.gif", "http://library.unist.ac.kr/DLiWeb25Eng/html/images/ico/icoN.gif")
-                    table.OuterHtml.ToString().Replace("<IMG src=\"/DLiWeb25Eng/html/images/ico/icoA.gif\" alert=\"Expire\">", "E").Replace("<IMG src=\"/DLiWeb25Eng/html/images/ico/icoN.gif\" alert=\"Reserved\">", "R").Replace("<IMG src=\"/DLiWeb25Eng/html/images/ico/icoU.gif\" alert=\"Commit\">", "E")
-                    + "\r\n</html>";*/
-                //string parsing = table.OuterHtml.ToString().Replace("<IMG src=\"/DLiWeb25Eng/html/images/ico/icoA.gif\" alert=\"Expire\">", "E").Replace("<IMG src=\"/DLiWeb25Eng/html/images/ico/icoN.gif\" alert=\"Reserved\">", "R").Replace("<IMG src=\"/DLiWeb25Eng/html/images/ico/icoU.gif\" alert=\"Commit\">", "E");
-                /*
-                HtmlElementCollection tds = table.GetElementsByTagName("td");
-
-                // study bookGridView_SelectionChanged 내용 지우기
-                while (studyGrid.Rows.Count != 0)
-                {
-                    studyGrid.Rows.RemoveAt(0);
-                }
-
-                // study room grid 내용 추가
-                for (int i = 0; i < tds.Count; i+=25)
-                {
-                    string[] rows = new string[25];
-                    for (int j = 0; j < 25; j++)
-                    {
-                        if (j % 25 == 0)
-                        {
-                            rows[0] = tds[i+j].InnerText;
-                        }
-                        else
-                        {
-                            if (tds[i+j].GetElementsByTagName("a")[0].InnerHtml.IndexOf("icoA.gif") != -1)
-                            {
-                                rows[j] = "E";
-                            }
-                            else if (tds[i+j].GetElementsByTagName("a")[0].InnerHtml.IndexOf("icoN.gif") != -1)
-                            {
-                                rows[j] = "R";
-                            }
-                            else
-                            {
-                                rows[j] = "-";
-                            }
-                        }
-                    }
-
-                    studyGrid.Rows.Add(rows);
-
-                    // 오늘 날짜 줄 표시
-                    if (Convert.ToInt32(rows[0].Substring(0, 2)) == DateTime.Now.Month && Convert.ToInt32(rows[0].Substring(3)) == DateTime.Now.Day)
-                        studyGrid.Rows[i / 25].DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.PowderBlue };
-                }
-
-                browser.Visible = false;
-                studyGrid.Visible = true;
-                roomNumberBox.Visible = true;
-                roomNumberLabel.Visible = true;
-            }
-            // 스터디 날짜 선택 시 이벤트
-            if (e.Url.ToString().IndexOf("http://library.unist.ac.kr/DLiWeb25Eng/studyroom/reserve.aspx?m_var=112&roomid=1&rdate=") != -1)
-            {
-                IEnumerable<HtmlElement> elements = ElementsByClass(doc, "empty_trbg");
-                HtmlElement info = elements.ElementAt(6);
-
-                studyPhoneNumber.Text = phoneNum = info.GetElementsByTagName("input")[0].GetAttribute("value");
-                studyEmail.Text = email = info.GetElementsByTagName("input")[1].GetAttribute("value");
-            }*/
-        }
-
-        private void libraryList_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            /*browser.Visible = false;
-            ListBox comboBox = (ListBox)sender;
-
-            // bb 클릭 클리어
-            bbList.ClearSelected();
-            portalList.ClearSelected();
-
-            switch (comboBox.SelectedIndex)
-            {
-
-                case 0:
-                    // 도서 검색
-                    
-                    break;
-                case 1:
-                    // 스터디룸 예약
-                    browser.Navigate("http://library.unist.ac.kr/dliweb25eng/html/EN/studyRoom.html");
-                    break;
-                case 2:
-                    // 열람실 좌석 현황
-                    browser.Navigate("http://seat.unist.ac.kr/EZ5500/RoomStatus/room_status.asp");
-                    break;
-            }
-            browser.Visible = true;*/
         }
 
         /**********************************************************
@@ -389,27 +332,72 @@ namespace robot
          *  설정
          *  
          **********************************************************/
-
-        private void settingLabel_Click(object sender, EventArgs e)
+        
+        private void settingBox_Click(object sender, EventArgs e)
         {
             MessageBox.Show("Designed by Kim Tae Hoon ಠ_ಠ");
         }
 
-        private void roomNumberBox_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            ComboBox comboBox = (ComboBox)sender;
+        /**********************************************************
+         * 
+         *  메일
+         *  
+         **********************************************************/
 
-            browser.Navigate("http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=" + (comboBox.SelectedIndex+1).ToString());
+        private void mailBox_Click(object sender, EventArgs e)
+        {
+            if (mailFormExist == true)
+            {
+                MessageBox.Show("창이 이미 열려 있습니다 :(", "Robot의 경고");
+                return;
+            }
+
+            if (mailFormExist == false)
+                mailFormExist = true;
+
+
+            if (mailCookie == "")
+            {
+                MessageBox.Show("메일 서버에 접속할 수 없습니다 -_-?", "Robot의 경고");
+                return;
+            }
+
+            MailForm mailForm=new MailForm(mailCookie);
+            mailForm.Show();
         }
 
-        private Color ConvertColor_PhotoShopStyle_toRGB(string photoShopColor)
-        {
-            int red, green, blue;
-            red = Convert.ToInt32(Convert.ToByte(photoShopColor.Substring(1, 2), 16));
-            green = Convert.ToInt32(Convert.ToByte(photoShopColor.Substring(3, 2), 16));
-            blue = Convert.ToInt32(Convert.ToByte(photoShopColor.Substring(5, 2), 16));
+        /**********************************************************
+         * 
+         *  스터디 룸
+         *  
+         **********************************************************/
 
-            return Color.FromArgb(red, green, blue);
+        private void loadStudyRoomStat()
+        {
+            library.loadStudyroomStatus(roomNumberBox.SelectedIndex + 1);
+
+            while (studyGrid.Rows.Count != 0)
+            {
+                studyGrid.Rows.RemoveAt(0);
+            }
+
+            // study room grid 내용 추가
+            for (int i = 0; i < library.dayCount; i++)
+            {
+                studyGrid.Rows.Add(library.roomStat[i]);
+
+                // 오늘 날짜 줄 표시
+                if (Convert.ToInt32(library.roomStat[i][0].Substring(0, 2)) == DateTime.Now.Month && Convert.ToInt32(library.roomStat[i][0].Substring(3)) == DateTime.Now.Day)
+                    studyGrid.Rows[i].DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.PowderBlue };
+            }
+        }
+
+        private void roomNumberBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if (isFirstLoading == true)
+                return;
+
+            loadStudyRoomStat();
         }
 
         // study room gridv
@@ -431,6 +419,23 @@ namespace robot
             }
         }
 
+        private void studyGrid_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            if (browser.Url.ToString().IndexOf("http://library.unist.ac.kr/DLiWeb25Eng/studyroom/reserve.aspx?m_var=112&roomid=1&rdate=") != -1)
+            {
+                browser.Navigate("http://library.unist.ac.kr/dliweb25/studyroom/detail.aspx?m_var=112&roomid=" + (roomNumberBox.SelectedIndex + 1).ToString());
+            }
+            DataGridView grid = (DataGridView)sender;
+            studyGroup.Enabled = true;
+
+            string hour = grid.Columns[grid.SelectedCells[0].ColumnIndex].HeaderText.ToString();
+            string date = grid.Rows[grid.SelectedCells[0].RowIndex].Cells[0].Value.ToString().Replace("-", "");
+
+            doc.InvokeScript("fnReserve", new object[] { thisYear + date, hour });
+
+            studyDateLabel.Text = thisYear + "년 " + date.Substring(0, 2) + "월 " + date.Substring(2) + "일 " + hour + "시 ~ ";
+        }
+
         /**********************************************************
          * 
          *  책 검색
@@ -439,8 +444,6 @@ namespace robot
 
         private void bookSearch_Click(object sender, EventArgs e)
         {
-            library = new Library(browser.Document.Cookie);
-
             // 도서 상태 초기화
             while (bookGridView.Rows.Count != 0)
             {
@@ -452,6 +455,11 @@ namespace robot
             bookReviewUrl = "";
 
             library.bookSearch(bookQuery1.Text, bookQuery2.Text, bookOption1.Text, bookOption2.Text, bookOperator.Text);
+
+            if (library.books.Length == 0)
+            {
+                MessageBox.Show("조건에 맞는 책이 없습니다 :(", "Robot의 경고");
+            }
 
             for (int i = 0; i < library.books.Length; i++)
             {
@@ -515,7 +523,7 @@ namespace robot
 
         /**********************************************************
          * 
-         *  bookGridView 에서 row 클릭 시
+         *  bookGridView 에서 select
          *  
          **********************************************************/
         
@@ -536,6 +544,9 @@ namespace robot
             bookReviewUrl = "";
             bookReview.Text = "...";
 
+            if (bookGridView.SelectedRows.Count == 0)
+                return;
+
             string url=library.books[bookGridView.SelectedRows[0].Index].thumbnail;
 
             if (url != "")
@@ -544,15 +555,17 @@ namespace robot
                 bookPic.Visible = true;
             }
 
-            string title = library.books[bookGridView.SelectedRows[0].Index].title;
+            Book book = library.books[bookGridView.SelectedRows[0].Index];
 
-            if (title.Length > 30)
+            if (book.title.Length > 30)
             {
-                bookTitle.Text = title.ToString().Substring(0, 30) + "\r\n" + title.ToString().Substring(30);
+                bookTitle.Text = book.title.ToString().Substring(0, 30) + "\r\n" + book.title.ToString().Substring(30);
             }
             else {
-                bookTitle.Text = title.ToString();
+                bookTitle.Text = book.title.ToString();
             }
+
+            bookInfo.Text = book.author + " | " + book.publisher + " | " + book.publishYear + " | " + book.kind;
 
             //http://openapi.naver.com/search?key=6053ca2ccd452f386a6e2eb44375d160&query=art&target=book_adv&d_isbn=9788996427513
         }
@@ -604,29 +617,12 @@ namespace robot
         {
             if (bookReviewUrl == "")
             {
-                MessageBox.Show("리뷰가 0건입니다 :-(", "Robot의 경고");
+                MessageBox.Show("리뷰가 없습니다 :-(", "Robot의 경고");
             }
             else
             {
                 System.Diagnostics.Process.Start(bookReviewUrl);
             }
-        }
-
-        private void studyGrid_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (browser.Url.ToString().IndexOf("http://library.unist.ac.kr/DLiWeb25Eng/studyroom/reserve.aspx?m_var=112&roomid=1&rdate=") != -1)
-            {
-                browser.Navigate("http://library.unist.ac.kr/dliweb25/studyroom/detail.aspx?m_var=112&roomid=" + (roomNumberBox.SelectedIndex + 1).ToString());
-            }
-            DataGridView grid = (DataGridView)sender;
-            studyGroup.Enabled = true;
-
-            string hour = grid.Columns[grid.SelectedCells[0].ColumnIndex].HeaderText.ToString();
-            string date = grid.Rows[grid.SelectedCells[0].RowIndex].Cells[0].Value.ToString().Replace("-", "");
-
-            doc.InvokeScript("fnReserve", new object[] { thisYear + date, hour });
-
-            studyDateLabel.Text = thisYear + "년 " + date.Substring(0, 2) + "월 " + date.Substring(2) + "일 " + hour + "시 ~ ";
         }
 
         /**********************************************************
@@ -669,9 +665,10 @@ namespace robot
             visibleBookSearch();
         }
 
-        // 스터디룸 예약
+        // library 예약
         private void buttonItem6_Click(object sender, EventArgs e)
         {
+            loadStudyRoomStat();
             visibleStudyroomReserve();
         }
 
@@ -752,7 +749,7 @@ namespace robot
 
         /**********************************************************
          * 
-         *  네이버 리뷰 점수
+         *  네이버 리뷰 점수, reviewBrowser 사용
          *  
          **********************************************************/
 
@@ -786,5 +783,22 @@ namespace robot
                 if (e.GetAttribute("className") == className)
                     yield return e;
         }
+
+        /**********************************************************
+         * 
+         *  RGB string 을 Color 객체로 변환
+         *  
+         **********************************************************/
+
+        private Color ConvertColor_PhotoShopStyle_toRGB(string photoShopColor)
+        {
+            int red, green, blue;
+            red = Convert.ToInt32(Convert.ToByte(photoShopColor.Substring(1, 2), 16));
+            green = Convert.ToInt32(Convert.ToByte(photoShopColor.Substring(3, 2), 16));
+            blue = Convert.ToInt32(Convert.ToByte(photoShopColor.Substring(5, 2), 16));
+
+            return Color.FromArgb(red, green, blue);
+        }
+
     }
 }

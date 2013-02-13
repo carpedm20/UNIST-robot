@@ -156,7 +156,7 @@ namespace robot
         {
             for (int pageNum = sPage; pageNum <= ePage; pageNum++)
             {
-                Form1.gridView.Columns[4].HeaderText = "게시판";
+                MainForm.gridView.Columns[4].HeaderText = "게시판";
 
                 string url = "http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_MyBoardLst.jsp?nfirst=" + pageNum;
                 wRes = getRespose(url);
@@ -218,7 +218,7 @@ namespace robot
 
         private void setBoard(PortalBoard[] board, string boardId, int sPage, int ePage) 
         {
-            Form1.gridView.Columns[4].HeaderText = "조회수";
+            MainForm.gridView.Columns[4].HeaderText = "조회수";
 
             for (int pageNum = sPage; pageNum <= ePage; pageNum++)
             {

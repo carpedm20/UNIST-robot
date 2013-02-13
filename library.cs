@@ -99,9 +99,20 @@ namespace robot
                 IHTMLElement element = (IHTMLElement)((IHTMLElement2)elements.ElementAt(i)).getElementsByTagName("label").item(0, 0);
                 rows[0] = books[i].title = element.getAttribute("title").ToString().Split('/')[0].Replace("선택하기", "");
 
-                rows[1] = books[i].author = ((IHTMLElement)(authors.ElementAt(i))).innerText.Replace("/ ", "");
-                rows[2] = books[i].publisher = ((IHTMLElement)(publishers.ElementAt(i))).innerText.Replace("/ ", "");
-                rows[3] = books[i].publishYear = ((IHTMLElement)(publishyears.ElementAt(i))).innerText.Replace("/ ", "");
+                if (((IHTMLElement)(authors.ElementAt(i))).innerText != null)
+                    rows[1] = books[i].author = ((IHTMLElement)(authors.ElementAt(i))).innerText.Replace("/ ", "");
+                else
+                    rows[1] = books[i].author = "";
+
+                if (((IHTMLElement)(publishers.ElementAt(i))).innerText != null)
+                    rows[2] = books[i].publisher = ((IHTMLElement)(publishers.ElementAt(i))).innerText.Replace("/ ", "");
+                else
+                    rows[2] = books[i].publisher = "";
+
+                if (((IHTMLElement)(publishyears.ElementAt(i))).innerText != null)
+                    rows[3] = books[i].publishYear = ((IHTMLElement)(publishyears.ElementAt(i))).innerText.Replace("/ ", "");
+                else
+                    rows[3] = books[i].publishYear = null;
                 rows[4] = books[i].kind = ((IHTMLElement)(cclasses.ElementAt(i))).innerText.Replace("/ ", "");
                 
                 books[i].isbn = html.Substring(html.IndexOf("isbn\">")).Split('>')[1].Split('<')[0];

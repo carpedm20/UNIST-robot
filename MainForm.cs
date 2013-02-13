@@ -39,18 +39,23 @@ namespace robot
 
         static public DataGridView gridView;
         static public WebBrowser brows;
+        static public Panel bbpanel;
 
+        static public string bbCookie = "";
         /****************************/
 
         public MainForm()
         {
             InitializeComponent();
 
+            visibleLoading();
+
             // 브라우저 스크립트 에러 무시
             browser.ScriptErrorsSuppressed = true;
 
             brows = this.browser;
             gridView = this.boardGrid;
+            bbpanel = this.bbPanel;
 
             autoLoginSetup();
 
@@ -137,14 +142,10 @@ namespace robot
 
         private void showBoardGrid(int boardId)
         {
-            boardGrid.Enabled = false;
-
             while (boardGrid.Rows.Count != 0)
             {
                 boardGrid.Rows.RemoveAt(0);
             }
-
-            boardGrid.Enabled = true;
 
             currentBoardId = boardId;
             PortalBoard[] boards=portal.getBoard(boardId);
@@ -229,6 +230,18 @@ namespace robot
         {
             /**********************************************************
              * 
+             *  브라우저 오른쪽으로 이동
+             *  
+             **********************************************************/
+
+            Point point = new Point(browser.Right, 0);
+            browser.Document.Window.ScrollTo(point);
+            
+            if(isFirstLoading==false)
+                browser.Visible = true;
+
+            /**********************************************************
+             * 
              *  첫 로그인, 이름 저장, 학사 공지로 이동
              *  
              **********************************************************/
@@ -272,6 +285,8 @@ namespace robot
             {
                 bb.setBoard();
 
+                bb.getCourceMenu();
+                
                 DevComponents.DotNetBar.ButtonItem[] bblist = new DevComponents.DotNetBar.ButtonItem[bb.board.Count()];
 
                 for (int i = 0; i < bb.board.Length; i++)
@@ -283,11 +298,12 @@ namespace robot
                     bblist[i].CanCustomize = false;
                     bblist[i].Name = "buttonItem" + Convert.ToInt32(i);
                     bblist[i].Text = bb.board[i].name;
-                    bblist[i].Click += new System.EventHandler(bb.board[i].bbboard_click);
+                    bblist[i].Click += new System.EventHandler(sideBBClick);
+                    bblist[i].Click += new System.EventHandler(visibleBB);
 
                     slideBB.SubItems.Add(bblist[i]);
                 }
-
+                
                 browser.Navigate("http://library.unist.ac.kr/DLiWeb25Eng/tmaxsso/first_cs.aspx");
             }
 
@@ -324,8 +340,28 @@ namespace robot
                 visiblePortal();
 
                 isFirstLoading = false;
+                circularProgress1.IsRunning = false;
+                visiblePortal();
 
                 notifyTimer.Start();
+            }
+        }
+
+        /**********************************************************
+         * 
+         *  boardSlide 에서 블랙보드 게시판 클릭시 이벤트
+         *  
+         **********************************************************/
+
+        private void sideBBClick(object sender, EventArgs e)
+        {
+            DevComponents.DotNetBar.ButtonItem butItem = (DevComponents.DotNetBar.ButtonItem)sender;
+
+            for(int i=0; i<bb.board.Length; i++) {
+                if (bb.board[i].name == butItem.Text)
+                {
+                    browser.Navigate(bb.board[i].menuUrl[0]);
+                }
             }
         }
 
@@ -534,6 +570,9 @@ namespace robot
             if (library.books == null)
                 return;
 
+            if (bookGridView.SelectedRows.Count == 0)
+                return;
+
             bookThumnailRefresh();
 
             loadBookStat(library.books[bookGridView.SelectedRows[0].Index].cid);
@@ -686,11 +725,12 @@ namespace robot
          *  
          **********************************************************/
 
-        private void visiblePortal()
+        private void visibleLoading()
         {
-            browser.Visible = true;
-            boardGrid.Visible = true;
-
+            boardSlide.Visible = false;
+            browser.Visible = false;
+            boardGrid.Visible = false;
+            bbPanel.Visible = false;
             studyGroup.Visible = false;
             bookGroup.Visible = false;
             bookInfoGroup.Visible = false;
@@ -699,9 +739,31 @@ namespace robot
             roomNumberBox.Visible = false;
         }
 
+        private void visiblePortal()
+        {
+            boardSlide.Visible = true;
+            browser.Visible = true;
+            boardGrid.Visible = true;
+
+            bbPanel.Visible = false;
+            studyGroup.Visible = false;
+            bookGroup.Visible = false;
+            bookInfoGroup.Visible = false;
+            studyGrid.Visible = false;
+            roomNumberLabel.Visible = false;
+            roomNumberBox.Visible = false;
+        }
+
+        private void visibleBB(object sender, EventArgs e)
+        {
+            visibleBB();
+        }
+
         public void visibleBB()
         {
+            boardSlide.Visible = true;
             browser.Visible = true;
+            bbPanel.Visible = true;
 
             boardGrid.Visible = false;
             studyGroup.Visible = false;
@@ -714,9 +776,11 @@ namespace robot
 
         private void visibleBookSearch()
         {
+            boardSlide.Visible = true;
             bookGroup.Visible = true;
             bookInfoGroup.Visible = true;
 
+            bbPanel.Visible = false;
             browser.Visible = false;
             boardGrid.Visible = false;
             studyGroup.Visible = false;
@@ -727,11 +791,13 @@ namespace robot
 
         private void visibleStudyroomReserve()
         {
+            boardSlide.Visible = true;
             studyGrid.Visible = true;
             roomNumberLabel.Visible = true;
             roomNumberBox.Visible = true;
             studyGroup.Visible = true;
 
+            bbPanel.Visible = false;
             browser.Visible = false;
             boardGrid.Visible = false;
             bookGroup.Visible = false;
@@ -802,12 +868,99 @@ namespace robot
             return Color.FromArgb(red, green, blue);
         }
 
+        /**********************************************************
+         * 
+         *  알림 타이머
+         *  
+         **********************************************************/
+
         private void notifyTimer_Tick(object sender, EventArgs e)
         {
             if (isFirstLoading == true)
                 return;
             else
                 portal.checkNewLastestBoard();
+        }
+
+        /**********************************************************
+         * 
+         *  메인폼 로드시 트레이 아이콘의 ContextMenuStrip 연결
+         *  
+         **********************************************************/
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            trayIcon.ContextMenuStrip = menuStrip;
+        }
+
+        /**********************************************************
+         * 
+         *  닫기 버튼 이벤트 취소
+         *  
+         **********************************************************/
+
+        private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            e.Cancel = true;
+
+            this.Visible = false;
+        }
+
+        /**********************************************************
+         * 
+         *  트레이 아이콘 관련 함수
+         *  
+         **********************************************************/
+
+        private void 보이기ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Visible = true;
+        }
+
+        private void 종료ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void trayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
+        {
+            this.Visible = true;
+        }
+
+        /**********************************************************
+         * 
+         *  시작 프로그램 등록 함수
+         *  
+         **********************************************************/
+
+        private void SetStartup(string AppName, bool enable)
+        {
+            string runKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
+            Microsoft.Win32.RegistryKey startupKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(runKey);
+
+            if (enable)
+            {
+                if (startupKey.GetValue(AppName) == null)
+                {
+                    // 시작프로그램에 등록(Add startup reg key)
+                    startupKey.Close();
+                    startupKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(runKey, true);
+                    startupKey.SetValue(AppName, Application.ExecutablePath.ToString());
+                    startupKey.Close();
+                }
+            }
+            else
+            {
+                // 시작프로그램에서 삭제(remove startup)
+                startupKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(runKey, true);
+                startupKey.DeleteValue(AppName, false);
+                startupKey.Close();
+            }
+        }
+
+        private void browser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
+        {
+            browser.Visible = false;
         }
     }
 }

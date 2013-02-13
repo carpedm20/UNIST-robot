@@ -128,23 +128,31 @@
             this.Column34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.w = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.boardSlide = new DevComponents.DotNetBar.SideBar();
-            this.slideLibrary = new DevComponents.DotNetBar.SideBarPanelItem();
-            this.buttonItem5 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem6 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem7 = new DevComponents.DotNetBar.ButtonItem();
             this.slidePortal = new DevComponents.DotNetBar.SideBarPanelItem();
             this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem2 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem4 = new DevComponents.DotNetBar.ButtonItem();
             this.slideBB = new DevComponents.DotNetBar.SideBarPanelItem();
+            this.slideLibrary = new DevComponents.DotNetBar.SideBarPanelItem();
+            this.buttonItem5 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem6 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem7 = new DevComponents.DotNetBar.ButtonItem();
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
-            this.notifyIcon1 = new System.Windows.Forms.NotifyIcon(this.components);
-            this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
+            this.menuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.보이기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.종료ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.circularProgress1 = new DevComponents.DotNetBar.Controls.CircularProgress();
             this.mailBox = new System.Windows.Forms.PictureBox();
             this.settingBox = new System.Windows.Forms.PictureBox();
             this.notifyTimer = new System.Windows.Forms.Timer(this.components);
+            this.ribbonClientPanel1 = new DevComponents.DotNetBar.Ribbon.RibbonClientPanel();
+            this.sideBar2 = new DevComponents.DotNetBar.SideBar();
+            this.controlContainerItem1 = new DevComponents.DotNetBar.ControlContainerItem();
+            this.sideBar3 = new DevComponents.DotNetBar.SideBar();
+            this.controlContainerItem2 = new DevComponents.DotNetBar.ControlContainerItem();
+            this.bbPanel = new System.Windows.Forms.Panel();
             ((System.ComponentModel.ISupportInitialize)(this.boardGrid)).BeginInit();
             this.studyGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -156,6 +164,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookGridView)).BeginInit();
+            this.menuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mailBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingBox)).BeginInit();
             this.SuspendLayout();
@@ -170,6 +179,7 @@
             this.browser.TabIndex = 1;
             this.browser.Visible = false;
             this.browser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.browser_DocumentCompleted);
+            this.browser.Navigated += new System.Windows.Forms.WebBrowserNavigatedEventHandler(this.browser_Navigated);
             this.browser.NewWindow += new System.ComponentModel.CancelEventHandler(this.browser_NewWindow);
             // 
             // boardGrid
@@ -185,7 +195,6 @@
             this.Column2,
             this.Column3,
             this.Column4});
-            this.boardGrid.Enabled = false;
             this.boardGrid.Location = new System.Drawing.Point(146, 32);
             this.boardGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.boardGrid.MultiSelect = false;
@@ -672,7 +681,7 @@
             // 
             this.bookReviewBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookReviewBtn.ForeColor = System.Drawing.Color.Black;
-            this.bookReviewBtn.Location = new System.Drawing.Point(589, 19);
+            this.bookReviewBtn.Location = new System.Drawing.Point(593, 19);
             this.bookReviewBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookReviewBtn.Name = "bookReviewBtn";
             this.bookReviewBtn.Size = new System.Drawing.Size(68, 25);
@@ -1137,6 +1146,7 @@
             this.label14.Size = new System.Drawing.Size(111, 15);
             this.label14.TabIndex = 22;
             this.label14.Text = "분야별 검색어 순위";
+            this.label14.Visible = false;
             // 
             // label13
             // 
@@ -1148,6 +1158,7 @@
             this.label13.Size = new System.Drawing.Size(111, 15);
             this.label13.TabIndex = 21;
             this.label13.Text = "실시간 검색어 순위";
+            this.label13.Visible = false;
             // 
             // dataGridView2
             // 
@@ -1163,6 +1174,7 @@
             this.dataGridView2.RowTemplate.Height = 23;
             this.dataGridView2.Size = new System.Drawing.Size(141, 184);
             this.dataGridView2.TabIndex = 20;
+            this.dataGridView2.Visible = false;
             // 
             // Column40
             // 
@@ -1193,6 +1205,7 @@
             this.dataGridView1.RowTemplate.Height = 23;
             this.dataGridView1.Size = new System.Drawing.Size(141, 190);
             this.dataGridView1.TabIndex = 19;
+            this.dataGridView1.Visible = false;
             // 
             // Column30
             // 
@@ -1254,9 +1267,9 @@
             this.bookGridView.RowHeadersVisible = false;
             this.bookGridView.RowTemplate.Height = 23;
             this.bookGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.bookGridView.Size = new System.Drawing.Size(625, 436);
+            this.bookGridView.Size = new System.Drawing.Size(780, 436);
             this.bookGridView.TabIndex = 0;
-            this.bookGridView.SelectionChanged += new System.EventHandler(this.bookGridView_SelectionChanged);
+            this.bookGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.bookGridView_SelectionChanged);
             // 
             // Column31
             // 
@@ -1264,7 +1277,7 @@
             this.Column31.HeaderText = "제목";
             this.Column31.Name = "Column31";
             this.Column31.ReadOnly = true;
-            this.Column31.Width = 300;
+            this.Column31.Width = 400;
             // 
             // Column32
             // 
@@ -1316,38 +1329,6 @@
             this.boardSlide.Text = "sideBar1";
             this.boardSlide.UsingSystemColors = true;
             // 
-            // slideLibrary
-            // 
-            this.slideLibrary.FontBold = true;
-            this.slideLibrary.Name = "slideLibrary";
-            this.slideLibrary.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItem5,
-            this.buttonItem6,
-            this.buttonItem7});
-            this.slideLibrary.Text = "학정";
-            // 
-            // buttonItem5
-            // 
-            this.buttonItem5.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItem5.CanCustomize = false;
-            this.buttonItem5.Name = "buttonItem5";
-            this.buttonItem5.Text = "도서 검색";
-            this.buttonItem5.Click += new System.EventHandler(this.buttonItem5_Click);
-            // 
-            // buttonItem6
-            // 
-            this.buttonItem6.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItem6.Name = "buttonItem6";
-            this.buttonItem6.Text = "스터디룸 예약";
-            this.buttonItem6.Click += new System.EventHandler(this.buttonItem6_Click);
-            // 
-            // buttonItem7
-            // 
-            this.buttonItem7.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItem7.Name = "buttonItem7";
-            this.buttonItem7.Text = "열람실 좌석 현황";
-            this.buttonItem7.Click += new System.EventHandler(this.buttonItem7_Click);
-            // 
             // slidePortal
             // 
             this.slidePortal.FontBold = true;
@@ -1395,21 +1376,71 @@
             this.slideBB.Name = "slideBB";
             this.slideBB.Text = "블랙보드";
             // 
+            // slideLibrary
+            // 
+            this.slideLibrary.FontBold = true;
+            this.slideLibrary.Name = "slideLibrary";
+            this.slideLibrary.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem5,
+            this.buttonItem6,
+            this.buttonItem7});
+            this.slideLibrary.Text = "학정";
+            // 
+            // buttonItem5
+            // 
+            this.buttonItem5.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem5.CanCustomize = false;
+            this.buttonItem5.Name = "buttonItem5";
+            this.buttonItem5.Text = "도서 검색";
+            this.buttonItem5.Click += new System.EventHandler(this.buttonItem5_Click);
+            // 
+            // buttonItem6
+            // 
+            this.buttonItem6.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem6.Name = "buttonItem6";
+            this.buttonItem6.Text = "스터디룸 예약";
+            this.buttonItem6.Click += new System.EventHandler(this.buttonItem6_Click);
+            // 
+            // buttonItem7
+            // 
+            this.buttonItem7.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem7.Name = "buttonItem7";
+            this.buttonItem7.Text = "열람실 좌석 현황";
+            this.buttonItem7.Click += new System.EventHandler(this.buttonItem7_Click);
+            // 
             // styleManager1
             // 
             this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Metro;
             this.styleManager1.MetroColorParameters = new DevComponents.DotNetBar.Metro.ColorTables.MetroColorGeneratorParameters(System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255))))), System.Drawing.Color.FromArgb(((int)(((byte)(200)))), ((int)(((byte)(230)))), ((int)(((byte)(255))))));
             // 
-            // notifyIcon1
+            // trayIcon
             // 
-            this.notifyIcon1.Icon = ((System.Drawing.Icon)(resources.GetObject("notifyIcon1.Icon")));
-            this.notifyIcon1.Text = "notifyIcon1";
-            this.notifyIcon1.Visible = true;
+            this.trayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("trayIcon.Icon")));
+            this.trayIcon.Text = "trayIcon";
+            this.trayIcon.Visible = true;
+            this.trayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.trayIcon_MouseDoubleClick);
             // 
-            // contextMenuStrip1
+            // menuStrip
             // 
-            this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.보이기ToolStripMenuItem,
+            this.종료ToolStripMenuItem});
+            this.menuStrip.Name = "contextMenuStrip1";
+            this.menuStrip.Size = new System.Drawing.Size(111, 48);
+            // 
+            // 보이기ToolStripMenuItem
+            // 
+            this.보이기ToolStripMenuItem.Name = "보이기ToolStripMenuItem";
+            this.보이기ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.보이기ToolStripMenuItem.Text = "보이기";
+            this.보이기ToolStripMenuItem.Click += new System.EventHandler(this.보이기ToolStripMenuItem_Click);
+            // 
+            // 종료ToolStripMenuItem
+            // 
+            this.종료ToolStripMenuItem.Name = "종료ToolStripMenuItem";
+            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.종료ToolStripMenuItem.Text = "종료";
+            this.종료ToolStripMenuItem.Click += new System.EventHandler(this.종료ToolStripMenuItem_Click);
             // 
             // circularProgress1
             // 
@@ -1417,9 +1448,9 @@
             // 
             // 
             this.circularProgress1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.circularProgress1.Location = new System.Drawing.Point(380, 454);
+            this.circularProgress1.Location = new System.Drawing.Point(350, 350);
             this.circularProgress1.Name = "circularProgress1";
-            this.circularProgress1.Size = new System.Drawing.Size(100, 100);
+            this.circularProgress1.Size = new System.Drawing.Size(150, 150);
             this.circularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
             this.circularProgress1.TabIndex = 21;
             // 
@@ -1437,7 +1468,7 @@
             // settingBox
             // 
             this.settingBox.Image = ((System.Drawing.Image)(resources.GetObject("settingBox.Image")));
-            this.settingBox.Location = new System.Drawing.Point(782, 6);
+            this.settingBox.Location = new System.Drawing.Point(788, 6);
             this.settingBox.Name = "settingBox";
             this.settingBox.Size = new System.Drawing.Size(18, 18);
             this.settingBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1450,12 +1481,77 @@
             this.notifyTimer.Interval = 10000;
             this.notifyTimer.Tick += new System.EventHandler(this.notifyTimer_Tick);
             // 
+            // ribbonClientPanel1
+            // 
+            this.ribbonClientPanel1.Location = new System.Drawing.Point(0, 0);
+            this.ribbonClientPanel1.Name = "ribbonClientPanel1";
+            this.ribbonClientPanel1.Size = new System.Drawing.Size(200, 100);
+            // 
+            // 
+            // 
+            this.ribbonClientPanel1.Style.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonClientPanel1.StyleMouseDown.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            // 
+            // 
+            // 
+            this.ribbonClientPanel1.StyleMouseOver.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.ribbonClientPanel1.TabIndex = 0;
+            // 
+            // sideBar2
+            // 
+            this.sideBar2.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
+            this.sideBar2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.sideBar2.ExpandedPanel = null;
+            this.sideBar2.ForeColor = System.Drawing.Color.Black;
+            this.sideBar2.Location = new System.Drawing.Point(0, 0);
+            this.sideBar2.Name = "sideBar2";
+            this.sideBar2.Size = new System.Drawing.Size(0, 0);
+            this.sideBar2.TabIndex = 0;
+            // 
+            // controlContainerItem1
+            // 
+            this.controlContainerItem1.AllowItemResize = true;
+            this.controlContainerItem1.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
+            this.controlContainerItem1.Name = "controlContainerItem1";
+            // 
+            // sideBar3
+            // 
+            this.sideBar3.AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
+            this.sideBar3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.sideBar3.ExpandedPanel = null;
+            this.sideBar3.ForeColor = System.Drawing.Color.Black;
+            this.sideBar3.Location = new System.Drawing.Point(0, 0);
+            this.sideBar3.Name = "sideBar3";
+            this.sideBar3.Size = new System.Drawing.Size(0, 0);
+            this.sideBar3.TabIndex = 0;
+            // 
+            // controlContainerItem2
+            // 
+            this.controlContainerItem2.AllowItemResize = true;
+            this.controlContainerItem2.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
+            this.controlContainerItem2.Name = "controlContainerItem2";
+            // 
+            // bbPanel
+            // 
+            this.bbPanel.AutoScroll = true;
+            this.bbPanel.BackColor = System.Drawing.Color.White;
+            this.bbPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.bbPanel.Location = new System.Drawing.Point(146, 32);
+            this.bbPanel.Name = "bbPanel";
+            this.bbPanel.Size = new System.Drawing.Size(672, 188);
+            this.bbPanel.TabIndex = 24;
+            this.bbPanel.Visible = false;
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(834, 755);
+            this.Controls.Add(this.bbPanel);
             this.Controls.Add(this.settingBox);
             this.Controls.Add(this.mailBox);
             this.Controls.Add(this.circularProgress1);
@@ -1481,7 +1577,9 @@
             this.MaximizeBox = false;
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "w";
+            this.Text = "Robot";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MainForm_FormClosing);
+            this.Load += new System.EventHandler(this.MainForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.boardGrid)).EndInit();
             this.studyGroup.ResumeLayout(false);
             this.studyGroup.PerformLayout();
@@ -1497,6 +1595,7 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookGridView)).EndInit();
+            this.menuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mailBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingBox)).EndInit();
             this.ResumeLayout(false);
@@ -1602,8 +1701,8 @@
         private DevComponents.DotNetBar.ButtonItem buttonItem5;
         private DevComponents.DotNetBar.ButtonItem buttonItem6;
         private DevComponents.DotNetBar.StyleManager styleManager1;
-        private System.Windows.Forms.NotifyIcon notifyIcon1;
-        private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
+        private System.Windows.Forms.NotifyIcon trayIcon;
+        private System.Windows.Forms.ContextMenuStrip menuStrip;
         private DevComponents.DotNetBar.ButtonItem buttonItem7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column37;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column36;
@@ -1612,15 +1711,23 @@
         private DevComponents.DotNetBar.Controls.CircularProgress circularProgress1;
         private System.Windows.Forms.WebBrowser reviewBrowser;
         private DevComponents.DotNetBar.Controls.RatingStar reviewStar;
+        private System.Windows.Forms.Label bookInfo;
+        private System.Windows.Forms.PictureBox mailBox;
+        private System.Windows.Forms.PictureBox settingBox;
+        private System.Windows.Forms.Timer notifyTimer;
+        private System.Windows.Forms.ToolStripMenuItem 보이기ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 종료ToolStripMenuItem;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column31;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column32;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column33;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column34;
         private System.Windows.Forms.DataGridViewTextBoxColumn w;
-        private System.Windows.Forms.Label bookInfo;
-        private System.Windows.Forms.PictureBox mailBox;
-        private System.Windows.Forms.PictureBox settingBox;
-        private System.Windows.Forms.Timer notifyTimer;
+        private DevComponents.DotNetBar.Ribbon.RibbonClientPanel ribbonClientPanel1;
+        private DevComponents.DotNetBar.SideBar sideBar2;
+        private DevComponents.DotNetBar.ControlContainerItem controlContainerItem1;
+        private DevComponents.DotNetBar.SideBar sideBar3;
+        private DevComponents.DotNetBar.ControlContainerItem controlContainerItem2;
+        private System.Windows.Forms.Panel bbPanel;
     }
 }
 

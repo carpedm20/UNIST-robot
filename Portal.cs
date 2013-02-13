@@ -71,7 +71,7 @@ namespace robot
             taskbarNotifier = new TaskbarNotifier();
             taskbarNotifier.SetBackgroundBitmap(new Bitmap(GetType(), "skin.bmp"), Color.FromArgb(255, 0, 255));
             taskbarNotifier.SetCloseBitmap(new Bitmap(GetType(), "close.bmp"), Color.FromArgb(255, 0, 255), new Point(121, 13));
-            taskbarNotifier.TitleRectangle = new Rectangle(40, 13, 70, 25);
+            taskbarNotifier.TitleRectangle = new Rectangle(40, 13, 80, 25);
             taskbarNotifier.ContentRectangle = new Rectangle(12, 30, 125, 72);
             taskbarNotifier.CloseClickable = true;
             taskbarNotifier.TitleClickable = false;
@@ -79,6 +79,8 @@ namespace robot
             taskbarNotifier.EnableSelectionRectangle = true;
             taskbarNotifier.KeepVisibleOnMousOver = true;
             taskbarNotifier.ReShowOnMouseOver = true;
+
+            taskbarNotifier.Show("새 글 알림", "포탈 공지의 새 글을\n 알려줍니다 :)", 500, 3000, 500);
         }
 
         // 클래스 이름으로 htmlelment 받는 함수

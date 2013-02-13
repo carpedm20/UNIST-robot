@@ -27,7 +27,7 @@ namespace robot
         Random r = new Random();
 
         /****************************/
-        bool isFirstLoading = true;
+        static public bool isFirstLoading = true;
 
         Portal portal;
         int currentBoardId = 1;
@@ -37,11 +37,20 @@ namespace robot
         static public string mailCookie = "";
         static public bool mailFormExist = false;
 
+        static public bool settingFormExist = false;
+
         static public DataGridView gridView;
         static public WebBrowser brows;
         static public Panel bbpanel;
 
         static public string bbCookie = "";
+
+        static public MailForm mailForm;
+        static public SettingForm settingForm;
+
+        static public bool alarmSet = false;
+
+        static public Timer timer;
         /****************************/
 
         public MainForm()
@@ -56,8 +65,7 @@ namespace robot
             brows = this.browser;
             gridView = this.boardGrid;
             bbpanel = this.bbPanel;
-
-            autoLoginSetup();
+            timer = this.notifyTimer;
 
             browser.Navigate("https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp");
 
@@ -68,42 +76,9 @@ namespace robot
             roomNumberBox.SelectedIndex = 0;
 
             circularProgress1.IsRunning = true;
-        }
 
-        /**********************************************************
-         * 
-         *  자동 로그인 체크 박스
-         *  
-         **********************************************************/
-
-        private void checkBox1_CheckedChanged(object sender, EventArgs e)
-        {
-            if (isFirstLoading == true)
-                return;
-
-            CheckBox check = (CheckBox)sender;
-            
-            if (check.Checked == true)
-            {
-                DialogResult result = MessageBox.Show("개인정보가 유출될 수 있습니다.\r\n자동 로그인을 하시겠습니까? :[", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                if (result == DialogResult.No)
-                {
-                    check.Checked = false;
-                    return;
-                }
-
-                Program.ini.SetIniValue("Login", "Auto", "true");
-                Program.ini.SetIniValue("Login", "Save", "true");
-                Program.ini.SetIniValue("Login", "Id", Program.id);
-                Program.ini.SetIniValue("Login", "Password", Program.password);
-            }
-            if (check.Checked == false)
-            {
-                Program.ini.SetIniValue("Login", "Auto", "false");
-                Program.ini.SetIniValue("Login", "Save", "false");
-                Program.ini.SetIniValue("Login", "Id", "");
-                Program.ini.SetIniValue("Login", "Password", "");
-            }
+            settingForm = new SettingForm();
+            autoLoginSetup();
         }
 
         private void autoLoginSetup()
@@ -118,13 +93,13 @@ namespace robot
                 {
                     Program.ini.SetIniValue("Login", "Auto", "true");
                     Program.ini.SetIniValue("Login", "Password", Program.password);
-                    checkBox1.Checked = true;
+                    settingForm.loginSwitch.Value = true;
                 }
                 else
                 {
                     Program.ini.SetIniValue("Login", "Auto", "false");
                     Program.ini.SetIniValue("Login", "Password", "");
-                    checkBox1.Checked = false;
+                    settingForm.loginSwitch.Value = false;
                 }
             }
             else
@@ -344,12 +319,14 @@ namespace robot
                 visiblePortal();
 
                 notifyTimer.Start();
+
+                mailForm = new MailForm(mailCookie);
             }
         }
 
         /**********************************************************
          * 
-         *  boardSlide 에서 블랙보드 게시판 클릭시 이벤트
+         *  boardSlide 에서 블랙보드 게시판 클릭시 이벤트 -> Announcement 보여줌
          *  
          **********************************************************/
 
@@ -360,7 +337,8 @@ namespace robot
             for(int i=0; i<bb.board.Length; i++) {
                 if (bb.board[i].name == butItem.Text)
                 {
-                    browser.Navigate(bb.board[i].menuUrl[0]);
+                    browser.Navigate(bb.board[i].menuUrl[1]);
+                    return;
                 }
             }
         }
@@ -373,7 +351,18 @@ namespace robot
         
         private void settingBox_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Designed by Kim Tae Hoon ಠ_ಠ");
+            if (settingFormExist == true)
+            {
+                MessageBox.Show("창이 이미 열려 있습니다 :(", "Robot의 경고");
+                return;
+            }
+
+            if (settingFormExist == false)
+                settingFormExist = true;
+
+            settingForm.Show();
+
+            // MessageBox.Show("Designed by Kim Tae Hoon ಠ_ಠ");
         }
 
         /**********************************************************
@@ -400,7 +389,6 @@ namespace robot
                 return;
             }
 
-            MailForm mailForm=new MailForm(mailCookie);
             mailForm.Show();
         }
 
@@ -933,7 +921,7 @@ namespace robot
          *  
          **********************************************************/
 
-        private void SetStartup(string AppName, bool enable)
+        static public void SetStartup(string AppName, bool enable)
         {
             string runKey = "SOFTWARE\\Microsoft\\Windows\\CurrentVersion\\Run";
             Microsoft.Win32.RegistryKey startupKey = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(runKey);

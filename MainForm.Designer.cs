@@ -39,7 +39,6 @@
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.portalBox = new System.Windows.Forms.ComboBox();
             this.bbList = new System.Windows.Forms.ListBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.welcomeLabel = new System.Windows.Forms.Label();
             this.libraryList = new System.Windows.Forms.ListBox();
             this.studyGroup = new System.Windows.Forms.GroupBox();
@@ -175,6 +174,7 @@
             this.browser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.browser.MinimumSize = new System.Drawing.Size(20, 25);
             this.browser.Name = "browser";
+            this.browser.ScrollBarsEnabled = false;
             this.browser.Size = new System.Drawing.Size(810, 516);
             this.browser.TabIndex = 1;
             this.browser.Visible = false;
@@ -291,26 +291,12 @@
             this.bbList.TabIndex = 11;
             this.bbList.Visible = false;
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.checkBox1.ForeColor = System.Drawing.Color.Black;
-            this.checkBox1.Location = new System.Drawing.Point(14, 6);
-            this.checkBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(90, 19);
-            this.checkBox1.TabIndex = 14;
-            this.checkBox1.Text = "자동 로그인";
-            this.checkBox1.UseVisualStyleBackColor = false;
-            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
-            // 
             // welcomeLabel
             // 
             this.welcomeLabel.AutoSize = true;
             this.welcomeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.welcomeLabel.ForeColor = System.Drawing.Color.Black;
-            this.welcomeLabel.Location = new System.Drawing.Point(162, 5);
+            this.welcomeLabel.Location = new System.Drawing.Point(23, 6);
             this.welcomeLabel.Name = "welcomeLabel";
             this.welcomeLabel.Size = new System.Drawing.Size(152, 15);
             this.welcomeLabel.TabIndex = 16;
@@ -1453,6 +1439,7 @@
             this.circularProgress1.Size = new System.Drawing.Size(150, 150);
             this.circularProgress1.Style = DevComponents.DotNetBar.eDotNetBarStyle.OfficeXP;
             this.circularProgress1.TabIndex = 21;
+            this.circularProgress1.TabStop = false;
             // 
             // mailBox
             // 
@@ -1468,7 +1455,7 @@
             // settingBox
             // 
             this.settingBox.Image = ((System.Drawing.Image)(resources.GetObject("settingBox.Image")));
-            this.settingBox.Location = new System.Drawing.Point(788, 6);
+            this.settingBox.Location = new System.Drawing.Point(792, 6);
             this.settingBox.Name = "settingBox";
             this.settingBox.Size = new System.Drawing.Size(18, 18);
             this.settingBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -1565,7 +1552,6 @@
             this.Controls.Add(this.libraryList);
             this.Controls.Add(this.bbList);
             this.Controls.Add(this.welcomeLabel);
-            this.Controls.Add(this.checkBox1);
             this.Controls.Add(this.browser);
             this.Controls.Add(this.portalBox);
             this.Controls.Add(this.boardGrid);
@@ -1609,7 +1595,6 @@
         private System.Windows.Forms.DataGridView boardGrid;
         private System.Windows.Forms.ComboBox portalBox;
         private System.Windows.Forms.ListBox bbList;
-        private System.Windows.Forms.CheckBox checkBox1;
         private System.Windows.Forms.Label welcomeLabel;
         private System.Windows.Forms.ListBox libraryList;
         private System.Windows.Forms.GroupBox studyGroup;

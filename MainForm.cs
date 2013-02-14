@@ -9,6 +9,9 @@ using System.Windows.Forms;
 using System.IO;
 using mshtml;
 using CustomUIControls;
+using System.Diagnostics;
+
+// http://somerandomdude.com/work/iconic/
 
 namespace robot
 {
@@ -20,14 +23,9 @@ namespace robot
 
         string bookReviewUrl = "";
 
-        string phoneNum = ""; // 스터디룸 예약을 위한 변수
-        string email = ""; // 스터디룸 예약을 위한 변수
-        string thisYear = "2013";
-
-        Random r = new Random();
-
         /****************************/
         static public bool isFirstLoading = true;
+        bool isExiting = false;
 
         Portal portal;
         int currentBoardId = 1;
@@ -50,7 +48,16 @@ namespace robot
 
         static public bool alarmSet = false;
 
-        static public Timer timer;
+        static public System.Windows.Forms.Timer timer1;
+        static public System.Windows.Forms.Timer timer2;
+
+        Say say;
+        static public System.Windows.Forms.Label saylabel;
+
+        string selectedDate = "";
+        string dateFormat = "00";
+
+        string[] posibleDate = new string[4];
         /****************************/
 
         public MainForm()
@@ -65,7 +72,9 @@ namespace robot
             brows = this.browser;
             gridView = this.boardGrid;
             bbpanel = this.bbPanel;
-            timer = this.notifyTimer;
+            timer1 = this.notifyTimer;
+            timer2 = this.sayTimer;
+            saylabel = this.sayLabel;
 
             browser.Navigate("https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp");
 
@@ -79,6 +88,15 @@ namespace robot
 
             settingForm = new SettingForm();
             autoLoginSetup();
+
+            say = new Say();
+
+            sayLabel.Text = say.says.ElementAt(0).Key;
+            sayToolTip.SetToolTip(sayLabel, say.says.ElementAt(0).Value);
+            sayLabel.ContextMenuStrip = sayStrip;
+
+            selectedDate = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString(dateFormat);
+            studyDate.Text = DateTime.Now.Year.ToString() + "." + DateTime.Now.Month.ToString(dateFormat);
         }
 
         private void autoLoginSetup()
@@ -212,7 +230,7 @@ namespace robot
             Point point = new Point(browser.Right, 0);
             browser.Document.Window.ScrollTo(point);
             
-            if(isFirstLoading==false)
+            if(isFirstLoading==false && studyGrid.Visible != true)
                 browser.Visible = true;
 
             /**********************************************************
@@ -291,13 +309,13 @@ namespace robot
             if (e.Url.ToString().IndexOf("http://library.unist.ac.kr/DLiWeb25Eng/default.aspx") != -1)
             {
                 library = new Library(browser.Document.Cookie);
-
+                
                 browser.Navigate("http://portal.unist.ac.kr/EP/web/security/jsp/SSO_unistMail.jsp");
             }
 
             /**********************************************************
              * 
-             *  전자우편
+             *  전자우편 - firstLoading 끝남
              *
              **********************************************************/
 
@@ -306,19 +324,26 @@ namespace robot
                 circularProgress1.IsRunning = false;
                 circularProgress1.Visible = false;
 
+                mailBox.Visible = true;
+                settingBox.Visible = true;
+                weatherBox.Visible = true;
+                notifyBox.Visible = true;
+
                 System.Web.UI.WebControls.GridViewSelectEventArgs ee = new System.Web.UI.WebControls.GridViewSelectEventArgs(1);
+                boardGrid_SelectionChanged(boardGrid, ee);
+
+                buttonItem1_Click(null, ee);
 
                 mailCookie = browser.Document.Cookie;
-
-                boardGrid_SelectionChanged(boardGrid, ee);
 
                 visiblePortal();
 
                 isFirstLoading = false;
-                circularProgress1.IsRunning = false;
                 visiblePortal();
 
                 notifyTimer.Start();
+                sayTimer.Start();
+                sessionTimer.Start();
 
                 mailForm = new MailForm(mailCookie);
             }
@@ -360,6 +385,7 @@ namespace robot
             if (settingFormExist == false)
                 settingFormExist = true;
 
+            settingForm = new SettingForm();
             settingForm.Show();
 
             // MessageBox.Show("Designed by Kim Tae Hoon ಠ_ಠ");
@@ -389,6 +415,7 @@ namespace robot
                 return;
             }
 
+            mailForm = new MailForm(mailCookie);
             mailForm.Show();
         }
 
@@ -398,14 +425,39 @@ namespace robot
          *  
          **********************************************************/
 
-        private void loadStudyRoomStat()
+        private void loadStudyRoomStat(string date)
         {
-            library.loadStudyroomStatus(roomNumberBox.SelectedIndex + 1);
+            circularProgress1.IsRunning = true;
+            circularProgress1.Visible = true;
+
+            nextMonthBtn.Enabled = false;
+            previousMonthBtn.Enabled = false;
+            roomNumberBox.Enabled = false;
+
+            studyGroup.Enabled = false;
+
+            if (roomNumberBox.SelectedIndex == 4)
+            {
+                studyStudentId6.Enabled = true;
+                studyStudentId7.Enabled = true;
+                studyStudentId8.Enabled = true;
+            }
+
+            else
+            {
+                studyStudentId6.Enabled = false;
+                studyStudentId7.Enabled = false;
+                studyStudentId8.Enabled = false;
+            }
+
+            library.loadStudyroomStatus(roomNumberBox.SelectedIndex + 1, date);
 
             while (studyGrid.Rows.Count != 0)
             {
                 studyGrid.Rows.RemoveAt(0);
             }
+
+            calculatePosibleDate(library.dayCount);
 
             // study room grid 내용 추가
             for (int i = 0; i < library.dayCount; i++)
@@ -413,20 +465,99 @@ namespace robot
                 studyGrid.Rows.Add(library.roomStat[i]);
 
                 // 오늘 날짜 줄 표시
-                if (Convert.ToInt32(library.roomStat[i][0].Substring(0, 2)) == DateTime.Now.Month && Convert.ToInt32(library.roomStat[i][0].Substring(3)) == DateTime.Now.Day)
-                    studyGrid.Rows[i].DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.PowderBlue };
+                for (int j = 0; j < 4; j++)
+                {
+                    if (studyDate.Text.Substring(0, 4) == posibleDate[j].Substring(0, 4)
+                        && library.roomStat[i][0].Substring(0, 2) == posibleDate[j].Substring(4, 2)
+                        && Convert.ToInt32(library.roomStat[i][0].Substring(3)) == Convert.ToInt32(posibleDate[j].Substring(6, 2)))
+                    {
+                        studyGrid.Rows[i].DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.PowderBlue };
+                    }
+                }                
+            }
+
+            nextMonthBtn.Enabled = true;
+            previousMonthBtn.Enabled = true;
+            roomNumberBox.Enabled = true;
+
+            circularProgress1.IsRunning = false;
+            circularProgress1.Visible = false;
+        }
+
+        /**********************************************************
+         * 
+         *  예약 버튼
+         *  
+         **********************************************************/
+
+        private void studyReserveBtn_Click(object sender, EventArgs e)
+        {
+            doc = browser.Document as HtmlDocument;
+
+            if (studyTimeBox.SelectedItem == null)
+            {
+                MessageBox.Show("사용할 시간을 선택해 주세요 :&", "Robot의 경고");
+                return;
+            }
+
+            doc.GetElementById("ctl00_ContentPlaceHolder_ddusehour").SetAttribute("value", studyTimeBox.SelectedItem.ToString().Substring(0,1));
+
+            if (studyStudentId1.Text != "")
+                doc.GetElementById("ctl00_ContentPlaceHolder_txtcompany_1").SetAttribute("value", studyStudentId1.Text);
+            if (studyStudentId2.Text != "")
+                doc.GetElementById("ctl00_ContentPlaceHolder_txtcompany_2").SetAttribute("value", studyStudentId2.Text);
+            if (studyStudentId3.Text != "")
+                doc.GetElementById("ctl00_ContentPlaceHolder_txtcompany_3").SetAttribute("value", studyStudentId3.Text);
+            if (studyStudentId4.Text != "")
+                doc.GetElementById("ctl00_ContentPlaceHolder_txtcompany_4").SetAttribute("value", studyStudentId4.Text);
+            if (studyStudentId5.Text != "" )
+                doc.GetElementById("ctl00_ContentPlaceHolder_txtcompany_5").SetAttribute("value", studyStudentId5.Text);
+            if (studyStudentId6.Text != "" && studyStudentId6.Enabled != false)
+                doc.GetElementById("ctl00_ContentPlaceHolder_txtcompany_6").SetAttribute("value", studyStudentId6.Text);
+            if (studyStudentId7.Text != "" && studyStudentId7.Enabled != false)
+                doc.GetElementById("ctl00_ContentPlaceHolder_txtcompany_7").SetAttribute("value", studyStudentId7.Text);
+            if (studyStudentId8.Text != "" && studyStudentId8.Enabled != false)
+                doc.GetElementById("ctl00_ContentPlaceHolder_txtcompany_8").SetAttribute("value", studyStudentId8.Text);
+
+            if (studyEtc.Text != "")
+                doc.GetElementById("ctl00_ContentPlaceHolder_txtnote").SetAttribute("value", studyEtc.Text);
+            
+            mshtml.HTMLDocument hdoc = doc.DomDocument as mshtml.HTMLDocument;
+
+            foreach (IHTMLElement hel in (mshtml.IHTMLElementCollection)hdoc.body.all)
+            {
+                if (hel.getAttribute("id", 0) != null)
+                {
+                    if (hel.getAttribute("id", 0).ToString().IndexOf("ctl00_ContentPlaceHolder_btnSubmit") != -1)
+                    {
+                        hel.click();
+                    }
+                }
             }
         }
+
+        /**********************************************************
+         * 
+         *  스터디 룸 번호 변경시
+         *  
+         **********************************************************/
 
         private void roomNumberBox_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (isFirstLoading == true)
                 return;
 
-            loadStudyRoomStat();
+            studyDate.Text = DateTime.Now.Year.ToString() + "." + DateTime.Now.Month.ToString(dateFormat);
+
+            loadStudyRoomStat(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString(dateFormat));
         }
 
-        // study room gridv
+        /**********************************************************
+         * 
+         *  스터디 룸 그리드 studyGrid 에 row 추가
+         *  
+         **********************************************************/
+
         private void studyGrid_RowsAdded(object sender, DataGridViewRowsAddedEventArgs e)
         {
             DataGridView grid = (DataGridView)sender;
@@ -445,21 +576,181 @@ namespace robot
             }
         }
 
+        /**********************************************************
+         * 
+         *  스터디 룸 그리드 studyGrid 셀 클릭시
+         *  
+         **********************************************************/
+
         private void studyGrid_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (browser.Url.ToString().IndexOf("http://library.unist.ac.kr/DLiWeb25Eng/studyroom/reserve.aspx?m_var=112&roomid=1&rdate=") != -1)
-            {
-                browser.Navigate("http://library.unist.ac.kr/dliweb25/studyroom/detail.aspx?m_var=112&roomid=" + (roomNumberBox.SelectedIndex + 1).ToString());
-            }
+            // http://library.unist.ac.kr/dliweb25eng/studyroom/reserve.aspx?m_var=112&roomid=1&rdate=20130214&rhour=10
+
+            studyGroup.Enabled = false;
             DataGridView grid = (DataGridView)sender;
-            studyGroup.Enabled = true;
 
-            string hour = grid.Columns[grid.SelectedCells[0].ColumnIndex].HeaderText.ToString();
             string date = grid.Rows[grid.SelectedCells[0].RowIndex].Cells[0].Value.ToString().Replace("-", "");
+            string hour = grid.Columns[grid.SelectedCells[0].ColumnIndex].HeaderText.ToString();
 
-            doc.InvokeScript("fnReserve", new object[] { thisYear + date, hour });
+            if(hour=="Date") {
+                MessageBox.Show("시간을 선택해 주세요 :^)", "Robot의 경고");
+                return;
+            }
 
-            studyDateLabel.Text = thisYear + "년 " + date.Substring(0, 2) + "월 " + date.Substring(2) + "일 " + hour + "시 ~ ";
+            string url = "http://library.unist.ac.kr/dliweb25eng/studyroom/reserve.aspx?m_var=112&roomid=" + (roomNumberBox.SelectedIndex + 1).ToString()
+                + "&rdate=" + studyDate.Text.Replace(".", "") + date.Substring(2) + "&rhour=" + hour;
+
+            browser.Navigate(url);
+
+            while (browser.ReadyState != WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
+
+            if (browser.Document.Body.InnerText.IndexOf("일시적으로 서비스를 이용할 수 없습니다.") != -1)
+            {
+                if (grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "-" && grid.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.PowderBlue)
+                {
+                    MessageBox.Show("이미 예약한 날입니다. :^)", "Robot의 경고");
+                }
+
+                else
+                {
+                    MessageBox.Show("올바른 시간을 선택해 주세요 :^)", "Robot의 경고");
+                }
+                return;
+            }
+            else
+            {
+                doc = browser.Document as HtmlDocument;
+                IEnumerable<HtmlElement> elements = ElementsByClass(doc, "empty_trbg");
+
+                HtmlElementCollection inputs = elements.ElementAt(6).GetElementsByTagName("input");
+
+                studyPhoneNumber.Text = inputs[0].GetAttribute("value");
+                studyEmail.Text = inputs[1].GetAttribute("value");
+
+                studyDateLabel.Text = DateTime.Now.Year.ToString() + "년 " + date.Substring(0, 2) + "월 " + date.Substring(2) + "일 " + hour + "시";
+                studyGroup.Enabled = true;
+
+                if (grid.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value.ToString() == "R")
+                {
+                    studyTimeBox.Items.Clear();
+                    studyTimeBox.Items.AddRange(new object[] {
+                    "1 시간"});
+                }
+                else if (grid.Rows[e.RowIndex].Cells[e.ColumnIndex + 2].Value.ToString() == "R")
+                {
+                    studyTimeBox.Items.Clear();
+                    studyTimeBox.Items.AddRange(new object[] {
+                    "1 시간",
+                    "2 시간"});
+                }
+                else
+                {
+                    studyTimeBox.Items.Clear();
+                    studyTimeBox.Items.AddRange(new object[] {
+                    "1 시간",
+                    "2 시간",
+                    "3 시간"});
+                }
+            }
+        }
+
+        private void nextMonthBtn_Click(object sender, EventArgs e)
+        {
+            loadStudyRoomStat(getNextMonth());
+        }
+
+        private void previousMonthBtn_Click(object sender, EventArgs e)
+        {
+            loadStudyRoomStat(getPreviousMonth());
+        }
+
+        private string getNextMonth()
+        {
+            string str = studyDate.Text;
+            int year = Convert.ToInt32(studyDate.Text.Substring(0, 4));
+            int month = Convert.ToInt32(studyDate.Text.Substring(5));
+
+            if (month == 12)
+            {
+                month = 1;
+                year++;
+            }
+            else
+            {
+                month++;
+            }
+
+            studyDate.Text = year.ToString() + "." + month.ToString(dateFormat);
+
+            return year.ToString()+month.ToString(dateFormat);
+        }
+
+        private string getPreviousMonth()
+        {
+            string str = studyDate.Text;
+            int year = Convert.ToInt32(studyDate.Text.Substring(0, 4));
+            int month = Convert.ToInt32(studyDate.Text.Substring(5));
+
+            if (month == 1)
+            {
+                month = 12;
+                year--;
+            }
+            else
+            {
+                month--;
+            }
+
+            studyDate.Text = year.ToString() + "." + month.ToString(dateFormat);
+
+            return year.ToString() + month.ToString(dateFormat);
+        }
+
+        /**********************************************************
+         * 
+         *  예약 가능한 날짜 계산, posibleDate 는 20130214 형태로 저장
+         *  
+         **********************************************************/
+
+        private void calculatePosibleDate(int maxDate) {
+            int year = DateTime.Today.Year;
+            int month = DateTime.Today.Month;
+            int day = DateTime.Today.Day;
+
+            if (maxDate - 1 < day + 3)
+            {
+                int overCount = day + 3 - (maxDate - 1);
+
+                for (int i = 0; i < 3 - overCount; i++)
+                {
+                    posibleDate[i] = year.ToString() + month.ToString(dateFormat) + (day + i).ToString(dateFormat);
+                }
+
+                if (month == 12)
+                {
+                    for (int i = 4 - overCount; i < 4; i++)
+                    {
+                        posibleDate[i] = (year + 1).ToString() + "1" + (i - 4 + overCount + 1).ToString(dateFormat);
+                    }
+                }
+                else
+                {
+                    for (int i = 4 - overCount; i < 4; i++)
+                    {
+                        posibleDate[i] = year.ToString() + (month + 1).ToString(dateFormat) + (i - 4 + overCount + 1).ToString(dateFormat);
+                    }
+                }
+            }
+            else
+            {
+                posibleDate[0] = year.ToString() + month.ToString(dateFormat) + day.ToString(dateFormat);
+                posibleDate[1] = year.ToString() + month.ToString(dateFormat) + (day + 1).ToString(dateFormat);
+                posibleDate[2] = year.ToString() + month.ToString(dateFormat) + (day + 2).ToString(dateFormat);
+                posibleDate[3] = year.ToString() + month.ToString(dateFormat) + (day + 3).ToString(dateFormat);
+            }
         }
 
         /**********************************************************
@@ -468,8 +759,13 @@ namespace robot
          *  
          **********************************************************/
 
-        private void bookSearch_Click(object sender, EventArgs e)
+        private void bookSearchBtn_Click(object sender, EventArgs e)
         {
+            circularProgress1.Visible = true;
+            circularProgress1.IsRunning = true;
+
+            bookSearchBtn.Enabled = false;
+
             // 도서 상태 초기화
             while (bookGridView.Rows.Count != 0)
             {
@@ -491,6 +787,14 @@ namespace robot
             {
                 bookGridView.Rows.Add(library.books[i].rows);
             }
+
+            System.Web.UI.WebControls.GridViewSelectEventArgs ee = new System.Web.UI.WebControls.GridViewSelectEventArgs(1);
+            bookGridView_SelectionChanged(boardGrid, ee);
+
+            bookSearchBtn.Enabled = true;
+
+            circularProgress1.Visible = false;
+            circularProgress1.IsRunning = false;
         }
 
         /**********************************************************
@@ -535,7 +839,7 @@ namespace robot
         {
             if (e.KeyCode == Keys.Enter)
             {
-                bookSearch_Click(sender, e);
+                bookSearchBtn_Click(sender, e);
             }
         }
 
@@ -543,7 +847,7 @@ namespace robot
         {
             if (e.KeyCode == Keys.Enter)
             {
-                bookSearch_Click(sender, e);
+                bookSearchBtn_Click(sender, e);
             }
         }
 
@@ -694,17 +998,21 @@ namespace robot
             visibleBookSearch();
         }
 
-        // library 예약
+        // library 스터디룸 예약
         private void buttonItem6_Click(object sender, EventArgs e)
         {
-            loadStudyRoomStat();
+            loadStudyRoomStat(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString(dateFormat));
             visibleStudyroomReserve();
         }
 
         // 열람실 좌석 현황
         private void buttonItem7_Click(object sender, EventArgs e)
         {
+            visiblePortal();
 
+            browser.Navigate("http://seat.unist.ac.kr/EZ5500/RoomStatus/room_status.asp");
+
+            boardGrid.Visible = false;
         }
 
         /**********************************************************
@@ -725,6 +1033,9 @@ namespace robot
             studyGrid.Visible = false;
             roomNumberLabel.Visible = false;
             roomNumberBox.Visible = false;
+            studyDate.Visible = false;
+            nextMonthBtn.Visible = false;
+            previousMonthBtn.Visible = false;
         }
 
         private void visiblePortal()
@@ -740,6 +1051,9 @@ namespace robot
             studyGrid.Visible = false;
             roomNumberLabel.Visible = false;
             roomNumberBox.Visible = false;
+            studyDate.Visible = false;
+            nextMonthBtn.Visible = false;
+            previousMonthBtn.Visible = false;
         }
 
         private void visibleBB(object sender, EventArgs e)
@@ -760,6 +1074,9 @@ namespace robot
             studyGrid.Visible = false;
             roomNumberLabel.Visible = false;
             roomNumberBox.Visible = false;
+            studyDate.Visible = false;
+            nextMonthBtn.Visible = false;
+            previousMonthBtn.Visible = false;
         }
 
         private void visibleBookSearch()
@@ -775,6 +1092,9 @@ namespace robot
             studyGrid.Visible = false;
             roomNumberLabel.Visible = false;
             roomNumberBox.Visible = false;
+            studyDate.Visible = false;
+            nextMonthBtn.Visible = false;
+            previousMonthBtn.Visible = false;
         }
 
         private void visibleStudyroomReserve()
@@ -784,6 +1104,9 @@ namespace robot
             roomNumberLabel.Visible = true;
             roomNumberBox.Visible = true;
             studyGroup.Visible = true;
+            studyDate.Visible = true;
+            nextMonthBtn.Visible = true;
+            previousMonthBtn.Visible = true;
 
             bbPanel.Visible = false;
             browser.Visible = false;
@@ -878,7 +1201,7 @@ namespace robot
 
         private void MainForm_Load(object sender, EventArgs e)
         {
-            trayIcon.ContextMenuStrip = menuStrip;
+            trayIcon.ContextMenuStrip = trayMenuStrip;
         }
 
         /**********************************************************
@@ -889,9 +1212,12 @@ namespace robot
 
         private void MainForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            e.Cancel = true;
+            if (isExiting != true)
+            {
+                e.Cancel = true;
 
-            this.Visible = false;
+                this.Visible = false;
+            }
         }
 
         /**********************************************************
@@ -902,12 +1228,19 @@ namespace robot
 
         private void 보이기ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Visible = true;
+            if(this.보이기ToolStripMenuItem.Text == "감추기")
+                this.Visible = false;
+            else
+                this.Visible = true;
         }
 
         private void 종료ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            this.Close();
+            notifyTimer.Stop();
+
+            isExiting = true;
+
+            Application.Exit();
         }
 
         private void trayIcon_MouseDoubleClick(object sender, MouseEventArgs e)
@@ -946,9 +1279,118 @@ namespace robot
             }
         }
 
+        /**********************************************************
+         * 
+         *  브라우저 이동 직전에 visible 를 false로 바꿈
+         *  
+         **********************************************************/
+
         private void browser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
             browser.Visible = false;
+        }
+
+        /**********************************************************
+         * 
+         *  포탈 바로가기
+         *  
+         **********************************************************/
+
+        private void buttonItem8_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://portal.unist.ac.kr");
+        }
+
+        /**********************************************************
+         * 
+         *  네이트 총재클럽 바로가기
+         *  
+         **********************************************************/
+
+        private void buttonItem9_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("http://club.cyworld.com/ClubV1/Home.cy/53814181");
+        }
+
+        /**********************************************************
+         * 
+         *  랜덤 명언 timer
+         *  
+         **********************************************************/
+
+        private void sayTimer_Tick(object sender, EventArgs e)
+        {
+            Random r = new Random();
+            int rand = r.Next(0, say.says.Count - 1);
+
+            sayLabel.Text = say.says.ElementAt(rand).Key;
+            sayToolTip.SetToolTip(sayLabel, say.says.ElementAt(rand).Value);
+        }
+
+        private void 숨기기ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (settingForm.sayswitch.Value == true)
+            {
+                settingForm.sayswitch.Value = false;
+                sayLabel.Visible = false;
+                sayTimer.Stop();
+            }
+        }
+
+        /**********************************************************
+         * 
+         *  트레이 아이콘 메뉴 opening event
+         *  
+         **********************************************************/
+
+        private void trayMenuStrip_Opening(object sender, CancelEventArgs e)
+        {
+            if (this.Visible == false)
+            {
+                this.보이기ToolStripMenuItem.Text = "보이기";
+            }
+
+            else
+            {
+                this.보이기ToolStripMenuItem.Text = "감추기";
+            }
+        }
+
+        /**********************************************************
+         * 
+         *  웹브라우저 세션 유지 위해
+         *  
+         **********************************************************/
+
+        private void sessionTimer_Tick(object sender, EventArgs e)
+        {
+            browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardLst.jsp?boardid=B200902281833482321051");
+
+            while (browser.ReadyState != WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
+
+            browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
+
+            while (browser.ReadyState != WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
+
+            browser.Navigate("http://library.unist.ac.kr/DLiWeb25Eng/tmaxsso/first_cs.aspx");
+
+            while (browser.ReadyState != WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
+
+            browser.Navigate("http://portal.unist.ac.kr/EP/web/security/jsp/SSO_unistMail.jsp");
+
+            while (browser.ReadyState != WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
         }
     }
 }

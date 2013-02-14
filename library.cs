@@ -112,8 +112,12 @@ namespace robot
                 if (((IHTMLElement)(publishyears.ElementAt(i))).innerText != null)
                     rows[3] = books[i].publishYear = ((IHTMLElement)(publishyears.ElementAt(i))).innerText.Replace("/ ", "");
                 else
-                    rows[3] = books[i].publishYear = null;
-                rows[4] = books[i].kind = ((IHTMLElement)(cclasses.ElementAt(i))).innerText.Replace("/ ", "");
+                    rows[3] = books[i].publishYear = "";
+
+                if (((IHTMLElement)(cclasses.ElementAt(i))).innerText != null)
+                    rows[4] = books[i].kind = ((IHTMLElement)(cclasses.ElementAt(i))).innerText.Replace("/ ", "");
+                else
+                    rows[3] = books[i].publishYear = "";
                 
                 books[i].isbn = html.Substring(html.IndexOf("isbn\">")).Split('>')[1].Split('<')[0];
 
@@ -296,11 +300,11 @@ namespace robot
                     yield return e;
         }
 
-        public void loadStudyroomStatus(int roomNum)
+        public void loadStudyroomStatus(int roomNum, string date) //date : 201302
         {
             //http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=1
 
-            string url = "http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=" + roomNum.ToString();
+            string url = "http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=" + roomNum.ToString() + "&yearmonth="+date;
             wRes = getRespose(url);
 
             // http 내용 추출

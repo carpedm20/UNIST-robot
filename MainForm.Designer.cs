@@ -37,7 +37,6 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.portalBox = new System.Windows.Forms.ComboBox();
             this.bbList = new System.Windows.Forms.ListBox();
             this.welcomeLabel = new System.Windows.Forms.Label();
             this.libraryList = new System.Windows.Forms.ListBox();
@@ -47,6 +46,14 @@
             this.label7 = new System.Windows.Forms.Label();
             this.studyReserveBtn = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.label17 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label9 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
             this.studyStudentId8 = new System.Windows.Forms.TextBox();
             this.studyStudentId6 = new System.Windows.Forms.TextBox();
             this.studyStudentId4 = new System.Windows.Forms.TextBox();
@@ -77,6 +84,7 @@
             this.Column36 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column38 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column35 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.bbPanel = new System.Windows.Forms.Panel();
             this.studyGrid = new System.Windows.Forms.DataGridView();
             this.Date = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column29 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -118,7 +126,7 @@
             this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.Column30 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column39 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bookSearch = new System.Windows.Forms.Button();
+            this.bookSearchBtn = new System.Windows.Forms.Button();
             this.bookQuery1 = new System.Windows.Forms.TextBox();
             this.bookGridView = new System.Windows.Forms.DataGridView();
             this.Column31 = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -137,9 +145,12 @@
             this.buttonItem5 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem6 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem7 = new DevComponents.DotNetBar.ButtonItem();
+            this.sideBarPanelItem1 = new DevComponents.DotNetBar.SideBarPanelItem();
+            this.buttonItem8 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem9 = new DevComponents.DotNetBar.ButtonItem();
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
             this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
-            this.menuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.trayMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.보이기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.종료ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.circularProgress1 = new DevComponents.DotNetBar.Controls.CircularProgress();
@@ -151,7 +162,17 @@
             this.controlContainerItem1 = new DevComponents.DotNetBar.ControlContainerItem();
             this.sideBar3 = new DevComponents.DotNetBar.SideBar();
             this.controlContainerItem2 = new DevComponents.DotNetBar.ControlContainerItem();
-            this.bbPanel = new System.Windows.Forms.Panel();
+            this.sayToolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.sayLabel = new System.Windows.Forms.Label();
+            this.sayTimer = new System.Windows.Forms.Timer(this.components);
+            this.sayStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.숨기기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.nextMonthBtn = new System.Windows.Forms.PictureBox();
+            this.studyDate = new System.Windows.Forms.Label();
+            this.previousMonthBtn = new System.Windows.Forms.PictureBox();
+            this.sessionTimer = new System.Windows.Forms.Timer(this.components);
+            this.notifyBox = new System.Windows.Forms.PictureBox();
+            this.weatherBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.boardGrid)).BeginInit();
             this.studyGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -163,19 +184,24 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookGridView)).BeginInit();
-            this.menuStrip.SuspendLayout();
+            this.trayMenuStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.mailBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingBox)).BeginInit();
+            this.sayStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.nextMonthBtn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.previousMonthBtn)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notifyBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.weatherBox)).BeginInit();
             this.SuspendLayout();
             // 
             // browser
             // 
-            this.browser.Location = new System.Drawing.Point(8, 234);
+            this.browser.Location = new System.Drawing.Point(8, 230);
             this.browser.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.browser.MinimumSize = new System.Drawing.Size(20, 25);
             this.browser.Name = "browser";
             this.browser.ScrollBarsEnabled = false;
-            this.browser.Size = new System.Drawing.Size(810, 516);
+            this.browser.Size = new System.Drawing.Size(808, 515);
             this.browser.TabIndex = 1;
             this.browser.Visible = false;
             this.browser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.browser_DocumentCompleted);
@@ -256,27 +282,6 @@
             this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column4.Width = 70;
             // 
-            // portalBox
-            // 
-            this.portalBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.portalBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.portalBox.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
-            this.portalBox.ForeColor = System.Drawing.Color.Black;
-            this.portalBox.FormattingEnabled = true;
-            this.portalBox.Items.AddRange(new object[] {
-            "학사 공지",
-            "전체 공지",
-            "대학원 공지",
-            "최신 게시물",
-            "개선 및 제안",
-            "Q & A"});
-            this.portalBox.Location = new System.Drawing.Point(146, 225);
-            this.portalBox.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.portalBox.Name = "portalBox";
-            this.portalBox.Size = new System.Drawing.Size(103, 23);
-            this.portalBox.TabIndex = 3;
-            this.portalBox.Visible = false;
-            // 
             // bbList
             // 
             this.bbList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
@@ -296,7 +301,7 @@
             this.welcomeLabel.AutoSize = true;
             this.welcomeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.welcomeLabel.ForeColor = System.Drawing.Color.Black;
-            this.welcomeLabel.Location = new System.Drawing.Point(23, 6);
+            this.welcomeLabel.Location = new System.Drawing.Point(18, 6);
             this.welcomeLabel.Name = "welcomeLabel";
             this.welcomeLabel.Size = new System.Drawing.Size(152, 15);
             this.welcomeLabel.TabIndex = 16;
@@ -390,10 +395,19 @@
             this.studyReserveBtn.TabIndex = 23;
             this.studyReserveBtn.Text = "예약";
             this.studyReserveBtn.UseVisualStyleBackColor = false;
+            this.studyReserveBtn.Click += new System.EventHandler(this.studyReserveBtn_Click);
             // 
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.groupBox1.Controls.Add(this.label17);
+            this.groupBox1.Controls.Add(this.label16);
+            this.groupBox1.Controls.Add(this.label15);
+            this.groupBox1.Controls.Add(this.label12);
+            this.groupBox1.Controls.Add(this.label11);
+            this.groupBox1.Controls.Add(this.label10);
+            this.groupBox1.Controls.Add(this.label9);
+            this.groupBox1.Controls.Add(this.label8);
             this.groupBox1.Controls.Add(this.studyStudentId8);
             this.groupBox1.Controls.Add(this.studyStudentId6);
             this.groupBox1.Controls.Add(this.studyStudentId4);
@@ -414,11 +428,99 @@
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "학생 번호";
             // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label17.ForeColor = System.Drawing.Color.Black;
+            this.label17.Location = new System.Drawing.Point(170, 121);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(14, 15);
+            this.label17.TabIndex = 33;
+            this.label17.Text = "8";
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label16.ForeColor = System.Drawing.Color.Black;
+            this.label16.Location = new System.Drawing.Point(10, 122);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(14, 15);
+            this.label16.TabIndex = 32;
+            this.label16.Text = "7";
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label15.ForeColor = System.Drawing.Color.Black;
+            this.label15.Location = new System.Drawing.Point(170, 92);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(14, 15);
+            this.label15.TabIndex = 31;
+            this.label15.Text = "6";
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label12.ForeColor = System.Drawing.Color.Black;
+            this.label12.Location = new System.Drawing.Point(10, 92);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(14, 15);
+            this.label12.TabIndex = 30;
+            this.label12.Text = "5";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label11.ForeColor = System.Drawing.Color.Black;
+            this.label11.Location = new System.Drawing.Point(170, 64);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(14, 15);
+            this.label11.TabIndex = 29;
+            this.label11.Text = "4";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label10.ForeColor = System.Drawing.Color.Black;
+            this.label10.Location = new System.Drawing.Point(10, 63);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(14, 15);
+            this.label10.TabIndex = 28;
+            this.label10.Text = "3";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label9.ForeColor = System.Drawing.Color.Black;
+            this.label9.Location = new System.Drawing.Point(170, 35);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(14, 15);
+            this.label9.TabIndex = 27;
+            this.label9.Text = "2";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label8.ForeColor = System.Drawing.Color.Black;
+            this.label8.Location = new System.Drawing.Point(10, 34);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(14, 15);
+            this.label8.TabIndex = 26;
+            this.label8.Text = "1";
+            // 
             // studyStudentId8
             // 
             this.studyStudentId8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId8.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId8.Location = new System.Drawing.Point(183, 119);
+            this.studyStudentId8.Location = new System.Drawing.Point(189, 119);
             this.studyStudentId8.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId8.Name = "studyStudentId8";
             this.studyStudentId8.Size = new System.Drawing.Size(135, 23);
@@ -428,7 +530,7 @@
             // 
             this.studyStudentId6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId6.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId6.Location = new System.Drawing.Point(183, 89);
+            this.studyStudentId6.Location = new System.Drawing.Point(189, 89);
             this.studyStudentId6.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId6.Name = "studyStudentId6";
             this.studyStudentId6.Size = new System.Drawing.Size(135, 23);
@@ -438,7 +540,7 @@
             // 
             this.studyStudentId4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId4.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId4.Location = new System.Drawing.Point(183, 60);
+            this.studyStudentId4.Location = new System.Drawing.Point(189, 60);
             this.studyStudentId4.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId4.Name = "studyStudentId4";
             this.studyStudentId4.Size = new System.Drawing.Size(135, 23);
@@ -448,7 +550,7 @@
             // 
             this.studyStudentId2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId2.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId2.Location = new System.Drawing.Point(183, 31);
+            this.studyStudentId2.Location = new System.Drawing.Point(189, 31);
             this.studyStudentId2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId2.Name = "studyStudentId2";
             this.studyStudentId2.Size = new System.Drawing.Size(135, 23);
@@ -458,7 +560,7 @@
             // 
             this.studyStudentId7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId7.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId7.Location = new System.Drawing.Point(23, 119);
+            this.studyStudentId7.Location = new System.Drawing.Point(27, 119);
             this.studyStudentId7.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId7.Name = "studyStudentId7";
             this.studyStudentId7.Size = new System.Drawing.Size(135, 23);
@@ -468,7 +570,7 @@
             // 
             this.studyStudentId5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId5.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId5.Location = new System.Drawing.Point(23, 89);
+            this.studyStudentId5.Location = new System.Drawing.Point(27, 89);
             this.studyStudentId5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId5.Name = "studyStudentId5";
             this.studyStudentId5.Size = new System.Drawing.Size(135, 23);
@@ -478,7 +580,7 @@
             // 
             this.studyStudentId3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId3.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId3.Location = new System.Drawing.Point(23, 60);
+            this.studyStudentId3.Location = new System.Drawing.Point(27, 60);
             this.studyStudentId3.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId3.Name = "studyStudentId3";
             this.studyStudentId3.Size = new System.Drawing.Size(135, 23);
@@ -508,7 +610,7 @@
             // 
             this.studyStudentId1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId1.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId1.Location = new System.Drawing.Point(23, 31);
+            this.studyStudentId1.Location = new System.Drawing.Point(27, 31);
             this.studyStudentId1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyStudentId1.Name = "studyStudentId1";
             this.studyStudentId1.Size = new System.Drawing.Size(135, 23);
@@ -523,7 +625,7 @@
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(59, 15);
             this.label4.TabIndex = 7;
-            this.label4.Text = "예약 날짜";
+            this.label4.Text = "예약 시간";
             // 
             // label3
             // 
@@ -606,7 +708,7 @@
             this.bookInfoGroup.Controls.Add(this.bookPic);
             this.bookInfoGroup.Controls.Add(this.bookListGrid);
             this.bookInfoGroup.ForeColor = System.Drawing.Color.Black;
-            this.bookInfoGroup.Location = new System.Drawing.Point(146, 32);
+            this.bookInfoGroup.Location = new System.Drawing.Point(144, 32);
             this.bookInfoGroup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookInfoGroup.Name = "bookInfoGroup";
             this.bookInfoGroup.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -752,6 +854,17 @@
             this.Column35.Name = "Column35";
             this.Column35.ReadOnly = true;
             // 
+            // bbPanel
+            // 
+            this.bbPanel.AutoScroll = true;
+            this.bbPanel.BackColor = System.Drawing.Color.White;
+            this.bbPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.bbPanel.Location = new System.Drawing.Point(145, 31);
+            this.bbPanel.Name = "bbPanel";
+            this.bbPanel.Size = new System.Drawing.Size(672, 188);
+            this.bbPanel.TabIndex = 24;
+            this.bbPanel.Visible = false;
+            // 
             // studyGrid
             // 
             this.studyGrid.AllowUserToAddRows = false;
@@ -786,7 +899,7 @@
             this.Column26,
             this.Column27,
             this.Column28});
-            this.studyGrid.Location = new System.Drawing.Point(14, 272);
+            this.studyGrid.Location = new System.Drawing.Point(14, 261);
             this.studyGrid.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.studyGrid.MultiSelect = false;
             this.studyGrid.Name = "studyGrid";
@@ -797,7 +910,7 @@
             this.studyGrid.ShowCellToolTips = false;
             this.studyGrid.ShowEditingIcon = false;
             this.studyGrid.ShowRowErrors = false;
-            this.studyGrid.Size = new System.Drawing.Size(804, 478);
+            this.studyGrid.Size = new System.Drawing.Size(804, 489);
             this.studyGrid.TabIndex = 18;
             this.studyGrid.Visible = false;
             this.studyGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.studyGrid_CellClick);
@@ -1050,11 +1163,11 @@
             this.bookGroup.Controls.Add(this.label13);
             this.bookGroup.Controls.Add(this.dataGridView2);
             this.bookGroup.Controls.Add(this.dataGridView1);
-            this.bookGroup.Controls.Add(this.bookSearch);
+            this.bookGroup.Controls.Add(this.bookSearchBtn);
             this.bookGroup.Controls.Add(this.bookQuery1);
             this.bookGroup.Controls.Add(this.bookGridView);
             this.bookGroup.ForeColor = System.Drawing.Color.Black;
-            this.bookGroup.Location = new System.Drawing.Point(14, 227);
+            this.bookGroup.Location = new System.Drawing.Point(8, 224);
             this.bookGroup.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.bookGroup.Name = "bookGroup";
             this.bookGroup.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -1208,18 +1321,18 @@
             this.Column39.Name = "Column39";
             this.Column39.ReadOnly = true;
             // 
-            // bookSearch
+            // bookSearchBtn
             // 
-            this.bookSearch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.bookSearch.ForeColor = System.Drawing.Color.Black;
-            this.bookSearch.Location = new System.Drawing.Point(690, 38);
-            this.bookSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.bookSearch.Name = "bookSearch";
-            this.bookSearch.Size = new System.Drawing.Size(100, 25);
-            this.bookSearch.TabIndex = 6;
-            this.bookSearch.Text = "검색";
-            this.bookSearch.UseVisualStyleBackColor = false;
-            this.bookSearch.Click += new System.EventHandler(this.bookSearch_Click);
+            this.bookSearchBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.bookSearchBtn.ForeColor = System.Drawing.Color.Black;
+            this.bookSearchBtn.Location = new System.Drawing.Point(690, 38);
+            this.bookSearchBtn.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.bookSearchBtn.Name = "bookSearchBtn";
+            this.bookSearchBtn.Size = new System.Drawing.Size(100, 25);
+            this.bookSearchBtn.TabIndex = 6;
+            this.bookSearchBtn.Text = "검색";
+            this.bookSearchBtn.UseVisualStyleBackColor = false;
+            this.bookSearchBtn.Click += new System.EventHandler(this.bookSearchBtn_Click);
             // 
             // bookQuery1
             // 
@@ -1302,12 +1415,13 @@
             this.boardSlide.BorderStyle = DevComponents.DotNetBar.eBorderType.None;
             this.boardSlide.ExpandedPanel = this.slidePortal;
             this.boardSlide.ForeColor = System.Drawing.Color.Black;
-            this.boardSlide.Location = new System.Drawing.Point(8, 32);
+            this.boardSlide.Location = new System.Drawing.Point(10, 32);
             this.boardSlide.Name = "boardSlide";
             this.boardSlide.Panels.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.slidePortal,
             this.slideBB,
-            this.slideLibrary});
+            this.slideLibrary,
+            this.sideBarPanelItem1});
             this.boardSlide.ShowToolTips = false;
             this.boardSlide.Size = new System.Drawing.Size(123, 185);
             this.boardSlide.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
@@ -1394,6 +1508,29 @@
             this.buttonItem7.Text = "열람실 좌석 현황";
             this.buttonItem7.Click += new System.EventHandler(this.buttonItem7_Click);
             // 
+            // sideBarPanelItem1
+            // 
+            this.sideBarPanelItem1.FontBold = true;
+            this.sideBarPanelItem1.Name = "sideBarPanelItem1";
+            this.sideBarPanelItem1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem8,
+            this.buttonItem9});
+            this.sideBarPanelItem1.Text = "바로가기";
+            // 
+            // buttonItem8
+            // 
+            this.buttonItem8.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem8.CanCustomize = false;
+            this.buttonItem8.Name = "buttonItem8";
+            this.buttonItem8.Text = "포탈 홈페이지";
+            this.buttonItem8.Click += new System.EventHandler(this.buttonItem8_Click);
+            // 
+            // buttonItem9
+            // 
+            this.buttonItem9.Name = "buttonItem9";
+            this.buttonItem9.Text = "네이트 총재 클럽";
+            this.buttonItem9.Click += new System.EventHandler(this.buttonItem9_Click);
+            // 
             // styleManager1
             // 
             this.styleManager1.ManagerStyle = DevComponents.DotNetBar.eStyle.Metro;
@@ -1402,17 +1539,18 @@
             // trayIcon
             // 
             this.trayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("trayIcon.Icon")));
-            this.trayIcon.Text = "trayIcon";
+            this.trayIcon.Text = "Robot";
             this.trayIcon.Visible = true;
             this.trayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.trayIcon_MouseDoubleClick);
             // 
-            // menuStrip
+            // trayMenuStrip
             // 
-            this.menuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.trayMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.보이기ToolStripMenuItem,
             this.종료ToolStripMenuItem});
-            this.menuStrip.Name = "contextMenuStrip1";
-            this.menuStrip.Size = new System.Drawing.Size(111, 48);
+            this.trayMenuStrip.Name = "contextMenuStrip1";
+            this.trayMenuStrip.Size = new System.Drawing.Size(111, 48);
+            this.trayMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.trayMenuStrip_Opening);
             // 
             // 보이기ToolStripMenuItem
             // 
@@ -1444,23 +1582,25 @@
             // mailBox
             // 
             this.mailBox.Image = ((System.Drawing.Image)(resources.GetObject("mailBox.Image")));
-            this.mailBox.Location = new System.Drawing.Point(751, 8);
+            this.mailBox.Location = new System.Drawing.Point(747, 8);
             this.mailBox.Name = "mailBox";
             this.mailBox.Size = new System.Drawing.Size(28, 14);
             this.mailBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.mailBox.TabIndex = 22;
             this.mailBox.TabStop = false;
+            this.mailBox.Visible = false;
             this.mailBox.Click += new System.EventHandler(this.mailBox_Click);
             // 
             // settingBox
             // 
             this.settingBox.Image = ((System.Drawing.Image)(resources.GetObject("settingBox.Image")));
-            this.settingBox.Location = new System.Drawing.Point(792, 6);
+            this.settingBox.Location = new System.Drawing.Point(788, 6);
             this.settingBox.Name = "settingBox";
             this.settingBox.Size = new System.Drawing.Size(18, 18);
             this.settingBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.settingBox.TabIndex = 23;
             this.settingBox.TabStop = false;
+            this.settingBox.Visible = false;
             this.settingBox.Click += new System.EventHandler(this.settingBox_Click);
             // 
             // notifyTimer
@@ -1521,29 +1661,109 @@
             this.controlContainerItem2.MenuVisibility = DevComponents.DotNetBar.eMenuVisibility.VisibleAlways;
             this.controlContainerItem2.Name = "controlContainerItem2";
             // 
-            // bbPanel
+            // sayLabel
             // 
-            this.bbPanel.AutoScroll = true;
-            this.bbPanel.BackColor = System.Drawing.Color.White;
-            this.bbPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.bbPanel.Location = new System.Drawing.Point(146, 32);
-            this.bbPanel.Name = "bbPanel";
-            this.bbPanel.Size = new System.Drawing.Size(672, 188);
-            this.bbPanel.TabIndex = 24;
-            this.bbPanel.Visible = false;
+            this.sayLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
+            this.sayLabel.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.sayLabel.Location = new System.Drawing.Point(185, 5);
+            this.sayLabel.Name = "sayLabel";
+            this.sayLabel.Size = new System.Drawing.Size(476, 21);
+            this.sayLabel.TabIndex = 26;
+            this.sayLabel.Text = "현재를 즐겨라";
+            this.sayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
+            // sayTimer
+            // 
+            this.sayTimer.Interval = 60000;
+            this.sayTimer.Tick += new System.EventHandler(this.sayTimer_Tick);
+            // 
+            // sayStrip
+            // 
+            this.sayStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.숨기기ToolStripMenuItem});
+            this.sayStrip.Name = "sayStrip";
+            this.sayStrip.Size = new System.Drawing.Size(111, 26);
+            // 
+            // 숨기기ToolStripMenuItem
+            // 
+            this.숨기기ToolStripMenuItem.Name = "숨기기ToolStripMenuItem";
+            this.숨기기ToolStripMenuItem.Size = new System.Drawing.Size(110, 22);
+            this.숨기기ToolStripMenuItem.Text = "숨기기";
+            this.숨기기ToolStripMenuItem.Click += new System.EventHandler(this.숨기기ToolStripMenuItem_Click);
+            // 
+            // nextMonthBtn
+            // 
+            this.nextMonthBtn.Image = ((System.Drawing.Image)(resources.GetObject("nextMonthBtn.Image")));
+            this.nextMonthBtn.Location = new System.Drawing.Point(800, 239);
+            this.nextMonthBtn.Name = "nextMonthBtn";
+            this.nextMonthBtn.Size = new System.Drawing.Size(18, 13);
+            this.nextMonthBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.nextMonthBtn.TabIndex = 27;
+            this.nextMonthBtn.TabStop = false;
+            this.nextMonthBtn.Click += new System.EventHandler(this.nextMonthBtn_Click);
+            // 
+            // studyDate
+            // 
+            this.studyDate.AutoSize = true;
+            this.studyDate.Location = new System.Drawing.Point(740, 238);
+            this.studyDate.Name = "studyDate";
+            this.studyDate.Size = new System.Drawing.Size(56, 15);
+            this.studyDate.TabIndex = 28;
+            this.studyDate.Text = "2013. 02";
+            // 
+            // previousMonthBtn
+            // 
+            this.previousMonthBtn.Image = ((System.Drawing.Image)(resources.GetObject("previousMonthBtn.Image")));
+            this.previousMonthBtn.Location = new System.Drawing.Point(715, 238);
+            this.previousMonthBtn.Name = "previousMonthBtn";
+            this.previousMonthBtn.Size = new System.Drawing.Size(18, 13);
+            this.previousMonthBtn.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.previousMonthBtn.TabIndex = 29;
+            this.previousMonthBtn.TabStop = false;
+            this.previousMonthBtn.Click += new System.EventHandler(this.previousMonthBtn_Click);
+            // 
+            // sessionTimer
+            // 
+            this.sessionTimer.Interval = 600000;
+            this.sessionTimer.Tick += new System.EventHandler(this.sessionTimer_Tick);
+            // 
+            // notifyBox
+            // 
+            this.notifyBox.Image = ((System.Drawing.Image)(resources.GetObject("notifyBox.Image")));
+            this.notifyBox.Location = new System.Drawing.Point(711, 7);
+            this.notifyBox.Name = "notifyBox";
+            this.notifyBox.Size = new System.Drawing.Size(24, 16);
+            this.notifyBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.notifyBox.TabIndex = 30;
+            this.notifyBox.TabStop = false;
+            this.notifyBox.Visible = false;
+            // 
+            // weatherBox
+            // 
+            this.weatherBox.Image = ((System.Drawing.Image)(resources.GetObject("weatherBox.Image")));
+            this.weatherBox.Location = new System.Drawing.Point(667, 4);
+            this.weatherBox.Name = "weatherBox";
+            this.weatherBox.Size = new System.Drawing.Size(39, 22);
+            this.weatherBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.weatherBox.TabIndex = 31;
+            this.weatherBox.TabStop = false;
+            this.weatherBox.Visible = false;
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(834, 755);
+            this.ClientSize = new System.Drawing.Size(826, 759);
+            this.Controls.Add(this.weatherBox);
+            this.Controls.Add(this.notifyBox);
             this.Controls.Add(this.bbPanel);
+            this.Controls.Add(this.bookInfoGroup);
+            this.Controls.Add(this.sayLabel);
             this.Controls.Add(this.settingBox);
             this.Controls.Add(this.mailBox);
             this.Controls.Add(this.circularProgress1);
             this.Controls.Add(this.boardSlide);
-            this.Controls.Add(this.bookInfoGroup);
             this.Controls.Add(this.bookGroup);
             this.Controls.Add(this.roomNumberLabel);
             this.Controls.Add(this.roomNumberBox);
@@ -1552,9 +1772,11 @@
             this.Controls.Add(this.libraryList);
             this.Controls.Add(this.bbList);
             this.Controls.Add(this.welcomeLabel);
-            this.Controls.Add(this.browser);
-            this.Controls.Add(this.portalBox);
             this.Controls.Add(this.boardGrid);
+            this.Controls.Add(this.previousMonthBtn);
+            this.Controls.Add(this.studyDate);
+            this.Controls.Add(this.nextMonthBtn);
+            this.Controls.Add(this.browser);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Malgun Gothic", 8.999999F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -1581,9 +1803,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.bookGridView)).EndInit();
-            this.menuStrip.ResumeLayout(false);
+            this.trayMenuStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.mailBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingBox)).EndInit();
+            this.sayStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.nextMonthBtn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.previousMonthBtn)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notifyBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.weatherBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -1593,7 +1820,6 @@
 
         private System.Windows.Forms.WebBrowser browser;
         private System.Windows.Forms.DataGridView boardGrid;
-        private System.Windows.Forms.ComboBox portalBox;
         private System.Windows.Forms.ListBox bbList;
         private System.Windows.Forms.Label welcomeLabel;
         private System.Windows.Forms.ListBox libraryList;
@@ -1646,7 +1872,7 @@
         private System.Windows.Forms.Label roomNumberLabel;
         private System.Windows.Forms.GroupBox bookGroup;
         private System.Windows.Forms.DataGridView bookGridView;
-        private System.Windows.Forms.Button bookSearch;
+        private System.Windows.Forms.Button bookSearchBtn;
         private System.Windows.Forms.TextBox bookQuery1;
         private System.Windows.Forms.Label label14;
         private System.Windows.Forms.Label label13;
@@ -1687,7 +1913,7 @@
         private DevComponents.DotNetBar.ButtonItem buttonItem6;
         private DevComponents.DotNetBar.StyleManager styleManager1;
         private System.Windows.Forms.NotifyIcon trayIcon;
-        private System.Windows.Forms.ContextMenuStrip menuStrip;
+        private System.Windows.Forms.ContextMenuStrip trayMenuStrip;
         private DevComponents.DotNetBar.ButtonItem buttonItem7;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column37;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column36;
@@ -1713,6 +1939,28 @@
         private DevComponents.DotNetBar.SideBar sideBar3;
         private DevComponents.DotNetBar.ControlContainerItem controlContainerItem2;
         private System.Windows.Forms.Panel bbPanel;
+        private DevComponents.DotNetBar.SideBarPanelItem sideBarPanelItem1;
+        private DevComponents.DotNetBar.ButtonItem buttonItem8;
+        private DevComponents.DotNetBar.ButtonItem buttonItem9;
+        private System.Windows.Forms.ToolTip sayToolTip;
+        private System.Windows.Forms.Label sayLabel;
+        private System.Windows.Forms.Timer sayTimer;
+        private System.Windows.Forms.ContextMenuStrip sayStrip;
+        private System.Windows.Forms.ToolStripMenuItem 숨기기ToolStripMenuItem;
+        private System.Windows.Forms.PictureBox nextMonthBtn;
+        private System.Windows.Forms.Label studyDate;
+        private System.Windows.Forms.PictureBox previousMonthBtn;
+        private System.Windows.Forms.Label label17;
+        private System.Windows.Forms.Label label16;
+        private System.Windows.Forms.Label label15;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Timer sessionTimer;
+        private System.Windows.Forms.PictureBox notifyBox;
+        private System.Windows.Forms.PictureBox weatherBox;
     }
 }
 

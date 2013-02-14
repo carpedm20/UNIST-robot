@@ -34,6 +34,8 @@
             this.alarmSwitch = new DevComponents.DotNetBar.Controls.SwitchButton();
             this.label3 = new System.Windows.Forms.Label();
             this.autoLoginSwitch = new DevComponents.DotNetBar.Controls.SwitchButton();
+            this.saySwitch = new DevComponents.DotNetBar.Controls.SwitchButton();
+            this.label4 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // startProgramSwitch
@@ -57,6 +59,8 @@
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label1.ForeColor = System.Drawing.Color.Black;
             this.label1.Location = new System.Drawing.Point(12, 19);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(111, 15);
@@ -66,6 +70,8 @@
             // label2
             // 
             this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label2.ForeColor = System.Drawing.Color.Black;
             this.label2.Location = new System.Drawing.Point(12, 60);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(75, 15);
@@ -95,6 +101,8 @@
             // label3
             // 
             this.label3.AutoSize = true;
+            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(12, 102);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(71, 15);
@@ -121,11 +129,44 @@
             this.autoLoginSwitch.ValueObject = "Y";
             this.autoLoginSwitch.ValueChanged += new System.EventHandler(this.autoLoginSwitch_ValueChanged);
             // 
+            // saySwitch
+            // 
+            this.saySwitch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            // 
+            // 
+            // 
+            this.saySwitch.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.saySwitch.ForeColor = System.Drawing.Color.Black;
+            this.saySwitch.Location = new System.Drawing.Point(149, 140);
+            this.saySwitch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.saySwitch.Name = "saySwitch";
+            this.saySwitch.OffText = "끔";
+            this.saySwitch.OnText = "켬";
+            this.saySwitch.Size = new System.Drawing.Size(66, 28);
+            this.saySwitch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.saySwitch.TabIndex = 6;
+            this.saySwitch.Value = true;
+            this.saySwitch.ValueObject = "Y";
+            this.saySwitch.ValueChanged += new System.EventHandler(this.saySwitch_ValueChanged);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label4.ForeColor = System.Drawing.Color.Black;
+            this.label4.Location = new System.Drawing.Point(12, 145);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(99, 15);
+            this.label4.TabIndex = 7;
+            this.label4.Text = "랜덤 명언 보이기";
+            // 
             // SettingForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(233, 146);
+            this.ClientSize = new System.Drawing.Size(233, 184);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.saySwitch);
             this.Controls.Add(this.autoLoginSwitch);
             this.Controls.Add(this.label3);
             this.Controls.Add(this.alarmSwitch);
@@ -141,6 +182,7 @@
             this.Name = "SettingForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "설정";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -154,5 +196,7 @@
         private DevComponents.DotNetBar.Controls.SwitchButton alarmSwitch;
         private System.Windows.Forms.Label label3;
         private DevComponents.DotNetBar.Controls.SwitchButton autoLoginSwitch;
+        private DevComponents.DotNetBar.Controls.SwitchButton saySwitch;
+        private System.Windows.Forms.Label label4;
     }
 }

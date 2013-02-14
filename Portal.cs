@@ -80,7 +80,7 @@ namespace robot
             taskbarNotifier.KeepVisibleOnMousOver = true;
             taskbarNotifier.ReShowOnMouseOver = true;
 
-            taskbarNotifier.Show("새 글 알림", "포탈 공지의 새 글을\n 알려줍니다 :)", 500, 3000, 500);
+            taskbarNotifier.Show("새 글 알리미", "\n포탈 공지의 새 글을\n 알려줍니다 :)", 500, 3000, 500);
         }
 
         // 클래스 이름으로 htmlelment 받는 함수

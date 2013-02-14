@@ -12,12 +12,14 @@ namespace robot
     public partial class SettingForm : DevComponents.DotNetBar.Metro.MetroForm
     {
         public DevComponents.DotNetBar.Controls.SwitchButton loginSwitch;
+        public DevComponents.DotNetBar.Controls.SwitchButton sayswitch;
 
         public SettingForm()
         {
             InitializeComponent();
 
             loginSwitch = this.autoLoginSwitch;
+            sayswitch = this.saySwitch;
         }
 
         public void autoLoginSwitch_ValueChanged(object sender, EventArgs e)
@@ -51,11 +53,11 @@ namespace robot
         {
             if (alarmSwitch.Value == false)
             {
-                MainForm.timer.Stop();
+                MainForm.timer1.Stop();
             }
             else
             {
-                MainForm.timer.Start();
+                MainForm.timer1.Start();
             }
         }
 
@@ -63,12 +65,31 @@ namespace robot
         {
             if (startProgramSwitch.Value == true)
             {
-                MainForm.SetStartup("UnistRobot", true);
+                MainForm.SetStartup("Robot", true);
             }
             else
             {
-                MainForm.SetStartup("UnistRobot", false);
+                MainForm.SetStartup("Robot", false);
             }
+        }
+
+        private void saySwitch_ValueChanged(object sender, EventArgs e)
+        {
+            if (saySwitch.Value == true)
+            {
+                MainForm.saylabel.Visible = true;
+                MainForm.timer2.Start();
+            }
+            else
+            {
+                MainForm.saylabel.Visible = false;
+                MainForm.timer2.Stop();
+            }
+        }
+
+        private void SettingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            MainForm.settingFormExist = false;
         }
     }
 }

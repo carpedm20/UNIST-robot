@@ -33,6 +33,7 @@
             this.sendBox = new System.Windows.Forms.Button();
             this.fromLabel = new System.Windows.Forms.Label();
             this.toLabel = new System.Windows.Forms.Label();
+            this.toBox = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // contentText
@@ -45,7 +46,7 @@
             this.contentText.Name = "contentText";
             this.contentText.Size = new System.Drawing.Size(261, 140);
             this.contentText.TabIndex = 0;
-            this.contentText.Text = "버그, 건의 사항 및 기타 의견을 보내주세요~\r\n\r\n여러분의 의견, 언제나 환영합니다 :)";
+            this.contentText.Text = "carpedm20@gmail.com 으로\r\n\r\n버그, 건의 사항 및 기타 의견을 보내주세요~\r\n\r\n여러분의 의견, 언제나 환영합니다 :)";
             this.contentText.TextChanged += new System.EventHandler(this.contentText_TextChanged);
             this.contentText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.contentText_KeyDown);
             // 
@@ -80,15 +81,27 @@
             this.toLabel.ForeColor = System.Drawing.Color.Black;
             this.toLabel.Location = new System.Drawing.Point(12, 32);
             this.toLabel.Name = "toLabel";
-            this.toLabel.Size = new System.Drawing.Size(216, 12);
+            this.toLabel.Size = new System.Drawing.Size(32, 12);
             this.toLabel.TabIndex = 3;
-            this.toLabel.Text = "To : 제작자 (carpedm20@gmail.com)";
+            this.toLabel.Text = "To : ";
+            // 
+            // toBox
+            // 
+            this.toBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.toBox.ForeColor = System.Drawing.Color.Black;
+            this.toBox.Location = new System.Drawing.Point(50, 27);
+            this.toBox.Name = "toBox";
+            this.toBox.Size = new System.Drawing.Size(223, 21);
+            this.toBox.TabIndex = 4;
+            this.toBox.Text = "carpedm20@gmail.com";
+            this.toBox.TextChanged += new System.EventHandler(this.toBox_TextChanged);
             // 
             // MailForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(285, 239);
+            this.Controls.Add(this.toBox);
             this.Controls.Add(this.toLabel);
             this.Controls.Add(this.fromLabel);
             this.Controls.Add(this.sendBox);
@@ -114,5 +127,6 @@
         private System.Windows.Forms.Button sendBox;
         private System.Windows.Forms.Label fromLabel;
         private System.Windows.Forms.Label toLabel;
+        private System.Windows.Forms.TextBox toBox;
     }
 }

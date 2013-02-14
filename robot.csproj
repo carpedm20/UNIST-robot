@@ -87,6 +87,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Alarm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Alarm.Designer.cs">
+      <DependentUpon>Alarm.cs</DependentUpon>
+    </Compile>
     <Compile Include="AutoLogin.cs" />
     <Compile Include="BB.cs" />
     <Compile Include="BBBoard.cs" />
@@ -126,6 +132,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="weather.cs" />
+    <EmbeddedResource Include="Alarm.resx">
+      <DependentUpon>Alarm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="MailForm.resx">
       <DependentUpon>MailForm.cs</DependentUpon>
     </EmbeddedResource>

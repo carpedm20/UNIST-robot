@@ -18,7 +18,7 @@ namespace robot
             RegistryKey reg = Registry.LocalMachine.CreateSubKey("SoftWare").CreateSubKey("robot_carpedm20");
             id = reg.GetValue("ID", "").ToString();
             pw = reg.GetValue("PW", "").ToString();
-            if (id == "")
+            if (id == "" || id == "" && pw == "")
                 return false;
             return true;
         }

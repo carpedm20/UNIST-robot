@@ -14,6 +14,7 @@ namespace robot
     public partial class MailForm : DevComponents.DotNetBar.Metro.MetroForm
     {
         bool messageCheck;
+        bool toCheck;
 
         IHTMLDocument2 doc = null;
         HttpWebRequest wReq;
@@ -22,11 +23,14 @@ namespace robot
         string cookie;
         Uri uri;
 
+        string original = "carpedm20@gmail.com 으로\r\n\r\n버그, 건의 사항 및 기타 의견을 보내주세요~\r\n\r\n여러분의 의견, 언제나 환영합니다 :)";
+
         public MailForm(string cookie)
         {
             InitializeComponent();
 
             messageCheck = false;
+            toCheck = false;
             this.cookie = cookie;
 
             fromLabel.Text += Program.id + "@unist.ac.kr";
@@ -40,7 +44,7 @@ namespace robot
                 return;
             }
 
-            if (contentText.Text == "버그, 건의 사항 및 기타 의견을 보내주세요~\r\n\r\n여러분의 의견, 언제나 환영합니다 :)")
+            if (contentText.Text == original)
             {
                 MessageBox.Show("내용은 수정해서 보내주세요 :)");
                 return;
@@ -51,7 +55,7 @@ namespace robot
 
             if (wRes.StatusDescription == "OK")
             {
-                MessageBox.Show("성공적으로 전성 되었습니다. 의견 감사합니다 :)");
+                MessageBox.Show("성공적으로 전송 되었습니다 ;)");
                 MainForm.mailFormExist = false;
                 this.Close();
             }
@@ -69,7 +73,7 @@ namespace robot
             string arg = "send_mail_type=now&body=++++%3Cstyle%3E+%09%09++%09+%23mailBodyContentDiv+%7B+font-family+%3A+Dotum%2C+Verdana%2C+Arial%2C+Helvetica+%3B+background-color%3A+%23ffffff%3Bfont-size%3A10pt%3B%7D++++%09%09+%23mailBodyContentDiv+BODY+%7B+background-color%3A+%23ffffff%3B%7D++++++++++++%23mailBodyContentDiv+BODY%2C+TD%2C+TH+%7B+color%3A+black%3B+font-family%3A+Dotum%2C+Verdana%2C+Arial%2C+Helvetica%3B+font-size%3A+10pt%3B+%7D++++++++++++%23mailBodyContentDiv+P+%7B+margin%3A+0px%3B+padding%3A2px%3B%7D+++++%3C%2Fstyle%3E++++%3Cdiv+id%3D%22mailBodyContentDiv%22+style%3D%22width%3A100%25%22%3E+%3Cspan+style%3D%22font-family%3A+Dotum%3B+font-size%3A+small%3B%22%3E";
             arg += contentText.Text.Replace("\r\n", "<br/>");
             arg += "%3C%2Fspan%3E++++%3C%2Fdiv%3E+&charset=EUC-KR&sender_mail=";
-            arg += Program.id + "%40unist.ac.kr&to=carpedm20%40gmail.com&subject=" + "Robot 리포트";
+            arg += Program.id + "%40unist.ac.kr&to=" + HttpUtility.UrlEncode(toBox.Text) + "&subject=" + "Robot 리포트";
             arg += "&SenderName="+MainForm.userName+"&uploadServer=mail.unist.ac.kr&uploadPort=80";
             arg += "&userId=";
             arg += "&sender_name=" + MainForm.userName;
@@ -120,6 +124,15 @@ namespace robot
                 {
                     contentText.SelectAll();
                 }
+            }
+        }
+
+        private void toBox_TextChanged(object sender, EventArgs e)
+        {
+            if (toCheck == false)
+            {
+                toCheck = true;
+                contentText.Text = "";
             }
         }
     }

@@ -24,7 +24,7 @@ namespace robot
             XmlNodeList tempList = docX.GetElementsByTagName("temp");
             XmlNodeList weatherList = docX.GetElementsByTagName("wfKor");
 
-            weather = "  = 울산 날씨 =\n";
+            weather = "   = 울산 날씨 =\n";
             weather += hourList[0].InnerText + "시 : " + weatherList[0].InnerText + " (" + tempList[0].InnerText + "℃)\n";
             weather += hourList[1].InnerText + "시 : " + weatherList[1].InnerText + " (" + tempList[1].InnerText + "℃)\n";
             weather += hourList[2].InnerText + "시 : " + weatherList[2].InnerText + " (" + tempList[2].InnerText + "℃)\n";

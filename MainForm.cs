@@ -35,6 +35,8 @@ namespace robot
         static public string mailCookie = "";
         static public bool mailFormExist = false;
 
+        static public bool alarmFormExist = false;
+
         static public bool settingFormExist = false;
 
         static public DataGridView gridView;
@@ -45,6 +47,7 @@ namespace robot
 
         static public MailForm mailForm;
         static public SettingForm settingForm;
+        static public AlarmForm alarmForm;
 
         static public bool alarmSet = false;
 
@@ -88,6 +91,7 @@ namespace robot
 
             circularProgress1.IsRunning = true;
 
+            alarmForm = new AlarmForm();
             settingForm = new SettingForm();
             isLoading = true;
             autoLoginSetup();
@@ -102,6 +106,10 @@ namespace robot
 
             selectedDate = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString(dateFormat);
             studyDate.Text = DateTime.Now.Year.ToString() + "." + DateTime.Now.Month.ToString(dateFormat);
+
+            notifyTip.SetToolTip(notifyBox, "?");
+            mailTip.SetToolTip(mailBox, "메일 보내기");
+            settingTip.SetToolTip(settingBox, "설정");
         }
 
         private void autoLoginSetup()
@@ -1510,6 +1518,20 @@ namespace robot
         private void 네이트총재클럽ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("http://club.cyworld.com/ClubV1/Home.cy/53814181");
+        }
+
+        private void notifyBox_Click(object sender, EventArgs e)
+        {
+            if (alarmFormExist == true)
+            {
+                MessageBox.Show("창이 이미 열려 있습니다 :(", "Robot의 경고");
+                return;
+            }
+
+            if (alarmFormExist == false)
+                alarmFormExist = true;
+
+            alarmForm.Show();
         }
     }
 }

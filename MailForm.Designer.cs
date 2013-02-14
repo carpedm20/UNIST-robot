@@ -39,10 +39,11 @@
             // 
             this.contentText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.contentText.ForeColor = System.Drawing.Color.Black;
-            this.contentText.Location = new System.Drawing.Point(12, 66);
+            this.contentText.Location = new System.Drawing.Point(12, 55);
+            this.contentText.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.contentText.Multiline = true;
             this.contentText.Name = "contentText";
-            this.contentText.Size = new System.Drawing.Size(261, 139);
+            this.contentText.Size = new System.Drawing.Size(261, 140);
             this.contentText.TabIndex = 0;
             this.contentText.Text = "버그, 건의 사항 및 기타 의견을 보내주세요~\r\n\r\n여러분의 의견, 언제나 환영합니다 :)";
             this.contentText.TextChanged += new System.EventHandler(this.contentText_TextChanged);
@@ -52,9 +53,10 @@
             // 
             this.sendBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.sendBox.ForeColor = System.Drawing.Color.Black;
-            this.sendBox.Location = new System.Drawing.Point(198, 211);
+            this.sendBox.Location = new System.Drawing.Point(198, 202);
+            this.sendBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.sendBox.Name = "sendBox";
-            this.sendBox.Size = new System.Drawing.Size(75, 23);
+            this.sendBox.Size = new System.Drawing.Size(75, 29);
             this.sendBox.TabIndex = 1;
             this.sendBox.Text = "보내기";
             this.sendBox.UseVisualStyleBackColor = false;
@@ -65,9 +67,9 @@
             this.fromLabel.AutoSize = true;
             this.fromLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.fromLabel.ForeColor = System.Drawing.Color.Black;
-            this.fromLabel.Location = new System.Drawing.Point(12, 9);
+            this.fromLabel.Location = new System.Drawing.Point(12, 5);
             this.fromLabel.Name = "fromLabel";
-            this.fromLabel.Size = new System.Drawing.Size(46, 15);
+            this.fromLabel.Size = new System.Drawing.Size(46, 12);
             this.fromLabel.TabIndex = 2;
             this.fromLabel.Text = "From : ";
             // 
@@ -76,26 +78,25 @@
             this.toLabel.AutoSize = true;
             this.toLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.toLabel.ForeColor = System.Drawing.Color.Black;
-            this.toLabel.Location = new System.Drawing.Point(12, 36);
+            this.toLabel.Location = new System.Drawing.Point(12, 32);
             this.toLabel.Name = "toLabel";
-            this.toLabel.Size = new System.Drawing.Size(209, 15);
+            this.toLabel.Size = new System.Drawing.Size(216, 12);
             this.toLabel.TabIndex = 3;
             this.toLabel.Text = "To : 제작자 (carpedm20@gmail.com)";
             // 
             // MailForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(285, 243);
+            this.ClientSize = new System.Drawing.Size(285, 239);
             this.Controls.Add(this.toLabel);
             this.Controls.Add(this.fromLabel);
             this.Controls.Add(this.sendBox);
             this.Controls.Add(this.contentText);
             this.DoubleBuffered = true;
-            this.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.Font = new System.Drawing.Font("Gulim", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "MailForm";

@@ -71,7 +71,7 @@ namespace robot
             taskbarNotifier = new TaskbarNotifier();
             taskbarNotifier.SetBackgroundBitmap(new Bitmap(GetType(), "skin.bmp"), Color.FromArgb(255, 0, 255));
             taskbarNotifier.SetCloseBitmap(new Bitmap(GetType(), "close.bmp"), Color.FromArgb(255, 0, 255), new Point(121, 13));
-            taskbarNotifier.TitleRectangle = new Rectangle(40, 13, 80, 25);
+            taskbarNotifier.TitleRectangle = new Rectangle(30, 13, 80, 25);
             taskbarNotifier.ContentRectangle = new Rectangle(12, 30, 125, 72);
             taskbarNotifier.CloseClickable = true;
             taskbarNotifier.TitleClickable = false;

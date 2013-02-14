@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AutoLogin.cs" />
     <Compile Include="BB.cs" />
     <Compile Include="BBBoard.cs" />
     <Compile Include="library.cs" />

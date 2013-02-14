@@ -40,10 +40,10 @@ namespace CustomUIControls
 		protected Color hoverTitleColor = Color.FromArgb(0,0,0);
 		protected Color normalContentColor = Color.FromArgb(0,0,0);
 		protected Color hoverContentColor = Color.FromArgb(0,0,0x66);
-        protected Font normalTitleFont = new Font("Malgun Gothic", 12, FontStyle.Regular, GraphicsUnit.Pixel);
-        protected Font hoverTitleFont = new Font("Malgun Gothic", 12, FontStyle.Bold, GraphicsUnit.Pixel);
-        protected Font normalContentFont = new Font("Malgun Gothic", 11, FontStyle.Regular, GraphicsUnit.Pixel);
-        protected Font hoverContentFont = new Font("Malgun Gothic", 11, FontStyle.Regular, GraphicsUnit.Pixel);
+        protected Font normalTitleFont = new Font("Gulim", 12, FontStyle.Regular, GraphicsUnit.Pixel);
+        protected Font hoverTitleFont = new Font("Gulim", 12, FontStyle.Bold, GraphicsUnit.Pixel);
+        protected Font normalContentFont = new Font("Gulim", 11, FontStyle.Regular, GraphicsUnit.Pixel);
+        protected Font hoverContentFont = new Font("Gulim", 11, FontStyle.Regular, GraphicsUnit.Pixel);
 		protected int nShowEvents;
 		protected int nHideEvents;
 		protected int nVisibleEvents;

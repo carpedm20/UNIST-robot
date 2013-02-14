@@ -16,7 +16,8 @@
             If you want to utilize File and Registry Virtualization for backward 
             compatibility then delete the requestedExecutionLevel node.
         -->
-        <requestedExecutionLevel level="requireAdministrator" uiAccess="false" />
+        <!-- asInvoker | requireadministrator -->
+        <requestedExecutionLevel level="requireadministrator" uiAccess="false" />
       </requestedPrivileges>
       <applicationRequestMinimum>
         <defaultAssemblyRequest permissionSetReference="Custom" />

@@ -7,59 +7,62 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.Security.Cryptography;
+using Microsoft.Win32;
+
 namespace robot
 {
     public partial class LoginForm : DevComponents.DotNetBar.Metro.MetroForm
     {
+        AutoLogin loginReg;
+
         public LoginForm()
         {
             InitializeComponent();
-
             browser.ScriptErrorsSuppressed = true;
+            loginReg = new AutoLogin();
+        }
 
-            if (Program.ini != null)
-            {
-                string save = Program.ini.GetIniValue("Login", "Save");
+        public LoginForm(string id, string pw)
+        {
+            InitializeComponent();
+            browser.ScriptErrorsSuppressed = true;
+            loginReg = new AutoLogin();
 
-                // id 저장 옵션 확인
-                if (save == "true")
-                {
-                    idBox.Text = Program.ini.GetIniValue("Login", "Id");
-                    saveIdBox.Checked = true;
-                    Program.loginSave = true;
+            idText.Text = id;
+            passText.Text = pw;
 
-                    save = Program.ini.GetIniValue("Login", "Auto");
+            loginBtn_Click(null, null);
+        }
 
-                    if (save == "true")
-                    {
-                        Program.autoLogin = true;
-                    }
-                }
-            }
+        public LoginForm(string id)
+        {
+            InitializeComponent();
+            browser.ScriptErrorsSuppressed = true;
+            loginReg = new AutoLogin();
+
+            idText.Text = id;
+
+            saveIdBox.Checked = true;
         }
 
         private void loginBtn_Click(object sender, EventArgs e)
         {
-            if (idBox.Text == "")
+            if (idText.Text == "")
             {
                 MessageBox.Show("아이디를 입력해 주세요");
             }
-            else if (passBox.Text == "")
+            else if (passText.Text == "")
             {
                 MessageBox.Show("비밀번호를 입력해 주세요");
             }
             else
             {
-                browser.Navigate("https://mail.unist.ac.kr/user/login.crd?charset=EUC-KR&my_char_set=default&result=&login_fail=null&encodeChallenge=true&locale=ko&userid=" + idBox.Text + "&userdomain=unist.ac.kr&userpass=" + MD5HashFunc(passBox.Text));
+                browser.Navigate("https://mail.unist.ac.kr/user/login.crd?charset=EUC-KR&my_char_set=default&result=&login_fail=null&encodeChallenge=true&locale=ko&userid=" + idText.Text + "&userdomain=unist.ac.kr&userpass=" + MD5HashFunc(passText.Text));
                 
-                Program.id = idBox.Text;
-                Program.password = passBox.Text;
+                Program.id = idText.Text;
+                Program.password = passText.Text;
 
                 this.Enabled = false;
-
-                //this.Enabled = false;
-                //Form1 f1 = new Form1();
-                //f1.Parent = this;
             }
         }
 
@@ -70,13 +73,12 @@ namespace robot
             if (check.Checked == true)
             {
                 autoLoginBox.Enabled = true;
-                Program.loginSave = true;
+                loginReg.WriteRegistry(idText.Text, "");
             }
             else
             {
                 autoLoginBox.Enabled = false;
                 autoLoginBox.Checked = false;
-                Program.loginSave = false;
             }
         }
 
@@ -93,6 +95,7 @@ namespace robot
                     return;
                 }
                 Program.autoLogin = true;
+                loginReg.WriteRegistry(idText.Text, passText.Text);
             }
             else
             {
@@ -133,11 +136,6 @@ namespace robot
             }
 
             this.Enabled = true;
-            
-            /*if(e.Url.ToString() == "")
-            {
-                MessageBox.Show("아이디 혹은 비밀번호가 틀렸습니다 :[", "Robot의 경고", MessageBoxButtons.OK, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-            }*/
         }
     }   
 }

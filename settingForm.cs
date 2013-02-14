@@ -13,6 +13,7 @@ namespace robot
     {
         public DevComponents.DotNetBar.Controls.SwitchButton loginSwitch;
         public DevComponents.DotNetBar.Controls.SwitchButton sayswitch;
+        AutoLogin autologin;
 
         public SettingForm()
         {
@@ -20,32 +21,40 @@ namespace robot
 
             loginSwitch = this.autoLoginSwitch;
             sayswitch = this.saySwitch;
+
+            autologin = new AutoLogin();
         }
 
         public void autoLoginSwitch_ValueChanged(object sender, EventArgs e)
         {
             DevComponents.DotNetBar.Controls.SwitchButton check = (DevComponents.DotNetBar.Controls.SwitchButton)sender;
 
-            if (check.Value == true)
+            if (MainForm.isLoading == true)
             {
-                DialogResult result = MessageBox.Show("개인정보가 유출될 수 있습니다.\r\n자동 로그인을 하시겠습니까? :[", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-                if (result == DialogResult.No)
-                {
-                    check.Value = false;
-                    return;
-                }
-
-                Program.ini.SetIniValue("Login", "Auto", "true");
-                Program.ini.SetIniValue("Login", "Save", "true");
-                Program.ini.SetIniValue("Login", "Id", Program.id);
-                Program.ini.SetIniValue("Login", "Password", Program.password);
+                return;
             }
-            if (check.Value == false)
+
+            else
             {
-                Program.ini.SetIniValue("Login", "Auto", "false");
-                Program.ini.SetIniValue("Login", "Save", "false");
-                Program.ini.SetIniValue("Login", "Id", "");
-                Program.ini.SetIniValue("Login", "Password", "");
+                if (check.Value == true)
+                {
+                    DialogResult result = MessageBox.Show("개인정보가 유출될 수 있습니다.\r\n자동 로그인을 하시겠습니까? :[", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+                    if (result == DialogResult.No)
+                    {
+                        check.Value = false;
+                        return;
+                    }
+
+                    if (MainForm.isLoading != true)
+                    {
+                        autologin.WriteRegistry(Program.id, Program.password);
+                    }
+
+                }
+                if (check.Value == false)
+                {
+                    autologin.WriteRegistry("", "");
+                }
             }
         }
 
@@ -89,7 +98,12 @@ namespace robot
 
         private void SettingForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MainForm.settingFormExist = false;
+            if (MainForm.isExiting == false)
+            {
+                MainForm.settingFormExist = false;
+                this.Visible = false;
+                e.Cancel = true;
+            }
         }
     }
 }

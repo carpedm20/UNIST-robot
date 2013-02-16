@@ -10,6 +10,7 @@ using System.IO;
 using mshtml;
 using CustomUIControls;
 using System.Diagnostics;
+using System.Security.Cryptography;
 
 // http://somerandomdude.com/work/iconic/
 
@@ -25,7 +26,16 @@ namespace robot
 
         /****************************/
         static public bool isLoading = true;
+        bool isSessionLoading = false;
         static public bool isExiting = false;
+        static public bool isError = false;
+
+        bool sayTimerStop = false;
+
+        bool isPortalComplete = false;
+        bool isBBComplete = false;
+        bool isLibraryComplete = false;
+        bool isEmailComplete = false;
 
         Portal portal;
         int currentBoardId = 1;
@@ -33,11 +43,6 @@ namespace robot
         Library library;
 
         static public string mailCookie = "";
-        static public bool mailFormExist = false;
-
-        static public bool alarmFormExist = false;
-
-        static public bool settingFormExist = false;
 
         static public DataGridView gridView;
         static public WebBrowser brows;
@@ -48,11 +53,15 @@ namespace robot
         static public MailForm mailForm;
         static public SettingForm settingForm;
         static public AlarmForm alarmForm;
+        static public ProgressBar loadingprogress;
+        static public Label loadinglabel;
 
         static public bool alarmSet = false;
 
         static public System.Windows.Forms.Timer timer1;
         static public System.Windows.Forms.Timer timer2;
+
+        ContextMenuStrip trayMenuStripFirst;
 
         Say say;
         static public System.Windows.Forms.Label saylabel;
@@ -71,6 +80,12 @@ namespace robot
 
             visibleLoading();
 
+            /************************************
+             *  구성 요소 준비 단계
+             ************************************/
+            loadingLabel.Text = "구성 요소 준비중";
+            loadingProgressBar.Value += 5;
+
             // 브라우저 스크립트 에러 무시
             browser.ScriptErrorsSuppressed = true;
 
@@ -80,6 +95,8 @@ namespace robot
             timer1 = this.notifyTimer;
             timer2 = this.sayTimer;
             saylabel = this.sayLabel;
+            loadingprogress = this.loadingProgressBar;
+            loadinglabel = this.loadingLabel;
 
             browser.Navigate("https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp");
 
@@ -88,8 +105,6 @@ namespace robot
             bookOption2.SelectedIndex = 1;
             bookOperator.SelectedIndex = 0;
             roomNumberBox.SelectedIndex = 0;
-
-            circularProgress1.IsRunning = true;
 
             alarmForm = new AlarmForm();
             settingForm = new SettingForm();
@@ -107,13 +122,22 @@ namespace robot
             selectedDate = DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString(dateFormat);
             studyDate.Text = DateTime.Now.Year.ToString() + "." + DateTime.Now.Month.ToString(dateFormat);
 
-            notifyTip.SetToolTip(notifyBox, "?");
+            notifyTip.SetToolTip(notifyBox, "개인 알림 설정");
+            reloadTip.SetToolTip(reloadBox, "세션 리로드");
             mailTip.SetToolTip(mailBox, "메일 보내기");
             settingTip.SetToolTip(settingBox, "설정");
+
+            sayTimer.Start();
         }
 
         private void autoLoginSetup()
         {
+            /************************************
+             *  로그인 준비 단계
+             ************************************/
+            loadingLabel.Text = "로그인 준비중";
+            loadingProgressBar.Value += 5;
+
             if (Program.autoLogin == true)
             {
                 settingForm.loginSwitch.Value = true;
@@ -138,7 +162,7 @@ namespace robot
             }
 
             currentBoardId = boardId;
-            PortalBoard[] boards=portal.getBoard(boardId);
+            PortalBoard[] boards = portal.getBoard(boardId);
             int i = 0;
 
             if (boardId == 4)
@@ -218,6 +242,9 @@ namespace robot
 
         private void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            if (isSessionLoading == true)
+                return;
+
             /**********************************************************
              * 
              *  브라우저 오른쪽으로 이동
@@ -226,24 +253,9 @@ namespace robot
 
             Point point = new Point(browser.Right, 0);
             browser.Document.Window.ScrollTo(point);
-            
-            if(isLoading==false && studyGrid.Visible != true)
+
+            if (isLoading == false && studyGrid.Visible != true)
                 browser.Visible = true;
-
-            /**********************************************************
-             * 
-             *  첫 로그인, 이름 저장, 학사 공지로 이동
-             *  
-             **********************************************************/
-
-            if (e.Url.ToString() == "http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp") {
-                userName=browser.DocumentTitle.ToString().Split('-')[1].Split('/')[0];
-                welcomeLabel.Text = userName + " 님 환영합니다 :-)";
-
-                portal = new Portal(browser.Document.Cookie);
-                showBoardGrid(1);
-                browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
-            }
 
             /**********************************************************
              * 
@@ -258,6 +270,45 @@ namespace robot
                 doc.GetElementById("id").SetAttribute("value", Program.id);
                 doc.GetElementsByTagName("input")["UserPassWord"].SetAttribute("value", Program.password);
                 doc.InvokeScript("doLogin");
+
+                /************************************
+                 *  포탈 로그인 단계
+                 ************************************/
+                loadingLabel.Text = "포탈 로그인중";
+                loadingProgressBar.Value += 5;
+            }
+
+            /**********************************************************
+             * 
+             *  첫 로그인, 이름 저장, 학사 공지로 이동
+             *  
+             **********************************************************/
+
+            if (e.Url.ToString() == "http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp")
+            {
+                if (isPortalComplete == false)
+                {
+                    /************************************
+                     *  포탈 로그인 완료
+                     ************************************/
+                    loadingLabel.Text = "포탈 로그인 완료";
+                    loadingProgressBar.Value += 5;
+
+                    userName = browser.DocumentTitle.ToString().Split('-')[1].Split('/')[0];
+                    welcomeLabel.Text = userName + " 님 환영합니다 :-)";
+
+                    portal = new Portal(browser.Document.Cookie, this);
+                    showBoardGrid(1);
+
+                    isPortalComplete = true;
+
+                    browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
+                }
+
+                else
+                {
+                    browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
+                }
             }
 
             /**********************************************************
@@ -268,15 +319,37 @@ namespace robot
 
             if (e.Url.ToString() == "http://bb.unist.ac.kr/webapps/portal/frameset.jsp")
             {
-                bb=new BB(browser);
+                if (isBBComplete == false)
+                {
+                    /************************************
+                     *  블랙보드 연결 완료
+                     ************************************/
+                    loadingLabel.Text = "블랙보드 연결 완료";
+                    loadingProgressBar.Value += 5;
+
+                    bb = new BB(browser);
+
+                    isBBComplete = true;
+                }
+
+                else
+                {
+                    browser.Navigate("http://bb.unist.ac.kr/webapps/blackboard/execute/announcement?method=search&context=mybb&handle=my_announcements");
+                }
             }
 
             else if (e.Url.ToString() == "http://bb.unist.ac.kr/webapps/blackboard/execute/announcement?method=search&context=mybb&handle=my_announcements")
             {
+                /************************************
+                 *  수강 정보 수집 단계
+                 ************************************/
+                loadingLabel.Text = "수강 정보 수집중";
+                loadingProgressBar.Value += 5;
+
                 bb.setBoard();
 
                 bb.getCourceMenu();
-                
+
                 DevComponents.DotNetBar.ButtonItem[] bblist = new DevComponents.DotNetBar.ButtonItem[bb.board.Count()];
                 System.Windows.Forms.ToolStripMenuItem[] trayItem = new System.Windows.Forms.ToolStripMenuItem[bb.board.Count()];
                 for (int i = 0; i < bb.board.Length; i++)
@@ -294,14 +367,20 @@ namespace robot
                     sideBB.SubItems.Add(bblist[i]);
 
                     trayItem[i] = new System.Windows.Forms.ToolStripMenuItem();
-                    trayItem[i].Name = "BBToolStripMenuItem"+i.ToString();
+                    trayItem[i].Name = "BBToolStripMenuItem" + i.ToString();
                     trayItem[i].Size = new System.Drawing.Size(152, 22);
                     trayItem[i].Text = bb.board[i].name;
                     trayItem[i].Click += new System.EventHandler(trayBBClick);
                     trayItem[i].Click += new System.EventHandler(visibleBB);
                     블랙보드ToolStripMenuItem.DropDownItems.Add(trayItem[i]);
                 }
-                
+
+                /************************************
+                 *  수강 정보 수집 완료
+                 ************************************/
+                loadingLabel.Text = "수강 정보 수집 완료";
+                loadingProgressBar.Value += 5;
+
                 browser.Navigate("http://library.unist.ac.kr/DLiWeb25Eng/tmaxsso/first_cs.aspx");
             }
 
@@ -313,9 +392,24 @@ namespace robot
 
             if (e.Url.ToString().IndexOf("http://library.unist.ac.kr/DLiWeb25Eng/default.aspx") != -1)
             {
-                library = new Library(browser.Document.Cookie);
-                
-                browser.Navigate("http://portal.unist.ac.kr/EP/web/security/jsp/SSO_unistMail.jsp");
+                if (isLibraryComplete == false)
+                {
+                    /************************************
+                     *  도서관 연결 완료
+                     ************************************/
+                    loadingLabel.Text = "도서관 연결 완료";
+                    loadingProgressBar.Value += 5;
+
+                    library = new Library(browser.Document.Cookie);
+
+                    isLibraryComplete=true;
+
+                    browser.Navigate("http://portal.unist.ac.kr/EP/web/security/jsp/SSO_unistMail.jsp");
+                }
+                else
+                {
+                    browser.Navigate("http://portal.unist.ac.kr/EP/web/security/jsp/SSO_unistMail.jsp");
+                }
             }
 
             /**********************************************************
@@ -326,31 +420,39 @@ namespace robot
 
             if (e.Url.ToString().IndexOf("http://mail.unist.ac.kr/mail/mailList.crd") != -1)
             {
-                circularProgress1.IsRunning = false;
-                circularProgress1.Visible = false;
+                if (isEmailComplete == false)
+                {
+                    System.Web.UI.WebControls.GridViewSelectEventArgs ee = new System.Web.UI.WebControls.GridViewSelectEventArgs(1);
+                    boardGrid_SelectionChanged(boardGrid, ee);
 
-                mailBox.Visible = true;
-                settingBox.Visible = true;
-                weatherBox.Visible = true;
-                notifyBox.Visible = true;
+                    buttonItem1_Click(null, ee);
 
-                System.Web.UI.WebControls.GridViewSelectEventArgs ee = new System.Web.UI.WebControls.GridViewSelectEventArgs(1);
-                boardGrid_SelectionChanged(boardGrid, ee);
+                    mailCookie = browser.Document.Cookie;
 
-                buttonItem1_Click(null, ee);
+                    isLoading = false;
+                    visiblePortal();
 
-                mailCookie = browser.Document.Cookie;
+                    notifyTimer.Start();
+                    sayTimer.Start();
+                    sessionTimer.Start();
 
-                visiblePortal();
+                    mailForm = new MailForm(mailCookie);
 
-                isLoading = false;
-                visiblePortal();
+                    loadingLabel.Visible = false;
+                    loadingProgressBar.Visible = false;
 
-                notifyTimer.Start();
-                sayTimer.Start();
-                sessionTimer.Start();
+                    mailBox.Visible = true;
+                    settingBox.Visible = true;
+                    weatherBox.Visible = true;
+                    notifyBox.Visible = true;
+                    reloadBox.Visible = true;
 
-                mailForm = new MailForm(mailCookie);
+                    visiblePortal();
+
+                    trayIcon.ContextMenuStrip = trayMenuStrip;
+
+                    isEmailComplete = true;
+                }
             }
         }
 
@@ -364,7 +466,8 @@ namespace robot
         {
             DevComponents.DotNetBar.ButtonItem butItem = (DevComponents.DotNetBar.ButtonItem)sender;
 
-            for(int i=0; i<bb.board.Length; i++) {
+            for (int i = 0; i < bb.board.Length; i++)
+            {
                 if (bb.board[i].name == butItem.Text)
                 {
                     browser.Navigate(bb.board[i].menuUrl[1]);
@@ -382,7 +485,7 @@ namespace robot
         private void trayBBClick(object sender, EventArgs e)
         {
             System.Windows.Forms.ToolStripMenuItem butItem = (System.Windows.Forms.ToolStripMenuItem)sender;
-            
+
             this.Visible = true;
 
             for (int i = 0; i < bb.board.Length; i++)
@@ -400,17 +503,14 @@ namespace robot
          *  설정
          *  
          **********************************************************/
-        
+
         private void settingBox_Click(object sender, EventArgs e)
         {
-            if (settingFormExist == true)
+            if (settingForm.Visible == true)
             {
                 MessageBox.Show("창이 이미 열려 있습니다 :(", "Robot의 경고");
                 return;
             }
-
-            if (settingFormExist == false)
-                settingFormExist = true;
 
             settingForm.Show();
 
@@ -425,14 +525,11 @@ namespace robot
 
         private void mailBox_Click(object sender, EventArgs e)
         {
-            if (mailFormExist == true)
+            if (mailForm.Visible == true)
             {
                 MessageBox.Show("창이 이미 열려 있습니다 :(", "Robot의 경고");
                 return;
             }
-
-            if (mailFormExist == false)
-                mailFormExist = true;
 
 
             if (mailCookie == "")
@@ -453,8 +550,6 @@ namespace robot
 
         private void loadStudyRoomStat(string date)
         {
-            circularProgress1.IsRunning = true;
-            circularProgress1.Visible = true;
 
             nextMonthBtn.Enabled = false;
             previousMonthBtn.Enabled = false;
@@ -483,6 +578,12 @@ namespace robot
                 studyGrid.Rows.RemoveAt(0);
             }
 
+            if (library.dayCount == 0)
+            {
+                MessageBox.Show("도서관 홈페이지에 접속할 수 없습니다 :-(", "Robot의 경고");
+                return;
+            }
+
             calculatePosibleDate(library.dayCount);
 
             // study room grid 내용 추가
@@ -499,15 +600,13 @@ namespace robot
                     {
                         studyGrid.Rows[i].DefaultCellStyle = new DataGridViewCellStyle { BackColor = Color.PowderBlue };
                     }
-                }                
+                }
             }
 
             nextMonthBtn.Enabled = true;
             previousMonthBtn.Enabled = true;
             roomNumberBox.Enabled = true;
 
-            circularProgress1.IsRunning = false;
-            circularProgress1.Visible = false;
         }
 
         /**********************************************************
@@ -526,7 +625,7 @@ namespace robot
                 return;
             }
 
-            doc.GetElementById("ctl00_ContentPlaceHolder_ddusehour").SetAttribute("value", studyTimeBox.SelectedItem.ToString().Substring(0,1));
+            doc.GetElementById("ctl00_ContentPlaceHolder_ddusehour").SetAttribute("value", studyTimeBox.SelectedItem.ToString().Substring(0, 1));
 
             if (studyStudentId1.Text != "")
                 doc.GetElementById("ctl00_ContentPlaceHolder_txtcompany_1").SetAttribute("value", studyStudentId1.Text);
@@ -536,7 +635,7 @@ namespace robot
                 doc.GetElementById("ctl00_ContentPlaceHolder_txtcompany_3").SetAttribute("value", studyStudentId3.Text);
             if (studyStudentId4.Text != "")
                 doc.GetElementById("ctl00_ContentPlaceHolder_txtcompany_4").SetAttribute("value", studyStudentId4.Text);
-            if (studyStudentId5.Text != "" )
+            if (studyStudentId5.Text != "")
                 doc.GetElementById("ctl00_ContentPlaceHolder_txtcompany_5").SetAttribute("value", studyStudentId5.Text);
             if (studyStudentId6.Text != "" && studyStudentId6.Enabled != false)
                 doc.GetElementById("ctl00_ContentPlaceHolder_txtcompany_6").SetAttribute("value", studyStudentId6.Text);
@@ -547,7 +646,7 @@ namespace robot
 
             if (studyEtc.Text != "")
                 doc.GetElementById("ctl00_ContentPlaceHolder_txtnote").SetAttribute("value", studyEtc.Text);
-            
+
             mshtml.HTMLDocument hdoc = doc.DomDocument as mshtml.HTMLDocument;
 
             foreach (IHTMLElement hel in (mshtml.IHTMLElementCollection)hdoc.body.all)
@@ -593,7 +692,7 @@ namespace robot
             {
                 if (row.Cells[i].Value == "E")
                 {
-                    row.Cells[i].Style = new DataGridViewCellStyle { ForeColor=Color.White, BackColor=Color.CadetBlue };
+                    row.Cells[i].Style = new DataGridViewCellStyle { ForeColor = Color.White, BackColor = Color.CadetBlue };
                 }
                 if (row.Cells[i].Value == "R")
                 {
@@ -618,7 +717,8 @@ namespace robot
             string date = grid.Rows[grid.SelectedCells[0].RowIndex].Cells[0].Value.ToString().Replace("-", "");
             string hour = grid.Columns[grid.SelectedCells[0].ColumnIndex].HeaderText.ToString();
 
-            if(hour=="Date") {
+            if (hour == "Date")
+            {
                 MessageBox.Show("시간을 선택해 주세요 :^)", "Robot의 경고");
                 return;
             }
@@ -659,13 +759,13 @@ namespace robot
                 studyDateLabel.Text = DateTime.Now.Year.ToString() + "년 " + date.Substring(0, 2) + "월 " + date.Substring(2) + "일 " + hour + "시";
                 studyGroup.Enabled = true;
 
-                if (grid.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value.ToString() == "R")
+                if (e.ColumnIndex + 1 < grid.Columns.Count && grid.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value.ToString() == "R")
                 {
                     studyTimeBox.Items.Clear();
                     studyTimeBox.Items.AddRange(new object[] {
                     "1 시간"});
                 }
-                else if (grid.Rows[e.RowIndex].Cells[e.ColumnIndex + 2].Value.ToString() == "R")
+                else if (e.ColumnIndex + 2 < grid.Columns.Count && grid.Rows[e.RowIndex].Cells[e.ColumnIndex + 2].Value.ToString() == "R")
                 {
                     studyTimeBox.Items.Clear();
                     studyTimeBox.Items.AddRange(new object[] {
@@ -711,7 +811,7 @@ namespace robot
 
             studyDate.Text = year.ToString() + "." + month.ToString(dateFormat);
 
-            return year.ToString()+month.ToString(dateFormat);
+            return year.ToString() + month.ToString(dateFormat);
         }
 
         private string getPreviousMonth()
@@ -741,7 +841,8 @@ namespace robot
          *  
          **********************************************************/
 
-        private void calculatePosibleDate(int maxDate) {
+        private void calculatePosibleDate(int maxDate)
+        {
             int year = DateTime.Today.Year;
             int month = DateTime.Today.Month;
             int day = DateTime.Today.Day;
@@ -787,8 +888,11 @@ namespace robot
 
         private void bookSearchBtn_Click(object sender, EventArgs e)
         {
-            circularProgress1.Visible = true;
-            circularProgress1.IsRunning = true;
+            if (isError == true || !System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            {
+                MessageBox.Show("인터넷 연결에 문제가 있습니다 :*(", "Robot의 경고");
+                return;
+            }
 
             bookSearchBtn.Enabled = false;
 
@@ -818,9 +922,6 @@ namespace robot
             bookGridView_SelectionChanged(boardGrid, ee);
 
             bookSearchBtn.Enabled = true;
-
-            circularProgress1.Visible = false;
-            circularProgress1.IsRunning = false;
         }
 
         /**********************************************************
@@ -882,7 +983,7 @@ namespace robot
          *  bookGridView 에서 select
          *  
          **********************************************************/
-        
+
         private void bookGridView_SelectionChanged(object sender, EventArgs e)
         {
             if (library.books == null)
@@ -897,7 +998,7 @@ namespace robot
             loadBookReview(library.books[bookGridView.SelectedRows[0].Index].isbn);
         }
 
-        private void bookThumnailRefresh() 
+        private void bookThumnailRefresh()
         {
             bookPic.Visible = false;
             bookReviewUrl = "";
@@ -906,9 +1007,9 @@ namespace robot
             if (bookGridView.SelectedRows.Count == 0)
                 return;
 
-            string url=library.books[bookGridView.SelectedRows[0].Index].thumbnail;
+            string url = library.books[bookGridView.SelectedRows[0].Index].thumbnail;
 
-            if (url != "")
+            if (url != "" && isError == false)
             {
                 bookPic.Load("http://library.unist.ac.kr/DLiWeb25/comp/search/thumb.axd?url=" + url.Split('=')[1]);
                 bookPic.Visible = true;
@@ -920,7 +1021,8 @@ namespace robot
             {
                 bookTitle.Text = book.title.ToString().Substring(0, 30) + "\r\n" + book.title.ToString().Substring(30);
             }
-            else {
+            else
+            {
                 bookTitle.Text = book.title.ToString();
             }
 
@@ -928,7 +1030,7 @@ namespace robot
 
             //http://openapi.naver.com/search?key=6053ca2ccd452f386a6e2eb44375d160&query=art&target=book_adv&d_isbn=9788996427513
         }
-        
+
         private void loadBookStat(string cid)
         {
             while (bookListGrid.Rows.Count != 0)
@@ -939,11 +1041,15 @@ namespace robot
             Column37.Width = 80;
 
             string[] str = library.loadBookStat(cid);
+
+            if (str == null)
+                return;
+
             int count = str.Length / 4;
 
             for (int i = 0; i < count; i++)
             {
-                string[] subStr=new string[4];
+                string[] subStr = new string[4];
 
                 Array.Copy(str, i * 4, subStr, 0, 4);
                 bookListGrid.Rows.Add(subStr);
@@ -955,7 +1061,7 @@ namespace robot
             }
         }
 
-        private void loadBookReview(string isbn) 
+        private void loadBookReview(string isbn)
         {
             bookReviewUrl = "";
             bookReview.Text = "...";
@@ -1064,7 +1170,7 @@ namespace robot
             previousMonthBtn.Visible = false;
         }
 
-        private void visiblePortal()
+        public void visiblePortal()
         {
             boardSlide.Visible = true;
             browser.Visible = true;
@@ -1213,21 +1319,16 @@ namespace robot
 
         private void notifyTimer_Tick(object sender, EventArgs e)
         {
+            if (isError == true)
+            {
+                notifyTimer.Stop();
+                return;
+            }
+
             if (isLoading == true)
                 return;
             else
                 portal.checkNewLastestBoard();
-        }
-
-        /**********************************************************
-         * 
-         *  메인폼 로드시 트레이 아이콘의 ContextMenuStrip 연결
-         *  
-         **********************************************************/
-
-        private void MainForm_Load(object sender, EventArgs e)
-        {
-            trayIcon.ContextMenuStrip = trayMenuStrip;
         }
 
         /**********************************************************
@@ -1254,8 +1355,13 @@ namespace robot
 
         private void 보이기ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if(this.보이기ToolStripMenuItem.Text == "감추기")
+            if (this.보이기ToolStripMenuItem.Text == "감추기")
+            {
                 this.Visible = false;
+                alarmForm.Visible = false;
+                settingForm.Visible = false;
+                mailForm.Visible = false;
+            }
             else
                 this.Visible = true;
         }
@@ -1263,6 +1369,8 @@ namespace robot
         private void 종료ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             notifyTimer.Stop();
+            sessionTimer.Stop();
+            sayTimer.Stop();
 
             isExiting = true;
 
@@ -1313,7 +1421,31 @@ namespace robot
 
         private void browser_Navigated(object sender, WebBrowserNavigatedEventArgs e)
         {
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && isError == false)
+            {
+                isError = true;
+
+                MessageBox.Show("인터넷 연결에 문제가 있습니다.\r\n 프로그램을 종료합니다. :^(", "Robot의 경고");
+                System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
+                foreach (System.Diagnostics.Process p in mProcess)
+                    p.Kill();
+            }
+
             browser.Visible = false;
+
+            if (e.Url.ToString().IndexOf("http://mail.unist.ac.kr/mail/mailList.crd") != -1)
+            {
+                /************************************
+                 *  전자우편 연결 완료
+                 ************************************/
+                loadingLabel.Text = "전자우편 연결 완료";
+                loadingProgressBar.Value = loadingProgressBar.Maximum;
+            }
+
+            if (isLoading == true)
+            {
+                loadingProgressBar.Value += 1;
+            }
         }
 
         /**********************************************************
@@ -1325,6 +1457,31 @@ namespace robot
         private void buttonItem8_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("http://portal.unist.ac.kr");
+        }
+
+        /**********************************************************
+        * 
+        *  UNIST 웹 메일 바로가기
+        *  
+        **********************************************************/
+
+        private void buttonItem10_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://mail.unist.ac.kr/user/login.crd?charset=EUC-KR&my_char_set=default&result=&login_fail=null&encodeChallenge=true&locale=ko&userid=" + Program.id + "&userdomain=unist.ac.kr&userpass=" + MD5HashFunc(Program.password));
+        }
+
+        public string MD5HashFunc(string str)
+        {
+            StringBuilder MD5Str = new StringBuilder();
+            byte[] byteArr = Encoding.ASCII.GetBytes(str);
+            byte[] resultArr = (new MD5CryptoServiceProvider()).ComputeHash(byteArr);
+
+            //for (int cnti = 1; cnti < resultArr.Length; cnti++) (2010.06.27)
+            for (int cnti = 0; cnti < resultArr.Length; cnti++)
+            {
+                MD5Str.Append(resultArr[cnti].ToString("X2"));
+            }
+            return MD5Str.ToString().ToLower();
         }
 
         /**********************************************************
@@ -1344,12 +1501,27 @@ namespace robot
          *  
          **********************************************************/
 
-        private void randomSayLabel() {
+        private void randomSayLabel()
+        {
             Random r = new Random();
             int rand = r.Next(0, say.says.Count - 1);
 
             sayLabel.Text = say.says.ElementAt(rand).Key;
-            sayToolTip.SetToolTip(sayLabel, say.says.ElementAt(rand).Value);
+            sayToolTip.SetToolTip(sayLabel, sayLabel.Text + " (" + say.says.ElementAt(rand).Value + ")");
+
+            if (sayTimerStop == true)
+            {
+                sayTimer.Start();
+                sayTimerStop = false;
+                sayBrowser.Navigate("http://www.google.com/");
+            }
+
+            if (rand == 1)
+            {
+                sayTimer.Stop();
+                sayTimerStop=true;
+                sayBrowser.Navigate("http://pds2.bgmstore.net/bgm_/5aLTJ.swf");
+            }
         }
 
         private void sayTimer_Tick(object sender, EventArgs e)
@@ -1369,6 +1541,9 @@ namespace robot
 
         private void sayLabel_Click(object sender, EventArgs e)
         {
+            sayTimer.Stop();
+            sayTimer.Start();
+            
             randomSayLabel();
         }
 
@@ -1399,15 +1574,42 @@ namespace robot
 
         private void sessionTimer_Tick(object sender, EventArgs e)
         {
+            if (isError == true)
+            {
+                return;
+            }
+
+            mailBox.Visible = false;
+            settingBox.Visible = false;
+            weatherBox.Visible = false;
+            notifyBox.Visible = false;
+            reloadBox.Visible = false;
+
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && isError == false)
+            {
+                isError = true;
+
+                MessageBox.Show("인터넷 연결에 문제가 있습니다.\r\n 프로그램을 종료합니다. :^(", "Robot의 경고");
+                System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
+                foreach (System.Diagnostics.Process p in mProcess)
+                    p.Kill();
+            }
+
             visibleLoading();
 
             isLoading = true;
 
-            circularProgress1.IsRunning = true;
-            circularProgress1.Visible = true;
-
             sayTimer.Stop();
             sayLabel.Text = "= 세션 유지를 위한 로딩이 진행 중입니다. 잠시만 기다려 주세요 :-) =";
+
+
+            isSessionLoading = true;
+
+            loadinglabel.Visible = true;
+            loadinglabel.Text = "세션 유지 시작";
+
+            loadingProgressBar.Visible = true;
+            loadingProgressBar.Value = 0;
 
             browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardLst.jsp?boardid=B200902281833482321051");
 
@@ -1416,34 +1618,59 @@ namespace robot
                 Application.DoEvents();
             }
 
-            browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
+            loadinglabel.Text = "메인 세션 유지 완료";
+            loadingProgressBar.Value += 15;
+
+            browser.Navigate("http://bb.unist.ac.kr/webapps/blackboard/execute/announcement?method=search&context=mybb&handle=my_announcements");
 
             while (browser.ReadyState != WebBrowserReadyState.Complete)
             {
                 Application.DoEvents();
             }
 
-            browser.Navigate("http://library.unist.ac.kr/DLiWeb25Eng/tmaxsso/first_cs.aspx");
+            loadinglabel.Text = "블랙보드 세션 유지 완료";
+            loadingProgressBar.Value += 15;
+
+            browser.Navigate("http://library.unist.ac.kr/");
 
             while (browser.ReadyState != WebBrowserReadyState.Complete)
             {
                 Application.DoEvents();
             }
 
-            browser.Navigate("http://portal.unist.ac.kr/EP/web/security/jsp/SSO_unistMail.jsp");
+            loadinglabel.Text = "도서관 세션 유지 완료";
+            loadingProgressBar.Value += 15;
+
+            browser.Navigate("http://mail.unist.ac.kr/");
 
             while (browser.ReadyState != WebBrowserReadyState.Complete)
             {
                 Application.DoEvents();
             }
+
+            loadinglabel.Text = "전자우편 세션 유지 완료";
+            loadingProgressBar.Value =loadingProgressBar.Maximum;
 
             isLoading = false;
-
-            sayTimer.Start();
+            isSessionLoading = false;
+            
             randomSayLabel();
 
-            circularProgress1.IsRunning = false;
-            circularProgress1.Visible = false;
+            loadingProgressBar.Visible = false;
+            loadinglabel.Visible = false;
+
+            System.Web.UI.WebControls.GridViewSelectEventArgs ee = new System.Web.UI.WebControls.GridViewSelectEventArgs(1);
+            boardGrid_SelectionChanged(boardGrid, ee);
+
+            mailBox.Visible = true;
+            settingBox.Visible = true;
+            weatherBox.Visible = true;
+            notifyBox.Visible = true;
+            reloadBox.Visible = true;
+
+            sayTimer.Start();
+
+            visiblePortal();
         }
 
         /**********************************************************
@@ -1461,6 +1688,12 @@ namespace robot
         {
             weatherTip.SetToolTip(sender as Control, weather.weather);
         }
+
+        /**********************************************************
+         * 
+         *  트레이 메뉴 클릭시 기능
+         *  
+         **********************************************************/
 
         private void 학사공지ToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -1515,6 +1748,11 @@ namespace robot
             System.Diagnostics.Process.Start("http://portal.unist.ac.kr");
         }
 
+        private void uNIST웹메일ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            System.Diagnostics.Process.Start("https://mail.unist.ac.kr/user/login.crd?charset=EUC-KR&my_char_set=default&result=&login_fail=null&encodeChallenge=true&locale=ko&userid=" + Program.id + "&userdomain=unist.ac.kr&userpass=" + MD5HashFunc(Program.password));
+        }
+
         private void 네이트총재클럽ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("http://club.cyworld.com/ClubV1/Home.cy/53814181");
@@ -1522,16 +1760,163 @@ namespace robot
 
         private void notifyBox_Click(object sender, EventArgs e)
         {
-            if (alarmFormExist == true)
+            if (alarmForm.Visible == true)
             {
                 MessageBox.Show("창이 이미 열려 있습니다 :(", "Robot의 경고");
                 return;
             }
 
-            if (alarmFormExist == false)
-                alarmFormExist = true;
-
             alarmForm.Show();
         }
+
+        /**********************************************************
+         * 
+         *  처음 폼 로드시 트레이 메뉴에 로딩중, 종료 만 추가
+         *  
+         **********************************************************/
+
+        private void MainForm_Load(object sender, EventArgs e)
+        {
+            trayMenuStripFirst = new ContextMenuStrip();
+
+            ToolStripMenuItem loadingToolStripMenuItem = new ToolStripMenuItem();
+            ToolStripMenuItem stopLoadingToolStripMenuItem = new ToolStripMenuItem();
+
+            loadingToolStripMenuItem.Name = "loadingToolStripMenuItem";
+            loadingToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            loadingToolStripMenuItem.Text = "로딩중...";
+
+            stopLoadingToolStripMenuItem.Name = "stopLoadingToolStripMenuItem";
+            stopLoadingToolStripMenuItem.Size = new System.Drawing.Size(122, 22);
+            stopLoadingToolStripMenuItem.Text = "종료";
+            stopLoadingToolStripMenuItem.Click += new System.EventHandler(종료ToolStripMenuItem_Click);
+            
+            trayMenuStripFirst.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+                loadingToolStripMenuItem,
+                stopLoadingToolStripMenuItem});
+
+            this.trayMenuStrip.Name = "trayMenuStripFirst";
+            this.trayMenuStrip.Size = new System.Drawing.Size(123, 136);
+            this.trayMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.trayMenuStrip_Opening);
+
+            trayIcon.ContextMenuStrip = trayMenuStripFirst;
+        }
+
+        private void 개인알람ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            alarmForm.Visible = true;
+        }
+
+        /**********************************************************
+         * 
+         *  reload 버튼 클릭
+         *  
+         **********************************************************/
+
+        private void reloadBox_Click(object sender, EventArgs e)
+        {
+            if (isError == true)
+            {
+                return;
+            }
+
+            mailBox.Visible = false;
+            settingBox.Visible = false;
+            weatherBox.Visible = false;
+            notifyBox.Visible = false;
+            reloadBox.Visible = false;
+
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && isError == false)
+            {
+                isError = true;
+
+                MessageBox.Show("인터넷 연결에 문제가 있습니다.\r\n 프로그램을 종료합니다. :^(", "Robot의 경고");
+                System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
+                foreach (System.Diagnostics.Process p in mProcess)
+                    p.Kill();
+            }
+
+            visibleLoading();
+
+            isLoading = true;
+
+            sayTimer.Stop();
+            sayLabel.Text = "= 세션 유지를 위한 로딩이 진행 중입니다. 잠시만 기다려 주세요 :-) =";
+
+
+            isSessionLoading = true;
+
+            loadinglabel.Visible = true;
+            loadinglabel.Text = "세션 유지 시작";
+
+            loadingProgressBar.Visible = true;
+            loadingProgressBar.Value = 0;
+
+            browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardLst.jsp?boardid=B200902281833482321051");
+
+            while (browser.ReadyState != WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
+
+            loadinglabel.Text = "메인 세션 유지 완료";
+            portal.setBoard1();
+            loadingProgressBar.Value += 15;
+
+            browser.Navigate("http://bb.unist.ac.kr/webapps/blackboard/execute/announcement?method=search&context=mybb&handle=my_announcements");
+
+            while (browser.ReadyState != WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
+
+            loadinglabel.Text = "블랙보드 세션 유지 완료";
+            portal.setBoard2();
+            loadingProgressBar.Value += 15;
+
+            browser.Navigate("http://library.unist.ac.kr/");
+
+            while (browser.ReadyState != WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
+
+            loadinglabel.Text = "도서관 세션 유지 완료";
+            portal.setBoard3();
+            loadingProgressBar.Value += 15;
+
+            browser.Navigate("http://mail.unist.ac.kr/");
+
+            while (browser.ReadyState != WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
+
+            loadinglabel.Text = "전자우편 세션 유지 완료";
+            portal.setBoard4();
+            loadingProgressBar.Value = loadingProgressBar.Maximum;
+
+            isLoading = false;
+            isSessionLoading = false;
+
+            randomSayLabel();
+
+            loadingProgressBar.Visible = false;
+            loadinglabel.Visible = false;
+
+            System.Web.UI.WebControls.GridViewSelectEventArgs ee = new System.Web.UI.WebControls.GridViewSelectEventArgs(1);
+            boardGrid_SelectionChanged(boardGrid, ee);
+
+            mailBox.Visible = true;
+            settingBox.Visible = true;
+            weatherBox.Visible = true;
+            notifyBox.Visible = true;
+            reloadBox.Visible = true;
+
+            sayTimer.Start();
+
+            visiblePortal();
+        }
+
     }
 }

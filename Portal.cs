@@ -48,10 +48,12 @@ namespace robot
         Uri uri;
 
         TaskbarNotifier taskbarNotifier;
+        MainForm mainForm;
 
-        public Portal(string cookie)
+        public Portal(string cookie, MainForm mainForm)
         {
             this.cookie = cookie;
+            this.mainForm = mainForm;
 
             // board 초기화
             for (int i = 0; i < PAGENUM * 10; i++)
@@ -83,24 +85,77 @@ namespace robot
             taskbarNotifier.Show("새 글 알리미", "\n포탈 공지의 새 글을\n 알려줍니다 :)", 500, 3000, 500);
         }
 
+        public void setBoard1()
+        {
+            setBoard(board1, a1, 1, 3);
+        }
+
+        public void setBoard2()
+        {
+            setBoard(board2, a2, 1, 3);
+        }
+
+        public void setBoard3()
+        {
+            setBoard(board3, a3, 1, 3);
+        }
+
+        public void setBoard4()
+        {
+            setLastestBoard(1, 3);
+        }
+
+
         // 클래스 이름으로 htmlelment 받는 함수
         static IEnumerable<IHTMLElement> ElementsByClass(IHTMLDocument2 doc, string className)
         {
             foreach (IHTMLElement e in doc.all)
                 if (e is mshtml.IHTMLTableCell)
-                    if(e.className==className)
+                    if (e.className == className)
                         yield return e;
         }
 
-        private HttpWebResponse getRespose(String url)
+        private bool getResponse(String url)
         {
-            uri = new Uri(url);
-            wReq = (HttpWebRequest)WebRequest.Create(uri);
-            wReq.Method = "GET";
-            wReq.CookieContainer = new CookieContainer();
-            wReq.CookieContainer.SetCookies(uri, cookie);
+            try
+            {
+                uri = new Uri(url);
+                wReq = (HttpWebRequest)WebRequest.Create(uri);
+                wReq.Method = "GET";
+                wReq.CookieContainer = new CookieContainer();
+                wReq.CookieContainer.SetCookies(uri, cookie);
 
-            return (HttpWebResponse)wReq.GetResponse();
+                using (wRes = (HttpWebResponse)wReq.GetResponse())
+                {
+                    Stream respPostStream = wRes.GetResponseStream();
+                    StreamReader readerPost = new StreamReader(respPostStream, Encoding.Default);
+
+                    resResult = readerPost.ReadToEnd();
+                }
+
+                return true;
+            }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.ProtocolError && ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        // Do something
+                    }
+                    else
+                    {
+                        // Do something else
+                    }
+                }
+                else
+                {
+                    // Do something else
+                }
+
+                return false;
+            }
         }
 
         public PortalBoard[] getBoard(int boardId)
@@ -120,7 +175,7 @@ namespace robot
             return board1;
         }
 
-        public string getBoardId(int boardId, int index=0)
+        public string getBoardId(int boardId, int index = 0)
         {
             switch (boardId)
             {
@@ -148,7 +203,7 @@ namespace robot
                 case 3:
                     return board3[index].bullId;
                 case 4:
-                    return board4[index].bullId;;
+                    return board4[index].bullId; ;
             }
 
             return "";
@@ -180,13 +235,8 @@ namespace robot
                 MainForm.gridView.Columns[4].HeaderText = "게시판";
 
                 string url = "http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_MyBoardLst.jsp?nfirst=" + pageNum;
-                wRes = getRespose(url);
-
-                // http 내용 추출
-                Stream respPostStream = wRes.GetResponseStream();
-                StreamReader readerPost = new StreamReader(respPostStream, Encoding.Default);
-
-                resResult = readerPost.ReadToEnd();
+                if (!getResponse(url))
+                    return;
 
                 doc = (IHTMLDocument2)new HTMLDocument();
                 doc.clear();
@@ -203,7 +253,7 @@ namespace robot
                 {
                     string[] rows = new string[5];
                     IHTMLElement title = titles.ElementAt(i);
-                    
+
                     int titleLen = 30;
 
                     if (title.innerText.Count() > titleLen)
@@ -234,6 +284,11 @@ namespace robot
                     board4[index].bullId = title.innerHTML.Substring(title.innerHTML.IndexOf("bullid=")).Substring(7);
                     board4[index].bullId = board4[index].bullId.Substring(0, board4[index].bullId.IndexOf("&"));
                 }
+
+                if (docNum / 11 != 10)
+                {
+                    return;
+                }
             }
         }
 
@@ -245,6 +300,8 @@ namespace robot
                 return;
             else
             {
+                taskbarNotifier.Click += new System.EventHandler(contentClick);
+
                 for (int i = 0; i < diffCount; i++)
                 {
                     // 학사 공지
@@ -258,6 +315,7 @@ namespace robot
                         board1[0] = new_board4[i];
 
                         taskbarNotifier.Show("학사 공지", board1[0].rows[1], 500, 3000, 500);
+                        
                     }
                     // 전체 공지
                     else if (new_board4[i].boardId == "B200902281833016691048")
@@ -287,19 +345,11 @@ namespace robot
             }
         }
 
-        void CloseClick(object obj, EventArgs ea)
+        private void contentClick(object sender, EventArgs e)
         {
-            MessageBox.Show("Closed was Clicked");
-        }
+            mainForm.Visible = true;
 
-        void TitleClick(object obj, EventArgs ea)
-        {
-            MessageBox.Show("Title was Clicked");
-        }
-
-        void ContentClick(object obj, EventArgs ea)
-        {
-            MessageBox.Show("Content was Clicked");
+            mainForm.visiblePortal();
         }
 
         private int setNewLastestBoard()
@@ -308,17 +358,12 @@ namespace robot
 
             for (int i = 0; i < PAGENUM * 10; i++)
                 new_board4[i] = new PortalBoard();
-            
+
             for (int pageNum = 0; pageNum <= PAGENUM; pageNum++)
             {
                 string url = "http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_MyBoardLst.jsp?nfirst=" + pageNum;
-                wRes = getRespose(url);
-
-                // http 내용 추출
-                Stream respPostStream = wRes.GetResponseStream();
-                StreamReader readerPost = new StreamReader(respPostStream, Encoding.Default);
-
-                resResult = readerPost.ReadToEnd();
+                if (!getResponse(url))
+                    return 0;
 
                 doc = (IHTMLDocument2)new HTMLDocument();
                 doc.clear();
@@ -377,20 +422,15 @@ namespace robot
             return diffCount;
         }
 
-        private void setBoard(PortalBoard[] board, string boardId, int sPage, int ePage) 
+        private void setBoard(PortalBoard[] board, string boardId, int sPage, int ePage)
         {
             MainForm.gridView.Columns[4].HeaderText = "조회수";
 
             for (int pageNum = sPage; pageNum <= ePage; pageNum++)
             {
                 string url = "http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardLst.jsp?boardid=" + boardId + "&nfirst=" + pageNum;
-                wRes = getRespose(url);
-
-                // http 내용 추출
-                Stream respPostStream = wRes.GetResponseStream();
-                StreamReader readerPost = new StreamReader(respPostStream, Encoding.Default);
-
-                resResult = readerPost.ReadToEnd();
+                if (!getResponse(url))
+                    return;
 
                 doc = (IHTMLDocument2)new HTMLDocument();
                 doc.clear();
@@ -407,13 +447,13 @@ namespace robot
                 {
                     string[] rows = new string[5];
                     IHTMLElement title = titles.ElementAt(i);
-                    
+
                     rows[0] = "";
                     rows[1] = title.innerText;
                     rows[2] = elements.ElementAt(i * BOARDTAGNUM + 5).innerText;
                     rows[3] = elements.ElementAt(i * BOARDTAGNUM + 7).innerText;
                     rows[4] = elements.ElementAt(i * BOARDTAGNUM + 9).innerText;
-                    
+
                     index = (pageNum - 1) * 10 + i;
 
                     // new 체크
@@ -442,7 +482,7 @@ namespace robot
                     string javaUrl = title.innerHTML.Substring(title.innerHTML.IndexOf("javascript:"));
                     board[index].bullId = javaUrl.Split('\"')[1];
 
-                    IHTMLElement font = (IHTMLElement)((IHTMLElement2)title).getElementsByTagName("font").item(0,0);
+                    IHTMLElement font = (IHTMLElement)((IHTMLElement2)title).getElementsByTagName("font").item(0, 0);
 
                     if (font.getAttribute("color") != null)
                     {

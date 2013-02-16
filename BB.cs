@@ -31,7 +31,7 @@ namespace robot
             doc = browser.Document as HtmlDocument;
             HtmlElementCollection options = doc.GetElementsByTagName("Option");
 
-            int removeCount=0;
+            int removeCount = 0;
 
             for (int i = 0; i < options.Count; i++)
             {
@@ -116,14 +116,14 @@ namespace robot
             {
                 bbsideBar[i] = new DevComponents.DotNetBar.SideBar();
                 bbsideItem[i] = new DevComponents.DotNetBar.SideBarPanelItem();
-                
-                DevComponents.DotNetBar.ButtonItem[] bbSideButton=new DevComponents.DotNetBar.ButtonItem[board[i].menu.Count];
+
+                DevComponents.DotNetBar.ButtonItem[] bbSideButton = new DevComponents.DotNetBar.ButtonItem[board[i].menu.Count];
 
                 for (int j = 0; j < board[i].menu.Count; j++)
                 {
                     bbSideButton[j] = new DevComponents.DotNetBar.ButtonItem();
                     bbSideButton[j].ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-                    bbSideButton[j].Name = "bbSideButton"+i.ToString()+j.ToString();
+                    bbSideButton[j].Name = "bbSideButton" + i.ToString() + j.ToString();
                     bbSideButton[j].Text = board[i].menu[j];
                     bbSideButton[j].Click += new System.EventHandler(board[i].bbSideItem_click);
 

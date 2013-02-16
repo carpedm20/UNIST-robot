@@ -47,11 +47,13 @@
             // 
             this.contentText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.contentText.ForeColor = System.Drawing.Color.Black;
-            this.contentText.Location = new System.Drawing.Point(14, 86);
+            this.contentText.Location = new System.Drawing.Point(14, 84);
             this.contentText.Multiline = true;
             this.contentText.Name = "contentText";
-            this.contentText.Size = new System.Drawing.Size(228, 58);
+            this.contentText.Size = new System.Drawing.Size(228, 77);
             this.contentText.TabIndex = 3;
+            this.contentText.Text = "여러분의 할 일을 잊지 않도록\r\n \r\n알림을 예약해 두세요 :^)";
+            this.contentText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.contentText_KeyDown);
             // 
             // label2
             // 
@@ -68,10 +70,10 @@
             // 
             this.reserveBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.reserveBtn.ForeColor = System.Drawing.Color.Black;
-            this.reserveBtn.Location = new System.Drawing.Point(167, 150);
+            this.reserveBtn.Location = new System.Drawing.Point(167, 169);
             this.reserveBtn.Name = "reserveBtn";
             this.reserveBtn.Size = new System.Drawing.Size(75, 26);
-            this.reserveBtn.TabIndex = 5;
+            this.reserveBtn.TabIndex = 4;
             this.reserveBtn.Text = "예약";
             this.reserveBtn.UseVisualStyleBackColor = false;
             this.reserveBtn.Click += new System.EventHandler(this.reserveBtn_Click);
@@ -92,7 +94,7 @@
             this.hourPicker.Name = "hourPicker";
             this.hourPicker.ShowUpDown = true;
             this.hourPicker.Size = new System.Drawing.Size(63, 21);
-            this.hourPicker.TabIndex = 6;
+            this.hourPicker.TabIndex = 1;
             // 
             // label3
             // 
@@ -121,7 +123,7 @@
             this.minPicker.Name = "minPicker";
             this.minPicker.ShowUpDown = true;
             this.minPicker.Size = new System.Drawing.Size(63, 21);
-            this.minPicker.TabIndex = 8;
+            this.minPicker.TabIndex = 2;
             // 
             // label4
             // 
@@ -154,7 +156,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(22, 157);
+            this.label1.Location = new System.Drawing.Point(22, 176);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(85, 12);
             this.label1.TabIndex = 11;
@@ -165,7 +167,7 @@
             this.countLabel.AutoSize = true;
             this.countLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.countLabel.ForeColor = System.Drawing.Color.Black;
-            this.countLabel.Location = new System.Drawing.Point(112, 158);
+            this.countLabel.Location = new System.Drawing.Point(112, 177);
             this.countLabel.Name = "countLabel";
             this.countLabel.Size = new System.Drawing.Size(27, 12);
             this.countLabel.TabIndex = 12;
@@ -175,7 +177,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(257, 186);
+            this.ClientSize = new System.Drawing.Size(257, 208);
             this.Controls.Add(this.countLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);
@@ -188,7 +190,7 @@
             this.MinimizeBox = false;
             this.Name = "AlarmForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Alarm";
+            this.Text = "개인 알림";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.AlarmForm_FormClosing);
             this.VisibleChanged += new System.EventHandler(this.AlarmForm_VisibleChanged);
             ((System.ComponentModel.ISupportInitialize)(this.hourPicker)).EndInit();

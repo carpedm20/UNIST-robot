@@ -56,8 +56,7 @@ namespace robot
             if (wRes.StatusDescription == "OK")
             {
                 MessageBox.Show("성공적으로 전송 되었습니다 ;)");
-                MainForm.mailFormExist = false;
-                this.Close();
+                this.Visible = false;
             }
 
             else
@@ -113,7 +112,8 @@ namespace robot
 
         private void MailForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            MainForm.mailFormExist = false;
+            this.Visible = false;
+            e.Cancel = true;
         }
 
         private void contentText_KeyDown(object sender, KeyEventArgs e)

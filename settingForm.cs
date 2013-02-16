@@ -22,6 +22,10 @@ namespace robot
             loginSwitch = this.autoLoginSwitch;
             sayswitch = this.saySwitch;
 
+            alarmTip.SetToolTip(alarmLabel, "새 글 알림 기능을 끄고 켤 수 있습니다 :-(");
+            autoLoginTip.SetToolTip(autoLoginLabel, "자동 로그인 기능을 끄고 켤 수 있습니다 :-|");
+            sayTip.SetToolTip(sayLabel, "랜덤 명언을 보이거나 안보이게 할 수 있습니다 :-)");
+            
             autologin = new AutoLogin();
         }
 
@@ -100,10 +104,14 @@ namespace robot
         {
             if (MainForm.isExiting == false)
             {
-                MainForm.settingFormExist = false;
                 this.Visible = false;
                 e.Cancel = true;
             }
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Created by Kim Tae Hoon ಠ_ಠ", ":^)");
         }
     }
 }

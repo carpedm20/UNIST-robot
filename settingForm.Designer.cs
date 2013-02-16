@@ -28,16 +28,20 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingForm));
             this.startProgramSwitch = new DevComponents.DotNetBar.Controls.SwitchButton();
             this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
+            this.alarmLabel = new System.Windows.Forms.Label();
             this.alarmSwitch = new DevComponents.DotNetBar.Controls.SwitchButton();
-            this.label3 = new System.Windows.Forms.Label();
+            this.autoLoginLabel = new System.Windows.Forms.Label();
             this.autoLoginSwitch = new DevComponents.DotNetBar.Controls.SwitchButton();
             this.saySwitch = new DevComponents.DotNetBar.Controls.SwitchButton();
-            this.label4 = new System.Windows.Forms.Label();
+            this.sayLabel = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
+            this.autoLoginTip = new System.Windows.Forms.ToolTip(this.components);
+            this.alarmTip = new System.Windows.Forms.ToolTip(this.components);
+            this.sayTip = new System.Windows.Forms.ToolTip(this.components);
             this.SuspendLayout();
             // 
             // startProgramSwitch
@@ -70,16 +74,16 @@
             this.label1.Text = "시작 프로그램 등록";
             this.label1.Visible = false;
             // 
-            // label2
+            // alarmLabel
             // 
-            this.label2.AutoSize = true;
-            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(12, 18);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(73, 12);
-            this.label2.TabIndex = 2;
-            this.label2.Text = "새 글 알리미";
+            this.alarmLabel.AutoSize = true;
+            this.alarmLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.alarmLabel.ForeColor = System.Drawing.Color.Black;
+            this.alarmLabel.Location = new System.Drawing.Point(12, 18);
+            this.alarmLabel.Name = "alarmLabel";
+            this.alarmLabel.Size = new System.Drawing.Size(73, 12);
+            this.alarmLabel.TabIndex = 2;
+            this.alarmLabel.Text = "새 글 알리미";
             // 
             // alarmSwitch
             // 
@@ -100,16 +104,16 @@
             this.alarmSwitch.ValueObject = "Y";
             this.alarmSwitch.ValueChanged += new System.EventHandler(this.alarmSwitch_ValueChanged);
             // 
-            // label3
+            // autoLoginLabel
             // 
-            this.label3.AutoSize = true;
-            this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(12, 56);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(69, 12);
-            this.label3.TabIndex = 4;
-            this.label3.Text = "자동 로그인";
+            this.autoLoginLabel.AutoSize = true;
+            this.autoLoginLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.autoLoginLabel.ForeColor = System.Drawing.Color.Black;
+            this.autoLoginLabel.Location = new System.Drawing.Point(12, 56);
+            this.autoLoginLabel.Name = "autoLoginLabel";
+            this.autoLoginLabel.Size = new System.Drawing.Size(69, 12);
+            this.autoLoginLabel.TabIndex = 4;
+            this.autoLoginLabel.Text = "자동 로그인";
             // 
             // autoLoginSwitch
             // 
@@ -147,16 +151,16 @@
             this.saySwitch.ValueObject = "Y";
             this.saySwitch.ValueChanged += new System.EventHandler(this.saySwitch_ValueChanged);
             // 
-            // label4
+            // sayLabel
             // 
-            this.label4.AutoSize = true;
-            this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(12, 95);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(97, 12);
-            this.label4.TabIndex = 7;
-            this.label4.Text = "랜덤 명언 보이기";
+            this.sayLabel.AutoSize = true;
+            this.sayLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.sayLabel.ForeColor = System.Drawing.Color.Black;
+            this.sayLabel.Location = new System.Drawing.Point(12, 95);
+            this.sayLabel.Name = "sayLabel";
+            this.sayLabel.Size = new System.Drawing.Size(97, 12);
+            this.sayLabel.TabIndex = 7;
+            this.sayLabel.Text = "랜덤 명언 보이기";
             // 
             // label5
             // 
@@ -169,6 +173,7 @@
             this.label5.Size = new System.Drawing.Size(174, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "Created by carpedm20.";
+            this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
             // SettingForm
             // 
@@ -176,12 +181,12 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(233, 163);
             this.Controls.Add(this.label5);
-            this.Controls.Add(this.label4);
+            this.Controls.Add(this.sayLabel);
             this.Controls.Add(this.saySwitch);
             this.Controls.Add(this.autoLoginSwitch);
-            this.Controls.Add(this.label3);
+            this.Controls.Add(this.autoLoginLabel);
             this.Controls.Add(this.alarmSwitch);
-            this.Controls.Add(this.label2);
+            this.Controls.Add(this.alarmLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.startProgramSwitch);
             this.DoubleBuffered = true;
@@ -203,12 +208,15 @@
 
         private DevComponents.DotNetBar.Controls.SwitchButton startProgramSwitch;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label alarmLabel;
         private DevComponents.DotNetBar.Controls.SwitchButton alarmSwitch;
-        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Label autoLoginLabel;
         private DevComponents.DotNetBar.Controls.SwitchButton autoLoginSwitch;
         private DevComponents.DotNetBar.Controls.SwitchButton saySwitch;
-        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Label sayLabel;
         private System.Windows.Forms.Label label5;
+        private System.Windows.Forms.ToolTip autoLoginTip;
+        private System.Windows.Forms.ToolTip alarmTip;
+        private System.Windows.Forms.ToolTip sayTip;
     }
 }

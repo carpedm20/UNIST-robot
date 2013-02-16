@@ -45,7 +45,7 @@
             this.contentText.Multiline = true;
             this.contentText.Name = "contentText";
             this.contentText.Size = new System.Drawing.Size(261, 140);
-            this.contentText.TabIndex = 0;
+            this.contentText.TabIndex = 3;
             this.contentText.Text = "carpedm20@gmail.com 으로\r\n\r\n버그, 건의 사항 및 기타 의견을 보내주세요~\r\n\r\n여러분의 의견, 언제나 환영합니다 :)";
             this.contentText.TextChanged += new System.EventHandler(this.contentText_TextChanged);
             this.contentText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.contentText_KeyDown);
@@ -92,7 +92,7 @@
             this.toBox.Location = new System.Drawing.Point(50, 27);
             this.toBox.Name = "toBox";
             this.toBox.Size = new System.Drawing.Size(223, 21);
-            this.toBox.TabIndex = 4;
+            this.toBox.TabIndex = 2;
             this.toBox.Text = "carpedm20@gmail.com";
             this.toBox.TextChanged += new System.EventHandler(this.toBox_TextChanged);
             // 

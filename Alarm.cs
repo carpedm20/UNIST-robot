@@ -97,17 +97,21 @@ namespace robot
         {
             if (this.Visible == true)
             {
-                contentText.Text = "";
                 hourPicker.Value = 0;
                 minPicker.Value = 0;
 
                 countLabel.Text = taskCount.ToString() + "개";
-                MainForm.alarmFormExist = true;
             }
-
-            else
+        }
+        
+        private void contentText_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Control)
             {
-                MainForm.alarmFormExist = false;
+                if (e.KeyCode == Keys.A)
+                {
+                    contentText.SelectAll();
+                }
             }
         }
     }

@@ -60,13 +60,10 @@ namespace robot
             bookQuery = queryMake();
 
             string url = "http://library.unist.ac.kr/DLiWeb25Eng/comp/search/Results.aspx?" + bookQuery;
-            wRes = getRespose(url);
-
-            // http 내용 추출
-            Stream respPostStream = wRes.GetResponseStream();
-            StreamReader readerPost = new StreamReader(respPostStream);
-
-            resResult = readerPost.ReadToEnd();
+            if (!getResponse(url))
+            {
+                return;
+            }
 
             doc = (IHTMLDocument2)new HTMLDocument();
             doc.clear();
@@ -118,7 +115,7 @@ namespace robot
                     rows[4] = books[i].kind = ((IHTMLElement)(cclasses.ElementAt(i))).innerText.Replace("/ ", "");
                 else
                     rows[3] = books[i].publishYear = "";
-                
+
                 books[i].isbn = html.Substring(html.IndexOf("isbn\">")).Split('>')[1].Split('<')[0];
 
                 IHTMLElement cid = (IHTMLElement)(((IHTMLElement2)elements.ElementAt(i)).getElementsByTagName("input").item(0, 0));
@@ -143,13 +140,11 @@ namespace robot
             // | 번호 | 등록 번호 | 소장 위치 | 도서 상태 | 청구 기호 | 출력 |
 
             string url = "http://library.unist.ac.kr/DLiWeb25Eng/comp/search/SearchHandler.aspx?action=stock&cid=" + cid;
-            wRes = getRespose(url);
 
-            // http 내용 추출
-            Stream respPostStream = wRes.GetResponseStream();
-            StreamReader readerPost = new StreamReader(respPostStream);
-
-            resResult = readerPost.ReadToEnd();
+            if (!getResponse(url))
+            {
+                return null;
+            }
 
             doc = (IHTMLDocument2)new HTMLDocument();
             doc.clear();
@@ -162,10 +157,11 @@ namespace robot
             IEnumerator<IHTMLElement> enumerator = e.GetEnumerator();
 
             string[] rows = new string[(e.Count() - 1) * 4];
-            int count=0;
+            int count = 0;
 
             enumerator.MoveNext();
-            while(enumerator.MoveNext()) {
+            while (enumerator.MoveNext())
+            {
                 IHTMLElement2 e2 = (IHTMLElement2)enumerator.Current;
                 rows[count++] = ((IHTMLElement)(e2.getElementsByTagName("td").item(3, 0))).innerText;
                 rows[count++] = ((IHTMLElement)(e2.getElementsByTagName("td").item(2, 0))).innerText;
@@ -267,23 +263,55 @@ namespace robot
             return query; // 최종 쿼리 넘겨줌
         }
 
-        private HttpWebResponse getRespose(String url)
+        private bool getResponse(String url)
         {
-            uri = new Uri(url);
-            wReq = (HttpWebRequest)WebRequest.Create(uri);
-            wReq.Method = "GET";
-            wReq.CookieContainer = new CookieContainer();
-            wReq.CookieContainer.SetCookies(uri, cookie);
+            try
+            {
+                uri = new Uri(url);
+                wReq = (HttpWebRequest)WebRequest.Create(uri);
+                wReq.Method = "GET";
+                wReq.CookieContainer = new CookieContainer();
+                wReq.CookieContainer.SetCookies(uri, cookie);
 
-            return (HttpWebResponse)wReq.GetResponse();
+                using (wRes = (HttpWebResponse)wReq.GetResponse())
+                {
+                    Stream respPostStream = wRes.GetResponseStream();
+                    StreamReader readerPost = new StreamReader(respPostStream);
+
+                    resResult = readerPost.ReadToEnd();
+                }
+
+                return true;
+            }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.ProtocolError && ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        // Do something
+                    }
+                    else
+                    {
+                        // Do something else
+                    }
+                }
+                else
+                {
+                    // Do something else
+                }
+
+                return false;
+            }
         }
 
         static IEnumerable<IHTMLElement> ElementsByClass(IHTMLDocument2 doc, string className)
         {
             foreach (IHTMLElement e in doc.all)
                 // if (e is mshtml.IHTMLDivElement)
-                    if (e.className == className)
-                        yield return e;
+                if (e.className == className)
+                    yield return e;
         }
 
         static IEnumerable<IHTMLElement> getTableRow(IHTMLDocument2 doc)
@@ -296,22 +324,30 @@ namespace robot
         static IEnumerable<IHTMLElement> getTd(IHTMLDocument2 doc)
         {
             foreach (IHTMLElement e in doc.all)
-                if (((IHTMLElement2)e).getElementsByTagName("td").length==25)
+                if (((IHTMLElement2)e).getElementsByTagName("td").length == 25)
                     yield return e;
         }
 
         public void loadStudyroomStatus(int roomNum, string date) //date : 201302
         {
+            if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable())
+            {
+                MainForm.isError = true;
+
+                Application.Exit();
+                MessageBox.Show("인터넷 연결에 문제가 있습니다.\r\n 프로그램을 종료합니다. :^(", "Robot의 경고");
+                System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
+                foreach (System.Diagnostics.Process p in mProcess)
+                    p.Kill();
+            }
+
             //http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=1
 
-            string url = "http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=" + roomNum.ToString() + "&yearmonth="+date;
-            wRes = getRespose(url);
-
-            // http 내용 추출
-            Stream respPostStream = wRes.GetResponseStream();
-            StreamReader readerPost = new StreamReader(respPostStream);
-
-            resResult = readerPost.ReadToEnd();
+            string url = "http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=" + roomNum.ToString() + "&yearmonth=" + date;
+            if (!getResponse(url))
+            {
+                return;
+            }
 
             doc = (IHTMLDocument2)new HTMLDocument();
             doc.clear();
@@ -322,31 +358,36 @@ namespace robot
             IEnumerator<IHTMLElement> enumerator = e.GetEnumerator();
 
             dayCount = e.Count();
-            roomStat=new string [dayCount][];
+            roomStat = new string[dayCount][];
 
-            for(int i=0; i<roomStat.Length; i++) {
-                roomStat[i]=new string[25];
+            for (int i = 0; i < roomStat.Length; i++)
+            {
+                roomStat[i] = new string[25];
             }
 
-            int count=0;
+            int count = 0;
 
-            while(enumerator.MoveNext()) {
+            while (enumerator.MoveNext())
+            {
                 IHTMLElement2 e2 = (IHTMLElement2)enumerator.Current;
                 roomStat[count][0] = ((IHTMLElement)(e2.getElementsByTagName("td").item(0, 0))).innerText;
 
-                for(int i=1; i<25; i++) {
+                for (int i = 1; i < 25; i++)
+                {
                     IHTMLElement elem = ((IHTMLElement)(e2.getElementsByTagName("td").item(i, 0)));
                     roomStat[count][i] = elem.innerText;
 
-                    if(roomStat[count][i]==null) {
+                    if (roomStat[count][i] == null)
+                    {
                         IHTMLElement img = (IHTMLElement)(((IHTMLElement2)elem).getElementsByTagName("img").item(0));
 
-                        if(img.getAttribute("src").ToString().IndexOf("icoA.gif") !=-1) {
-                            roomStat[count][i]="E";
+                        if (img.getAttribute("src").ToString().IndexOf("icoA.gif") != -1)
+                        {
+                            roomStat[count][i] = "E";
                         }
                         else if (img.getAttribute("src").ToString().IndexOf("icoN.gif") != -1)
                         {
-                            roomStat[count][i]="R";
+                            roomStat[count][i] = "R";
                         }
                     }
                 }

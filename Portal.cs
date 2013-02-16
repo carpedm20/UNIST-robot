@@ -8,6 +8,7 @@ using System.Net;
 using System.Text;
 using System.Windows.Forms;
 using CustomUIControls;
+using System.Web;
 
 namespace robot
 {
@@ -30,10 +31,10 @@ namespace robot
         int BOARDTAGNUM = 13;
         int PAGENUM = 3; // board 배열 선언 숫자 & setBoard의 epage도 바꿔주어야 함
 
-        PortalBoard[] board1 = new PortalBoard[3 * 10];
-        PortalBoard[] board2 = new PortalBoard[3 * 10];
-        PortalBoard[] board3 = new PortalBoard[3 * 10];
-        PortalBoard[] board4 = new PortalBoard[3 * 10];
+        PortalBoard[] board1 = new PortalBoard[10 * 10];
+        PortalBoard[] board2 = new PortalBoard[10 * 10];
+        PortalBoard[] board3 = new PortalBoard[10 * 10];
+        PortalBoard[] board4 = new PortalBoard[10 * 10];
         PortalBoard[] new_board4 = new PortalBoard[3 * 10];
 
         string a1 = "B200902281833482321051";
@@ -56,12 +57,16 @@ namespace robot
             this.mainForm = mainForm;
 
             // board 초기화
-            for (int i = 0; i < PAGENUM * 10; i++)
+            for (int i = 0; i < 10 * 10; i++)
             {
                 board1[i] = new PortalBoard();
                 board2[i] = new PortalBoard();
                 board3[i] = new PortalBoard();
                 board4[i] = new PortalBoard();
+            }
+
+            for (int i = 0; i < 3 * 10; i++)
+            {
                 new_board4[i] = new PortalBoard();
             }
 
@@ -87,22 +92,22 @@ namespace robot
 
         public void setBoard1()
         {
-            setBoard(board1, a1, 1, 3);
+            setBoard(board1, a1, 1, PAGENUM);
         }
 
         public void setBoard2()
         {
-            setBoard(board2, a2, 1, 3);
+            setBoard(board2, a2, 1, PAGENUM);
         }
 
         public void setBoard3()
         {
-            setBoard(board3, a3, 1, 3);
+            setBoard(board3, a3, 1, PAGENUM);
         }
 
         public void setBoard4()
         {
-            setLastestBoard(1, 3);
+            setLastestBoard(1, PAGENUM);
         }
 
 
@@ -221,6 +226,25 @@ namespace robot
                     break;
                 case 3:
                     setBoard(board3, a3, sPage, ePage);
+                    break;
+                case 4:
+                    setLastestBoard(sPage, ePage);
+                    break;
+            }
+        }
+
+        public void searchBoard(int boardId, int sPage = 1, int ePage = 3, string query ="")
+        {
+            switch (boardId)
+            {
+                case 1:
+                    searchBoard(board1, a1, sPage, ePage, query);
+                    break;
+                case 2:
+                    searchBoard(board2, a2, sPage, ePage, query);
+                    break;
+                case 3:
+                    searchBoard(board3, a3, sPage, ePage, query);
                     break;
                 case 4:
                     setLastestBoard(sPage, ePage);
@@ -426,6 +450,11 @@ namespace robot
         {
             MainForm.gridView.Columns[4].HeaderText = "조회수";
 
+            for (int i = 0; i < 10 * 10; i++)
+            {
+                board[i] = new PortalBoard();
+            }
+
             for (int pageNum = sPage; pageNum <= ePage; pageNum++)
             {
                 string url = "http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardLst.jsp?boardid=" + boardId + "&nfirst=" + pageNum;
@@ -442,6 +471,105 @@ namespace robot
 
                 int docNum = elements.Count();
                 int index;
+
+                for (int i = 0; i < docNum / BOARDTAGNUM; i++)
+                {
+                    string[] rows = new string[5];
+                    IHTMLElement title = titles.ElementAt(i);
+
+                    rows[0] = "";
+                    rows[1] = title.innerText;
+                    rows[2] = elements.ElementAt(i * BOARDTAGNUM + 5).innerText;
+                    rows[3] = elements.ElementAt(i * BOARDTAGNUM + 7).innerText;
+                    rows[4] = elements.ElementAt(i * BOARDTAGNUM + 9).innerText;
+
+                    index = (pageNum - 1) * 10 + i;
+
+                    // new 체크
+                    if (((IHTMLElement2)title).getElementsByTagName("img").length > 0)
+                    {
+                        board[index].newPost = true;
+                        rows[0] = "new";
+                    }
+
+                    // 공지 체크
+                    if (((IHTMLElement2)elements.ElementAt(i * BOARDTAGNUM + 1)).getElementsByTagName("img").length > 0)
+                    {
+                        board[index].anouncement = true;
+                        rows[0] = "공지";
+                    }
+
+                    board[index].rows = rows;
+                    //board[index].title = rows[1];
+                    //board[index].writer = rows[2];
+                    //board[index].date = rows[3];
+                    //board[index].viewCount = Convert.ToInt32(rows[4]);
+                    board[index].page = pageNum;
+                    board[index].boardId = boardId;
+
+                    // javascript:clickBulletin("BB201302011329070365135","BB201302011329070365135","BB201302011329070365135","0","N");
+                    string javaUrl = title.innerHTML.Substring(title.innerHTML.IndexOf("javascript:"));
+                    board[index].bullId = javaUrl.Split('\"')[1];
+
+                    IHTMLElement font = (IHTMLElement)((IHTMLElement2)title).getElementsByTagName("font").item(0, 0);
+
+                    if (font.getAttribute("color") != null)
+                    {
+                        board[index].color = ConvertColor_PhotoShopStyle_toRGB((string)font.getAttribute("color"));
+                    }
+
+                    if (title.outerHTML.IndexOf("FONT-WEIGHT: bold") != -1)
+                    {
+                        board[index].bold = true;
+                    }
+                }
+            }
+        }
+
+        /**********************************************************
+         * 
+         *  포탈 검색, EUC-KR 인코딩
+         *  
+         **********************************************************/
+
+        private void searchBoard(PortalBoard[] board, string boardId, int sPage, int ePage, string query)
+        {
+            // http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardLst.jsp?searchcondition=BULLTITLE&searchname=%B0%F8%C1%F6&boardid=B200902281833482321051&nfirst=1
+            MainForm.gridView.Columns[4].HeaderText = "조회수";
+
+            for (int i = 0; i < 10 * 10; i++)
+            {
+                board[i] = new PortalBoard();
+            }
+
+            for (int pageNum = sPage; pageNum <= ePage; pageNum++)
+            {
+                byte[] b = System.Text.Encoding.GetEncoding(51949).GetBytes(query);
+                string result = "";
+
+                foreach (byte ch in b)
+                {
+                    result += ("%" + string.Format("{0:x2} ", ch)); // 2자리의 16진수로 출력, [참고] 링크 읽어볼 것 
+                }
+
+                string url = "http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardLst.jsp?boardid=" + boardId + "&nfirst=" + pageNum 
+                    + "&searchcondition=BULLTITLE&searchname=" + result.Replace(" ","");
+                if (!getResponse(url))
+                    return;
+
+                doc = (IHTMLDocument2)new HTMLDocument();
+                doc.clear();
+                doc.write(resResult);
+                doc.close();
+
+                IEnumerable<IHTMLElement> titles = ElementsByClass(doc, "ltb_left");
+                IEnumerable<IHTMLElement> elements = ElementsByClass(doc, "ltb_center");
+
+                int docNum = elements.Count();
+                int index;
+
+                if (docNum == 0)
+                    return;
 
                 for (int i = 0; i < docNum / BOARDTAGNUM; i++)
                 {

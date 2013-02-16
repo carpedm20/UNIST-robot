@@ -101,6 +101,14 @@ namespace robot
                 minPicker.Value = 0;
 
                 countLabel.Text = taskCount.ToString() + "개";
+
+                MainForm.notifyPic.Visible = false;
+                MainForm.notifyClick.Visible = true;
+            }
+            else
+            {
+                MainForm.notifyPic.Visible = true;
+                MainForm.notifyClick.Visible = false;
             }
         }
         

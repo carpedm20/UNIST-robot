@@ -116,6 +116,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "메일";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MailForm_FormClosing);
+            this.VisibleChanged += new System.EventHandler(this.MailForm_VisibleChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

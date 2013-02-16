@@ -25,6 +25,7 @@ namespace robot
         string bookReviewUrl = "";
 
         /****************************/
+
         static public bool isLoading = true;
         bool isSessionLoading = false;
         static public bool isExiting = false;
@@ -39,6 +40,8 @@ namespace robot
 
         Portal portal;
         int currentBoardId = 1;
+        int[] currentBoardMaxNum; // 1, 2, 3 만 사용
+        string[] currentBoardSearchQuery; // 1, 2, 3 만 사용
         BB bb;
         Library library;
 
@@ -55,6 +58,13 @@ namespace robot
         static public AlarmForm alarmForm;
         static public ProgressBar loadingprogress;
         static public Label loadinglabel;
+
+        static public PictureBox weatherClick;
+        static public PictureBox notifyPic;
+        static public PictureBox notifyClick;
+        static public PictureBox mailClick;
+        static public PictureBox reloadClick;
+        static public PictureBox settingClick;
 
         static public bool alarmSet = false;
 
@@ -86,6 +96,17 @@ namespace robot
             loadingLabel.Text = "구성 요소 준비중";
             loadingProgressBar.Value += 5;
 
+            currentBoardMaxNum = new int[4];
+            for (int i = 0; i < 4; i++)
+            {
+                currentBoardMaxNum[i] = 3;
+            }
+            currentBoardSearchQuery = new string[4]; 
+            for (int i = 0; i < 4; i++)
+            {
+                currentBoardSearchQuery[i] = "";
+            }
+
             // 브라우저 스크립트 에러 무시
             browser.ScriptErrorsSuppressed = true;
 
@@ -97,6 +118,25 @@ namespace robot
             saylabel = this.sayLabel;
             loadingprogress = this.loadingProgressBar;
             loadinglabel = this.loadingLabel;
+
+            weatherClick = this.weatherClickBox;
+            notifyPic = this.notifyBox;
+            notifyClick = this.notifyClickBox;
+            mailClick = this.mailClickBox;
+            reloadClick = this.reloadClickBox;
+            settingClick = this.settingClickBox;
+
+            mailBox.Click -= new System.EventHandler(mailBox_Click);
+            settingBox.Click -= new System.EventHandler(settingBox_Click);
+            weatherBox.Click -= new System.EventHandler(weatherBox_Click);
+            notifyBox.Click -= new System.EventHandler(notifyBox_Click);
+            reloadBox.Click -= new System.EventHandler(reloadBox_Click);
+
+            mailBox.Click += new System.EventHandler(loadingPictureBox_Click);
+            settingBox.Click += new System.EventHandler(loadingPictureBox_Click);
+            weatherBox.Click += new System.EventHandler(loadingPictureBox_Click);
+            notifyBox.Click += new System.EventHandler(loadingPictureBox_Click);
+            reloadBox.Click += new System.EventHandler(loadingPictureBox_Click);
 
             browser.Navigate("https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp");
 
@@ -114,6 +154,7 @@ namespace robot
             say = new Say();
             weather = new Weather();
             weatherTip.SetToolTip(weatherBox, weather.weather);
+            weatherTip.SetToolTip(weatherClick, weather.weather);
 
             sayLabel.Text = say.says.ElementAt(0).Key;
             sayToolTip.SetToolTip(sayLabel, say.says.ElementAt(0).Value);
@@ -127,6 +168,9 @@ namespace robot
             mailTip.SetToolTip(mailBox, "메일 보내기");
             settingTip.SetToolTip(settingBox, "설정");
 
+            maxPageNumTip.SetToolTip(maxPageCountLabel, "포탈 공지에서 몇 페이지를 불러올지 정할 수 있습니다 :-)");
+            announceTip.SetToolTip(announceHideCheck, "리스트에서 공지글을 숨길 수 있습니다 :^)");
+            portalSearchTip.SetToolTip(portalSearchLabel, "포탈 공지에서 제목 검색을 할 수 있습니다 ;-)");
             sayTimer.Start();
         }
 
@@ -150,7 +194,72 @@ namespace robot
 
         /**********************************************************
          * 
-         *  게시판 boardGrid
+         *  공지글 숨기기
+         *  
+         **********************************************************/
+
+        private void announceHideCheck_CheckedChanged(object sender, EventArgs e)
+        {
+            if (announceHideCheck.Checked == true)
+            {
+                showBoardGridExceptAnnouncement(currentBoardId);
+            }
+
+            else
+            {
+                showBoardGrid(currentBoardId);
+            }
+        }
+
+        /**********************************************************
+         * 
+         *  최대 공지 페이지 수 integerBox 에서 엔터 키다운 이벤트
+         *  
+         **********************************************************/
+
+        private void maxPageNumBox_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                portalSearchBtn_Click(sender, e);
+            }
+        }
+
+        /**********************************************************
+         * 
+         *  포탈 공지 검색
+         *  
+         **********************************************************/
+
+        private void portalSearchBtn_Click(object sender, EventArgs e)
+        {
+            portalSearchBtn.Enabled = false;
+
+            currentBoardMaxNum[currentBoardId] = maxPageNumBox.Value;
+            currentBoardSearchQuery[currentBoardId]=portalSearchTextBox.Text;
+            portal.searchBoard(currentBoardId, 1, currentBoardMaxNum[currentBoardId], currentBoardSearchQuery[currentBoardId]);
+
+            if (announceHideCheck.Checked == true)
+            {
+                showBoardGridExceptAnnouncement(currentBoardId);
+            }
+
+            else
+            {
+                showBoardGrid(currentBoardId);
+            }
+
+            if (boardGrid.Rows.Count==0)
+            {
+                MessageBox.Show("조건에 만족하는 게시물이 없습니다 :-(", "Robot의 경고");
+            }
+
+            portalSearchBtn.Enabled = true;
+        }
+
+        /**********************************************************
+         * 
+         *  게시판 boardGrid 나열
          *  
          **********************************************************/
 
@@ -177,6 +286,9 @@ namespace robot
 
             foreach (PortalBoard b in boards)
             {
+                if (b.rows == null)
+                    break;
+
                 if (boardId == 4)
                 {
                     if (b.rows == null)
@@ -217,9 +329,101 @@ namespace robot
                 }
             }
 
-            browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid="
-                + portal.getBoardId(currentBoardId) + "&bullid=" + portal.getBoardbullId(currentBoardId, 0));
+            if (boards[0].rows != null)
+            {
+                /*    browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid="
+                        + portal.getBoardId(currentBoardId) + "&bullid=" + portal.getBoardbullId(currentBoardId, 0));*/
+            }
+            else
+                browser.Navigate("");
         }
+
+        /**********************************************************
+         * 
+         *  게시판 boardGrid 공지글 제외하고 나열
+         *  
+         **********************************************************/
+
+        private void showBoardGridExceptAnnouncement(int boardId)
+        {
+            while (boardGrid.Rows.Count != 0)
+            {
+                boardGrid.Rows.RemoveAt(0);
+            }
+
+            currentBoardId = boardId;
+            PortalBoard[] boards = portal.getBoard(boardId);
+            int i = 0;
+
+            if (boardId == 4)
+            {
+                this.Column5.Width = 0;
+            }
+
+            else
+            {
+                this.Column5.Width = 33;
+            }
+
+            foreach (PortalBoard b in boards)
+            {
+                if (b.rows == null)
+                    break;
+
+                if (b.anouncement == true)
+                {
+                    continue;
+                }
+
+                if (boardId == 4)
+                {
+                    if (b.rows == null)
+                        break;
+                    boardGrid.Rows.Add(b.rows);
+                    continue;
+                }
+
+                else
+                {
+                    boardGrid.Rows.Add(b.rows);
+
+                    // 셀 글자 색 추가
+                    if (b.color != Color.Black)
+                    {
+                        // 글자 볼드 추가
+                        if (b.bold == true)
+                        {
+                            boardGrid.Rows[i].Cells[1].Style = new DataGridViewCellStyle
+                            {
+                                ForeColor = b.color,
+                                Font = new Font(boardGrid.DefaultCellStyle.Font, FontStyle.Bold)
+                            };
+                        }
+                        else
+                        {
+                            boardGrid.Rows[i].Cells[1].Style = new DataGridViewCellStyle { ForeColor = b.color };
+                        }
+                    }
+
+                    // 글자 볼드 추가
+                    if (b.bold == true)
+                    {
+                        boardGrid.Rows[i].Cells[1].Style.Font = new Font(boardGrid.DefaultCellStyle.Font, FontStyle.Bold);
+                    }
+
+                    i++;
+                }
+            }
+
+            /*browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid="
+                + portal.getBoardId(currentBoardId) + "&bullid=" + portal.getBoardbullId(currentBoardId, 0));*/
+        }
+
+        /**********************************************************
+         * 
+         *  게시판 boardGrid row 클릭시
+         *  
+         **********************************************************/
 
         private void boardGrid_SelectionChanged(object sender, EventArgs e)
         {
@@ -228,15 +432,29 @@ namespace robot
             if (grid.SelectedRows.Count == 0)
                 return;
 
-            if (currentBoardId == 4)
+            string str = grid.SelectedRows[0].Cells[1].Value.ToString();
+            PortalBoard[] boards=portal.getBoard(currentBoardId);
+            
+            for (int i = 0; i < boards.Length; i++)
             {
-                browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid="
-                   + portal.getBoardId(currentBoardId, grid.SelectedRows[0].Index) + "&bullid=" + portal.getBoardbullId(currentBoardId, grid.SelectedRows[0].Index));
-            }
-            else
-            {
-                browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid="
-                    + portal.getBoardId(currentBoardId) + "&bullid=" + portal.getBoardbullId(currentBoardId, grid.SelectedRows[0].Index));
+                if (boards[i].rows == null)
+                    return;
+
+                if (boards[i].rows[1] == str)
+                {
+                    if (currentBoardId == 4)
+                    {
+                        browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid="
+                           + portal.getBoardId(currentBoardId, i) + "&bullid=" + portal.getBoardbullId(currentBoardId, i));
+                    }
+                    else
+                    {
+                        browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid="
+                            + portal.getBoardId(currentBoardId) + "&bullid=" + portal.getBoardbullId(currentBoardId, i));
+                    }
+
+                    return;
+                }
             }
         }
 
@@ -441,11 +659,18 @@ namespace robot
                     loadingLabel.Visible = false;
                     loadingProgressBar.Visible = false;
 
-                    mailBox.Visible = true;
-                    settingBox.Visible = true;
-                    weatherBox.Visible = true;
-                    notifyBox.Visible = true;
-                    reloadBox.Visible = true;
+                    mailBox.Click += new System.EventHandler(mailBox_Click);
+                    settingBox.Click += new System.EventHandler(settingBox_Click);
+                    weatherBox.Click += new System.EventHandler(weatherBox_Click);
+                    weatherClick.Click += new System.EventHandler(weatherBox_Click);
+                    notifyBox.Click += new System.EventHandler(notifyBox_Click);
+                    reloadBox.Click += new System.EventHandler(reloadBox_Click);
+
+                    mailBox.Click -= new System.EventHandler(loadingPictureBox_Click);
+                    settingBox.Click -= new System.EventHandler(loadingPictureBox_Click);
+                    weatherBox.Click -= new System.EventHandler(loadingPictureBox_Click);
+                    notifyBox.Click -= new System.EventHandler(loadingPictureBox_Click);
+                    reloadBox.Click -= new System.EventHandler(loadingPictureBox_Click);
 
                     visiblePortal();
 
@@ -538,8 +763,7 @@ namespace robot
                 return;
             }
 
-            mailForm = new MailForm(mailCookie);
-            mailForm.Show();
+            mailForm.Visible = true;
         }
 
         /**********************************************************
@@ -1099,27 +1323,87 @@ namespace robot
         // 학사 공지
         private void buttonItem1_Click(object sender, EventArgs e)
         {
+            gridView.Columns[4].HeaderText = "조회수";
+
+            announceHideCheck.Enabled = true;
+            maxPageNumBox.Enabled = true;
+            portalSearchTextBox.Enabled = true;
+            portalSearchBtn.Enabled = true;
+
             visiblePortal();
-            showBoardGrid(1);
+
+            if (announceHideCheck.Checked == false)
+            {
+                showBoardGrid(1);
+            }
+            else
+            {
+                showBoardGridExceptAnnouncement(1);
+            }
+
+            maxPageNumBox.Value = currentBoardMaxNum[1];
+            portalSearchTextBox.Text = currentBoardSearchQuery[1];
         }
 
         // 전체 공지
         private void buttonItem2_Click(object sender, EventArgs e)
         {
-            visiblePortal();
-            showBoardGrid(2);
+            gridView.Columns[4].HeaderText = "조회수";
+
+            announceHideCheck.Enabled = true;
+            maxPageNumBox.Enabled = true;
+            portalSearchTextBox.Enabled = true;
+            portalSearchBtn.Enabled = true;
+
+            visiblePortal(); 
+            
+            if (announceHideCheck.Checked == false)
+            {
+                showBoardGrid(2);
+            }
+            else
+            {
+                showBoardGridExceptAnnouncement(2);
+            }
+
+            maxPageNumBox.Value = currentBoardMaxNum[2];
+            portalSearchTextBox.Text = currentBoardSearchQuery[2];
         }
 
         // 대학원 공지
         private void buttonItem3_Click(object sender, EventArgs e)
         {
+            gridView.Columns[4].HeaderText = "조회수";
+
+            announceHideCheck.Enabled = true;
+            maxPageNumBox.Enabled = true;
+            portalSearchTextBox.Enabled = true;
+            portalSearchBtn.Enabled = true;
+
             visiblePortal();
-            showBoardGrid(3);
+
+            if (announceHideCheck.Checked == false)
+            {
+                showBoardGrid(3);
+            }
+            else
+            {
+                showBoardGridExceptAnnouncement(3);
+            }
+
+            maxPageNumBox.Value = currentBoardMaxNum[3];
+            portalSearchTextBox.Text = currentBoardSearchQuery[3];
         }
 
         // 최신 게시글
         private void buttonItem4_Click(object sender, EventArgs e)
         {
+            gridView.Columns[4].HeaderText = "게시판";
+            announceHideCheck.Enabled = false;
+            maxPageNumBox.Enabled = false;
+            portalSearchTextBox.Enabled = false;
+            portalSearchBtn.Enabled = false;
+
             visiblePortal();
             showBoardGrid(4);
         }
@@ -1144,7 +1428,7 @@ namespace robot
 
             browser.Navigate("http://seat.unist.ac.kr/EZ5500/RoomStatus/room_status.asp");
 
-            boardGrid.Visible = false;
+            portalGroup.Visible = false;
         }
 
         /**********************************************************
@@ -1157,7 +1441,7 @@ namespace robot
         {
             boardSlide.Visible = false;
             browser.Visible = false;
-            boardGrid.Visible = false;
+            portalGroup.Visible = false;
             bbPanel.Visible = false;
             studyGroup.Visible = false;
             bookGroup.Visible = false;
@@ -1174,7 +1458,7 @@ namespace robot
         {
             boardSlide.Visible = true;
             browser.Visible = true;
-            boardGrid.Visible = true;
+            portalGroup.Visible = true;
 
             bbPanel.Visible = false;
             studyGroup.Visible = false;
@@ -1199,7 +1483,7 @@ namespace robot
             browser.Visible = true;
             bbPanel.Visible = true;
 
-            boardGrid.Visible = false;
+            portalGroup.Visible = false;
             studyGroup.Visible = false;
             bookGroup.Visible = false;
             bookInfoGroup.Visible = false;
@@ -1219,7 +1503,7 @@ namespace robot
 
             bbPanel.Visible = false;
             browser.Visible = false;
-            boardGrid.Visible = false;
+            portalGroup.Visible = false;
             studyGroup.Visible = false;
             studyGrid.Visible = false;
             roomNumberLabel.Visible = false;
@@ -1242,7 +1526,7 @@ namespace robot
 
             bbPanel.Visible = false;
             browser.Visible = false;
-            boardGrid.Visible = false;
+            portalGroup.Visible = false;
             bookGroup.Visible = false;
             bookInfoGroup.Visible = false;
         }
@@ -1371,6 +1655,10 @@ namespace robot
             notifyTimer.Stop();
             sessionTimer.Stop();
             sayTimer.Stop();
+
+            mailForm = null;
+            settingForm = null;
+            alarmForm = null;
 
             isExiting = true;
 
@@ -1586,11 +1874,10 @@ namespace robot
                 return;
             }
 
-            mailBox.Visible = false;
-            settingBox.Visible = false;
-            weatherBox.Visible = false;
-            notifyBox.Visible = false;
-            reloadBox.Visible = false;
+            mailBox.Enabled = false;
+            settingBox.Enabled = false;
+            notifyBox.Enabled = false;
+            reloadBox.Enabled = false;
 
             if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && isError == false)
             {
@@ -1608,8 +1895,7 @@ namespace robot
 
             sayTimer.Stop();
             sayLabel.Text = "= 세션 유지를 위한 로딩이 진행 중입니다. 잠시만 기다려 주세요 :-) =";
-
-
+            
             isSessionLoading = true;
 
             loadinglabel.Visible = true;
@@ -1669,11 +1955,10 @@ namespace robot
             System.Web.UI.WebControls.GridViewSelectEventArgs ee = new System.Web.UI.WebControls.GridViewSelectEventArgs(1);
             boardGrid_SelectionChanged(boardGrid, ee);
 
-            mailBox.Visible = true;
-            settingBox.Visible = true;
-            weatherBox.Visible = true;
-            notifyBox.Visible = true;
-            reloadBox.Visible = true;
+            mailBox.Enabled = true;
+            settingBox.Enabled = true;
+            notifyBox.Enabled = true;
+            reloadBox.Enabled = true;
 
             sayTimer.Start();
 
@@ -1747,7 +2032,7 @@ namespace robot
 
             browser.Navigate("http://seat.unist.ac.kr/EZ5500/RoomStatus/room_status.asp");
 
-            boardGrid.Visible = false;
+            portalGroup.Visible = false;
         }
 
         private void 포탈홈페이지ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -1827,11 +2112,21 @@ namespace robot
                 return;
             }
 
-            mailBox.Visible = false;
-            settingBox.Visible = false;
-            weatherBox.Visible = false;
-            notifyBox.Visible = false;
-            reloadBox.Visible = false;
+            reloadClickBox.Visible = true;
+
+            mailBox.Enabled = false;
+            settingBox.Enabled = false;
+            weatherBox.Enabled = false;
+            notifyBox.Enabled = false;
+            reloadBox.Enabled = false;
+
+            for (int i = 0; i < 4; i++)
+            {
+                currentBoardMaxNum[i] = 3;
+                currentBoardSearchQuery[i] = "";
+            }
+            maxPageNumBox.Value = 3;
+            announceHideCheck.Checked = false;
 
             if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && isError == false)
             {
@@ -1914,16 +2209,25 @@ namespace robot
             System.Web.UI.WebControls.GridViewSelectEventArgs ee = new System.Web.UI.WebControls.GridViewSelectEventArgs(1);
             boardGrid_SelectionChanged(boardGrid, ee);
 
-            mailBox.Visible = true;
-            settingBox.Visible = true;
-            weatherBox.Visible = true;
-            notifyBox.Visible = true;
-            reloadBox.Visible = true;
+            mailBox.Enabled = true;
+            settingBox.Enabled = true;
+            weatherBox.Enabled = true;
+            notifyBox.Enabled = true;
+            reloadBox.Enabled = true;
+            reloadClickBox.Visible = false;
+
+            portalSearchTextBox.Text = currentBoardSearchQuery[currentBoardId];
 
             sayTimer.Start();
 
             visiblePortal();
         }
+
+        /**********************************************************
+         * 
+         *  날씨 버튼 더블 클릭
+         *  
+         **********************************************************/
 
         private void weatherBox_DoubleClick(object sender, EventArgs e)
         {
@@ -1931,5 +2235,38 @@ namespace robot
             System.Diagnostics.Process.Start(url);
         }
 
+        private void notifyClickBox_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("창이 이미 열려 있습니다 :(", "Robot의 경고");
+        }
+
+        private void mailClickBox_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("창이 이미 열려 있습니다 :(", "Robot의 경고");
+        }
+
+        private void settingClickBox_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("창이 이미 열려 있습니다 :(", "Robot의 경고");
+        }
+
+        private void loadingPictureBox_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("로딩중 입니다. 잠시만 기다려주세요 :-)", "Robot");
+        }
+
+        private void weatherTimer_Tick(object sender, EventArgs e)
+        {
+            if (weatherBox.Visible == true)
+            {
+                weatherBox.Visible = false;
+                weatherClick.Visible = true;
+            }
+            else
+            {
+                weatherBox.Visible = true;
+                weatherClick.Visible = false;
+            }
+        }
     }
 }

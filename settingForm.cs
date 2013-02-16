@@ -113,5 +113,17 @@ namespace robot
         {
             MessageBox.Show("Created by Kim Tae Hoon ಠ_ಠ", ":^)");
         }
+
+        private void SettingForm_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible == true)
+            {
+                MainForm.settingClick.Visible = true;
+            }
+            else
+            {
+                MainForm.settingClick.Visible = false;
+            }
+        }
     }
 }

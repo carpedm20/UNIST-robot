@@ -49,9 +49,7 @@
             this.Column2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Column4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.bbList = new System.Windows.Forms.ListBox();
             this.welcomeLabel = new System.Windows.Forms.Label();
-            this.libraryList = new System.Windows.Forms.ListBox();
             this.studyGroup = new System.Windows.Forms.GroupBox();
             this.studyDateLabel = new System.Windows.Forms.Label();
             this.studyEtc = new System.Windows.Forms.TextBox();
@@ -147,19 +145,20 @@
             this.Column34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.w = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.boardSlide = new DevComponents.DotNetBar.SideBar();
-            this.sideBarPanelItem1 = new DevComponents.DotNetBar.SideBarPanelItem();
-            this.buttonItem8 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem10 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem9 = new DevComponents.DotNetBar.ButtonItem();
             this.slidePortal = new DevComponents.DotNetBar.SideBarPanelItem();
             this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem2 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem3 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem4 = new DevComponents.DotNetBar.ButtonItem();
             this.sideBB = new DevComponents.DotNetBar.SideBarPanelItem();
             this.slideLibrary = new DevComponents.DotNetBar.SideBarPanelItem();
             this.buttonItem5 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem6 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem7 = new DevComponents.DotNetBar.ButtonItem();
+            this.sideBarPanelItem1 = new DevComponents.DotNetBar.SideBarPanelItem();
+            this.buttonItem8 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem10 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem9 = new DevComponents.DotNetBar.ButtonItem();
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
             this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -208,7 +207,22 @@
             this.reloadBox = new System.Windows.Forms.PictureBox();
             this.reloadTip = new System.Windows.Forms.ToolTip(this.components);
             this.sayBrowser = new System.Windows.Forms.WebBrowser();
-            this.buttonItem4 = new DevComponents.DotNetBar.ButtonItem();
+            this.weatherClickBox = new System.Windows.Forms.PictureBox();
+            this.mailClickBox = new System.Windows.Forms.PictureBox();
+            this.reloadClickBox = new System.Windows.Forms.PictureBox();
+            this.settingClickBox = new System.Windows.Forms.PictureBox();
+            this.notifyClickBox = new System.Windows.Forms.PictureBox();
+            this.announceHideCheck = new System.Windows.Forms.CheckBox();
+            this.maxPageNumBox = new DevComponents.Editors.IntegerInput();
+            this.maxPageCountLabel = new System.Windows.Forms.Label();
+            this.portalSearchLabel = new System.Windows.Forms.Label();
+            this.portalSearchTextBox = new System.Windows.Forms.TextBox();
+            this.portalSearchBtn = new System.Windows.Forms.Button();
+            this.maxPageNumTip = new System.Windows.Forms.ToolTip(this.components);
+            this.announceTip = new System.Windows.Forms.ToolTip(this.components);
+            this.portalGroup = new System.Windows.Forms.GroupBox();
+            this.portalSearchTip = new System.Windows.Forms.ToolTip(this.components);
+            this.weatherTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.boardGrid)).BeginInit();
             this.studyGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -229,6 +243,13 @@
             ((System.ComponentModel.ISupportInitialize)(this.notifyBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.weatherBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reloadBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.weatherClickBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mailClickBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reloadClickBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingClickBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notifyClickBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxPageNumBox)).BeginInit();
+            this.portalGroup.SuspendLayout();
             this.SuspendLayout();
             // 
             // browser
@@ -273,7 +294,7 @@
             dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.boardGrid.DefaultCellStyle = dataGridViewCellStyle2;
-            this.boardGrid.Location = new System.Drawing.Point(142, 42);
+            this.boardGrid.Location = new System.Drawing.Point(8, 39);
             this.boardGrid.MultiSelect = false;
             this.boardGrid.Name = "boardGrid";
             this.boardGrid.ReadOnly = true;
@@ -287,7 +308,7 @@
             this.boardGrid.ShowCellToolTips = false;
             this.boardGrid.ShowEditingIcon = false;
             this.boardGrid.ShowRowErrors = false;
-            this.boardGrid.Size = new System.Drawing.Size(672, 182);
+            this.boardGrid.Size = new System.Drawing.Size(670, 157);
             this.boardGrid.TabIndex = 2;
             this.boardGrid.SelectionChanged += new System.EventHandler(this.boardGrid_SelectionChanged);
             // 
@@ -306,7 +327,7 @@
             this.Column1.HeaderText = "제목";
             this.Column1.Name = "Column1";
             this.Column1.ReadOnly = true;
-            this.Column1.Width = 430;
+            this.Column1.Width = 425;
             // 
             // Column2
             // 
@@ -333,19 +354,6 @@
             this.Column4.Resizable = System.Windows.Forms.DataGridViewTriState.False;
             this.Column4.Width = 70;
             // 
-            // bbList
-            // 
-            this.bbList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.bbList.Enabled = false;
-            this.bbList.ForeColor = System.Drawing.Color.Black;
-            this.bbList.FormattingEnabled = true;
-            this.bbList.ItemHeight = 12;
-            this.bbList.Location = new System.Drawing.Point(246, 86);
-            this.bbList.Name = "bbList";
-            this.bbList.Size = new System.Drawing.Size(110, 40);
-            this.bbList.TabIndex = 11;
-            this.bbList.Visible = false;
-            // 
             // welcomeLabel
             // 
             this.welcomeLabel.AutoSize = true;
@@ -356,23 +364,6 @@
             this.welcomeLabel.Size = new System.Drawing.Size(151, 12);
             this.welcomeLabel.TabIndex = 16;
             this.welcomeLabel.Text = "이름을 찾고 있습니다 o_o?";
-            // 
-            // libraryList
-            // 
-            this.libraryList.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.libraryList.Enabled = false;
-            this.libraryList.ForeColor = System.Drawing.Color.Black;
-            this.libraryList.FormattingEnabled = true;
-            this.libraryList.ItemHeight = 12;
-            this.libraryList.Items.AddRange(new object[] {
-            "도서 검색",
-            "스터디룸 예약",
-            "열람실 좌석 현황"});
-            this.libraryList.Location = new System.Drawing.Point(246, 131);
-            this.libraryList.Name = "libraryList";
-            this.libraryList.Size = new System.Drawing.Size(110, 28);
-            this.libraryList.TabIndex = 12;
-            this.libraryList.Visible = false;
             // 
             // studyGroup
             // 
@@ -391,9 +382,9 @@
             this.studyGroup.Controls.Add(this.label1);
             this.studyGroup.Enabled = false;
             this.studyGroup.ForeColor = System.Drawing.Color.Black;
-            this.studyGroup.Location = new System.Drawing.Point(142, 42);
+            this.studyGroup.Location = new System.Drawing.Point(141, 38);
             this.studyGroup.Name = "studyGroup";
-            this.studyGroup.Size = new System.Drawing.Size(672, 182);
+            this.studyGroup.Size = new System.Drawing.Size(672, 189);
             this.studyGroup.TabIndex = 17;
             this.studyGroup.TabStop = false;
             this.studyGroup.Text = "스터디 룸 예약";
@@ -414,7 +405,7 @@
             // 
             this.studyEtc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyEtc.ForeColor = System.Drawing.Color.Black;
-            this.studyEtc.Location = new System.Drawing.Point(88, 114);
+            this.studyEtc.Location = new System.Drawing.Point(88, 118);
             this.studyEtc.Name = "studyEtc";
             this.studyEtc.Size = new System.Drawing.Size(199, 21);
             this.studyEtc.TabIndex = 25;
@@ -424,7 +415,7 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(18, 118);
+            this.label7.Location = new System.Drawing.Point(18, 122);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(29, 12);
             this.label7.TabIndex = 24;
@@ -434,7 +425,7 @@
             // 
             this.studyReserveBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyReserveBtn.ForeColor = System.Drawing.Color.Black;
-            this.studyReserveBtn.Location = new System.Drawing.Point(203, 145);
+            this.studyReserveBtn.Location = new System.Drawing.Point(203, 152);
             this.studyReserveBtn.Name = "studyReserveBtn";
             this.studyReserveBtn.Size = new System.Drawing.Size(84, 26);
             this.studyReserveBtn.TabIndex = 23;
@@ -466,7 +457,7 @@
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
             this.groupBox1.Location = new System.Drawing.Point(314, 20);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(338, 147);
+            this.groupBox1.Size = new System.Drawing.Size(338, 158);
             this.groupBox1.TabIndex = 12;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "학생 번호";
@@ -476,7 +467,7 @@
             this.label17.AutoSize = true;
             this.label17.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label17.ForeColor = System.Drawing.Color.Black;
-            this.label17.Location = new System.Drawing.Point(170, 116);
+            this.label17.Location = new System.Drawing.Point(170, 126);
             this.label17.Name = "label17";
             this.label17.Size = new System.Drawing.Size(11, 12);
             this.label17.TabIndex = 33;
@@ -487,7 +478,7 @@
             this.label16.AutoSize = true;
             this.label16.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label16.ForeColor = System.Drawing.Color.Black;
-            this.label16.Location = new System.Drawing.Point(10, 117);
+            this.label16.Location = new System.Drawing.Point(10, 127);
             this.label16.Name = "label16";
             this.label16.Size = new System.Drawing.Size(11, 12);
             this.label16.TabIndex = 32;
@@ -498,7 +489,7 @@
             this.label15.AutoSize = true;
             this.label15.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label15.ForeColor = System.Drawing.Color.Black;
-            this.label15.Location = new System.Drawing.Point(170, 86);
+            this.label15.Location = new System.Drawing.Point(170, 94);
             this.label15.Name = "label15";
             this.label15.Size = new System.Drawing.Size(11, 12);
             this.label15.TabIndex = 31;
@@ -509,7 +500,7 @@
             this.label12.AutoSize = true;
             this.label12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label12.ForeColor = System.Drawing.Color.Black;
-            this.label12.Location = new System.Drawing.Point(10, 86);
+            this.label12.Location = new System.Drawing.Point(10, 94);
             this.label12.Name = "label12";
             this.label12.Size = new System.Drawing.Size(11, 12);
             this.label12.TabIndex = 30;
@@ -520,7 +511,7 @@
             this.label11.AutoSize = true;
             this.label11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label11.ForeColor = System.Drawing.Color.Black;
-            this.label11.Location = new System.Drawing.Point(170, 57);
+            this.label11.Location = new System.Drawing.Point(170, 61);
             this.label11.Name = "label11";
             this.label11.Size = new System.Drawing.Size(11, 12);
             this.label11.TabIndex = 29;
@@ -531,7 +522,7 @@
             this.label10.AutoSize = true;
             this.label10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label10.ForeColor = System.Drawing.Color.Black;
-            this.label10.Location = new System.Drawing.Point(10, 56);
+            this.label10.Location = new System.Drawing.Point(10, 60);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(11, 12);
             this.label10.TabIndex = 28;
@@ -563,7 +554,7 @@
             // 
             this.studyStudentId8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId8.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId8.Location = new System.Drawing.Point(189, 114);
+            this.studyStudentId8.Location = new System.Drawing.Point(189, 124);
             this.studyStudentId8.Name = "studyStudentId8";
             this.studyStudentId8.Size = new System.Drawing.Size(135, 21);
             this.studyStudentId8.TabIndex = 17;
@@ -572,7 +563,7 @@
             // 
             this.studyStudentId6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId6.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId6.Location = new System.Drawing.Point(189, 83);
+            this.studyStudentId6.Location = new System.Drawing.Point(189, 91);
             this.studyStudentId6.Name = "studyStudentId6";
             this.studyStudentId6.Size = new System.Drawing.Size(135, 21);
             this.studyStudentId6.TabIndex = 16;
@@ -581,7 +572,7 @@
             // 
             this.studyStudentId4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId4.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId4.Location = new System.Drawing.Point(189, 54);
+            this.studyStudentId4.Location = new System.Drawing.Point(189, 58);
             this.studyStudentId4.Name = "studyStudentId4";
             this.studyStudentId4.Size = new System.Drawing.Size(135, 21);
             this.studyStudentId4.TabIndex = 15;
@@ -599,7 +590,7 @@
             // 
             this.studyStudentId7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId7.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId7.Location = new System.Drawing.Point(27, 114);
+            this.studyStudentId7.Location = new System.Drawing.Point(27, 124);
             this.studyStudentId7.Name = "studyStudentId7";
             this.studyStudentId7.Size = new System.Drawing.Size(135, 21);
             this.studyStudentId7.TabIndex = 13;
@@ -608,7 +599,7 @@
             // 
             this.studyStudentId5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId5.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId5.Location = new System.Drawing.Point(27, 83);
+            this.studyStudentId5.Location = new System.Drawing.Point(27, 91);
             this.studyStudentId5.Name = "studyStudentId5";
             this.studyStudentId5.Size = new System.Drawing.Size(135, 21);
             this.studyStudentId5.TabIndex = 12;
@@ -617,7 +608,7 @@
             // 
             this.studyStudentId3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyStudentId3.ForeColor = System.Drawing.Color.Black;
-            this.studyStudentId3.Location = new System.Drawing.Point(27, 54);
+            this.studyStudentId3.Location = new System.Drawing.Point(27, 58);
             this.studyStudentId3.Name = "studyStudentId3";
             this.studyStudentId3.Size = new System.Drawing.Size(135, 21);
             this.studyStudentId3.TabIndex = 11;
@@ -637,7 +628,7 @@
             this.label5.AutoSize = true;
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(10, 54);
+            this.label5.Location = new System.Drawing.Point(10, 56);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(0, 12);
             this.label5.TabIndex = 10;
@@ -667,7 +658,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(18, 150);
+            this.label3.Location = new System.Drawing.Point(18, 157);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 12);
             this.label3.TabIndex = 5;
@@ -683,7 +674,7 @@
             "1 시간",
             "2 시간",
             "3 시간"});
-            this.studyTimeBox.Location = new System.Drawing.Point(88, 147);
+            this.studyTimeBox.Location = new System.Drawing.Point(88, 154);
             this.studyTimeBox.Name = "studyTimeBox";
             this.studyTimeBox.Size = new System.Drawing.Size(81, 20);
             this.studyTimeBox.TabIndex = 4;
@@ -692,7 +683,7 @@
             // 
             this.studyEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyEmail.ForeColor = System.Drawing.Color.Black;
-            this.studyEmail.Location = new System.Drawing.Point(88, 83);
+            this.studyEmail.Location = new System.Drawing.Point(88, 85);
             this.studyEmail.Name = "studyEmail";
             this.studyEmail.Size = new System.Drawing.Size(199, 21);
             this.studyEmail.TabIndex = 3;
@@ -702,7 +693,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(18, 86);
+            this.label2.Location = new System.Drawing.Point(18, 88);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 12);
             this.label2.TabIndex = 2;
@@ -740,7 +731,7 @@
             this.bookInfoGroup.Controls.Add(this.bookPic);
             this.bookInfoGroup.Controls.Add(this.bookListGrid);
             this.bookInfoGroup.ForeColor = System.Drawing.Color.Black;
-            this.bookInfoGroup.Location = new System.Drawing.Point(142, 39);
+            this.bookInfoGroup.Location = new System.Drawing.Point(141, 36);
             this.bookInfoGroup.Name = "bookInfoGroup";
             this.bookInfoGroup.Size = new System.Drawing.Size(672, 190);
             this.bookInfoGroup.TabIndex = 14;
@@ -904,10 +895,10 @@
             this.bbPanel.AutoScroll = true;
             this.bbPanel.BackColor = System.Drawing.Color.White;
             this.bbPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
-            this.bbPanel.Location = new System.Drawing.Point(142, 38);
+            this.bbPanel.Location = new System.Drawing.Point(136, 39);
             this.bbPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.bbPanel.Name = "bbPanel";
-            this.bbPanel.Size = new System.Drawing.Size(672, 188);
+            this.bbPanel.Size = new System.Drawing.Size(685, 188);
             this.bbPanel.TabIndex = 24;
             this.bbPanel.Visible = false;
             // 
@@ -1521,41 +1512,11 @@
             this.slideLibrary,
             this.sideBarPanelItem1});
             this.boardSlide.ShowToolTips = false;
-            this.boardSlide.Size = new System.Drawing.Size(115, 182);
+            this.boardSlide.Size = new System.Drawing.Size(115, 189);
             this.boardSlide.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.boardSlide.TabIndex = 8;
             this.boardSlide.Text = "sideBar1";
             this.boardSlide.UsingSystemColors = true;
-            // 
-            // sideBarPanelItem1
-            // 
-            this.sideBarPanelItem1.FontBold = true;
-            this.sideBarPanelItem1.Name = "sideBarPanelItem1";
-            this.sideBarPanelItem1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItem8,
-            this.buttonItem10,
-            this.buttonItem9});
-            this.sideBarPanelItem1.Text = "바로가기";
-            // 
-            // buttonItem8
-            // 
-            this.buttonItem8.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItem8.CanCustomize = false;
-            this.buttonItem8.Name = "buttonItem8";
-            this.buttonItem8.Text = "포탈 홈페이지";
-            this.buttonItem8.Click += new System.EventHandler(this.buttonItem8_Click);
-            // 
-            // buttonItem10
-            // 
-            this.buttonItem10.Name = "buttonItem10";
-            this.buttonItem10.Text = "UNIST 웹메일";
-            this.buttonItem10.Click += new System.EventHandler(this.buttonItem10_Click);
-            // 
-            // buttonItem9
-            // 
-            this.buttonItem9.Name = "buttonItem9";
-            this.buttonItem9.Text = "네이트 총재 클럽";
-            this.buttonItem9.Click += new System.EventHandler(this.buttonItem9_Click);
             // 
             // slidePortal
             // 
@@ -1590,6 +1551,13 @@
             this.buttonItem3.Name = "buttonItem3";
             this.buttonItem3.Text = "대학원 공지";
             this.buttonItem3.Click += new System.EventHandler(this.buttonItem3_Click);
+            // 
+            // buttonItem4
+            // 
+            this.buttonItem4.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem4.Name = "buttonItem4";
+            this.buttonItem4.Text = "최신 게시물";
+            this.buttonItem4.Click += new System.EventHandler(this.buttonItem4_Click);
             // 
             // sideBB
             // 
@@ -1628,6 +1596,36 @@
             this.buttonItem7.Name = "buttonItem7";
             this.buttonItem7.Text = "열람실 좌석 현황";
             this.buttonItem7.Click += new System.EventHandler(this.buttonItem7_Click);
+            // 
+            // sideBarPanelItem1
+            // 
+            this.sideBarPanelItem1.FontBold = true;
+            this.sideBarPanelItem1.Name = "sideBarPanelItem1";
+            this.sideBarPanelItem1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem8,
+            this.buttonItem10,
+            this.buttonItem9});
+            this.sideBarPanelItem1.Text = "바로가기";
+            // 
+            // buttonItem8
+            // 
+            this.buttonItem8.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem8.CanCustomize = false;
+            this.buttonItem8.Name = "buttonItem8";
+            this.buttonItem8.Text = "포탈 홈페이지";
+            this.buttonItem8.Click += new System.EventHandler(this.buttonItem8_Click);
+            // 
+            // buttonItem10
+            // 
+            this.buttonItem10.Name = "buttonItem10";
+            this.buttonItem10.Text = "UNIST 웹메일";
+            this.buttonItem10.Click += new System.EventHandler(this.buttonItem10_Click);
+            // 
+            // buttonItem9
+            // 
+            this.buttonItem9.Name = "buttonItem9";
+            this.buttonItem9.Text = "네이트 총재 클럽";
+            this.buttonItem9.Click += new System.EventHandler(this.buttonItem9_Click);
             // 
             // styleManager1
             // 
@@ -1793,7 +1791,6 @@
             this.mailBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.mailBox.TabIndex = 22;
             this.mailBox.TabStop = false;
-            this.mailBox.Visible = false;
             this.mailBox.Click += new System.EventHandler(this.mailBox_Click);
             // 
             // settingBox
@@ -1806,7 +1803,6 @@
             this.settingBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
             this.settingBox.TabIndex = 23;
             this.settingBox.TabStop = false;
-            this.settingBox.Visible = false;
             this.settingBox.Click += new System.EventHandler(this.settingBox_Click);
             // 
             // notifyTimer
@@ -1946,7 +1942,6 @@
             this.notifyBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.notifyBox.TabIndex = 30;
             this.notifyBox.TabStop = false;
-            this.notifyBox.Visible = false;
             this.notifyBox.Click += new System.EventHandler(this.notifyBox_Click);
             // 
             // weatherBox
@@ -1959,7 +1954,6 @@
             this.weatherBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.weatherBox.TabIndex = 31;
             this.weatherBox.TabStop = false;
-            this.weatherBox.Visible = false;
             this.weatherBox.Click += new System.EventHandler(this.weatherBox_Click);
             this.weatherBox.DoubleClick += new System.EventHandler(this.weatherBox_DoubleClick);
             // 
@@ -1995,7 +1989,6 @@
             this.reloadBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.reloadBox.TabIndex = 35;
             this.reloadBox.TabStop = false;
-            this.reloadBox.Visible = false;
             this.reloadBox.Click += new System.EventHandler(this.reloadBox_Click);
             // 
             // sayBrowser
@@ -2007,25 +2000,176 @@
             this.sayBrowser.TabIndex = 36;
             this.sayBrowser.Visible = false;
             // 
-            // buttonItem4
+            // weatherClickBox
             // 
-            this.buttonItem4.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItem4.Name = "buttonItem4";
-            this.buttonItem4.Text = "최신 게시물";
+            this.weatherClickBox.Image = ((System.Drawing.Image)(resources.GetObject("weatherClickBox.Image")));
+            this.weatherClickBox.Location = new System.Drawing.Point(679, 10);
+            this.weatherClickBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.weatherClickBox.Name = "weatherClickBox";
+            this.weatherClickBox.Size = new System.Drawing.Size(18, 18);
+            this.weatherClickBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.weatherClickBox.TabIndex = 38;
+            this.weatherClickBox.TabStop = false;
+            this.weatherClickBox.Visible = false;
+            this.weatherClickBox.Click += new System.EventHandler(this.weatherBox_Click);
+            this.weatherClickBox.DoubleClick += new System.EventHandler(this.weatherBox_DoubleClick);
+            // 
+            // mailClickBox
+            // 
+            this.mailClickBox.Image = ((System.Drawing.Image)(resources.GetObject("mailClickBox.Image")));
+            this.mailClickBox.Location = new System.Drawing.Point(735, 13);
+            this.mailClickBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.mailClickBox.Name = "mailClickBox";
+            this.mailClickBox.Size = new System.Drawing.Size(25, 13);
+            this.mailClickBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.mailClickBox.TabIndex = 39;
+            this.mailClickBox.TabStop = false;
+            this.mailClickBox.Visible = false;
+            this.mailClickBox.Click += new System.EventHandler(this.mailClickBox_Click);
+            // 
+            // reloadClickBox
+            // 
+            this.reloadClickBox.Image = ((System.Drawing.Image)(resources.GetObject("reloadClickBox.Image")));
+            this.reloadClickBox.Location = new System.Drawing.Point(765, 11);
+            this.reloadClickBox.Name = "reloadClickBox";
+            this.reloadClickBox.Size = new System.Drawing.Size(20, 16);
+            this.reloadClickBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.reloadClickBox.TabIndex = 40;
+            this.reloadClickBox.TabStop = false;
+            this.reloadClickBox.Visible = false;
+            // 
+            // settingClickBox
+            // 
+            this.settingClickBox.Image = ((System.Drawing.Image)(resources.GetObject("settingClickBox.Image")));
+            this.settingClickBox.Location = new System.Drawing.Point(792, 11);
+            this.settingClickBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.settingClickBox.Name = "settingClickBox";
+            this.settingClickBox.Size = new System.Drawing.Size(18, 18);
+            this.settingClickBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.settingClickBox.TabIndex = 41;
+            this.settingClickBox.TabStop = false;
+            this.settingClickBox.Visible = false;
+            this.settingClickBox.Click += new System.EventHandler(this.settingClickBox_Click);
+            // 
+            // notifyClickBox
+            // 
+            this.notifyClickBox.Image = ((System.Drawing.Image)(resources.GetObject("notifyClickBox.Image")));
+            this.notifyClickBox.Location = new System.Drawing.Point(705, 12);
+            this.notifyClickBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.notifyClickBox.Name = "notifyClickBox";
+            this.notifyClickBox.Size = new System.Drawing.Size(24, 15);
+            this.notifyClickBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.notifyClickBox.TabIndex = 42;
+            this.notifyClickBox.TabStop = false;
+            this.notifyClickBox.Visible = false;
+            this.notifyClickBox.Click += new System.EventHandler(this.notifyClickBox_Click);
+            // 
+            // announceHideCheck
+            // 
+            this.announceHideCheck.AutoSize = true;
+            this.announceHideCheck.Location = new System.Drawing.Point(6, 16);
+            this.announceHideCheck.Name = "announceHideCheck";
+            this.announceHideCheck.Size = new System.Drawing.Size(100, 16);
+            this.announceHideCheck.TabIndex = 43;
+            this.announceHideCheck.Text = "공지글 숨기기";
+            this.announceHideCheck.UseVisualStyleBackColor = true;
+            this.announceHideCheck.CheckedChanged += new System.EventHandler(this.announceHideCheck_CheckedChanged);
+            // 
+            // maxPageNumBox
+            // 
+            // 
+            // 
+            // 
+            this.maxPageNumBox.BackgroundStyle.Class = "DateTimeInputBackground";
+            this.maxPageNumBox.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.maxPageNumBox.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.maxPageNumBox.Location = new System.Drawing.Point(246, 12);
+            this.maxPageNumBox.MaxValue = 10;
+            this.maxPageNumBox.MinValue = 1;
+            this.maxPageNumBox.Name = "maxPageNumBox";
+            this.maxPageNumBox.ShowUpDown = true;
+            this.maxPageNumBox.Size = new System.Drawing.Size(71, 21);
+            this.maxPageNumBox.TabIndex = 44;
+            this.maxPageNumBox.Value = 3;
+            this.maxPageNumBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maxPageNumBox_KeyDown);
+            // 
+            // maxPageCountLabel
+            // 
+            this.maxPageCountLabel.AutoSize = true;
+            this.maxPageCountLabel.Location = new System.Drawing.Point(123, 17);
+            this.maxPageCountLabel.Name = "maxPageCountLabel";
+            this.maxPageCountLabel.Size = new System.Drawing.Size(117, 12);
+            this.maxPageCountLabel.TabIndex = 45;
+            this.maxPageCountLabel.Text = "최대 공지 페이지수 :";
+            // 
+            // portalSearchLabel
+            // 
+            this.portalSearchLabel.AutoSize = true;
+            this.portalSearchLabel.Location = new System.Drawing.Point(344, 16);
+            this.portalSearchLabel.Name = "portalSearchLabel";
+            this.portalSearchLabel.Size = new System.Drawing.Size(37, 12);
+            this.portalSearchLabel.TabIndex = 46;
+            this.portalSearchLabel.Text = "검색 :";
+            // 
+            // portalSearchTextBox
+            // 
+            this.portalSearchTextBox.Location = new System.Drawing.Point(387, 13);
+            this.portalSearchTextBox.Name = "portalSearchTextBox";
+            this.portalSearchTextBox.Size = new System.Drawing.Size(232, 21);
+            this.portalSearchTextBox.TabIndex = 47;
+            this.portalSearchTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maxPageNumBox_KeyDown);
+            // 
+            // portalSearchBtn
+            // 
+            this.portalSearchBtn.Location = new System.Drawing.Point(629, 11);
+            this.portalSearchBtn.Name = "portalSearchBtn";
+            this.portalSearchBtn.Size = new System.Drawing.Size(49, 23);
+            this.portalSearchBtn.TabIndex = 48;
+            this.portalSearchBtn.Text = "보기";
+            this.portalSearchBtn.UseVisualStyleBackColor = true;
+            this.portalSearchBtn.Click += new System.EventHandler(this.portalSearchBtn_Click);
+            // 
+            // portalGroup
+            // 
+            this.portalGroup.Controls.Add(this.boardGrid);
+            this.portalGroup.Controls.Add(this.announceHideCheck);
+            this.portalGroup.Controls.Add(this.maxPageNumBox);
+            this.portalGroup.Controls.Add(this.maxPageCountLabel);
+            this.portalGroup.Controls.Add(this.portalSearchBtn);
+            this.portalGroup.Controls.Add(this.portalSearchLabel);
+            this.portalGroup.Controls.Add(this.portalSearchTextBox);
+            this.portalGroup.Location = new System.Drawing.Point(136, 31);
+            this.portalGroup.Name = "portalGroup";
+            this.portalGroup.Size = new System.Drawing.Size(687, 201);
+            this.portalGroup.TabIndex = 50;
+            this.portalGroup.TabStop = false;
+            this.portalGroup.Text = "포탈 공지";
+            // 
+            // weatherTimer
+            // 
+            this.weatherTimer.Interval = 1000;
+            this.weatherTimer.Tick += new System.EventHandler(this.weatherTimer_Tick);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(826, 707);
+            this.ClientSize = new System.Drawing.Size(826, 692);
+            this.Controls.Add(this.bbPanel);
+            this.Controls.Add(this.bookInfoGroup);
+            this.Controls.Add(this.studyGroup);
+            this.Controls.Add(this.portalGroup);
+            this.Controls.Add(this.notifyClickBox);
+            this.Controls.Add(this.settingClickBox);
+            this.Controls.Add(this.reloadClickBox);
+            this.Controls.Add(this.mailClickBox);
+            this.Controls.Add(this.weatherClickBox);
             this.Controls.Add(this.sayBrowser);
             this.Controls.Add(this.reloadBox);
             this.Controls.Add(this.boardSlide);
             this.Controls.Add(this.weatherBox);
             this.Controls.Add(this.notifyBox);
-            this.Controls.Add(this.bbPanel);
-            this.Controls.Add(this.bookInfoGroup);
             this.Controls.Add(this.sayLabel);
             this.Controls.Add(this.loadingLabel);
             this.Controls.Add(this.loadingProgressBar);
@@ -2035,11 +2179,7 @@
             this.Controls.Add(this.roomNumberLabel);
             this.Controls.Add(this.roomNumberBox);
             this.Controls.Add(this.studyGrid);
-            this.Controls.Add(this.studyGroup);
-            this.Controls.Add(this.libraryList);
-            this.Controls.Add(this.bbList);
             this.Controls.Add(this.welcomeLabel);
-            this.Controls.Add(this.boardGrid);
             this.Controls.Add(this.previousMonthBtn);
             this.Controls.Add(this.studyDate);
             this.Controls.Add(this.nextMonthBtn);
@@ -2078,6 +2218,14 @@
             ((System.ComponentModel.ISupportInitialize)(this.notifyBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.weatherBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reloadBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.weatherClickBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mailClickBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.reloadClickBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.settingClickBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notifyClickBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.maxPageNumBox)).EndInit();
+            this.portalGroup.ResumeLayout(false);
+            this.portalGroup.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2087,9 +2235,7 @@
 
         private System.Windows.Forms.WebBrowser browser;
         private System.Windows.Forms.DataGridView boardGrid;
-        private System.Windows.Forms.ListBox bbList;
         private System.Windows.Forms.Label welcomeLabel;
-        private System.Windows.Forms.ListBox libraryList;
         private System.Windows.Forms.GroupBox studyGroup;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.TextBox studyStudentId8;
@@ -2163,11 +2309,6 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button studyReserveBtn;
         private System.Windows.Forms.Label studyDateLabel;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private DevComponents.DotNetBar.SideBar boardSlide;
         private DevComponents.DotNetBar.SideBarPanelItem slidePortal;
         private DevComponents.DotNetBar.ButtonItem buttonItem1;
@@ -2252,6 +2393,27 @@
         private DevComponents.DotNetBar.ButtonItem buttonItem10;
         private System.Windows.Forms.ToolStripMenuItem uNIST웹메일ToolStripMenuItem;
         private DevComponents.DotNetBar.ButtonItem buttonItem4;
+        private System.Windows.Forms.PictureBox weatherClickBox;
+        private System.Windows.Forms.PictureBox mailClickBox;
+        private System.Windows.Forms.PictureBox reloadClickBox;
+        private System.Windows.Forms.PictureBox settingClickBox;
+        private System.Windows.Forms.PictureBox notifyClickBox;
+        private System.Windows.Forms.CheckBox announceHideCheck;
+        private DevComponents.Editors.IntegerInput maxPageNumBox;
+        private System.Windows.Forms.Label maxPageCountLabel;
+        private System.Windows.Forms.Label portalSearchLabel;
+        private System.Windows.Forms.TextBox portalSearchTextBox;
+        private System.Windows.Forms.Button portalSearchBtn;
+        private System.Windows.Forms.ToolTip maxPageNumTip;
+        private System.Windows.Forms.ToolTip announceTip;
+        private System.Windows.Forms.GroupBox portalGroup;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column5;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column2;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
+        private System.Windows.Forms.ToolTip portalSearchTip;
+        private System.Windows.Forms.Timer weatherTimer;
     }
 }
 

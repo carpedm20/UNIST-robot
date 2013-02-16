@@ -135,5 +135,17 @@ namespace robot
                 contentText.Text = "";
             }
         }
+
+        private void MailForm_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible == true)
+            {
+                MainForm.mailClick.Visible = true;
+            }
+            else
+            {
+                MainForm.mailClick.Visible = false;
+            }
+        }
     }
 }

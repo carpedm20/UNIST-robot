@@ -199,6 +199,7 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "설정";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SettingForm_FormClosing);
+            this.VisibleChanged += new System.EventHandler(this.SettingForm_VisibleChanged);
             this.ResumeLayout(false);
             this.PerformLayout();
 

@@ -295,7 +295,7 @@ namespace robot
                     loadingProgressBar.Value += 5;
 
                     userName = browser.DocumentTitle.ToString().Split('-')[1].Split('/')[0];
-                    welcomeLabel.Text = userName + " 님 환영합니다 :-)";
+                    welcomeLabel.Text = userName + " 님 환영합니다 :^)";
 
                     portal = new Portal(browser.Document.Cookie, this);
                     showBoardGrid(1);
@@ -719,7 +719,7 @@ namespace robot
 
             if (hour == "Date")
             {
-                MessageBox.Show("시간을 선택해 주세요 :^)", "Robot의 경고");
+                MessageBox.Show("시간을 선택해 주세요 :-)", "Robot의 경고");
                 return;
             }
 
@@ -737,12 +737,12 @@ namespace robot
             {
                 if (grid.Rows[e.RowIndex].Cells[e.ColumnIndex].Value.ToString() == "-" && grid.Rows[e.RowIndex].DefaultCellStyle.BackColor == Color.PowderBlue)
                 {
-                    MessageBox.Show("이미 예약한 날입니다. :^)", "Robot의 경고");
+                    MessageBox.Show("이미 예약한 날입니다. :*(", "Robot의 경고");
                 }
 
                 else
                 {
-                    MessageBox.Show("올바른 시간을 선택해 주세요 :^)", "Robot의 경고");
+                    MessageBox.Show("올바른 시간을 선택해 주세요 :-(", "Robot의 경고");
                 }
                 return;
             }
@@ -1374,6 +1374,9 @@ namespace robot
 
             isExiting = true;
 
+            System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
+            foreach (System.Diagnostics.Process p in mProcess)
+                p.Kill();
             Application.Exit();
         }
 
@@ -1506,8 +1509,12 @@ namespace robot
             Random r = new Random();
             int rand = r.Next(0, say.says.Count - 1);
 
-            sayLabel.Text = say.says.ElementAt(rand).Key;
-            sayToolTip.SetToolTip(sayLabel, sayLabel.Text + " (" + say.says.ElementAt(rand).Value + ")");
+            if (say.says.ElementAt(rand).Key.Length > 40)
+                sayLabel.Text = say.says.ElementAt(rand).Key.Substring(0, 40) + "...";
+            else
+                sayLabel.Text = say.says.ElementAt(rand).Key;
+
+            sayToolTip.SetToolTip(sayLabel, say.says.ElementAt(rand).Key + " (" + say.says.ElementAt(rand).Value + ")");
 
             if (sayTimerStop == true)
             {
@@ -1916,6 +1923,12 @@ namespace robot
             sayTimer.Start();
 
             visiblePortal();
+        }
+
+        private void weatherBox_DoubleClick(object sender, EventArgs e)
+        {
+            string url = "https://www.google.com/webhp?hl=ko&tab=ww#hl=ko&gs_rn=3&gs_ri=psy-ab&tok=HLpcdGRpLYFCLaSGkkaukQ&gs_is=1&cp=4&gs_id=6o&xhr=t&q=울산+날씨&es_nrs=true&pf=p&tbo=d&output=search&sclient=psy-ab&oq=울산+ㄴ&gs_l=&pbx=1&bav=on.2,or.r_gc.r_pw.r_cp.r_qf.&bvm=bv.42553238,d.dGY&fp=f9a492576012ae72&biw=1071&bih=686";
+            System.Diagnostics.Process.Start(url);
         }
 
     }

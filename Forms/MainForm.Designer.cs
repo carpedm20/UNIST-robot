@@ -222,6 +222,7 @@
             this.announceTip = new System.Windows.Forms.ToolTip(this.components);
             this.portalGroup = new System.Windows.Forms.GroupBox();
             this.portalSearchTip = new System.Windows.Forms.ToolTip(this.components);
+            this.mainBrowser = new System.Windows.Forms.WebBrowser();
             ((System.ComponentModel.ISupportInitialize)(this.boardGrid)).BeginInit();
             this.studyGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -2163,11 +2164,23 @@
             this.portalGroup.TabIndex = 50;
             this.portalGroup.TabStop = false;
             // 
+            // mainBrowser
+            // 
+            this.mainBrowser.Location = new System.Drawing.Point(283, -6);
+            this.mainBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.mainBrowser.Name = "mainBrowser";
+            this.mainBrowser.Size = new System.Drawing.Size(45, 40);
+            this.mainBrowser.TabIndex = 23;
+            this.mainBrowser.Visible = false;
+            this.mainBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.mainBrowser_DocumentCompleted);
+            this.mainBrowser.NewWindow += new System.ComponentModel.CancelEventHandler(this.browser_NewWindow);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(826, 696);
+            this.Controls.Add(this.mainBrowser);
             this.Controls.Add(this.bookGroup);
             this.Controls.Add(this.bbPanel);
             this.Controls.Add(this.bookInfoGroup);
@@ -2425,6 +2438,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.ToolTip portalSearchTip;
         private DevComponents.DotNetBar.ButtonItem buttonItem4;
+        private System.Windows.Forms.WebBrowser mainBrowser;
     }
 }
 

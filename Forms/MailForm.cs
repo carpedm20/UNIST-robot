@@ -54,7 +54,7 @@ namespace robot
             if (!getResponse(url, makeArgument()))
                 return;
 
-            if (wRes.StatusDescription == "OK")
+            if (wRes.StatusCode == System.Net.HttpStatusCode.OK)
             {
                 MessageBox.Show("성공적으로 전송 되었습니다 ;)");
                 this.Visible = false;

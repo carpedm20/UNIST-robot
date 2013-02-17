@@ -40,8 +40,6 @@
             this.autoLoginTip = new System.Windows.Forms.ToolTip(this.components);
             this.alarmTip = new System.Windows.Forms.ToolTip(this.components);
             this.sayTip = new System.Windows.Forms.ToolTip(this.components);
-            this.label1 = new System.Windows.Forms.Label();
-            this.switchButton1 = new DevComponents.DotNetBar.Controls.SwitchButton();
             this.SuspendLayout();
             // 
             // alarmLabel
@@ -138,46 +136,17 @@
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label5.Font = new System.Drawing.Font("Gulim", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(31, 167);
+            this.label5.Location = new System.Drawing.Point(29, 131);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(174, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "Created by carpedm20.";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(12, 132);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 12);
-            this.label1.TabIndex = 10;
-            this.label1.Text = "네이트 아이디 저장";
-            // 
-            // switchButton1
-            // 
-            this.switchButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            // 
-            // 
-            // 
-            this.switchButton1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.switchButton1.ForeColor = System.Drawing.Color.Black;
-            this.switchButton1.Location = new System.Drawing.Point(149, 128);
-            this.switchButton1.Name = "switchButton1";
-            this.switchButton1.OffText = "끔";
-            this.switchButton1.OnText = "켬";
-            this.switchButton1.Size = new System.Drawing.Size(66, 22);
-            this.switchButton1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.switchButton1.TabIndex = 9;
-            // 
             // SettingForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(233, 199);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.switchButton1);
+            this.ClientSize = new System.Drawing.Size(233, 162);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.sayLabel);
             this.Controls.Add(this.saySwitch);
@@ -213,7 +182,5 @@
         private System.Windows.Forms.ToolTip autoLoginTip;
         private System.Windows.Forms.ToolTip alarmTip;
         private System.Windows.Forms.ToolTip sayTip;
-        private System.Windows.Forms.Label label1;
-        private DevComponents.DotNetBar.Controls.SwitchButton switchButton1;
     }
 }

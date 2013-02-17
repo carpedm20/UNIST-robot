@@ -175,7 +175,15 @@ namespace robot
         public string loadBookReview(string isbn)
         {
             XmlDocument docX = new XmlDocument();
-            docX.Load("http://openapi.naver.com/search?key=6053ca2ccd452f386a6e2eb44375d160&query=art&target=book_adv&d_isbn=" + isbn);
+
+            try
+            {
+                docX.Load("http://openapi.naver.com/search?key=6053ca2ccd452f386a6e2eb44375d160&query=art&target=book_adv&d_isbn=" + isbn);
+            }
+            catch
+            {
+                return "";
+            }
 
             XmlNodeList elemList = docX.GetElementsByTagName("link");
 

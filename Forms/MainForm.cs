@@ -113,6 +113,7 @@ namespace robot
 
             // 브라우저 스크립트 에러 무시
             browser.ScriptErrorsSuppressed = true;
+            mainBrowser.ScriptErrorsSuppressed = true;
 
             brows = this.browser;
             gridView = this.boardGrid;
@@ -142,7 +143,7 @@ namespace robot
             notifyBox.Click += new System.EventHandler(loadingPictureBox_Click);
             reloadBox.Click += new System.EventHandler(loadingPictureBox_Click);
 
-            browser.Navigate("https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp");
+            mainBrowser.Navigate("https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp");
 
             // 책 검색 옵션 초기화
             bookOption1.SelectedIndex = 0;
@@ -446,21 +447,31 @@ namespace robot
 
                 if (boards[i].rows[1] == str)
                 {
+                    string url = "";
+
                     if (currentBoardId == 4)
                     {
-                        browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid="
-                           + portal.getBoardId(currentBoardId, i) + "&bullid=" + portal.getBoardbullId(currentBoardId, i));
+                        url = "http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid="
+                           + portal.getBoardId(currentBoardId, i) + "&bullid=" + portal.getBoardbullId(currentBoardId, i);
+                        browser.Navigate(url);
                     }
                     else
                     {
-                        browser.Navigate("http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid="
-                            + portal.getBoardId(currentBoardId) + "&bullid=" + portal.getBoardbullId(currentBoardId, i));
+                        url = "http://portal.unist.ac.kr/EP/web/collaboration/bbs/jsp/BB_BoardView.jsp?boardid="
+                            + portal.getBoardId(currentBoardId) + "&bullid=" + portal.getBoardbullId(currentBoardId, i);
+                        browser.Navigate(url);
                     }
 
                     return;
                 }
             }
         }
+
+        /**********************************************************
+         * 
+         *  포탈
+         *
+         **********************************************************/
 
         private void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
@@ -481,77 +492,29 @@ namespace robot
 
             /**********************************************************
              * 
-             *  로그인 창에서 변수 입력
-             *  
-             **********************************************************/
-
-            if (e.Url.ToString() == "https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp")
-            {
-                doc = browser.Document as HtmlDocument;
-
-                doc.GetElementById("id").SetAttribute("value", Program.id);
-                doc.GetElementsByTagName("input")["UserPassWord"].SetAttribute("value", Program.password);
-                doc.InvokeScript("doLogin");
-
-                /************************************
-                 *  포탈 로그인 단계
-                 ************************************/
-                loadingLabel.Text = "포탈 로그인중";
-                loadingProgressBar.Value += 5;
-            }
-
-            /**********************************************************
-             * 
-             *  첫 로그인, 이름 저장, 학사 공지로 이동
-             *  
-             **********************************************************/
-
-            if (e.Url.ToString() == "http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp")
-            {
-                if (isPortalComplete == false)
-                {
-                    /************************************
-                     *  포탈 로그인 완료
-                     ************************************/
-                    loadingLabel.Text = "포탈 로그인 완료";
-                    loadingProgressBar.Value += 5;
-
-                    portalCookie = browser.Document.Cookie;
-                    welcomeLabel.Click += new EventHandler(welcomeLabel_Click);
-
-                    userName = browser.DocumentTitle.ToString().Split('-')[1].Split('/')[0];
-                    welcomeLabel.Text = userName + " 님 환영합니다 :^)";
-
-//MessageBox.Show("성공?");
-
-                    portal = new Portal(browser.Document.Cookie, this);
-                    showBoardGrid(1);
-
-//MessageBox.Show("3");
-
-                    isPortalComplete = true;
-
-                    browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
-//MessageBox.Show("4");
-                }
-
-                else
-                {
-                    browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
-                }
-            }
-
-            /**********************************************************
-             * 
              *  블랙보드
              *
              **********************************************************/
+
+            if (browser.Document.Title.IndexOf("Service Temporarily Unavailable") != -1)
+            {
+                /************************************
+                 *  블랙보드 연결 실패
+                 ************************************/
+                loadingLabel.Text = "블랙보드 연결 실패";
+                loadingProgressBar.Value += 5;
+
+                bb = null;
+
+                isBBComplete = false;
+
+                browser.Navigate("http://library.unist.ac.kr/DLiWeb25Eng/tmaxsso/first_cs.aspx");
+            }
 
             if (e.Url.ToString() == "http://bb.unist.ac.kr/webapps/portal/frameset.jsp")
             {
                 if (isBBComplete == false)
                 {
-//MessageBox.Show("5");
                     /************************************
                      *  블랙보드 연결 완료
                      ************************************/
@@ -633,7 +596,7 @@ namespace robot
 
                     library = new Library(browser.Document.Cookie);
 
-                    isLibraryComplete=true;
+                    isLibraryComplete = true;
 
                     browser.Navigate("http://portal.unist.ac.kr/EP/web/security/jsp/SSO_unistMail.jsp");
                 }
@@ -653,11 +616,6 @@ namespace robot
             {
                 if (isEmailComplete == false)
                 {
-                    System.Web.UI.WebControls.GridViewSelectEventArgs ee = new System.Web.UI.WebControls.GridViewSelectEventArgs(1);
-                    boardGrid_SelectionChanged(boardGrid, ee);
-
-                    buttonItem1_Click(null, ee);
-
                     mailCookie = browser.Document.Cookie;
 
                     isLoading = false;
@@ -2315,6 +2273,68 @@ namespace robot
 
             Program.isExit = false;
             Application.Exit();
+        }
+
+        private void mainBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            /**********************************************************
+             * 
+             *  로그인 창에서 변수 입력
+             *  
+             **********************************************************/
+
+            loadingProgressBar.Value += 1;
+
+            if (e.Url.ToString() == "https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp")
+            {
+                doc = mainBrowser.Document as HtmlDocument;
+
+                doc.GetElementById("id").SetAttribute("value", Program.id);
+                doc.GetElementsByTagName("input")["UserPassWord"].SetAttribute("value", Program.password);
+                doc.InvokeScript("doLogin");
+
+                /************************************
+                 *  포탈 로그인 단계
+                 ************************************/
+                loadingLabel.Text = "포탈 로그인중";
+                loadingProgressBar.Value += 5;
+            }
+
+            /**********************************************************
+             * 
+             *  첫 로그인, 이름 저장, 학사 공지로 이동
+             *  
+             **********************************************************/
+
+            if (e.Url.ToString() == "http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp")
+            {
+                if (isPortalComplete == false)
+                {
+                    /************************************
+                     *  포탈 로그인 완료
+                     ************************************/
+                    loadingLabel.Text = "포탈 로그인 완료";
+                    loadingProgressBar.Value += 5;
+
+                    portalCookie = mainBrowser.Document.Cookie;
+                    welcomeLabel.Click += new EventHandler(welcomeLabel_Click);
+
+                    userName = mainBrowser.DocumentTitle.ToString().Split('-')[1].Split('/')[0];
+                    welcomeLabel.Text = userName + " 님 환영합니다 :^)";
+
+                    portal = new Portal(portalCookie, this);
+                    showBoardGrid(1);
+
+                    isPortalComplete = true;
+
+                    browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
+                }
+
+                else
+                {
+                    browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
+                }
+            }
         }
     }
 }

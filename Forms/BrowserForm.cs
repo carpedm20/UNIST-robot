@@ -121,38 +121,128 @@ namespace robot.Forms
 
         private void portalBtn_Click(object sender, EventArgs e)
         {
-            ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
-            ex.Navigate("http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp");
+            TabPage NewTabPage = new TabPage();
+
+            ExtendedWebBrowser NewTabBrowser = new ExtendedWebBrowser()
+            {
+                Parent = NewTabPage,
+                Dock = DockStyle.Fill,
+                Tag = NewTabPage
+            };
+
+            NewTabBrowser.Navigate("http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp");
+            InitializeBrowserEvents(NewTabBrowser);
+
+            tabControl.TabPages.Add(NewTabPage);
+            tabControl.SelectedTab = NewTabPage;
+
+            // ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
+            // ex.Navigate("http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp");
         }
 
         private void bbBtn_Click(object sender, EventArgs e)
         {
-            ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
-            ex.Navigate("http://bb.unist.ac.kr");
+            TabPage NewTabPage = new TabPage();
+
+            ExtendedWebBrowser NewTabBrowser = new ExtendedWebBrowser()
+            {
+                Parent = NewTabPage,
+                Dock = DockStyle.Fill,
+                Tag = NewTabPage
+            };
+
+            NewTabBrowser.Navigate("http://bb.unist.ac.kr");
+            InitializeBrowserEvents(NewTabBrowser);
+
+            tabControl.TabPages.Add(NewTabPage);
+            tabControl.SelectedTab = NewTabPage;
+
+            // ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
+            // ex.Navigate("http://bb.unist.ac.kr");
         }
 
         private void libraryBtn_Click(object sender, EventArgs e)
         {
-            ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
-            ex.Navigate("http://library.unist.ac.kr");
+            TabPage NewTabPage = new TabPage();
+
+            ExtendedWebBrowser NewTabBrowser = new ExtendedWebBrowser()
+            {
+                Parent = NewTabPage,
+                Dock = DockStyle.Fill,
+                Tag = NewTabPage
+            };
+
+            NewTabBrowser.Navigate("http://library.unist.ac.kr");
+            InitializeBrowserEvents(NewTabBrowser);
+
+            tabControl.TabPages.Add(NewTabPage);
+            tabControl.SelectedTab = NewTabPage;
+
+            // ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
+            // ex.Navigate("http://library.unist.ac.kr");
         }
 
         private void dormBtn_Click(object sender, EventArgs e)
         {
-            ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
-            ex.Navigate("http://dorm.unist.ac.kr");
+            TabPage NewTabPage = new TabPage();
+
+            ExtendedWebBrowser NewTabBrowser = new ExtendedWebBrowser()
+            {
+                Parent = NewTabPage,
+                Dock = DockStyle.Fill,
+                Tag = NewTabPage
+            };
+
+            NewTabBrowser.Navigate("http://dorm.unist.ac.kr");
+            InitializeBrowserEvents(NewTabBrowser);
+
+            tabControl.TabPages.Add(NewTabPage);
+            tabControl.SelectedTab = NewTabPage;
+
+            // ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
+            // ex.Navigate("http://dorm.unist.ac.kr");
         }
 
         private void mailBtn_Click(object sender, EventArgs e)
         {
-            ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
-            ex.Navigate("http://mail.unist.ac.kr");
+            TabPage NewTabPage = new TabPage();
+
+            ExtendedWebBrowser NewTabBrowser = new ExtendedWebBrowser()
+            {
+                Parent = NewTabPage,
+                Dock = DockStyle.Fill,
+                Tag = NewTabPage
+            };
+
+            NewTabBrowser.Navigate("http://mail.unist.ac.kr");
+            InitializeBrowserEvents(NewTabBrowser);
+
+            tabControl.TabPages.Add(NewTabPage);
+            tabControl.SelectedTab = NewTabPage;
+
+            // ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
+            // ex.Navigate("http://mail.unist.ac.kr");
         }
 
         private void nateClubBtn_Click(object sender, EventArgs e)
         {
-            ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
-            ex.Navigate("http://club.cyworld.com/ClubV1/Home.cy/53814181");
+            TabPage NewTabPage = new TabPage();
+
+            ExtendedWebBrowser NewTabBrowser = new ExtendedWebBrowser()
+            {
+                Parent = NewTabPage,
+                Dock = DockStyle.Fill,
+                Tag = NewTabPage
+            };
+
+            NewTabBrowser.Navigate("http://club.cyworld.com/ClubV1/Home.cy/53814181");
+            InitializeBrowserEvents(NewTabBrowser);
+
+            tabControl.TabPages.Add(NewTabPage);
+            tabControl.SelectedTab = NewTabPage;
+
+            // ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
+            // ex.Navigate("http://club.cyworld.com/ClubV1/Home.cy/53814181");
         }
 
         private void tabControl_SelectedIndexChanged_1(object sender, EventArgs e)

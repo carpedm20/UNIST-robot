@@ -69,12 +69,12 @@ namespace robot
             {
                 new_board4[i] = new PortalBoard();
             }
-//MessageBox.Show("1");
+
             setBoard(board1, a1, 1, 3);
             setBoard(board2, a2, 1, 3);
             setBoard(board3, a3, 1, 3);
             setLastestBoard(1, 3);
-//MessageBox.Show("2");
+
             taskbarNotifier = new TaskbarNotifier();
             taskbarNotifier.SetBackgroundBitmap(new Bitmap(GetType(), "skin.bmp"), Color.FromArgb(255, 0, 255));
             taskbarNotifier.SetCloseBitmap(new Bitmap(GetType(), "close.bmp"), Color.FromArgb(255, 0, 255), new Point(121, 13));

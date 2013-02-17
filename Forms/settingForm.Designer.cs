@@ -30,8 +30,6 @@
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(SettingForm));
-            this.startProgramSwitch = new DevComponents.DotNetBar.Controls.SwitchButton();
-            this.label1 = new System.Windows.Forms.Label();
             this.alarmLabel = new System.Windows.Forms.Label();
             this.alarmSwitch = new DevComponents.DotNetBar.Controls.SwitchButton();
             this.autoLoginLabel = new System.Windows.Forms.Label();
@@ -42,37 +40,9 @@
             this.autoLoginTip = new System.Windows.Forms.ToolTip(this.components);
             this.alarmTip = new System.Windows.Forms.ToolTip(this.components);
             this.sayTip = new System.Windows.Forms.ToolTip(this.components);
+            this.label1 = new System.Windows.Forms.Label();
+            this.switchButton1 = new DevComponents.DotNetBar.Controls.SwitchButton();
             this.SuspendLayout();
-            // 
-            // startProgramSwitch
-            // 
-            this.startProgramSwitch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            // 
-            // 
-            // 
-            this.startProgramSwitch.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
-            this.startProgramSwitch.ForeColor = System.Drawing.Color.Black;
-            this.startProgramSwitch.Location = new System.Drawing.Point(149, 129);
-            this.startProgramSwitch.Name = "startProgramSwitch";
-            this.startProgramSwitch.OffText = "끔";
-            this.startProgramSwitch.OnText = "켬";
-            this.startProgramSwitch.Size = new System.Drawing.Size(66, 22);
-            this.startProgramSwitch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
-            this.startProgramSwitch.TabIndex = 0;
-            this.startProgramSwitch.Visible = false;
-            this.startProgramSwitch.ValueChanged += new System.EventHandler(this.startProgramSwitch_ValueChanged);
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(12, 135);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(109, 12);
-            this.label1.TabIndex = 1;
-            this.label1.Text = "시작 프로그램 등록";
-            this.label1.Visible = false;
             // 
             // alarmLabel
             // 
@@ -168,18 +138,46 @@
             this.label5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label5.Font = new System.Drawing.Font("Gulim", 9.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.label5.ForeColor = System.Drawing.Color.Black;
-            this.label5.Location = new System.Drawing.Point(30, 134);
+            this.label5.Location = new System.Drawing.Point(31, 167);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(174, 13);
             this.label5.TabIndex = 8;
             this.label5.Text = "Created by carpedm20.";
             this.label5.Click += new System.EventHandler(this.label5_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(12, 132);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(109, 12);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "네이트 아이디 저장";
+            // 
+            // switchButton1
+            // 
+            this.switchButton1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            // 
+            // 
+            // 
+            this.switchButton1.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.switchButton1.ForeColor = System.Drawing.Color.Black;
+            this.switchButton1.Location = new System.Drawing.Point(149, 128);
+            this.switchButton1.Name = "switchButton1";
+            this.switchButton1.OffText = "끔";
+            this.switchButton1.OnText = "켬";
+            this.switchButton1.Size = new System.Drawing.Size(66, 22);
+            this.switchButton1.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.switchButton1.TabIndex = 9;
+            // 
             // SettingForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(233, 163);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(233, 199);
+            this.Controls.Add(this.label1);
+            this.Controls.Add(this.switchButton1);
             this.Controls.Add(this.label5);
             this.Controls.Add(this.sayLabel);
             this.Controls.Add(this.saySwitch);
@@ -187,8 +185,6 @@
             this.Controls.Add(this.autoLoginLabel);
             this.Controls.Add(this.alarmSwitch);
             this.Controls.Add(this.alarmLabel);
-            this.Controls.Add(this.label1);
-            this.Controls.Add(this.startProgramSwitch);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Gulim", 9F);
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
@@ -207,8 +203,6 @@
 
         #endregion
 
-        private DevComponents.DotNetBar.Controls.SwitchButton startProgramSwitch;
-        private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label alarmLabel;
         private DevComponents.DotNetBar.Controls.SwitchButton alarmSwitch;
         private System.Windows.Forms.Label autoLoginLabel;
@@ -219,5 +213,7 @@
         private System.Windows.Forms.ToolTip autoLoginTip;
         private System.Windows.Forms.ToolTip alarmTip;
         private System.Windows.Forms.ToolTip sayTip;
+        private System.Windows.Forms.Label label1;
+        private DevComponents.DotNetBar.Controls.SwitchButton switchButton1;
     }
 }

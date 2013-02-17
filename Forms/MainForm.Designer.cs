@@ -222,7 +222,6 @@
             this.announceTip = new System.Windows.Forms.ToolTip(this.components);
             this.portalGroup = new System.Windows.Forms.GroupBox();
             this.portalSearchTip = new System.Windows.Forms.ToolTip(this.components);
-            this.weatherTimer = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.boardGrid)).BeginInit();
             this.studyGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -254,11 +253,14 @@
             // 
             // browser
             // 
+            this.browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.browser.Location = new System.Drawing.Point(12, 235);
             this.browser.MinimumSize = new System.Drawing.Size(20, 20);
             this.browser.Name = "browser";
             this.browser.ScrollBarsEnabled = false;
-            this.browser.Size = new System.Drawing.Size(802, 460);
+            this.browser.Size = new System.Drawing.Size(802, 454);
             this.browser.TabIndex = 1;
             this.browser.Visible = false;
             this.browser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.browser_DocumentCompleted);
@@ -270,6 +272,8 @@
             this.boardGrid.AllowUserToAddRows = false;
             this.boardGrid.AllowUserToDeleteRows = false;
             this.boardGrid.AllowUserToResizeRows = false;
+            this.boardGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.boardGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -308,7 +312,7 @@
             this.boardGrid.ShowCellToolTips = false;
             this.boardGrid.ShowEditingIcon = false;
             this.boardGrid.ShowRowErrors = false;
-            this.boardGrid.Size = new System.Drawing.Size(670, 157);
+            this.boardGrid.Size = new System.Drawing.Size(661, 157);
             this.boardGrid.TabIndex = 2;
             this.boardGrid.SelectionChanged += new System.EventHandler(this.boardGrid_SelectionChanged);
             // 
@@ -827,6 +831,8 @@
             this.bookListGrid.AllowUserToAddRows = false;
             this.bookListGrid.AllowUserToDeleteRows = false;
             this.bookListGrid.AllowUserToResizeRows = false;
+            this.bookListGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.bookListGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -892,13 +898,15 @@
             // 
             // bbPanel
             // 
+            this.bbPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.bbPanel.AutoScroll = true;
             this.bbPanel.BackColor = System.Drawing.Color.White;
             this.bbPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
             this.bbPanel.Location = new System.Drawing.Point(136, 39);
             this.bbPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.bbPanel.Name = "bbPanel";
-            this.bbPanel.Size = new System.Drawing.Size(685, 188);
+            this.bbPanel.Size = new System.Drawing.Size(681, 188);
             this.bbPanel.TabIndex = 24;
             this.bbPanel.Visible = false;
             // 
@@ -908,6 +916,9 @@
             this.studyGrid.AllowUserToDeleteRows = false;
             this.studyGrid.AllowUserToResizeColumns = false;
             this.studyGrid.AllowUserToResizeRows = false;
+            this.studyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.studyGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
@@ -952,7 +963,7 @@
             dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
             dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
             this.studyGrid.DefaultCellStyle = dataGridViewCellStyle6;
-            this.studyGrid.Location = new System.Drawing.Point(10, 262);
+            this.studyGrid.Location = new System.Drawing.Point(14, 261);
             this.studyGrid.MultiSelect = false;
             this.studyGrid.Name = "studyGrid";
             this.studyGrid.ReadOnly = true;
@@ -962,7 +973,7 @@
             this.studyGrid.ShowCellToolTips = false;
             this.studyGrid.ShowEditingIcon = false;
             this.studyGrid.ShowRowErrors = false;
-            this.studyGrid.Size = new System.Drawing.Size(804, 433);
+            this.studyGrid.Size = new System.Drawing.Size(804, 427);
             this.studyGrid.TabIndex = 18;
             this.studyGrid.Visible = false;
             this.studyGrid.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.studyGrid_CellClick);
@@ -1205,6 +1216,9 @@
             // 
             // bookGroup
             // 
+            this.bookGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.bookGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookGroup.Controls.Add(this.bookOperator);
             this.bookGroup.Controls.Add(this.bookOption2);
@@ -1218,9 +1232,9 @@
             this.bookGroup.Controls.Add(this.bookQuery1);
             this.bookGroup.Controls.Add(this.bookGridView);
             this.bookGroup.ForeColor = System.Drawing.Color.Black;
-            this.bookGroup.Location = new System.Drawing.Point(10, 236);
+            this.bookGroup.Location = new System.Drawing.Point(14, 235);
             this.bookGroup.Name = "bookGroup";
-            this.bookGroup.Size = new System.Drawing.Size(804, 463);
+            this.bookGroup.Size = new System.Drawing.Size(804, 454);
             this.bookGroup.TabIndex = 20;
             this.bookGroup.TabStop = false;
             this.bookGroup.Text = "도서 검색";
@@ -1423,6 +1437,9 @@
             this.bookGridView.AllowUserToAddRows = false;
             this.bookGridView.AllowUserToDeleteRows = false;
             this.bookGridView.AllowUserToResizeRows = false;
+            this.bookGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.bookGridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
@@ -1454,7 +1471,7 @@
             this.bookGridView.RowHeadersVisible = false;
             this.bookGridView.RowTemplate.Height = 23;
             this.bookGridView.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.bookGridView.Size = new System.Drawing.Size(775, 400);
+            this.bookGridView.Size = new System.Drawing.Size(775, 384);
             this.bookGridView.TabIndex = 0;
             this.bookGridView.CellMouseClick += new System.Windows.Forms.DataGridViewCellMouseEventHandler(this.bookGridView_SelectionChanged);
             // 
@@ -2123,7 +2140,7 @@
             // 
             this.portalSearchBtn.Location = new System.Drawing.Point(629, 11);
             this.portalSearchBtn.Name = "portalSearchBtn";
-            this.portalSearchBtn.Size = new System.Drawing.Size(49, 23);
+            this.portalSearchBtn.Size = new System.Drawing.Size(45, 23);
             this.portalSearchBtn.TabIndex = 48;
             this.portalSearchBtn.Text = "보기";
             this.portalSearchBtn.UseVisualStyleBackColor = true;
@@ -2131,6 +2148,8 @@
             // 
             // portalGroup
             // 
+            this.portalGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.portalGroup.Controls.Add(this.boardGrid);
             this.portalGroup.Controls.Add(this.announceHideCheck);
             this.portalGroup.Controls.Add(this.maxPageNumBox);
@@ -2140,22 +2159,16 @@
             this.portalGroup.Controls.Add(this.portalSearchTextBox);
             this.portalGroup.Location = new System.Drawing.Point(136, 31);
             this.portalGroup.Name = "portalGroup";
-            this.portalGroup.Size = new System.Drawing.Size(687, 201);
+            this.portalGroup.Size = new System.Drawing.Size(678, 201);
             this.portalGroup.TabIndex = 50;
             this.portalGroup.TabStop = false;
-            this.portalGroup.Text = "포탈 공지";
-            // 
-            // weatherTimer
-            // 
-            this.weatherTimer.Interval = 1000;
-            this.weatherTimer.Tick += new System.EventHandler(this.weatherTimer_Tick);
             // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
-            this.ClientSize = new System.Drawing.Size(826, 692);
+            this.ClientSize = new System.Drawing.Size(826, 696);
+            this.Controls.Add(this.bookGroup);
             this.Controls.Add(this.bbPanel);
             this.Controls.Add(this.bookInfoGroup);
             this.Controls.Add(this.studyGroup);
@@ -2175,7 +2188,6 @@
             this.Controls.Add(this.loadingProgressBar);
             this.Controls.Add(this.settingBox);
             this.Controls.Add(this.mailBox);
-            this.Controls.Add(this.bookGroup);
             this.Controls.Add(this.roomNumberLabel);
             this.Controls.Add(this.roomNumberBox);
             this.Controls.Add(this.studyGrid);
@@ -2186,9 +2198,9 @@
             this.Controls.Add(this.browser);
             this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
+            this.MinimumSize = new System.Drawing.Size(842, 681);
             this.Name = "MainForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Robot";
@@ -2392,7 +2404,6 @@
         private System.Windows.Forms.WebBrowser sayBrowser;
         private DevComponents.DotNetBar.ButtonItem buttonItem10;
         private System.Windows.Forms.ToolStripMenuItem uNIST웹메일ToolStripMenuItem;
-        private DevComponents.DotNetBar.ButtonItem buttonItem4;
         private System.Windows.Forms.PictureBox weatherClickBox;
         private System.Windows.Forms.PictureBox mailClickBox;
         private System.Windows.Forms.PictureBox reloadClickBox;
@@ -2413,7 +2424,7 @@
         private System.Windows.Forms.DataGridViewTextBoxColumn Column3;
         private System.Windows.Forms.DataGridViewTextBoxColumn Column4;
         private System.Windows.Forms.ToolTip portalSearchTip;
-        private System.Windows.Forms.Timer weatherTimer;
+        private DevComponents.DotNetBar.ButtonItem buttonItem4;
     }
 }
 

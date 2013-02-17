@@ -74,17 +74,6 @@ namespace robot
             }
         }
 
-        private void startProgramSwitch_ValueChanged(object sender, EventArgs e)
-        {
-            if (startProgramSwitch.Value == true)
-            {
-                MainForm.SetStartup("Robot", true);
-            }
-            else
-            {
-                MainForm.SetStartup("Robot", false);
-            }
-        }
 
         private void saySwitch_ValueChanged(object sender, EventArgs e)
         {

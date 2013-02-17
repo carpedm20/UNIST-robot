@@ -16,6 +16,7 @@ namespace robot
         public static bool login = false;
         public static LoginForm f2;
         public static MainForm f1;
+        public static bool isExit = true;
 
         /// <summary>
         /// The main entry point for the application.
@@ -51,8 +52,11 @@ namespace robot
                     id = regId;
                     password = regPw;
                     autoLogin = true;
-                    f1 = new MainForm();
-                    Application.Run(f1);
+                    do
+                    {
+                        f1 = new MainForm();
+                        Application.Run(f1);
+                    } while (isExit != true);
                 }
             }
             else

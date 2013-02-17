@@ -98,8 +98,7 @@
             // 
             // MailForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(285, 239);
             this.Controls.Add(this.toBox);
             this.Controls.Add(this.toLabel);

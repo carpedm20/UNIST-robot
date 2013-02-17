@@ -51,7 +51,8 @@ namespace robot
             }
 
             string url = "http://mail.unist.ac.kr/mail/writeMail.crd";
-            wRes = getRespose(url, makeArgument());
+            if (!getResponse(url, makeArgument()))
+                return;
 
             if (wRes.StatusDescription == "OK")
             {
@@ -89,25 +90,57 @@ namespace robot
             }
         }
 
-        private HttpWebResponse getRespose(String url, string data)
+        private bool getResponse(String url, string data)
         {
-            uri = new Uri(url);
-            wReq = (HttpWebRequest)WebRequest.Create(uri);
-            wReq.Method = "POST";
-            wReq.CookieContainer = new CookieContainer();
-            wReq.CookieContainer.SetCookies(uri, cookie);
+            try
+            {
+                uri = new Uri(url);
+                wReq = (HttpWebRequest)WebRequest.Create(uri);
+                wReq.Method = "POST";
+                wReq.CookieContainer = new CookieContainer();
+                wReq.CookieContainer.SetCookies(uri, cookie);
 
-            wReq.Headers.Add("Origin: http://mail.unist.ac.kr");
-            wReq.ContentType = "application/x-www-form-urlencoded";
-            wReq.Referer = "http://mail.unist.ac.kr/mail/toMailWrite.crd";
+                wReq.Headers.Add("Origin: http://mail.unist.ac.kr");
+                wReq.ContentType = "application/x-www-form-urlencoded";
+                wReq.Referer = "http://mail.unist.ac.kr/mail/toMailWrite.crd";
 
-            byte[] byteArray = Encoding.UTF8.GetBytes(data);
+                byte[] byteArray = Encoding.UTF8.GetBytes(data);
 
-            Stream dataStream = wReq.GetRequestStream();
-            dataStream.Write(byteArray, 0, byteArray.Length);
-            dataStream.Close();
+                Stream dataStream = wReq.GetRequestStream();
+                dataStream.Write(byteArray, 0, byteArray.Length);
+                dataStream.Close();
 
-            return (HttpWebResponse)wReq.GetResponse();
+                using (wRes = (HttpWebResponse)wReq.GetResponse())
+                {
+                    Stream respPostStream = wRes.GetResponseStream();
+                    StreamReader readerPost = new StreamReader(respPostStream, Encoding.Default);
+
+                    resResult = readerPost.ReadToEnd();
+                }
+
+                return true;
+            }
+            catch (WebException ex)
+            {
+                if (ex.Status == WebExceptionStatus.ProtocolError && ex.Response != null)
+                {
+                    var resp = (HttpWebResponse)ex.Response;
+                    if (resp.StatusCode == HttpStatusCode.NotFound)
+                    {
+                        // Do something
+                    }
+                    else
+                    {
+                        // Do something else
+                    }
+                }
+                else
+                {
+                    // Do something else
+                }
+
+                return false;
+            }
         }
 
         private void MailForm_FormClosing(object sender, FormClosingEventArgs e)

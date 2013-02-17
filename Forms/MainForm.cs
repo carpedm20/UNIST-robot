@@ -52,12 +52,14 @@ namespace robot
         static public Panel bbpanel;
 
         static public string bbCookie = "";
+        static public string portalCookie="";
 
         static public MailForm mailForm;
         static public SettingForm settingForm;
         static public AlarmForm alarmForm;
         static public ProgressBar loadingprogress;
         static public Label loadinglabel;
+        static public Forms.BrowserForm browserForm;
 
         static public PictureBox weatherClick;
         static public PictureBox notifyPic;
@@ -82,6 +84,8 @@ namespace robot
         string[] posibleDate = new string[4];
 
         Weather weather;
+
+        bool nateIdSave = false;
         /****************************/
 
         public MainForm()
@@ -512,15 +516,23 @@ namespace robot
                     loadingLabel.Text = "포탈 로그인 완료";
                     loadingProgressBar.Value += 5;
 
+                    portalCookie = browser.Document.Cookie;
+                    welcomeLabel.Click += new EventHandler(welcomeLabel_Click);
+
                     userName = browser.DocumentTitle.ToString().Split('-')[1].Split('/')[0];
                     welcomeLabel.Text = userName + " 님 환영합니다 :^)";
+
+//MessageBox.Show("성공?");
 
                     portal = new Portal(browser.Document.Cookie, this);
                     showBoardGrid(1);
 
+//MessageBox.Show("3");
+
                     isPortalComplete = true;
 
                     browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
+//MessageBox.Show("4");
                 }
 
                 else
@@ -539,6 +551,7 @@ namespace robot
             {
                 if (isBBComplete == false)
                 {
+//MessageBox.Show("5");
                     /************************************
                      *  블랙보드 연결 완료
                      ************************************/
@@ -1747,7 +1760,8 @@ namespace robot
 
         private void buttonItem8_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://portal.unist.ac.kr");
+            browserForm = new Forms.BrowserForm("http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp", portalCookie);
+            browserForm.Show();
         }
 
         /**********************************************************
@@ -2037,7 +2051,8 @@ namespace robot
 
         private void 포탈홈페이지ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://portal.unist.ac.kr");
+            browserForm = new Forms.BrowserForm("http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp", portalCookie);
+            browserForm.Show();
         }
 
         private void uNIST웹메일ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2220,6 +2235,9 @@ namespace robot
 
             sayTimer.Start();
 
+            sessionTimer.Stop();
+            sessionTimer.Start();
+
             visiblePortal();
         }
 
@@ -2255,18 +2273,48 @@ namespace robot
             MessageBox.Show("로딩중 입니다. 잠시만 기다려주세요 :-)", "Robot");
         }
 
-        private void weatherTimer_Tick(object sender, EventArgs e)
+        /**********************************************************
+         * 
+         *  기숙사
+         *  
+         **********************************************************/
+
+        private void dormNoticeButton_Click(object sender, EventArgs e)
         {
-            if (weatherBox.Visible == true)
+
+        }
+
+        /**********************************************************
+         * 
+         *  welcomeLabel 클릭 이벤트 (이름)
+         *  
+         **********************************************************/
+
+        private void welcomeLabel_Click(object sender, EventArgs e)
+        {
+            string url = "http://portal.unist.ac.kr/EP/tmaxsso/runSAPEP.jsp";
+            browserForm = new Forms.BrowserForm(url, portalCookie);
+
+            browserForm.Show();
+        }
+
+        /**********************************************************
+         * 
+         *  다시 로그인
+         *  
+         **********************************************************/
+
+        private void reLoginEvent(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("다시 로그인 하시겠습니까?", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+            
+            if (result == DialogResult.No)
             {
-                weatherBox.Visible = false;
-                weatherClick.Visible = true;
+                return;
             }
-            else
-            {
-                weatherBox.Visible = true;
-                weatherClick.Visible = false;
-            }
+
+            Program.isExit = false;
+            Application.Exit();
         }
     }
 }

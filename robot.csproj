@@ -12,6 +12,7 @@
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <IsWebBootstrapper>false</IsWebBootstrapper>
+    <TargetFrameworkProfile />
     <PublishUrl>publish\</PublishUrl>
     <Install>true</Install>
     <InstallFrom>Disk</InstallFrom>
@@ -28,7 +29,6 @@
     <UseApplicationTrust>false</UseApplicationTrust>
     <PublishWizardCompleted>true</PublishWizardCompleted>
     <BootstrapperEnabled>true</BootstrapperEnabled>
-    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <PlatformTarget>AnyCPU</PlatformTarget>
@@ -87,60 +87,75 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Alarm.cs">
+    <Compile Include="Dorm.cs" />
+    <Compile Include="DormBoard.cs" />
+    <Compile Include="ExtendedWebBrowser.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Forms\BrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Alarm.Designer.cs">
-      <DependentUpon>Alarm.cs</DependentUpon>
+    <Compile Include="Forms\BrowserForm.Designer.cs">
+      <DependentUpon>BrowserForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Forms\NotifyForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\NotifyForm.Designer.cs">
+      <DependentUpon>NotifyForm.cs</DependentUpon>
     </Compile>
     <Compile Include="AutoLogin.cs" />
     <Compile Include="BB.cs" />
     <Compile Include="BBBoard.cs" />
     <Compile Include="library.cs" />
-    <Compile Include="MailForm.cs">
+    <Compile Include="Forms\MailForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MailForm.Designer.cs">
+    <Compile Include="Forms\MailForm.Designer.cs">
       <DependentUpon>MailForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Nate.cs" />
     <Compile Include="PortalBoard.cs" />
     <Compile Include="Book.cs" />
-    <Compile Include="MainForm.cs">
+    <Compile Include="Forms\MainForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MainForm.Designer.cs">
+    <Compile Include="Forms\MainForm.Designer.cs">
       <DependentUpon>MainForm.cs</DependentUpon>
     </Compile>
-    <Compile Include="LoginForm.cs">
+    <Compile Include="Forms\LoginForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="LoginForm.Designer.cs">
+    <Compile Include="Forms\LoginForm.Designer.cs">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </Compile>
     <Compile Include="Portal.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Say.cs" />
-    <Compile Include="settingForm.cs">
+    <Compile Include="Forms\settingForm.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="settingForm.Designer.cs">
+    <Compile Include="Forms\settingForm.Designer.cs">
       <DependentUpon>settingForm.cs</DependentUpon>
     </Compile>
     <Compile Include="TaskbarNotifier.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="weather.cs" />
-    <EmbeddedResource Include="Alarm.resx">
-      <DependentUpon>Alarm.cs</DependentUpon>
+    <EmbeddedResource Include="Forms\BrowserForm.resx">
+      <DependentUpon>BrowserForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MailForm.resx">
+    <EmbeddedResource Include="Forms\NotifyForm.resx">
+      <DependentUpon>NotifyForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Forms\MailForm.resx">
       <DependentUpon>MailForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MainForm.resx">
+    <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="LoginForm.resx">
+    <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
@@ -190,7 +205,7 @@
   <ItemGroup>
     <EmbeddedResource Include="close.bmp" />
     <Content Include="favicon.ico" />
-    <EmbeddedResource Include="settingForm.resx">
+    <EmbeddedResource Include="Forms\settingForm.resx">
       <DependentUpon>settingForm.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="skin.bmp" />

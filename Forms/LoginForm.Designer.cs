@@ -52,23 +52,23 @@
             this.loginBtn.UseVisualStyleBackColor = false;
             this.loginBtn.Click += new System.EventHandler(this.loginBtn_Click);
             // 
-            // passBox
+            // passText
             // 
             this.passText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.passText.ForeColor = System.Drawing.Color.Black;
             this.passText.Location = new System.Drawing.Point(47, 66);
-            this.passText.Name = "passBox";
+            this.passText.Name = "passText";
             this.passText.PasswordChar = '*';
             this.passText.Size = new System.Drawing.Size(100, 21);
             this.passText.TabIndex = 2;
             this.passText.KeyDown += new System.Windows.Forms.KeyEventHandler(this.passBox_KeyDown);
             // 
-            // idBox
+            // idText
             // 
             this.idText.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.idText.ForeColor = System.Drawing.Color.Black;
             this.idText.Location = new System.Drawing.Point(47, 36);
-            this.idText.Name = "idBox";
+            this.idText.Name = "idText";
             this.idText.Size = new System.Drawing.Size(100, 21);
             this.idText.TabIndex = 1;
             // 
@@ -145,8 +145,7 @@
             // 
             // LoginForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(239, 130);
             this.Controls.Add(this.browser);
             this.Controls.Add(this.label1);

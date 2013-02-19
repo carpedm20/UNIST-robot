@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BrowserForm));
             this.backBtn = new System.Windows.Forms.Button();
             this.nextBtn = new System.Windows.Forms.Button();
@@ -41,8 +42,14 @@
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.browser = new ExtendedWebBrowser();
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.closeMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.닫기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.epBtn = new System.Windows.Forms.Button();
             this.tabPage1.SuspendLayout();
             this.tabControl.SuspendLayout();
+            this.closeMenuStrip.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // backBtn
@@ -75,114 +82,170 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.currentUrlLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.currentUrlLabel.ForeColor = System.Drawing.Color.Black;
-            this.currentUrlLabel.Location = new System.Drawing.Point(70, 2);
+            this.currentUrlLabel.Location = new System.Drawing.Point(98, 2);
             this.currentUrlLabel.Name = "currentUrlLabel";
-            this.currentUrlLabel.Size = new System.Drawing.Size(967, 21);
+            this.currentUrlLabel.Size = new System.Drawing.Size(897, 21);
             this.currentUrlLabel.TabIndex = 2;
             this.currentUrlLabel.KeyDown += new System.Windows.Forms.KeyEventHandler(this.currentUrlLabel_KeyDown);
             // 
             // bbBtn
             // 
-            this.bbBtn.Location = new System.Drawing.Point(113, 32);
+            this.bbBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.bbBtn.ForeColor = System.Drawing.Color.Black;
+            this.bbBtn.Location = new System.Drawing.Point(224, 32);
             this.bbBtn.Name = "bbBtn";
             this.bbBtn.Size = new System.Drawing.Size(105, 23);
             this.bbBtn.TabIndex = 6;
             this.bbBtn.Text = "블랙 보드";
-            this.bbBtn.UseVisualStyleBackColor = true;
+            this.bbBtn.UseVisualStyleBackColor = false;
             this.bbBtn.Click += new System.EventHandler(this.bbBtn_Click);
             // 
             // portalBtn
             // 
+            this.portalBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.portalBtn.ForeColor = System.Drawing.Color.Black;
             this.portalBtn.Location = new System.Drawing.Point(2, 32);
             this.portalBtn.Name = "portalBtn";
             this.portalBtn.Size = new System.Drawing.Size(105, 23);
             this.portalBtn.TabIndex = 7;
             this.portalBtn.Text = "포탈";
-            this.portalBtn.UseVisualStyleBackColor = true;
+            this.portalBtn.UseVisualStyleBackColor = false;
             this.portalBtn.Click += new System.EventHandler(this.portalBtn_Click);
             // 
             // libraryBtn
             // 
+            this.libraryBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.libraryBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.libraryBtn.Location = new System.Drawing.Point(224, 32);
+            this.libraryBtn.ForeColor = System.Drawing.Color.Black;
+            this.libraryBtn.Location = new System.Drawing.Point(335, 32);
             this.libraryBtn.Name = "libraryBtn";
             this.libraryBtn.Size = new System.Drawing.Size(105, 23);
             this.libraryBtn.TabIndex = 8;
             this.libraryBtn.Text = "학정";
-            this.libraryBtn.UseVisualStyleBackColor = true;
+            this.libraryBtn.UseVisualStyleBackColor = false;
             this.libraryBtn.Click += new System.EventHandler(this.libraryBtn_Click);
             // 
             // dormBtn
             // 
+            this.dormBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.dormBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.dormBtn.Location = new System.Drawing.Point(335, 32);
+            this.dormBtn.ForeColor = System.Drawing.Color.Black;
+            this.dormBtn.Location = new System.Drawing.Point(446, 32);
             this.dormBtn.Name = "dormBtn";
             this.dormBtn.Size = new System.Drawing.Size(105, 23);
             this.dormBtn.TabIndex = 9;
             this.dormBtn.Text = "기숙사";
-            this.dormBtn.UseVisualStyleBackColor = true;
+            this.dormBtn.UseVisualStyleBackColor = false;
             this.dormBtn.Click += new System.EventHandler(this.dormBtn_Click);
             // 
             // nateClubBtn
             // 
+            this.nateClubBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.nateClubBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.nateClubBtn.Location = new System.Drawing.Point(557, 32);
+            this.nateClubBtn.ForeColor = System.Drawing.Color.Black;
+            this.nateClubBtn.Location = new System.Drawing.Point(668, 32);
             this.nateClubBtn.Name = "nateClubBtn";
             this.nateClubBtn.Size = new System.Drawing.Size(105, 23);
             this.nateClubBtn.TabIndex = 10;
             this.nateClubBtn.Text = "총재 클럽";
-            this.nateClubBtn.UseVisualStyleBackColor = true;
+            this.nateClubBtn.UseVisualStyleBackColor = false;
             this.nateClubBtn.Click += new System.EventHandler(this.nateClubBtn_Click);
             // 
             // mailBtn
             // 
+            this.mailBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.mailBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.mailBtn.Location = new System.Drawing.Point(446, 32);
+            this.mailBtn.ForeColor = System.Drawing.Color.Black;
+            this.mailBtn.Location = new System.Drawing.Point(557, 32);
             this.mailBtn.Name = "mailBtn";
             this.mailBtn.Size = new System.Drawing.Size(105, 23);
             this.mailBtn.TabIndex = 11;
             this.mailBtn.Text = "전자 우편";
-            this.mailBtn.UseVisualStyleBackColor = true;
+            this.mailBtn.UseVisualStyleBackColor = false;
             this.mailBtn.Click += new System.EventHandler(this.mailBtn_Click);
             // 
             // tabPage1
             // 
             this.tabPage1.Controls.Add(this.browser);
+            this.tabPage1.ForeColor = System.Drawing.Color.Black;
             this.tabPage1.Location = new System.Drawing.Point(4, 22);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(1022, 566);
+            this.tabPage1.Size = new System.Drawing.Size(1022, 601);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = " ";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
             // browser
             // 
-            this.browser.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.browser.Location = new System.Drawing.Point(3, 3);
             this.browser.MinimumSize = new System.Drawing.Size(20, 20);
             this.browser.Name = "browser";
-            this.browser.Size = new System.Drawing.Size(1016, 560);
+            this.browser.Size = new System.Drawing.Size(1016, 595);
             this.browser.TabIndex = 0;
             // 
             // tabControl
             // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabPage1);
+            this.tabControl.ForeColor = System.Drawing.Color.Black;
             this.tabControl.Location = new System.Drawing.Point(7, 61);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(1030, 592);
+            this.tabControl.Size = new System.Drawing.Size(1030, 627);
             this.tabControl.TabIndex = 12;
-            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged_1);
+            this.tabControl.SelectedIndexChanged += new System.EventHandler(this.tabControl_SelectedIndexChanged);
+            this.tabControl.MouseUp += new System.Windows.Forms.MouseEventHandler(this.tabControl_MouseClick);
+            // 
+            // closeMenuStrip
+            // 
+            this.closeMenuStrip.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.닫기ToolStripMenuItem});
+            this.closeMenuStrip.Name = "closeMenuStrip";
+            this.closeMenuStrip.Size = new System.Drawing.Size(99, 26);
+            // 
+            // 닫기ToolStripMenuItem
+            // 
+            this.닫기ToolStripMenuItem.Name = "닫기ToolStripMenuItem";
+            this.닫기ToolStripMenuItem.Size = new System.Drawing.Size(98, 22);
+            this.닫기ToolStripMenuItem.Text = "닫기";
+            this.닫기ToolStripMenuItem.Click += new System.EventHandler(this.닫기ToolStripMenuItem_Click_1);
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
+            this.pictureBox1.Location = new System.Drawing.Point(71, 2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(21, 18);
+            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.pictureBox1.TabIndex = 13;
+            this.pictureBox1.TabStop = false;
+            this.pictureBox1.Click += new System.EventHandler(this.pictureBox1_Click);
+            // 
+            // epBtn
+            // 
+            this.epBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.epBtn.ForeColor = System.Drawing.Color.Black;
+            this.epBtn.Location = new System.Drawing.Point(113, 32);
+            this.epBtn.Name = "epBtn";
+            this.epBtn.Size = new System.Drawing.Size(105, 23);
+            this.epBtn.TabIndex = 14;
+            this.epBtn.Text = "종합정보";
+            this.epBtn.UseVisualStyleBackColor = false;
+            this.epBtn.Click += new System.EventHandler(this.epBtn_Click);
             // 
             // BrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1041, 661);
+            this.ClientSize = new System.Drawing.Size(1041, 696);
+            this.Controls.Add(this.epBtn);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.mailBtn);
             this.Controls.Add(this.nateClubBtn);
@@ -195,13 +258,15 @@
             this.Controls.Add(this.currentUrlLabel);
             this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
-            this.MinimumSize = new System.Drawing.Size(800, 681);
+            this.MinimumSize = new System.Drawing.Size(670, 681);
             this.Name = "BrowserForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "브라우저";
+            this.Text = "Robrowser";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BrowserForm_FormClosing);
             this.tabPage1.ResumeLayout(false);
             this.tabControl.ResumeLayout(false);
+            this.closeMenuStrip.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -221,5 +286,9 @@
         private System.Windows.Forms.TabPage tabPage1;
         private ExtendedWebBrowser browser;
         private System.Windows.Forms.TabControl tabControl;
+        private System.Windows.Forms.ContextMenuStrip closeMenuStrip;
+        private System.Windows.Forms.ToolStripMenuItem 닫기ToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Button epBtn;
     }
 }

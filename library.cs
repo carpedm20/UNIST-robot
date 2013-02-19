@@ -176,15 +176,9 @@ namespace robot
         {
             XmlDocument docX = new XmlDocument();
 
-            try
-            {
-                docX.Load("http://openapi.naver.com/search?key=6053ca2ccd452f386a6e2eb44375d160&query=art&target=book_adv&d_isbn=" + isbn);
-            }
-            catch
-            {
-                return "";
-            }
-
+            string url = "http://openapi.naver.com/search?key=6053ca2ccd452f386a6e2eb44375d160&query=art&target=book_adv&d_isbn=" + isbn;
+            docX.Load(url);
+            
             XmlNodeList elemList = docX.GetElementsByTagName("link");
 
             if (elemList.Count < 2)

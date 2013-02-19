@@ -473,6 +473,70 @@ namespace robot
          *
          **********************************************************/
 
+
+
+        private void mainBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
+        {
+            /**********************************************************
+             * 
+             *  로그인 창에서 변수 입력
+             *  
+             **********************************************************/
+
+            loadingProgressBar.Value += 1;
+
+            if (e.Url.ToString() == "https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp")
+            {
+                doc = mainBrowser.Document as HtmlDocument;
+
+                doc.GetElementById("id").SetAttribute("value", Program.id);
+                doc.GetElementsByTagName("input")["UserPassWord"].SetAttribute("value", Program.password);
+                doc.InvokeScript("doLogin");
+
+                /************************************
+                 *  포탈 로그인 단계
+                 ************************************/
+                loadingLabel.Text = "포탈 로그인중";
+                loadingProgressBar.Value += 5;
+            }
+
+            /**********************************************************
+             * 
+             *  첫 로그인, 이름 저장, 학사 공지로 이동
+             *  
+             **********************************************************/
+
+            if (e.Url.ToString() == "http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp")
+            {
+                if (isPortalComplete == false)
+                {
+                    /************************************
+                     *  포탈 로그인 완료
+                     ************************************/
+                    loadingLabel.Text = "포탈 로그인 완료";
+                    loadingProgressBar.Value += 5;
+
+                    portalCookie = mainBrowser.Document.Cookie;
+                    welcomeLabel.Click += new EventHandler(welcomeLabel_Click);
+
+                    userName = mainBrowser.DocumentTitle.ToString().Split('-')[1].Split('/')[0];
+                    welcomeLabel.Text = userName + " 님 환영합니다 :^)";
+
+                    portal = new Portal(portalCookie, this);
+                    showBoardGrid(1);
+
+                    isPortalComplete = true;
+
+                    browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
+                }
+
+                else
+                {
+                    browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
+                }
+            }
+        }
+
         private void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
             if (isSessionLoading == true)
@@ -539,11 +603,11 @@ namespace robot
                  ************************************/
                 loadingLabel.Text = "수강 정보 수집중";
                 loadingProgressBar.Value += 5;
-
+loadingLabel.Text = "수강 정보 수집중1";
                 bb.setBoard();
-
+loadingLabel.Text = "수강 정보 수집중2";
                 bb.getCourceMenu();
-
+loadingLabel.Text = "수강 정보 수집중3";
                 DevComponents.DotNetBar.ButtonItem[] bblist = new DevComponents.DotNetBar.ButtonItem[bb.board.Count()];
                 System.Windows.Forms.ToolStripMenuItem[] trayItem = new System.Windows.Forms.ToolStripMenuItem[bb.board.Count()];
                 for (int i = 0; i < bb.board.Length; i++)
@@ -850,10 +914,18 @@ namespace robot
                 {
                     if (hel.getAttribute("id", 0).ToString().IndexOf("ctl00_ContentPlaceHolder_btnSubmit") != -1)
                     {
+                        // 예약 완료 or 미완료 메세지
                         hel.click();
                     }
                 }
             }
+
+            if (isLoading == true)
+                return;
+
+            studyDate.Text = DateTime.Now.Year.ToString() + "." + DateTime.Now.Month.ToString(dateFormat);
+
+            loadStudyRoomStat(DateTime.Now.Year.ToString() + DateTime.Now.Month.ToString(dateFormat));
         }
 
         /**********************************************************
@@ -960,7 +1032,20 @@ namespace robot
                     studyTimeBox.Items.AddRange(new object[] {
                     "1 시간"});
                 }
+                else if (e.ColumnIndex + 1 == grid.Columns.Count)
+                {
+                    studyTimeBox.Items.Clear();
+                    studyTimeBox.Items.AddRange(new object[] {
+                    "1 시간"});
+                }
                 else if (e.ColumnIndex + 2 < grid.Columns.Count && grid.Rows[e.RowIndex].Cells[e.ColumnIndex + 2].Value.ToString() == "R")
+                {
+                    studyTimeBox.Items.Clear();
+                    studyTimeBox.Items.AddRange(new object[] {
+                    "1 시간",
+                    "2 시간"});
+                }
+                else if (e.ColumnIndex + 2 == grid.Columns.Count)
                 {
                     studyTimeBox.Items.Clear();
                     studyTimeBox.Items.AddRange(new object[] {
@@ -1521,7 +1606,7 @@ namespace robot
 
         private void reviewBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            if (e.Url.ToString().IndexOf("http://book.naver.com/bookdb/book_detail.nhn?bid=") != -1)
+            if (e.Url.ToString().IndexOf("http://book.naver.com/") != -1)
             {
                 doc = reviewBrowser.Document as HtmlDocument;
 
@@ -1687,10 +1772,19 @@ namespace robot
             {
                 isError = true;
 
-                MessageBox.Show("인터넷 연결에 문제가 있습니다.\r\n 프로그램을 종료합니다. :^(", "Robot의 경고");
-                System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
-                foreach (System.Diagnostics.Process p in mProcess)
-                    p.Kill();
+                DialogResult result = MessageBox.Show("인터넷 연결에 문제가 있습니다.\r\n다시 로그인 하시겠습니까?", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+
+                if (result == DialogResult.No)
+                {
+                    System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
+                    foreach (System.Diagnostics.Process p in mProcess)
+                        p.Kill();
+                }
+                else
+                {
+                    Program.isExit = false;
+                    Application.Exit();
+                }
             }
 
             browser.Visible = false;
@@ -1719,6 +1813,20 @@ namespace robot
         private void buttonItem8_Click(object sender, EventArgs e)
         {
             browserForm = new Forms.BrowserForm("http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp", portalCookie);
+            browserForm.Show();
+        }
+
+        /**********************************************************
+         * 
+         *  종합 정보 바로가기
+         *  
+         **********************************************************/
+
+        private void buttonItem11_Click(object sender, EventArgs e)
+        {
+            string url = "http://portal.unist.ac.kr/EP/tmaxsso/runSAPEP.jsp";
+            browserForm = new Forms.BrowserForm(url, portalCookie);
+
             browserForm.Show();
         }
 
@@ -1855,10 +1963,19 @@ namespace robot
             {
                 isError = true;
 
-                MessageBox.Show("인터넷 연결에 문제가 있습니다.\r\n 프로그램을 종료합니다. :^(", "Robot의 경고");
-                System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
-                foreach (System.Diagnostics.Process p in mProcess)
-                    p.Kill();
+                DialogResult result = MessageBox.Show("인터넷 연결에 문제가 있습니다.\r\n다시 로그인 하시겠습니까?", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+
+                if (result == DialogResult.No)
+                {
+                    System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
+                    foreach (System.Diagnostics.Process p in mProcess)
+                        p.Kill();
+                }
+                else
+                {
+                    Program.isExit = false;
+                    Application.Exit();
+                }
             }
 
             visibleLoading();
@@ -2013,6 +2130,12 @@ namespace robot
             browserForm.Show();
         }
 
+        private void 종합정보ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            browserForm = new Forms.BrowserForm("http://portal.unist.ac.kr/EP/tmaxsso/runSAPEP.jsp", portalCookie);
+            browserForm.Show();
+        }
+
         private void uNIST웹메일ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             System.Diagnostics.Process.Start("https://mail.unist.ac.kr/user/login.crd?charset=EUC-KR&my_char_set=default&result=&login_fail=null&encodeChallenge=true&locale=ko&userid=" + Program.id + "&userdomain=unist.ac.kr&userpass=" + MD5HashFunc(Program.password));
@@ -2105,10 +2228,19 @@ namespace robot
             {
                 isError = true;
 
-                MessageBox.Show("인터넷 연결에 문제가 있습니다.\r\n 프로그램을 종료합니다. :^(", "Robot의 경고");
-                System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
-                foreach (System.Diagnostics.Process p in mProcess)
-                    p.Kill();
+                DialogResult result = MessageBox.Show("인터넷 연결에 문제가 있습니다.\r\n다시 로그인 하시겠습니까?", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+
+                if (result == DialogResult.No)
+                {
+                    System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
+                    foreach (System.Diagnostics.Process p in mProcess)
+                        p.Kill();
+                }
+                else
+                {
+                    Program.isExit = false;
+                    Application.Exit();
+                }
             }
 
             visibleLoading();
@@ -2275,66 +2407,6 @@ namespace robot
             Application.Exit();
         }
 
-        private void mainBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
-        {
-            /**********************************************************
-             * 
-             *  로그인 창에서 변수 입력
-             *  
-             **********************************************************/
-
-            loadingProgressBar.Value += 1;
-
-            if (e.Url.ToString() == "https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp")
-            {
-                doc = mainBrowser.Document as HtmlDocument;
-
-                doc.GetElementById("id").SetAttribute("value", Program.id);
-                doc.GetElementsByTagName("input")["UserPassWord"].SetAttribute("value", Program.password);
-                doc.InvokeScript("doLogin");
-
-                /************************************
-                 *  포탈 로그인 단계
-                 ************************************/
-                loadingLabel.Text = "포탈 로그인중";
-                loadingProgressBar.Value += 5;
-            }
-
-            /**********************************************************
-             * 
-             *  첫 로그인, 이름 저장, 학사 공지로 이동
-             *  
-             **********************************************************/
-
-            if (e.Url.ToString() == "http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp")
-            {
-                if (isPortalComplete == false)
-                {
-                    /************************************
-                     *  포탈 로그인 완료
-                     ************************************/
-                    loadingLabel.Text = "포탈 로그인 완료";
-                    loadingProgressBar.Value += 5;
-
-                    portalCookie = mainBrowser.Document.Cookie;
-                    welcomeLabel.Click += new EventHandler(welcomeLabel_Click);
-
-                    userName = mainBrowser.DocumentTitle.ToString().Split('-')[1].Split('/')[0];
-                    welcomeLabel.Text = userName + " 님 환영합니다 :^)";
-
-                    portal = new Portal(portalCookie, this);
-                    showBoardGrid(1);
-
-                    isPortalComplete = true;
-
-                    browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
-                }
-
-                else
-                {
-                    browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
-                }
-            }
-        }
+        
     }
 }

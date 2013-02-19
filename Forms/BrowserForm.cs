@@ -13,7 +13,7 @@ namespace robot.Forms
     public partial class BrowserForm : DevComponents.DotNetBar.Metro.MetroForm
     {
         string cookie;
-        int currentTabIndex = 0;
+        int clickedTabIndex = 0;
         List<ExtendedWebBrowser> browsers;
 
         public BrowserForm(string url, string cookie)
@@ -24,6 +24,8 @@ namespace robot.Forms
 
             this.cookie = cookie;
             InitializeBrowserEvents(browser);
+
+            tabControl.ContextMenuStrip = closeMenuStrip;
 
             browsers = new List<ExtendedWebBrowser>();
         }
@@ -115,8 +117,39 @@ namespace robot.Forms
 
         private void tabControl_SelectedIndexChanged(object sender, EventArgs e)
         {
-            TabControl tab=(TabControl)sender;
-            currentTabIndex = tab.SelectedIndex;
+            ExtendedWebBrowser ex;
+
+            if (tabControl.SelectedTab == null)
+            {
+                this.Visible = false;
+                return;
+            }
+            else
+            {
+                ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
+            }
+
+            if (ex.Url == null)
+                currentUrlLabel.Text = "";
+            else
+                currentUrlLabel.Text = ex.Url.ToString();
+
+            if (ex.CanGoBack)
+            {
+                backBtn.Enabled = true;
+            }
+            else
+            {
+                backBtn.Enabled = false;
+            }
+            if (ex.CanGoForward)
+            {
+                nextBtn.Enabled = true;
+            }
+            else
+            {
+                nextBtn.Enabled = false;
+            }
         }
 
         private void portalBtn_Click(object sender, EventArgs e)
@@ -131,6 +164,27 @@ namespace robot.Forms
             };
 
             NewTabBrowser.Navigate("http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp");
+            InitializeBrowserEvents(NewTabBrowser);
+
+            tabControl.TabPages.Add(NewTabPage);
+            tabControl.SelectedTab = NewTabPage;
+
+            // ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
+            // ex.Navigate("http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp");
+        }
+
+        private void epBtn_Click(object sender, EventArgs e)
+        {
+            TabPage NewTabPage = new TabPage();
+
+            ExtendedWebBrowser NewTabBrowser = new ExtendedWebBrowser()
+            {
+                Parent = NewTabPage,
+                Dock = DockStyle.Fill,
+                Tag = NewTabPage
+            };
+
+            NewTabBrowser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runSAPEP.jsp");
             InitializeBrowserEvents(NewTabBrowser);
 
             tabControl.TabPages.Add(NewTabPage);
@@ -245,14 +299,33 @@ namespace robot.Forms
             // ex.Navigate("http://club.cyworld.com/ClubV1/Home.cy/53814181");
         }
 
-        private void tabControl_SelectedIndexChanged_1(object sender, EventArgs e)
+        private void tabControl_MouseClick(object sender, MouseEventArgs e)
+        {
+            if (e.Button == MouseButtons.Right)
+            {
+                // iterate through all the tab pages
+                for (int i = 0; i < tabControl.TabCount; i++)
+                {
+                    // get their rectangle area and check if it contains the mouse cursor
+                    Rectangle r = tabControl.GetTabRect(i);
+                    if (r.Contains(e.Location))
+                    {
+                        clickedTabIndex = i;
+                    }
+                }
+            }
+        }
+
+        private void 닫기ToolStripMenuItem_Click_1(object sender, EventArgs e)
+        {
+            tabControl.TabPages.RemoveAt(clickedTabIndex);
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
         {
             ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
-
-            if (ex.Url == null)
-                currentUrlLabel.Text="";
-            else
-                currentUrlLabel.Text = ex.Url.ToString();
+            ex.Refresh();
         }
+
     }
 }

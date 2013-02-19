@@ -18,7 +18,16 @@ namespace robot
 
         public void getWeather() {
             XmlDocument docX = new XmlDocument();
-            docX.Load("http://www.kma.go.kr/wid/queryDFS.jsp?gridx=98&gridy=84");
+
+            try
+            {
+                docX.Load("http://www.kma.go.kr/wid/queryDFS.jsp?gridx=98&gridy=84");
+
+            }
+            catch
+            {
+                return;
+            }
 
             XmlNodeList hourList = docX.GetElementsByTagName("hour");
             XmlNodeList tempList = docX.GetElementsByTagName("temp");

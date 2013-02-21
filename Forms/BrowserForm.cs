@@ -320,6 +320,27 @@ namespace robot.Forms
             // ex.Navigate("http://club.cyworld.com/ClubV1/Home.cy/53814181");
         }
 
+        private void nightMealBtn_Click(object sender, EventArgs e)
+        {
+            TabPage NewTabPage = new TabPage();
+
+            ExtendedWebBrowser NewTabBrowser = new ExtendedWebBrowser()
+            {
+                Parent = NewTabPage,
+                Dock = DockStyle.Fill,
+                Tag = NewTabPage
+            };
+
+            NewTabBrowser.Navigate("https://docs.google.com/spreadsheet/ccc?key=0AiTS2HBKYvZxdEpRVHJ1cXliQVRNUTI1OVQwTzlyTFE&usp=sharing#gid=0");
+            InitializeBrowserEvents(NewTabBrowser);
+
+            tabControl.TabPages.Add(NewTabPage);
+            tabControl.SelectedTab = NewTabPage;
+
+            // ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
+            // ex.Navigate("http://club.cyworld.com/ClubV1/Home.cy/53814181");
+        }
+
         private void nateClubBtn_Click(object sender, EventArgs e)
         {
             TabPage NewTabPage = new TabPage();
@@ -368,6 +389,5 @@ namespace robot.Forms
             ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
             ex.Refresh();
         }
-
     }
 }

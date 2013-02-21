@@ -147,9 +147,9 @@
             this.boardSlide = new DevComponents.DotNetBar.SideBar();
             this.sideBarPanelItem1 = new DevComponents.DotNetBar.SideBarPanelItem();
             this.buttonItem8 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem11 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem12 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem17 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem11 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem10 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem9 = new DevComponents.DotNetBar.ButtonItem();
             this.slidePortal = new DevComponents.DotNetBar.SideBarPanelItem();
@@ -188,6 +188,7 @@
             this.종합정보ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.주간식단ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.학사일정ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.야식정보ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uNIST웹메일ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.네이트총재클럽ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.개인알람ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -1533,7 +1534,7 @@
             this.boardSlide.AllowUserCustomize = false;
             this.boardSlide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.boardSlide.BorderStyle = DevComponents.DotNetBar.eBorderType.None;
-            this.boardSlide.ExpandedPanel = this.sideBarPanelItem1;
+            this.boardSlide.ExpandedPanel = this.slidePortal;
             this.boardSlide.ForeColor = System.Drawing.Color.Black;
             this.boardSlide.Location = new System.Drawing.Point(12, 39);
             this.boardSlide.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1544,7 +1545,7 @@
             this.slideLibrary,
             this.sideBarPanelItem1});
             this.boardSlide.ShowToolTips = false;
-            this.boardSlide.Size = new System.Drawing.Size(115, 187);
+            this.boardSlide.Size = new System.Drawing.Size(117, 187);
             this.boardSlide.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.boardSlide.TabIndex = 8;
             this.boardSlide.Text = "sideBar1";
@@ -1556,9 +1557,9 @@
             this.sideBarPanelItem1.Name = "sideBarPanelItem1";
             this.sideBarPanelItem1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItem8,
-            this.buttonItem11,
             this.buttonItem12,
             this.buttonItem17,
+            this.buttonItem11,
             this.buttonItem10,
             this.buttonItem9});
             this.sideBarPanelItem1.Text = "바로가기";
@@ -1570,14 +1571,6 @@
             this.buttonItem8.Name = "buttonItem8";
             this.buttonItem8.Text = "포탈 홈페이지";
             this.buttonItem8.Click += new System.EventHandler(this.buttonItem8_Click);
-            // 
-            // buttonItem11
-            // 
-            this.buttonItem11.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItem11.CanCustomize = false;
-            this.buttonItem11.Name = "buttonItem11";
-            this.buttonItem11.Text = "종합 정보";
-            this.buttonItem11.Click += new System.EventHandler(this.buttonItem11_Click);
             // 
             // buttonItem12
             // 
@@ -1594,6 +1587,14 @@
             this.buttonItem17.Name = "buttonItem17";
             this.buttonItem17.Text = "학사 일정";
             this.buttonItem17.Click += new System.EventHandler(this.buttonItem17_Click);
+            // 
+            // buttonItem11
+            // 
+            this.buttonItem11.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem11.CanCustomize = false;
+            this.buttonItem11.Name = "buttonItem11";
+            this.buttonItem11.Text = "야식 정보";
+            this.buttonItem11.Click += new System.EventHandler(this.buttonItem11_Click_1);
             // 
             // buttonItem10
             // 
@@ -1737,7 +1738,7 @@
             this.보이기ToolStripMenuItem,
             this.종료ToolStripMenuItem});
             this.trayMenuStrip.Name = "contextMenuStrip1";
-            this.trayMenuStrip.Size = new System.Drawing.Size(127, 158);
+            this.trayMenuStrip.Size = new System.Drawing.Size(153, 180);
             this.trayMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.trayMenuStrip_Opening);
             // 
             // 포탈ToolStripMenuItem
@@ -1748,7 +1749,7 @@
             this.대학원공지ToolStripMenuItem,
             this.최신게시물ToolStripMenuItem});
             this.포탈ToolStripMenuItem.Name = "포탈ToolStripMenuItem";
-            this.포탈ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.포탈ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.포탈ToolStripMenuItem.Text = "포탈";
             // 
             // 학사공지ToolStripMenuItem
@@ -1782,7 +1783,7 @@
             // 블랙보드ToolStripMenuItem
             // 
             this.블랙보드ToolStripMenuItem.Name = "블랙보드ToolStripMenuItem";
-            this.블랙보드ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.블랙보드ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.블랙보드ToolStripMenuItem.Text = "블랙보드";
             // 
             // 학정ToolStripMenuItem
@@ -1793,7 +1794,7 @@
             this.열람실좌석현황ToolStripMenuItem,
             this.myLibraryToolStripMenuItem});
             this.학정ToolStripMenuItem.Name = "학정ToolStripMenuItem";
-            this.학정ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.학정ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.학정ToolStripMenuItem.Text = "학정";
             // 
             // 도서검색ToolStripMenuItem
@@ -1830,21 +1831,21 @@
             // 대출현황ToolStripMenuItem
             // 
             this.대출현황ToolStripMenuItem.Name = "대출현황ToolStripMenuItem";
-            this.대출현황ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.대출현황ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.대출현황ToolStripMenuItem.Text = "대출 현황";
             this.대출현황ToolStripMenuItem.Click += new System.EventHandler(this.대출현황ToolStripMenuItem_Click);
             // 
             // 예약현황ToolStripMenuItem
             // 
             this.예약현황ToolStripMenuItem.Name = "예약현황ToolStripMenuItem";
-            this.예약현황ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.예약현황ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.예약현황ToolStripMenuItem.Text = "예약 현황";
             this.예약현황ToolStripMenuItem.Click += new System.EventHandler(this.예약현황ToolStripMenuItem_Click);
             // 
             // 신청현황ToolStripMenuItem
             // 
             this.신청현황ToolStripMenuItem.Name = "신청현황ToolStripMenuItem";
-            this.신청현황ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.신청현황ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.신청현황ToolStripMenuItem.Text = "신청 현황";
             this.신청현황ToolStripMenuItem.Click += new System.EventHandler(this.신청현황ToolStripMenuItem_Click);
             // 
@@ -1855,10 +1856,11 @@
             this.종합정보ToolStripMenuItem,
             this.주간식단ToolStripMenuItem,
             this.학사일정ToolStripMenuItem,
+            this.야식정보ToolStripMenuItem,
             this.uNIST웹메일ToolStripMenuItem,
             this.네이트총재클럽ToolStripMenuItem});
             this.바로가기ToolStripMenuItem.Name = "바로가기ToolStripMenuItem";
-            this.바로가기ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.바로가기ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.바로가기ToolStripMenuItem.Text = "바로가기";
             // 
             // 포탈홈페이지ToolStripMenuItem
@@ -1889,6 +1891,13 @@
             this.학사일정ToolStripMenuItem.Text = "학사 일정";
             this.학사일정ToolStripMenuItem.Click += new System.EventHandler(this.학사일정ToolStripMenuItem_Click);
             // 
+            // 야식정보ToolStripMenuItem
+            // 
+            this.야식정보ToolStripMenuItem.Name = "야식정보ToolStripMenuItem";
+            this.야식정보ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.야식정보ToolStripMenuItem.Text = "야식 정보";
+            this.야식정보ToolStripMenuItem.Click += new System.EventHandler(this.야식정보ToolStripMenuItem_Click);
+            // 
             // uNIST웹메일ToolStripMenuItem
             // 
             this.uNIST웹메일ToolStripMenuItem.Name = "uNIST웹메일ToolStripMenuItem";
@@ -1906,21 +1915,21 @@
             // 개인알람ToolStripMenuItem
             // 
             this.개인알람ToolStripMenuItem.Name = "개인알람ToolStripMenuItem";
-            this.개인알람ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.개인알람ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.개인알람ToolStripMenuItem.Text = "개인 알람";
             this.개인알람ToolStripMenuItem.Click += new System.EventHandler(this.개인알람ToolStripMenuItem_Click);
             // 
             // 보이기ToolStripMenuItem
             // 
             this.보이기ToolStripMenuItem.Name = "보이기ToolStripMenuItem";
-            this.보이기ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.보이기ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.보이기ToolStripMenuItem.Text = "보이기";
             this.보이기ToolStripMenuItem.Click += new System.EventHandler(this.보이기ToolStripMenuItem_Click);
             // 
             // 종료ToolStripMenuItem
             // 
             this.종료ToolStripMenuItem.Name = "종료ToolStripMenuItem";
-            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.종료ToolStripMenuItem.Text = "종료";
             this.종료ToolStripMenuItem.Click += new System.EventHandler(this.종료ToolStripMenuItem_Click);
             // 
@@ -2568,7 +2577,6 @@
         private System.Windows.Forms.ToolTip portalSearchTip;
         private DevComponents.DotNetBar.ButtonItem buttonItem4;
         private System.Windows.Forms.WebBrowser mainBrowser;
-        private DevComponents.DotNetBar.ButtonItem buttonItem11;
         private System.Windows.Forms.ToolStripMenuItem 종합정보ToolStripMenuItem;
         private DevComponents.DotNetBar.ButtonItem buttonItem12;
         private System.Windows.Forms.ToolStripMenuItem 주간식단ToolStripMenuItem;
@@ -2584,6 +2592,8 @@
         private System.Windows.Forms.ToolStripMenuItem 대출현황ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 예약현황ToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem 신청현황ToolStripMenuItem;
+        private DevComponents.DotNetBar.ButtonItem buttonItem11;
+        private System.Windows.Forms.ToolStripMenuItem 야식정보ToolStripMenuItem;
     }
 }
 

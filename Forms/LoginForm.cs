@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*************************************************************
+ * 
+ *   Robot.
+ *   Copyright (c) 2013 Kim Tae Hoon
+ *   
+ *************************************************************/
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;

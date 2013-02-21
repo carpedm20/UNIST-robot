@@ -1883,6 +1883,18 @@ loadingLabel.Text = "수강 정보 수집중3";
         }
 
         /**********************************************************
+         * 
+         *  학사 일정 바로가기
+         *  
+         **********************************************************/
+
+        private void buttonItem11_Click_1(object sender, EventArgs e)
+        {
+            browserForm = new Forms.BrowserForm("https://docs.google.com/spreadsheet/ccc?key=0AiTS2HBKYvZxdEpRVHJ1cXliQVRNUTI1OVQwTzlyTFE&usp=sharing#gid=0", portalCookie);
+            browserForm.Show();
+        }
+
+        /**********************************************************
         * 
         *  UNIST 웹 메일 바로가기
         *  
@@ -2222,6 +2234,12 @@ loadingLabel.Text = "수강 정보 수집중3";
             browser.Navigate("https://www.google.com/calendar/embed?src=anr9a4cbgv3os8ac5i8fg6fqic%40group.calendar.google.com&ctz=Asia/Seoul");
 
             portalGroup.Visible = false;
+        }
+
+        private void 야식정보ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            browserForm = new Forms.BrowserForm("https://docs.google.com/spreadsheet/ccc?key=0AiTS2HBKYvZxdEpRVHJ1cXliQVRNUTI1OVQwTzlyTFE&usp=sharing#gid=0", portalCookie);
+            browserForm.Show();
         }
 
         private void uNIST웹메일ToolStripMenuItem_Click(object sender, EventArgs e)

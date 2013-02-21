@@ -100,7 +100,7 @@ namespace robot
 
         private void label5_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Created by Kim Tae Hoon ಠ_ಠ", ":^)");
+            MessageBox.Show("Copyright (c) 2013 Kim Tae Hoon ಠ_ಠ", ":^)");
         }
 
         private void SettingForm_VisibleChanged(object sender, EventArgs e)

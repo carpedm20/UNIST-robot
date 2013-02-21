@@ -40,7 +40,6 @@
             this.nateClubBtn = new System.Windows.Forms.Button();
             this.mailBtn = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.browser = new ExtendedWebBrowser();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.closeMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.닫기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,6 +47,8 @@
             this.epBtn = new System.Windows.Forms.Button();
             this.mealBtn = new System.Windows.Forms.Button();
             this.calendarBtn = new System.Windows.Forms.Button();
+            this.nightMealBtn = new System.Windows.Forms.Button();
+            this.browser = new ExtendedWebBrowser();
             this.tabPage1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.closeMenuStrip.SuspendLayout();
@@ -94,9 +95,9 @@
             // 
             this.bbBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bbBtn.ForeColor = System.Drawing.Color.Black;
-            this.bbBtn.Location = new System.Drawing.Point(224, 32);
+            this.bbBtn.Location = new System.Drawing.Point(194, 32);
             this.bbBtn.Name = "bbBtn";
-            this.bbBtn.Size = new System.Drawing.Size(105, 23);
+            this.bbBtn.Size = new System.Drawing.Size(90, 23);
             this.bbBtn.TabIndex = 6;
             this.bbBtn.Text = "블랙 보드";
             this.bbBtn.UseVisualStyleBackColor = false;
@@ -108,7 +109,7 @@
             this.portalBtn.ForeColor = System.Drawing.Color.Black;
             this.portalBtn.Location = new System.Drawing.Point(2, 32);
             this.portalBtn.Name = "portalBtn";
-            this.portalBtn.Size = new System.Drawing.Size(105, 23);
+            this.portalBtn.Size = new System.Drawing.Size(90, 23);
             this.portalBtn.TabIndex = 7;
             this.portalBtn.Text = "포탈";
             this.portalBtn.UseVisualStyleBackColor = false;
@@ -119,9 +120,9 @@
             this.libraryBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.libraryBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.libraryBtn.ForeColor = System.Drawing.Color.Black;
-            this.libraryBtn.Location = new System.Drawing.Point(335, 32);
+            this.libraryBtn.Location = new System.Drawing.Point(290, 32);
             this.libraryBtn.Name = "libraryBtn";
-            this.libraryBtn.Size = new System.Drawing.Size(105, 23);
+            this.libraryBtn.Size = new System.Drawing.Size(90, 23);
             this.libraryBtn.TabIndex = 8;
             this.libraryBtn.Text = "학정";
             this.libraryBtn.UseVisualStyleBackColor = false;
@@ -132,9 +133,9 @@
             this.dormBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.dormBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.dormBtn.ForeColor = System.Drawing.Color.Black;
-            this.dormBtn.Location = new System.Drawing.Point(557, 32);
+            this.dormBtn.Location = new System.Drawing.Point(482, 32);
             this.dormBtn.Name = "dormBtn";
-            this.dormBtn.Size = new System.Drawing.Size(105, 23);
+            this.dormBtn.Size = new System.Drawing.Size(90, 23);
             this.dormBtn.TabIndex = 9;
             this.dormBtn.Text = "기숙사";
             this.dormBtn.UseVisualStyleBackColor = false;
@@ -145,9 +146,9 @@
             this.nateClubBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.nateClubBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.nateClubBtn.ForeColor = System.Drawing.Color.Black;
-            this.nateClubBtn.Location = new System.Drawing.Point(890, 32);
+            this.nateClubBtn.Location = new System.Drawing.Point(866, 32);
             this.nateClubBtn.Name = "nateClubBtn";
-            this.nateClubBtn.Size = new System.Drawing.Size(105, 23);
+            this.nateClubBtn.Size = new System.Drawing.Size(90, 23);
             this.nateClubBtn.TabIndex = 10;
             this.nateClubBtn.Text = "총재 클럽";
             this.nateClubBtn.UseVisualStyleBackColor = false;
@@ -158,9 +159,9 @@
             this.mailBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.mailBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.mailBtn.ForeColor = System.Drawing.Color.Black;
-            this.mailBtn.Location = new System.Drawing.Point(668, 32);
+            this.mailBtn.Location = new System.Drawing.Point(578, 32);
             this.mailBtn.Name = "mailBtn";
-            this.mailBtn.Size = new System.Drawing.Size(105, 23);
+            this.mailBtn.Size = new System.Drawing.Size(90, 23);
             this.mailBtn.TabIndex = 11;
             this.mailBtn.Text = "전자 우편";
             this.mailBtn.UseVisualStyleBackColor = false;
@@ -177,17 +178,6 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = " ";
             this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // browser
-            // 
-            this.browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.browser.Location = new System.Drawing.Point(3, 3);
-            this.browser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.browser.Name = "browser";
-            this.browser.Size = new System.Drawing.Size(1016, 595);
-            this.browser.TabIndex = 0;
             // 
             // tabControl
             // 
@@ -235,9 +225,9 @@
             // 
             this.epBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.epBtn.ForeColor = System.Drawing.Color.Black;
-            this.epBtn.Location = new System.Drawing.Point(113, 32);
+            this.epBtn.Location = new System.Drawing.Point(98, 32);
             this.epBtn.Name = "epBtn";
-            this.epBtn.Size = new System.Drawing.Size(105, 23);
+            this.epBtn.Size = new System.Drawing.Size(90, 23);
             this.epBtn.TabIndex = 14;
             this.epBtn.Text = "종합정보";
             this.epBtn.UseVisualStyleBackColor = false;
@@ -248,9 +238,9 @@
             this.mealBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.mealBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.mealBtn.ForeColor = System.Drawing.Color.Black;
-            this.mealBtn.Location = new System.Drawing.Point(446, 32);
+            this.mealBtn.Location = new System.Drawing.Point(386, 32);
             this.mealBtn.Name = "mealBtn";
-            this.mealBtn.Size = new System.Drawing.Size(105, 23);
+            this.mealBtn.Size = new System.Drawing.Size(90, 23);
             this.mealBtn.TabIndex = 15;
             this.mealBtn.Text = "주간 식단";
             this.mealBtn.UseVisualStyleBackColor = false;
@@ -261,31 +251,56 @@
             this.calendarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.calendarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.calendarBtn.ForeColor = System.Drawing.Color.Black;
-            this.calendarBtn.Location = new System.Drawing.Point(779, 32);
+            this.calendarBtn.Location = new System.Drawing.Point(674, 32);
             this.calendarBtn.Name = "calendarBtn";
-            this.calendarBtn.Size = new System.Drawing.Size(105, 23);
+            this.calendarBtn.Size = new System.Drawing.Size(90, 23);
             this.calendarBtn.TabIndex = 16;
             this.calendarBtn.Text = "학사 일정";
             this.calendarBtn.UseVisualStyleBackColor = false;
             this.calendarBtn.Click += new System.EventHandler(this.calendarBtn_Click);
+            // 
+            // nightMealBtn
+            // 
+            this.nightMealBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.nightMealBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.nightMealBtn.ForeColor = System.Drawing.Color.Black;
+            this.nightMealBtn.Location = new System.Drawing.Point(770, 32);
+            this.nightMealBtn.Name = "nightMealBtn";
+            this.nightMealBtn.Size = new System.Drawing.Size(90, 23);
+            this.nightMealBtn.TabIndex = 17;
+            this.nightMealBtn.Text = "야식 정보";
+            this.nightMealBtn.UseVisualStyleBackColor = false;
+            this.nightMealBtn.Click += new System.EventHandler(this.nightMealBtn_Click);
+            // 
+            // browser
+            // 
+            this.browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.browser.Location = new System.Drawing.Point(3, 3);
+            this.browser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.browser.Name = "browser";
+            this.browser.Size = new System.Drawing.Size(1016, 595);
+            this.browser.TabIndex = 0;
             // 
             // BrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 696);
+            this.Controls.Add(this.nightMealBtn);
+            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.calendarBtn);
             this.Controls.Add(this.mealBtn);
             this.Controls.Add(this.epBtn);
-            this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.mailBtn);
             this.Controls.Add(this.nateClubBtn);
+            this.Controls.Add(this.portalBtn);
+            this.Controls.Add(this.mailBtn);
             this.Controls.Add(this.dormBtn);
             this.Controls.Add(this.libraryBtn);
-            this.Controls.Add(this.portalBtn);
-            this.Controls.Add(this.bbBtn);
             this.Controls.Add(this.nextBtn);
+            this.Controls.Add(this.bbBtn);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.currentUrlLabel);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -323,5 +338,6 @@
         private System.Windows.Forms.Button epBtn;
         private System.Windows.Forms.Button mealBtn;
         private System.Windows.Forms.Button calendarBtn;
+        private System.Windows.Forms.Button nightMealBtn;
     }
 }

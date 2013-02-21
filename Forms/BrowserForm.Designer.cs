@@ -46,6 +46,8 @@
             this.닫기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.epBtn = new System.Windows.Forms.Button();
+            this.mealBtn = new System.Windows.Forms.Button();
+            this.calendarBtn = new System.Windows.Forms.Button();
             this.tabPage1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.closeMenuStrip.SuspendLayout();
@@ -78,8 +80,8 @@
             // 
             // currentUrlLabel
             // 
-            this.currentUrlLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.currentUrlLabel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.currentUrlLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.currentUrlLabel.ForeColor = System.Drawing.Color.Black;
             this.currentUrlLabel.Location = new System.Drawing.Point(98, 2);
@@ -130,7 +132,7 @@
             this.dormBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.dormBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.dormBtn.ForeColor = System.Drawing.Color.Black;
-            this.dormBtn.Location = new System.Drawing.Point(446, 32);
+            this.dormBtn.Location = new System.Drawing.Point(557, 32);
             this.dormBtn.Name = "dormBtn";
             this.dormBtn.Size = new System.Drawing.Size(105, 23);
             this.dormBtn.TabIndex = 9;
@@ -143,7 +145,7 @@
             this.nateClubBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.nateClubBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.nateClubBtn.ForeColor = System.Drawing.Color.Black;
-            this.nateClubBtn.Location = new System.Drawing.Point(668, 32);
+            this.nateClubBtn.Location = new System.Drawing.Point(890, 32);
             this.nateClubBtn.Name = "nateClubBtn";
             this.nateClubBtn.Size = new System.Drawing.Size(105, 23);
             this.nateClubBtn.TabIndex = 10;
@@ -156,7 +158,7 @@
             this.mailBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.mailBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.mailBtn.ForeColor = System.Drawing.Color.Black;
-            this.mailBtn.Location = new System.Drawing.Point(557, 32);
+            this.mailBtn.Location = new System.Drawing.Point(668, 32);
             this.mailBtn.Name = "mailBtn";
             this.mailBtn.Size = new System.Drawing.Size(105, 23);
             this.mailBtn.TabIndex = 11;
@@ -178,9 +180,9 @@
             // 
             // browser
             // 
-            this.browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.browser.Location = new System.Drawing.Point(3, 3);
             this.browser.MinimumSize = new System.Drawing.Size(20, 20);
             this.browser.Name = "browser";
@@ -189,9 +191,9 @@
             // 
             // tabControl
             // 
-            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.tabControl.Controls.Add(this.tabPage1);
             this.tabControl.ForeColor = System.Drawing.Color.Black;
             this.tabControl.Location = new System.Drawing.Point(7, 61);
@@ -218,6 +220,8 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.pictureBox1.ForeColor = System.Drawing.Color.Black;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(71, 2);
             this.pictureBox1.Name = "pictureBox1";
@@ -239,11 +243,39 @@
             this.epBtn.UseVisualStyleBackColor = false;
             this.epBtn.Click += new System.EventHandler(this.epBtn_Click);
             // 
+            // mealBtn
+            // 
+            this.mealBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.mealBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.mealBtn.ForeColor = System.Drawing.Color.Black;
+            this.mealBtn.Location = new System.Drawing.Point(446, 32);
+            this.mealBtn.Name = "mealBtn";
+            this.mealBtn.Size = new System.Drawing.Size(105, 23);
+            this.mealBtn.TabIndex = 15;
+            this.mealBtn.Text = "주간 식단";
+            this.mealBtn.UseVisualStyleBackColor = false;
+            this.mealBtn.Click += new System.EventHandler(this.mealBtn_Click);
+            // 
+            // calendarBtn
+            // 
+            this.calendarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.calendarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.calendarBtn.ForeColor = System.Drawing.Color.Black;
+            this.calendarBtn.Location = new System.Drawing.Point(779, 32);
+            this.calendarBtn.Name = "calendarBtn";
+            this.calendarBtn.Size = new System.Drawing.Size(105, 23);
+            this.calendarBtn.TabIndex = 16;
+            this.calendarBtn.Text = "학사 일정";
+            this.calendarBtn.UseVisualStyleBackColor = false;
+            this.calendarBtn.Click += new System.EventHandler(this.calendarBtn_Click);
+            // 
             // BrowserForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1041, 696);
+            this.Controls.Add(this.calendarBtn);
+            this.Controls.Add(this.mealBtn);
             this.Controls.Add(this.epBtn);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.tabControl);
@@ -256,7 +288,6 @@
             this.Controls.Add(this.nextBtn);
             this.Controls.Add(this.backBtn);
             this.Controls.Add(this.currentUrlLabel);
-            this.DoubleBuffered = true;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(670, 681);
             this.Name = "BrowserForm";
@@ -290,5 +321,7 @@
         private System.Windows.Forms.ToolStripMenuItem 닫기ToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button epBtn;
+        private System.Windows.Forms.Button mealBtn;
+        private System.Windows.Forms.Button calendarBtn;
     }
 }

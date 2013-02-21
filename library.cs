@@ -1,4 +1,4 @@
-﻿using mshtml;
+﻿using MSHTML;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -319,7 +319,7 @@ namespace robot
         static IEnumerable<IHTMLElement> getTableRow(IHTMLDocument2 doc)
         {
             foreach (IHTMLElement e in doc.all)
-                if (e is mshtml.IHTMLTableRow)
+                if (e is IHTMLTableRow)
                     yield return e;
         }
 

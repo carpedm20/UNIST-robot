@@ -236,6 +236,27 @@ namespace robot.Forms
             // ex.Navigate("http://library.unist.ac.kr");
         }
 
+        private void mealBtn_Click(object sender, EventArgs e)
+        {
+            TabPage NewTabPage = new TabPage();
+
+            ExtendedWebBrowser NewTabBrowser = new ExtendedWebBrowser()
+            {
+                Parent = NewTabPage,
+                Dock = DockStyle.Fill,
+                Tag = NewTabPage
+            };
+
+            NewTabBrowser.Navigate(MainForm.mealUrl);
+            InitializeBrowserEvents(NewTabBrowser);
+
+            tabControl.TabPages.Add(NewTabPage);
+            tabControl.SelectedTab = NewTabPage;
+
+            // ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
+            // ex.Navigate("http://dorm.unist.ac.kr");
+        }
+
         private void dormBtn_Click(object sender, EventArgs e)
         {
             TabPage NewTabPage = new TabPage();
@@ -276,6 +297,27 @@ namespace robot.Forms
 
             // ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
             // ex.Navigate("http://mail.unist.ac.kr");
+        }
+
+        private void calendarBtn_Click(object sender, EventArgs e)
+        {
+            TabPage NewTabPage = new TabPage();
+
+            ExtendedWebBrowser NewTabBrowser = new ExtendedWebBrowser()
+            {
+                Parent = NewTabPage,
+                Dock = DockStyle.Fill,
+                Tag = NewTabPage
+            };
+
+            NewTabBrowser.Navigate("https://www.google.com/calendar/embed?src=anr9a4cbgv3os8ac5i8fg6fqic%40group.calendar.google.com&ctz=Asia/Seoul");
+            InitializeBrowserEvents(NewTabBrowser);
+
+            tabControl.TabPages.Add(NewTabPage);
+            tabControl.SelectedTab = NewTabPage;
+
+            // ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
+            // ex.Navigate("http://club.cyworld.com/ClubV1/Home.cy/53814181");
         }
 
         private void nateClubBtn_Click(object sender, EventArgs e)

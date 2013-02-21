@@ -145,6 +145,13 @@
             this.Column34 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.w = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.boardSlide = new DevComponents.DotNetBar.SideBar();
+            this.sideBarPanelItem1 = new DevComponents.DotNetBar.SideBarPanelItem();
+            this.buttonItem8 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem11 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem12 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem17 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem10 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem9 = new DevComponents.DotNetBar.ButtonItem();
             this.slidePortal = new DevComponents.DotNetBar.SideBarPanelItem();
             this.buttonItem1 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem2 = new DevComponents.DotNetBar.ButtonItem();
@@ -155,11 +162,10 @@
             this.buttonItem5 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem6 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem7 = new DevComponents.DotNetBar.ButtonItem();
-            this.sideBarPanelItem1 = new DevComponents.DotNetBar.SideBarPanelItem();
-            this.buttonItem8 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem11 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem10 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem9 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem13 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem14 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem15 = new DevComponents.DotNetBar.ButtonItem();
+            this.buttonItem16 = new DevComponents.DotNetBar.ButtonItem();
             this.styleManager1 = new DevComponents.DotNetBar.StyleManager(this.components);
             this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.trayMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
@@ -173,8 +179,15 @@
             this.도서검색ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.스터디룸예약ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.열람실좌석현황ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.myLibraryToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.대출현황ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.예약현황ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.신청현황ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.바로가기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.포탈홈페이지ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.종합정보ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.주간식단ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.학사일정ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uNIST웹메일ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.네이트총재클럽ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.개인알람ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -197,7 +210,6 @@
             this.studyDate = new System.Windows.Forms.Label();
             this.previousMonthBtn = new System.Windows.Forms.PictureBox();
             this.sessionTimer = new System.Windows.Forms.Timer(this.components);
-            this.notifyBox = new System.Windows.Forms.PictureBox();
             this.weatherBox = new System.Windows.Forms.PictureBox();
             this.weatherTip = new System.Windows.Forms.ToolTip(this.components);
             this.notifyTip = new System.Windows.Forms.ToolTip(this.components);
@@ -212,7 +224,6 @@
             this.mailClickBox = new System.Windows.Forms.PictureBox();
             this.reloadClickBox = new System.Windows.Forms.PictureBox();
             this.settingClickBox = new System.Windows.Forms.PictureBox();
-            this.notifyClickBox = new System.Windows.Forms.PictureBox();
             this.announceHideCheck = new System.Windows.Forms.CheckBox();
             this.maxPageNumBox = new DevComponents.Editors.IntegerInput();
             this.maxPageCountLabel = new System.Windows.Forms.Label();
@@ -224,8 +235,8 @@
             this.portalGroup = new System.Windows.Forms.GroupBox();
             this.portalSearchTip = new System.Windows.Forms.ToolTip(this.components);
             this.mainBrowser = new System.Windows.Forms.WebBrowser();
-            this.extraBrowser = new System.Windows.Forms.WebBrowser();
-            this.종합정보ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.notifyBox = new System.Windows.Forms.PictureBox();
+            this.notifyClickBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.boardGrid)).BeginInit();
             this.studyGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -243,23 +254,23 @@
             this.sayStrip.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.nextMonthBtn)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.previousMonthBtn)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notifyBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.weatherBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reloadBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.weatherClickBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mailClickBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.reloadClickBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingClickBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notifyClickBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxPageNumBox)).BeginInit();
             this.portalGroup.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.notifyBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notifyClickBox)).BeginInit();
             this.SuspendLayout();
             // 
             // browser
             // 
-            this.browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.browser.Location = new System.Drawing.Point(12, 235);
             this.browser.MinimumSize = new System.Drawing.Size(20, 20);
             this.browser.Name = "browser";
@@ -276,8 +287,8 @@
             this.boardGrid.AllowUserToAddRows = false;
             this.boardGrid.AllowUserToDeleteRows = false;
             this.boardGrid.AllowUserToResizeRows = false;
-            this.boardGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.boardGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.boardGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
@@ -835,8 +846,8 @@
             this.bookListGrid.AllowUserToAddRows = false;
             this.bookListGrid.AllowUserToDeleteRows = false;
             this.bookListGrid.AllowUserToResizeRows = false;
-            this.bookListGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.bookListGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.bookListGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
@@ -902,8 +913,8 @@
             // 
             // bbPanel
             // 
-            this.bbPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.bbPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.bbPanel.AutoScroll = true;
             this.bbPanel.BackColor = System.Drawing.Color.White;
             this.bbPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
@@ -920,9 +931,9 @@
             this.studyGrid.AllowUserToDeleteRows = false;
             this.studyGrid.AllowUserToResizeColumns = false;
             this.studyGrid.AllowUserToResizeRows = false;
-            this.studyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.studyGrid.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.studyGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
@@ -1220,9 +1231,9 @@
             // 
             // bookGroup
             // 
-            this.bookGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.bookGroup.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.bookGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookGroup.Controls.Add(this.bookOperator);
             this.bookGroup.Controls.Add(this.bookOption2);
@@ -1441,9 +1452,9 @@
             this.bookGridView.AllowUserToAddRows = false;
             this.bookGridView.AllowUserToDeleteRows = false;
             this.bookGridView.AllowUserToResizeRows = false;
-            this.bookGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.bookGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.bookGridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
             dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
@@ -1522,7 +1533,7 @@
             this.boardSlide.AllowUserCustomize = false;
             this.boardSlide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.boardSlide.BorderStyle = DevComponents.DotNetBar.eBorderType.None;
-            this.boardSlide.ExpandedPanel = this.slidePortal;
+            this.boardSlide.ExpandedPanel = this.sideBarPanelItem1;
             this.boardSlide.ForeColor = System.Drawing.Color.Black;
             this.boardSlide.Location = new System.Drawing.Point(12, 39);
             this.boardSlide.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1533,11 +1544,68 @@
             this.slideLibrary,
             this.sideBarPanelItem1});
             this.boardSlide.ShowToolTips = false;
-            this.boardSlide.Size = new System.Drawing.Size(115, 189);
+            this.boardSlide.Size = new System.Drawing.Size(115, 187);
             this.boardSlide.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
             this.boardSlide.TabIndex = 8;
             this.boardSlide.Text = "sideBar1";
             this.boardSlide.UsingSystemColors = true;
+            // 
+            // sideBarPanelItem1
+            // 
+            this.sideBarPanelItem1.FontBold = true;
+            this.sideBarPanelItem1.Name = "sideBarPanelItem1";
+            this.sideBarPanelItem1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem8,
+            this.buttonItem11,
+            this.buttonItem12,
+            this.buttonItem17,
+            this.buttonItem10,
+            this.buttonItem9});
+            this.sideBarPanelItem1.Text = "바로가기";
+            // 
+            // buttonItem8
+            // 
+            this.buttonItem8.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem8.CanCustomize = false;
+            this.buttonItem8.Name = "buttonItem8";
+            this.buttonItem8.Text = "포탈 홈페이지";
+            this.buttonItem8.Click += new System.EventHandler(this.buttonItem8_Click);
+            // 
+            // buttonItem11
+            // 
+            this.buttonItem11.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem11.CanCustomize = false;
+            this.buttonItem11.Name = "buttonItem11";
+            this.buttonItem11.Text = "종합 정보";
+            this.buttonItem11.Click += new System.EventHandler(this.buttonItem11_Click);
+            // 
+            // buttonItem12
+            // 
+            this.buttonItem12.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem12.CanCustomize = false;
+            this.buttonItem12.Name = "buttonItem12";
+            this.buttonItem12.Text = "주간 식단";
+            this.buttonItem12.Click += new System.EventHandler(this.buttonItem12_Click);
+            // 
+            // buttonItem17
+            // 
+            this.buttonItem17.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem17.CanCustomize = false;
+            this.buttonItem17.Name = "buttonItem17";
+            this.buttonItem17.Text = "학사 일정";
+            this.buttonItem17.Click += new System.EventHandler(this.buttonItem17_Click);
+            // 
+            // buttonItem10
+            // 
+            this.buttonItem10.Name = "buttonItem10";
+            this.buttonItem10.Text = "UNIST 웹메일";
+            this.buttonItem10.Click += new System.EventHandler(this.buttonItem10_Click);
+            // 
+            // buttonItem9
+            // 
+            this.buttonItem9.Name = "buttonItem9";
+            this.buttonItem9.Text = "네이트 총재 클럽";
+            this.buttonItem9.Click += new System.EventHandler(this.buttonItem9_Click);
             // 
             // slidePortal
             // 
@@ -1593,7 +1661,8 @@
             this.slideLibrary.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItem5,
             this.buttonItem6,
-            this.buttonItem7});
+            this.buttonItem7,
+            this.buttonItem13});
             this.slideLibrary.Text = "학정";
             // 
             // buttonItem5
@@ -1618,44 +1687,33 @@
             this.buttonItem7.Text = "열람실 좌석 현황";
             this.buttonItem7.Click += new System.EventHandler(this.buttonItem7_Click);
             // 
-            // sideBarPanelItem1
+            // buttonItem13
             // 
-            this.sideBarPanelItem1.FontBold = true;
-            this.sideBarPanelItem1.Name = "sideBarPanelItem1";
-            this.sideBarPanelItem1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
-            this.buttonItem8,
-            this.buttonItem11,
-            this.buttonItem10,
-            this.buttonItem9});
-            this.sideBarPanelItem1.Text = "바로가기";
+            this.buttonItem13.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
+            this.buttonItem13.Name = "buttonItem13";
+            this.buttonItem13.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
+            this.buttonItem14,
+            this.buttonItem15,
+            this.buttonItem16});
+            this.buttonItem13.Text = "My Library";
             // 
-            // buttonItem8
+            // buttonItem14
             // 
-            this.buttonItem8.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItem8.CanCustomize = false;
-            this.buttonItem8.Name = "buttonItem8";
-            this.buttonItem8.Text = "포탈 홈페이지";
-            this.buttonItem8.Click += new System.EventHandler(this.buttonItem8_Click);
+            this.buttonItem14.Name = "buttonItem14";
+            this.buttonItem14.Text = "대출 현황";
+            this.buttonItem14.Click += new System.EventHandler(this.buttonItem14_Click);
             // 
-            // buttonItem11
+            // buttonItem15
             // 
-            this.buttonItem11.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItem11.CanCustomize = false;
-            this.buttonItem11.Name = "buttonItem11";
-            this.buttonItem11.Text = "종합 정보";
-            this.buttonItem11.Click += new System.EventHandler(this.buttonItem11_Click);
+            this.buttonItem15.Name = "buttonItem15";
+            this.buttonItem15.Text = "예약 현황";
+            this.buttonItem15.Click += new System.EventHandler(this.buttonItem15_Click);
             // 
-            // buttonItem10
+            // buttonItem16
             // 
-            this.buttonItem10.Name = "buttonItem10";
-            this.buttonItem10.Text = "UNIST 웹메일";
-            this.buttonItem10.Click += new System.EventHandler(this.buttonItem10_Click);
-            // 
-            // buttonItem9
-            // 
-            this.buttonItem9.Name = "buttonItem9";
-            this.buttonItem9.Text = "네이트 총재 클럽";
-            this.buttonItem9.Click += new System.EventHandler(this.buttonItem9_Click);
+            this.buttonItem16.Name = "buttonItem16";
+            this.buttonItem16.Text = "신청 현황";
+            this.buttonItem16.Click += new System.EventHandler(this.buttonItem16_Click);
             // 
             // styleManager1
             // 
@@ -1664,7 +1722,6 @@
             // 
             // trayIcon
             // 
-            this.trayIcon.Icon = ((System.Drawing.Icon)(resources.GetObject("trayIcon.Icon")));
             this.trayIcon.Text = "Robot";
             this.trayIcon.Visible = true;
             this.trayIcon.MouseDoubleClick += new System.Windows.Forms.MouseEventHandler(this.trayIcon_MouseDoubleClick);
@@ -1680,7 +1737,7 @@
             this.보이기ToolStripMenuItem,
             this.종료ToolStripMenuItem});
             this.trayMenuStrip.Name = "contextMenuStrip1";
-            this.trayMenuStrip.Size = new System.Drawing.Size(153, 180);
+            this.trayMenuStrip.Size = new System.Drawing.Size(127, 158);
             this.trayMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.trayMenuStrip_Opening);
             // 
             // 포탈ToolStripMenuItem
@@ -1691,7 +1748,7 @@
             this.대학원공지ToolStripMenuItem,
             this.최신게시물ToolStripMenuItem});
             this.포탈ToolStripMenuItem.Name = "포탈ToolStripMenuItem";
-            this.포탈ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.포탈ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.포탈ToolStripMenuItem.Text = "포탈";
             // 
             // 학사공지ToolStripMenuItem
@@ -1725,7 +1782,7 @@
             // 블랙보드ToolStripMenuItem
             // 
             this.블랙보드ToolStripMenuItem.Name = "블랙보드ToolStripMenuItem";
-            this.블랙보드ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.블랙보드ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.블랙보드ToolStripMenuItem.Text = "블랙보드";
             // 
             // 학정ToolStripMenuItem
@@ -1733,9 +1790,10 @@
             this.학정ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.도서검색ToolStripMenuItem,
             this.스터디룸예약ToolStripMenuItem,
-            this.열람실좌석현황ToolStripMenuItem});
+            this.열람실좌석현황ToolStripMenuItem,
+            this.myLibraryToolStripMenuItem});
             this.학정ToolStripMenuItem.Name = "학정ToolStripMenuItem";
-            this.학정ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.학정ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.학정ToolStripMenuItem.Text = "학정";
             // 
             // 도서검색ToolStripMenuItem
@@ -1759,15 +1817,48 @@
             this.열람실좌석현황ToolStripMenuItem.Text = "열람실 좌석 현황";
             this.열람실좌석현황ToolStripMenuItem.Click += new System.EventHandler(this.열람실좌석현황ToolStripMenuItem_Click);
             // 
+            // myLibraryToolStripMenuItem
+            // 
+            this.myLibraryToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.대출현황ToolStripMenuItem,
+            this.예약현황ToolStripMenuItem,
+            this.신청현황ToolStripMenuItem});
+            this.myLibraryToolStripMenuItem.Name = "myLibraryToolStripMenuItem";
+            this.myLibraryToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.myLibraryToolStripMenuItem.Text = "My Library";
+            // 
+            // 대출현황ToolStripMenuItem
+            // 
+            this.대출현황ToolStripMenuItem.Name = "대출현황ToolStripMenuItem";
+            this.대출현황ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.대출현황ToolStripMenuItem.Text = "대출 현황";
+            this.대출현황ToolStripMenuItem.Click += new System.EventHandler(this.대출현황ToolStripMenuItem_Click);
+            // 
+            // 예약현황ToolStripMenuItem
+            // 
+            this.예약현황ToolStripMenuItem.Name = "예약현황ToolStripMenuItem";
+            this.예약현황ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.예약현황ToolStripMenuItem.Text = "예약 현황";
+            this.예약현황ToolStripMenuItem.Click += new System.EventHandler(this.예약현황ToolStripMenuItem_Click);
+            // 
+            // 신청현황ToolStripMenuItem
+            // 
+            this.신청현황ToolStripMenuItem.Name = "신청현황ToolStripMenuItem";
+            this.신청현황ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.신청현황ToolStripMenuItem.Text = "신청 현황";
+            this.신청현황ToolStripMenuItem.Click += new System.EventHandler(this.신청현황ToolStripMenuItem_Click);
+            // 
             // 바로가기ToolStripMenuItem
             // 
             this.바로가기ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.포탈홈페이지ToolStripMenuItem,
             this.종합정보ToolStripMenuItem,
+            this.주간식단ToolStripMenuItem,
+            this.학사일정ToolStripMenuItem,
             this.uNIST웹메일ToolStripMenuItem,
             this.네이트총재클럽ToolStripMenuItem});
             this.바로가기ToolStripMenuItem.Name = "바로가기ToolStripMenuItem";
-            this.바로가기ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.바로가기ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.바로가기ToolStripMenuItem.Text = "바로가기";
             // 
             // 포탈홈페이지ToolStripMenuItem
@@ -1776,6 +1867,27 @@
             this.포탈홈페이지ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.포탈홈페이지ToolStripMenuItem.Text = "포탈 홈페이지";
             this.포탈홈페이지ToolStripMenuItem.Click += new System.EventHandler(this.포탈홈페이지ToolStripMenuItem_Click);
+            // 
+            // 종합정보ToolStripMenuItem
+            // 
+            this.종합정보ToolStripMenuItem.Name = "종합정보ToolStripMenuItem";
+            this.종합정보ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.종합정보ToolStripMenuItem.Text = "종합 정보";
+            this.종합정보ToolStripMenuItem.Click += new System.EventHandler(this.종합정보ToolStripMenuItem_Click);
+            // 
+            // 주간식단ToolStripMenuItem
+            // 
+            this.주간식단ToolStripMenuItem.Name = "주간식단ToolStripMenuItem";
+            this.주간식단ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.주간식단ToolStripMenuItem.Text = "주간 식단";
+            this.주간식단ToolStripMenuItem.Click += new System.EventHandler(this.주간식단ToolStripMenuItem_Click);
+            // 
+            // 학사일정ToolStripMenuItem
+            // 
+            this.학사일정ToolStripMenuItem.Name = "학사일정ToolStripMenuItem";
+            this.학사일정ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
+            this.학사일정ToolStripMenuItem.Text = "학사 일정";
+            this.학사일정ToolStripMenuItem.Click += new System.EventHandler(this.학사일정ToolStripMenuItem_Click);
             // 
             // uNIST웹메일ToolStripMenuItem
             // 
@@ -1794,26 +1906,27 @@
             // 개인알람ToolStripMenuItem
             // 
             this.개인알람ToolStripMenuItem.Name = "개인알람ToolStripMenuItem";
-            this.개인알람ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.개인알람ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.개인알람ToolStripMenuItem.Text = "개인 알람";
             this.개인알람ToolStripMenuItem.Click += new System.EventHandler(this.개인알람ToolStripMenuItem_Click);
             // 
             // 보이기ToolStripMenuItem
             // 
             this.보이기ToolStripMenuItem.Name = "보이기ToolStripMenuItem";
-            this.보이기ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.보이기ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.보이기ToolStripMenuItem.Text = "보이기";
             this.보이기ToolStripMenuItem.Click += new System.EventHandler(this.보이기ToolStripMenuItem_Click);
             // 
             // 종료ToolStripMenuItem
             // 
             this.종료ToolStripMenuItem.Name = "종료ToolStripMenuItem";
-            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
             this.종료ToolStripMenuItem.Text = "종료";
             this.종료ToolStripMenuItem.Click += new System.EventHandler(this.종료ToolStripMenuItem_Click);
             // 
             // mailBox
             // 
+            this.mailBox.ErrorImage = null;
             this.mailBox.Image = ((System.Drawing.Image)(resources.GetObject("mailBox.Image")));
             this.mailBox.Location = new System.Drawing.Point(735, 13);
             this.mailBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1826,6 +1939,7 @@
             // 
             // settingBox
             // 
+            this.settingBox.ErrorImage = null;
             this.settingBox.Image = ((System.Drawing.Image)(resources.GetObject("settingBox.Image")));
             this.settingBox.Location = new System.Drawing.Point(792, 11);
             this.settingBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1963,20 +2077,9 @@
             this.sessionTimer.Interval = 600000;
             this.sessionTimer.Tick += new System.EventHandler(this.sessionTimer_Tick);
             // 
-            // notifyBox
-            // 
-            this.notifyBox.Image = ((System.Drawing.Image)(resources.GetObject("notifyBox.Image")));
-            this.notifyBox.Location = new System.Drawing.Point(705, 12);
-            this.notifyBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.notifyBox.Name = "notifyBox";
-            this.notifyBox.Size = new System.Drawing.Size(24, 15);
-            this.notifyBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.notifyBox.TabIndex = 30;
-            this.notifyBox.TabStop = false;
-            this.notifyBox.Click += new System.EventHandler(this.notifyBox_Click);
-            // 
             // weatherBox
             // 
+            this.weatherBox.ErrorImage = null;
             this.weatherBox.Image = ((System.Drawing.Image)(resources.GetObject("weatherBox.Image")));
             this.weatherBox.Location = new System.Drawing.Point(679, 10);
             this.weatherBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2013,6 +2116,7 @@
             // 
             // reloadBox
             // 
+            this.reloadBox.ErrorImage = null;
             this.reloadBox.Image = ((System.Drawing.Image)(resources.GetObject("reloadBox.Image")));
             this.reloadBox.Location = new System.Drawing.Point(765, 11);
             this.reloadBox.Name = "reloadBox";
@@ -2082,19 +2186,6 @@
             this.settingClickBox.Visible = false;
             this.settingClickBox.Click += new System.EventHandler(this.settingClickBox_Click);
             // 
-            // notifyClickBox
-            // 
-            this.notifyClickBox.Image = ((System.Drawing.Image)(resources.GetObject("notifyClickBox.Image")));
-            this.notifyClickBox.Location = new System.Drawing.Point(705, 12);
-            this.notifyClickBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.notifyClickBox.Name = "notifyClickBox";
-            this.notifyClickBox.Size = new System.Drawing.Size(24, 15);
-            this.notifyClickBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.notifyClickBox.TabIndex = 42;
-            this.notifyClickBox.TabStop = false;
-            this.notifyClickBox.Visible = false;
-            this.notifyClickBox.Click += new System.EventHandler(this.notifyClickBox_Click);
-            // 
             // announceHideCheck
             // 
             this.announceHideCheck.AutoSize = true;
@@ -2162,8 +2253,8 @@
             // 
             // portalGroup
             // 
-            this.portalGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.portalGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
             this.portalGroup.Controls.Add(this.boardGrid);
             this.portalGroup.Controls.Add(this.announceHideCheck);
             this.portalGroup.Controls.Add(this.maxPageNumBox);
@@ -2188,42 +2279,53 @@
             this.mainBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(this.mainBrowser_DocumentCompleted);
             this.mainBrowser.NewWindow += new System.ComponentModel.CancelEventHandler(this.browser_NewWindow);
             // 
-            // extraBrowser
+            // notifyBox
             // 
-            this.extraBrowser.Location = new System.Drawing.Point(482, -7);
-            this.extraBrowser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.extraBrowser.Name = "extraBrowser";
-            this.extraBrowser.Size = new System.Drawing.Size(44, 39);
-            this.extraBrowser.TabIndex = 51;
-            this.extraBrowser.Visible = false;
+            this.notifyBox.Image = ((System.Drawing.Image)(resources.GetObject("notifyBox.Image")));
+            this.notifyBox.InitialImage = null;
+            this.notifyBox.Location = new System.Drawing.Point(705, 12);
+            this.notifyBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.notifyBox.Name = "notifyBox";
+            this.notifyBox.Size = new System.Drawing.Size(24, 15);
+            this.notifyBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.notifyBox.TabIndex = 30;
+            this.notifyBox.TabStop = false;
+            this.notifyBox.Click += new System.EventHandler(this.notifyBox_Click);
             // 
-            // 종합정보ToolStripMenuItem
+            // notifyClickBox
             // 
-            this.종합정보ToolStripMenuItem.Name = "종합정보ToolStripMenuItem";
-            this.종합정보ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.종합정보ToolStripMenuItem.Text = "종합 정보";
-            this.종합정보ToolStripMenuItem.Click += new System.EventHandler(this.종합정보ToolStripMenuItem_Click);
+            this.notifyClickBox.ErrorImage = null;
+            this.notifyClickBox.Image = ((System.Drawing.Image)(resources.GetObject("notifyClickBox.Image")));
+            this.notifyClickBox.InitialImage = null;
+            this.notifyClickBox.Location = new System.Drawing.Point(705, 12);
+            this.notifyClickBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.notifyClickBox.Name = "notifyClickBox";
+            this.notifyClickBox.Size = new System.Drawing.Size(24, 15);
+            this.notifyClickBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.notifyClickBox.TabIndex = 42;
+            this.notifyClickBox.TabStop = false;
+            this.notifyClickBox.Visible = false;
+            this.notifyClickBox.Click += new System.EventHandler(this.notifyClickBox_Click);
             // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(826, 696);
-            this.Controls.Add(this.extraBrowser);
+            this.Controls.Add(this.boardSlide);
             this.Controls.Add(this.mainBrowser);
-            this.Controls.Add(this.bookGroup);
             this.Controls.Add(this.bbPanel);
             this.Controls.Add(this.bookInfoGroup);
+            this.Controls.Add(this.bookGroup);
             this.Controls.Add(this.studyGroup);
             this.Controls.Add(this.portalGroup);
             this.Controls.Add(this.notifyClickBox);
             this.Controls.Add(this.settingClickBox);
             this.Controls.Add(this.reloadClickBox);
-            this.Controls.Add(this.mailClickBox);
             this.Controls.Add(this.weatherClickBox);
             this.Controls.Add(this.sayBrowser);
+            this.Controls.Add(this.mailClickBox);
             this.Controls.Add(this.reloadBox);
-            this.Controls.Add(this.boardSlide);
             this.Controls.Add(this.weatherBox);
             this.Controls.Add(this.notifyBox);
             this.Controls.Add(this.sayLabel);
@@ -2239,7 +2341,6 @@
             this.Controls.Add(this.studyDate);
             this.Controls.Add(this.nextMonthBtn);
             this.Controls.Add(this.browser);
-            this.DoubleBuffered = true;
             this.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
@@ -2270,17 +2371,17 @@
             this.sayStrip.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.nextMonthBtn)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.previousMonthBtn)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notifyBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.weatherBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reloadBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.weatherClickBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mailClickBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.reloadClickBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.settingClickBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.notifyClickBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.maxPageNumBox)).EndInit();
             this.portalGroup.ResumeLayout(false);
             this.portalGroup.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.notifyBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.notifyClickBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2420,7 +2521,6 @@
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Timer sessionTimer;
-        private System.Windows.Forms.PictureBox notifyBox;
         private System.Windows.Forms.PictureBox weatherBox;
         private System.Windows.Forms.ToolTip weatherTip;
         private System.Windows.Forms.ToolStripMenuItem 포탈ToolStripMenuItem;
@@ -2451,7 +2551,6 @@
         private System.Windows.Forms.PictureBox mailClickBox;
         private System.Windows.Forms.PictureBox reloadClickBox;
         private System.Windows.Forms.PictureBox settingClickBox;
-        private System.Windows.Forms.PictureBox notifyClickBox;
         private System.Windows.Forms.CheckBox announceHideCheck;
         private DevComponents.Editors.IntegerInput maxPageNumBox;
         private System.Windows.Forms.Label maxPageCountLabel;
@@ -2470,8 +2569,21 @@
         private DevComponents.DotNetBar.ButtonItem buttonItem4;
         private System.Windows.Forms.WebBrowser mainBrowser;
         private DevComponents.DotNetBar.ButtonItem buttonItem11;
-        private System.Windows.Forms.WebBrowser extraBrowser;
         private System.Windows.Forms.ToolStripMenuItem 종합정보ToolStripMenuItem;
+        private DevComponents.DotNetBar.ButtonItem buttonItem12;
+        private System.Windows.Forms.ToolStripMenuItem 주간식단ToolStripMenuItem;
+        private System.Windows.Forms.PictureBox notifyBox;
+        private System.Windows.Forms.PictureBox notifyClickBox;
+        private DevComponents.DotNetBar.ButtonItem buttonItem13;
+        private DevComponents.DotNetBar.ButtonItem buttonItem14;
+        private DevComponents.DotNetBar.ButtonItem buttonItem15;
+        private DevComponents.DotNetBar.ButtonItem buttonItem16;
+        private DevComponents.DotNetBar.ButtonItem buttonItem17;
+        private System.Windows.Forms.ToolStripMenuItem 학사일정ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem myLibraryToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 대출현황ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 예약현황ToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem 신청현황ToolStripMenuItem;
     }
 }
 

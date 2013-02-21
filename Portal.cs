@@ -1,4 +1,4 @@
-﻿using mshtml;
+﻿using MSHTML;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -115,7 +115,7 @@ namespace robot
         static IEnumerable<IHTMLElement> ElementsByClass(IHTMLDocument2 doc, string className)
         {
             foreach (IHTMLElement e in doc.all)
-                if (e is mshtml.IHTMLTableCell)
+                if (e is IHTMLTableCell)
                     if (e.className == className)
                         yield return e;
         }
@@ -127,13 +127,14 @@ namespace robot
                 uri = new Uri(url);
                 wReq = (HttpWebRequest)WebRequest.Create(uri);
                 wReq.Method = "GET";
+                wReq.ServicePoint.Expect100Continue = false;
                 wReq.CookieContainer = new CookieContainer();
                 wReq.CookieContainer.SetCookies(uri, cookie);
 
                 using (wRes = (HttpWebResponse)wReq.GetResponse())
                 {
                     Stream respPostStream = wRes.GetResponseStream();
-                    StreamReader readerPost = new StreamReader(respPostStream, Encoding.Default);
+                    StreamReader readerPost = new StreamReader(respPostStream,  Encoding.GetEncoding("EUC-KR"), true);
 
                     resResult = readerPost.ReadToEnd();
                 }

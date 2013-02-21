@@ -1,4 +1,5 @@
 ﻿using System;
+using MSHTML;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,7 +8,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using mshtml;
 using CustomUIControls;
 using System.Diagnostics;
 using System.Security.Cryptography;
@@ -18,6 +18,8 @@ namespace robot
 {
     public partial class MainForm : DevComponents.DotNetBar.Metro.MetroForm
     {
+        static public string mealUrl="http://carpedm20.net76.net/meal.html";
+
         HtmlDocument doc = null;
 
         public static string userName = "";
@@ -86,6 +88,8 @@ namespace robot
         Weather weather;
 
         bool nateIdSave = false;
+
+        Delivery delivery;
         /****************************/
 
         public MainForm()
@@ -105,8 +109,8 @@ namespace robot
             {
                 currentBoardMaxNum[i] = 3;
             }
-            currentBoardSearchQuery = new string[4]; 
-            for (int i = 0; i < 4; i++)
+            currentBoardSearchQuery = new string[5]; 
+            for (int i = 0; i < 5; i++)
             {
                 currentBoardSearchQuery[i] = "";
             }
@@ -603,9 +607,9 @@ namespace robot
                  ************************************/
                 loadingLabel.Text = "수강 정보 수집중";
                 loadingProgressBar.Value += 5;
-loadingLabel.Text = "수강 정보 수집중1";
+
                 bb.setBoard();
-loadingLabel.Text = "수강 정보 수집중2";
+
                 bb.getCourceMenu();
 loadingLabel.Text = "수강 정보 수집중3";
                 DevComponents.DotNetBar.ButtonItem[] bblist = new DevComponents.DotNetBar.ButtonItem[bb.board.Count()];
@@ -830,7 +834,10 @@ loadingLabel.Text = "수강 정보 수집중3";
                 studyStudentId8.Enabled = false;
             }
 
-            library.loadStudyroomStatus(roomNumberBox.SelectedIndex + 1, date);
+            if (library == null)
+                return;
+            else
+                library.loadStudyroomStatus(roomNumberBox.SelectedIndex + 1, date);
 
             while (studyGrid.Rows.Count != 0)
             {
@@ -906,9 +913,9 @@ loadingLabel.Text = "수강 정보 수집중3";
             if (studyEtc.Text != "")
                 doc.GetElementById("ctl00_ContentPlaceHolder_txtnote").SetAttribute("value", studyEtc.Text);
 
-            mshtml.HTMLDocument hdoc = doc.DomDocument as mshtml.HTMLDocument;
+            HTMLDocument hdoc = doc.DomDocument as HTMLDocument;
 
-            foreach (IHTMLElement hel in (mshtml.IHTMLElementCollection)hdoc.body.all)
+            foreach (IHTMLElement hel in (IHTMLElementCollection)hdoc.body.all)
             {
                 if (hel.getAttribute("id", 0) != null)
                 {
@@ -1487,6 +1494,36 @@ loadingLabel.Text = "수강 정보 수집중3";
             portalGroup.Visible = false;
         }
 
+        // 대출 현황
+        private void buttonItem14_Click(object sender, EventArgs e)
+        {
+            visiblePortal();
+
+            browser.Navigate("http://portal.unist.ac.kr/EP/web/bookInfo/bookChangeList.jsp");
+
+            portalGroup.Visible = false;
+        }
+
+        // 예약 현황
+        private void buttonItem15_Click(object sender, EventArgs e)
+        {
+            visiblePortal();
+
+            browser.Navigate("http://portal.unist.ac.kr/EP/web/bookInfo/bookHoldList.jsp");
+
+            portalGroup.Visible = false;
+        }
+
+        // 신청 현황
+        private void buttonItem16_Click(object sender, EventArgs e)
+        {
+            visiblePortal();
+
+            browser.Navigate("http://portal.unist.ac.kr/EP/web/bookInfo/bookREQList.jsp");
+
+            portalGroup.Visible = false;
+        }
+
         /**********************************************************
          * 
          *  리스트 별 visible 세팅
@@ -1770,21 +1807,7 @@ loadingLabel.Text = "수강 정보 수집중3";
         {
             if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && isError == false)
             {
-                isError = true;
-
-                DialogResult result = MessageBox.Show("인터넷 연결에 문제가 있습니다.\r\n다시 로그인 하시겠습니까?", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-
-                if (result == DialogResult.No)
-                {
-                    System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
-                    foreach (System.Diagnostics.Process p in mProcess)
-                        p.Kill();
-                }
-                else
-                {
-                    Program.isExit = false;
-                    Application.Exit();
-                }
+                reLoginEvent();
             }
 
             browser.Visible = false;
@@ -1828,6 +1851,35 @@ loadingLabel.Text = "수강 정보 수집중3";
             browserForm = new Forms.BrowserForm(url, portalCookie);
 
             browserForm.Show();
+        }
+
+        /**********************************************************
+         * 
+         *  주간 식단 바로가기
+         *  
+         **********************************************************/
+
+        private void buttonItem12_Click(object sender, EventArgs e)
+        {
+            string url = mealUrl;
+            browserForm = new Forms.BrowserForm(url, portalCookie);
+
+            browserForm.Show();
+        }
+
+        /**********************************************************
+         * 
+         *  학사 일정 바로가기
+         *  
+         **********************************************************/
+
+        private void buttonItem17_Click(object sender, EventArgs e)
+        {
+            visiblePortal();
+
+            browser.Navigate("https://www.google.com/calendar/embed?src=anr9a4cbgv3os8ac5i8fg6fqic%40group.calendar.google.com&ctz=Asia/Seoul");
+
+            portalGroup.Visible = false;
         }
 
         /**********************************************************
@@ -1961,21 +2013,7 @@ loadingLabel.Text = "수강 정보 수집중3";
 
             if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && isError == false)
             {
-                isError = true;
-
-                DialogResult result = MessageBox.Show("인터넷 연결에 문제가 있습니다.\r\n다시 로그인 하시겠습니까?", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-
-                if (result == DialogResult.No)
-                {
-                    System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
-                    foreach (System.Diagnostics.Process p in mProcess)
-                        p.Kill();
-                }
-                else
-                {
-                    Program.isExit = false;
-                    Application.Exit();
-                }
+                reLoginEvent();
             }
 
             visibleLoading();
@@ -2124,6 +2162,39 @@ loadingLabel.Text = "수강 정보 수집중3";
             portalGroup.Visible = false;
         }
 
+        private void 대출현황ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Visible = true;
+
+            visiblePortal();
+
+            browser.Navigate("http://portal.unist.ac.kr/EP/web/bookInfo/bookChangeList.jsp");
+
+            portalGroup.Visible = false;
+        }
+
+        private void 예약현황ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Visible=true;
+
+            visiblePortal();
+
+            browser.Navigate("http://portal.unist.ac.kr/EP/web/bookInfo/bookHoldList.jsp");
+
+            portalGroup.Visible = false;
+        }
+
+        private void 신청현황ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Visible=true;
+
+            visiblePortal();
+
+            browser.Navigate("http://portal.unist.ac.kr/EP/web/bookInfo/bookREQList.jsp");
+
+            portalGroup.Visible = false;
+        }
+
         private void 포탈홈페이지ToolStripMenuItem_Click(object sender, EventArgs e)
         {
             browserForm = new Forms.BrowserForm("http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp", portalCookie);
@@ -2134,6 +2205,23 @@ loadingLabel.Text = "수강 정보 수집중3";
         {
             browserForm = new Forms.BrowserForm("http://portal.unist.ac.kr/EP/tmaxsso/runSAPEP.jsp", portalCookie);
             browserForm.Show();
+        }
+
+        private void 주간식단ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            browserForm = new Forms.BrowserForm(mealUrl, portalCookie);
+            browserForm.Show();
+        }
+
+        private void 학사일정ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            this.Visible = true;
+
+            visiblePortal();
+
+            browser.Navigate("https://www.google.com/calendar/embed?src=anr9a4cbgv3os8ac5i8fg6fqic%40group.calendar.google.com&ctz=Asia/Seoul");
+
+            portalGroup.Visible = false;
         }
 
         private void uNIST웹메일ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2226,21 +2314,7 @@ loadingLabel.Text = "수강 정보 수집중3";
 
             if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && isError == false)
             {
-                isError = true;
-
-                DialogResult result = MessageBox.Show("인터넷 연결에 문제가 있습니다.\r\n다시 로그인 하시겠습니까?", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-
-                if (result == DialogResult.No)
-                {
-                    System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
-                    foreach (System.Diagnostics.Process p in mProcess)
-                        p.Kill();
-                }
-                else
-                {
-                    Program.isExit = false;
-                    Application.Exit();
-                }
+                reLoginEvent();
             }
 
             visibleLoading();
@@ -2394,19 +2468,46 @@ loadingLabel.Text = "수강 정보 수집중3";
          *  
          **********************************************************/
 
-        private void reLoginEvent(object sender, EventArgs e)
+        private void reLoginEvent()
         {
-            DialogResult result = MessageBox.Show("다시 로그인 하시겠습니까?", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
-            
-            if (result == DialogResult.No)
-            {
-                return;
-            }
+            isError = true;
 
+            DialogResult result = MessageBox.Show("인터넷 연결에 문제가 있습니다.\r\n프로그램을 종료합니다.", "Robot의 경고");
+
+            System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
+            foreach (System.Diagnostics.Process p in mProcess)
+                p.Kill();
+
+            notifyTimer.Stop();
+            sayTimer.Stop();
+            sessionTimer.Stop();
+
+            this.Close();
             Program.isExit = false;
             Application.Exit();
-        }
 
-        
+            /*
+            DialogResult result = MessageBox.Show("인터넷 연결에 문제가 있습니다.\r\n다시 로그인 하시겠습니까?", "Robot의 경고", MessageBoxButtons.YesNo, MessageBoxIcon.Exclamation, MessageBoxDefaultButton.Button1);
+
+            if (result == DialogResult.No)
+            {
+                System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
+                foreach (System.Diagnostics.Process p in mProcess)
+                    p.Kill();
+            }
+            else
+            {
+                isExiting = true;
+
+                notifyTimer.Stop();
+                sayTimer.Stop();
+                sessionTimer.Stop();
+
+                this.Close();
+                Program.isExit = false;
+                Application.Exit();
+            }
+             * */
+        }
     }
 }

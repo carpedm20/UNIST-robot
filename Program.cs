@@ -16,6 +16,7 @@ namespace robot
         public static bool login = false;
         public static LoginForm f2;
         public static MainForm f1;
+
         public static bool isExit = true;
 
         /// <summary>
@@ -24,8 +25,10 @@ namespace robot
         [STAThread]
         static void Main()
         {
+            isExit = true;
+
             Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
+            // Application.SetCompatibleTextRenderingDefault(false);
 
             AutoLogin loginReg = new AutoLogin();
             string regId = "", regPw = "";
@@ -37,6 +40,7 @@ namespace robot
                 System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
                 foreach (System.Diagnostics.Process p in mProcess)
                     p.Kill();
+                return;
             }
 
             if (loginReg.ReadRegistry(ref regId, ref regPw))
@@ -52,17 +56,10 @@ namespace robot
                     id = regId;
                     password = regPw;
                     autoLogin = true;
-                    do
-                    {
-                        f1 = new MainForm();
-                        Application.Run(f1);
-                    } while (isExit != true);
+
+                    MainForm f1 = new MainForm();
+                    Application.Run(f1);
                 }
-            }
-            else
-            {
-                f2 = new LoginForm();
-                Application.Run(f2);
             }
 
             if (login == true)

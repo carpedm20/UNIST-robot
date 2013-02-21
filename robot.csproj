@@ -71,9 +71,9 @@
     <ApplicationManifest>Properties\app.manifest</ApplicationManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="DevComponents.DotNetBar2, Version=10.9.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL" />
-    <Reference Include="Microsoft.mshtml, Version=7.0.3300.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-      <EmbedInteropTypes>True</EmbedInteropTypes>
+    <Reference Include="DevComponents.DotNetBar2, Version=10.9.0.4, Culture=neutral, PublicKeyToken=7eb7c3a35b91de04, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>bin\Debug\DevComponents.DotNetBar2.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -87,6 +87,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Delivery.cs" />
     <Compile Include="Dorm.cs" />
     <Compile Include="DormBoard.cs" />
     <Compile Include="ExtendedWebBrowser.cs">
@@ -114,6 +115,7 @@
     <Compile Include="Forms\MailForm.Designer.cs">
       <DependentUpon>MailForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="miniMshtml.cs" />
     <Compile Include="Nate.cs" />
     <Compile Include="PortalBoard.cs" />
     <Compile Include="Book.cs" />
@@ -154,6 +156,7 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\MainForm.resx">
       <DependentUpon>MainForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\LoginForm.resx">
       <DependentUpon>LoginForm.cs</DependentUpon>
@@ -168,6 +171,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="TaskbarNotifier.resx">
+      <DependentUpon>TaskbarNotifier.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="Properties\app.manifest">
       <SubType>Designer</SubType>
     </None>
@@ -205,10 +211,21 @@
   <ItemGroup>
     <EmbeddedResource Include="close.bmp" />
     <Content Include="favicon.ico" />
+    <EmbeddedResource Include="skin.bmp" />
     <EmbeddedResource Include="Forms\settingForm.resx">
       <DependentUpon>settingForm.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="skin.bmp" />
+  </ItemGroup>
+  <ItemGroup>
+    <COMReference Include="MSHTML">
+      <Guid>{3050F1C5-98B5-11CF-BB82-00AA00BDCE0B}</Guid>
+      <VersionMajor>4</VersionMajor>
+      <VersionMinor>0</VersionMinor>
+      <Lcid>0</Lcid>
+      <WrapperTool>tlbimp</WrapperTool>
+      <Isolated>False</Isolated>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </COMReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

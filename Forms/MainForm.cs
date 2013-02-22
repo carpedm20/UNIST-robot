@@ -18,6 +18,9 @@ namespace robot
 {
     public partial class MainForm : DevComponents.DotNetBar.Metro.MetroForm
     {
+        string currentVersion = "1.0.0";
+        public static string lastestVersion = "";
+
         static public string mealUrl="http://carpedm20.net76.net/meal.html";
 
         HtmlDocument doc = null;
@@ -102,7 +105,7 @@ namespace robot
              *  구성 요소 준비 단계
              ************************************/
             loadingLabel.Text = "구성 요소 준비중";
-            loadingProgressBar.Value += 5;
+            loadingProgressBar.Value += 2;
 
             currentBoardMaxNum = new int[4];
             for (int i = 0; i < 4; i++)
@@ -147,7 +150,7 @@ namespace robot
             notifyBox.Click += new System.EventHandler(loadingPictureBox_Click);
             reloadBox.Click += new System.EventHandler(loadingPictureBox_Click);
 
-            mainBrowser.Navigate("https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp");
+            mainBrowser.Navigate("http://carpedm20.net76.net/robot_version.html");
 
             // 책 검색 옵션 초기화
             bookOption1.SelectedIndex = 0;
@@ -477,10 +480,45 @@ namespace robot
          *
          **********************************************************/
 
-
-
         private void mainBrowser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
+            /**********************************************************
+             * 
+             *  최신 버전 확인
+             *  
+             **********************************************************/
+
+            if (e.Url.ToString().IndexOf("carpedm20.net76.net/robot_version.html") != -1)
+            {
+                doc = mainBrowser.Document as HtmlDocument;
+
+                /************************************
+                 *  최신 버전 확인중
+                 ************************************/
+                loadingLabel.Text = "최신 버전 확인중";
+                loadingProgressBar.Value += 2;
+
+                if (doc.GetElementById("version") == null)
+                {
+                    loadingLabel.Text = "최신 버전 확인 실패 :(";
+                    mainBrowser.Navigate("https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp");
+                }
+
+                lastestVersion = doc.GetElementById("version").InnerText.Trim();
+
+                if (currentVersion.IndexOf(lastestVersion) != -1)
+                {
+                    loadingLabel.Text = "최신 버전입니다 :)";
+                }
+
+                else
+                {
+                    loadingLabel.Text = "최신 버전이 아닙니다 :(";
+                }
+
+                mainBrowser.Navigate("https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp");
+            }
+
             /**********************************************************
              * 
              *  로그인 창에서 변수 입력
@@ -491,6 +529,7 @@ namespace robot
 
             if (e.Url.ToString() == "https://portal.unist.ac.kr/EP/web/login/unist_acube_login_int.jsp")
             {
+                System.Threading.Thread.Sleep(2000);
                 doc = mainBrowser.Document as HtmlDocument;
 
                 doc.GetElementById("id").SetAttribute("value", Program.id);
@@ -1492,6 +1531,7 @@ loadingLabel.Text = "수강 정보 수집중3";
             browser.Navigate("http://seat.unist.ac.kr/EZ5500/RoomStatus/room_status.asp");
 
             portalGroup.Visible = false;
+            logoPicBox.Visible = true;
         }
 
         // 대출 현황
@@ -1502,6 +1542,7 @@ loadingLabel.Text = "수강 정보 수집중3";
             browser.Navigate("http://portal.unist.ac.kr/EP/web/bookInfo/bookChangeList.jsp");
 
             portalGroup.Visible = false;
+            logoPicBox.Visible = true;
         }
 
         // 예약 현황
@@ -1512,6 +1553,7 @@ loadingLabel.Text = "수강 정보 수집중3";
             browser.Navigate("http://portal.unist.ac.kr/EP/web/bookInfo/bookHoldList.jsp");
 
             portalGroup.Visible = false;
+            logoPicBox.Visible = true;
         }
 
         // 신청 현황
@@ -1522,6 +1564,7 @@ loadingLabel.Text = "수강 정보 수집중3";
             browser.Navigate("http://portal.unist.ac.kr/EP/web/bookInfo/bookREQList.jsp");
 
             portalGroup.Visible = false;
+            logoPicBox.Visible = true;
         }
 
         /**********************************************************
@@ -1545,6 +1588,7 @@ loadingLabel.Text = "수강 정보 수집중3";
             studyDate.Visible = false;
             nextMonthBtn.Visible = false;
             previousMonthBtn.Visible = false;
+            logoPicBox.Visible = false;
         }
 
         public void visiblePortal()
@@ -1563,6 +1607,7 @@ loadingLabel.Text = "수강 정보 수집중3";
             studyDate.Visible = false;
             nextMonthBtn.Visible = false;
             previousMonthBtn.Visible = false;
+            logoPicBox.Visible = false;
         }
 
         private void visibleBB(object sender, EventArgs e)
@@ -1604,6 +1649,7 @@ loadingLabel.Text = "수강 정보 수집중3";
             studyDate.Visible = false;
             nextMonthBtn.Visible = false;
             previousMonthBtn.Visible = false;
+            logoPicBox.Visible = false;
         }
 
         private void visibleStudyroomReserve()
@@ -1622,6 +1668,7 @@ loadingLabel.Text = "수강 정보 수집중3";
             portalGroup.Visible = false;
             bookGroup.Visible = false;
             bookInfoGroup.Visible = false;
+            logoPicBox.Visible = false;
         }
 
         /**********************************************************
@@ -1657,7 +1704,7 @@ loadingLabel.Text = "수강 정보 수집중3";
                 bookReview.Text += str.Substring(0, str.IndexOf('.'));
                 bookReview.Text += str.Substring(str.IndexOf('.'), 2);
                 //bookReview.Text += html.Substring(html.IndexOf("네티즌리뷰")).Split('건')[0];
-                bookReview.Text += " (" + element.InnerText.Split('|')[1].Substring(6) + ")";
+                bookReview.Text += " (" + element.InnerText.Split('|')[1].Substring(6).Trim() + ")";
                 bookReviewUrl = element.GetElementsByTagName("a")[0].GetAttribute("href");
 
                 reviewStar.Visible = true;
@@ -1880,11 +1927,12 @@ loadingLabel.Text = "수강 정보 수집중3";
             browser.Navigate("https://www.google.com/calendar/embed?src=anr9a4cbgv3os8ac5i8fg6fqic%40group.calendar.google.com&ctz=Asia/Seoul");
 
             portalGroup.Visible = false;
+            logoPicBox.Visible = true;
         }
 
         /**********************************************************
          * 
-         *  학사 일정 바로가기
+         *  야식 정보 바로가기
          *  
          **********************************************************/
 
@@ -2171,6 +2219,7 @@ loadingLabel.Text = "수강 정보 수집중3";
 
             browser.Navigate("http://seat.unist.ac.kr/EZ5500/RoomStatus/room_status.asp");
 
+            logoPicBox.Visible = true;
             portalGroup.Visible = false;
         }
 
@@ -2183,6 +2232,7 @@ loadingLabel.Text = "수강 정보 수집중3";
             browser.Navigate("http://portal.unist.ac.kr/EP/web/bookInfo/bookChangeList.jsp");
 
             portalGroup.Visible = false;
+            logoPicBox.Visible = true;
         }
 
         private void 예약현황ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2194,6 +2244,7 @@ loadingLabel.Text = "수강 정보 수집중3";
             browser.Navigate("http://portal.unist.ac.kr/EP/web/bookInfo/bookHoldList.jsp");
 
             portalGroup.Visible = false;
+            logoPicBox.Visible = true;
         }
 
         private void 신청현황ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2205,6 +2256,7 @@ loadingLabel.Text = "수강 정보 수집중3";
             browser.Navigate("http://portal.unist.ac.kr/EP/web/bookInfo/bookREQList.jsp");
 
             portalGroup.Visible = false;
+            logoPicBox.Visible = true;
         }
 
         private void 포탈홈페이지ToolStripMenuItem_Click(object sender, EventArgs e)
@@ -2234,6 +2286,7 @@ loadingLabel.Text = "수강 정보 수집중3";
             browser.Navigate("https://www.google.com/calendar/embed?src=anr9a4cbgv3os8ac5i8fg6fqic%40group.calendar.google.com&ctz=Asia/Seoul");
 
             portalGroup.Visible = false;
+            logoPicBox.Visible = true;
         }
 
         private void 야식정보ToolStripMenuItem_Click(object sender, EventArgs e)

@@ -40,6 +40,7 @@
             this.alarmTip = new System.Windows.Forms.ToolTip(this.components);
             this.sayTip = new System.Windows.Forms.ToolTip(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -133,6 +134,8 @@
             // 
             // pictureBox1
             // 
+            this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.pictureBox1.ForeColor = System.Drawing.Color.Black;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
             this.pictureBox1.Location = new System.Drawing.Point(16, 121);
             this.pictureBox1.Name = "pictureBox1";
@@ -141,10 +144,23 @@
             this.pictureBox1.TabStop = false;
             this.pictureBox1.Click += new System.EventHandler(this.label5_Click);
             // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label1.ForeColor = System.Drawing.Color.Black;
+            this.label1.Location = new System.Drawing.Point(78, 207);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(76, 12);
+            this.label1.TabIndex = 10;
+            this.label1.Text = "version 1.0.0";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
+            // 
             // SettingForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(233, 206);
+            this.ClientSize = new System.Drawing.Size(233, 226);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.sayLabel);
             this.Controls.Add(this.saySwitch);
@@ -180,5 +196,6 @@
         private System.Windows.Forms.ToolTip alarmTip;
         private System.Windows.Forms.ToolTip sayTip;
         private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.Label label1;
     }
 }

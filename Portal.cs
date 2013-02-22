@@ -438,9 +438,7 @@ namespace robot
                     new_board4[index].boardName = rows[4];
                     new_board4[index].page = pageNum;
                     new_board4[index].boardId = title.innerHTML.Substring(title.innerHTML.IndexOf("boardid=")).Substring(8);
-                    new_board4[index].boardId = board4[index].boardId.Substring(0, board4[index].boardId.IndexOf("&"));
                     new_board4[index].bullId = title.innerHTML.Substring(title.innerHTML.IndexOf("bullid=")).Substring(7);
-                    new_board4[index].bullId = board4[index].bullId.Substring(0, board4[index].bullId.IndexOf("&"));
                 }
             }
 

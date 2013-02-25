@@ -14,10 +14,13 @@ namespace robot
         public DevComponents.DotNetBar.Controls.SwitchButton loginSwitch;
         public DevComponents.DotNetBar.Controls.SwitchButton sayswitch;
         AutoLogin autologin;
+        Snake.SnakeForm snakeform;
 
         public SettingForm()
         {
             InitializeComponent();
+
+            snakeform = new Snake.SnakeForm();
 
             loginSwitch = this.autoLoginSwitch;
             sayswitch = this.saySwitch;
@@ -100,7 +103,7 @@ namespace robot
 
         private void label5_Click(object sender, EventArgs e)
         {
-            MessageBox.Show("Copyright (c) 2013 Kim Tae Hoon ಠ_ಠ", ":^)");
+            snakeform.Visible = true;
         }
 
         private void SettingForm_VisibleChanged(object sender, EventArgs e)

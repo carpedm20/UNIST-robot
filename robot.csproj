@@ -141,6 +141,20 @@
     <Compile Include="Forms\settingForm.Designer.cs">
       <DependentUpon>settingForm.cs</DependentUpon>
     </Compile>
+    <Compile Include="Snake\Food.cs" />
+    <Compile Include="Snake\Snake.cs" />
+    <Compile Include="Snake\SnakeForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Snake\SnakeForm.Designer.cs">
+      <DependentUpon>SnakeForm.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Snake\SnakeRankingForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Snake\SnakeRankingForm.Designer.cs">
+      <DependentUpon>SnakeRankingForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="TaskbarNotifier.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -171,6 +185,12 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Snake\SnakeForm.resx">
+      <DependentUpon>SnakeForm.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Snake\SnakeRankingForm.resx">
+      <DependentUpon>SnakeRankingForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="TaskbarNotifier.resx">
       <DependentUpon>TaskbarNotifier.cs</DependentUpon>
     </EmbeddedResource>
@@ -210,7 +230,7 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="close.bmp" />
-    <Content Include="favicon.ico" />
+    <EmbeddedResource Include="favicon.ico" />
     <EmbeddedResource Include="skin.bmp" />
     <EmbeddedResource Include="Forms\settingForm.resx">
       <DependentUpon>settingForm.cs</DependentUpon>
@@ -226,6 +246,9 @@
       <Isolated>False</Isolated>
       <EmbedInteropTypes>True</EmbedInteropTypes>
     </COMReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Snake\favicon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

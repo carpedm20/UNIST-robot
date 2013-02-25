@@ -1,4 +1,11 @@
-﻿using System;
+﻿/*************************************************************
+ * 
+ *   Robot.
+ *   Copyright (c) 2013 Kim Tae Hoon
+ *   
+ *************************************************************/
+
+using System;
 using MSHTML;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -645,7 +652,7 @@ namespace robot
                  *  수강 정보 수집 단계
                  ************************************/
                 loadingLabel.Text = "수강 정보 수집중";
-                loadingProgressBar.Value += 5;
+                loadingProgressBar.Value += 3;
 
                 bb.setBoard();
 
@@ -699,7 +706,35 @@ loadingLabel.Text = "수강 정보 수집중3";
                      *  도서관 연결 완료
                      ************************************/
                     loadingLabel.Text = "도서관 연결 완료";
-                    loadingProgressBar.Value += 5;
+                    loadingProgressBar.Value += 3;
+
+                    library = new Library(browser.Document.Cookie);
+
+                    isLibraryComplete = true;
+
+                    browser.Navigate("http://dorm.unist.ac.kr/sso/runSSO.asp");
+                }
+                else
+                {
+                    browser.Navigate("http://dorm.unist.ac.kr/sso/runSSO.asp");
+                }
+            }
+
+            /**********************************************************
+            * 
+            *  기숙사
+            *
+            **********************************************************/
+
+            if (e.Url.ToString().IndexOf("http://dorm.unist.ac.kr/home/index_01.asp") != -1)
+            {
+                if (isLibraryComplete == false)
+                {
+                    /************************************
+                     *  기숙사 연결 완료
+                     ************************************/
+                    loadingLabel.Text = "기숙사 연결 완료";
+                    loadingProgressBar.Value += 3;
 
                     library = new Library(browser.Document.Cookie);
 
@@ -899,6 +934,9 @@ loadingLabel.Text = "수강 정보 수집중3";
                 // 오늘 날짜 줄 표시
                 for (int j = 0; j < 4; j++)
                 {
+                    if (posibleDate[j] == null)
+                        break;
+
                     if (studyDate.Text.Substring(0, 4) == posibleDate[j].Substring(0, 4)
                         && library.roomStat[i][0].Substring(0, 2) == posibleDate[j].Substring(4, 2)
                         && Convert.ToInt32(library.roomStat[i][0].Substring(3)) == Convert.ToInt32(posibleDate[j].Substring(6, 2)))
@@ -1173,7 +1211,7 @@ loadingLabel.Text = "수강 정보 수집중3";
             int month = DateTime.Today.Month;
             int day = DateTime.Today.Day;
 
-            if (maxDate - 1 < day + 3)
+            if (maxDate < day + 3)
             {
                 int overCount = day + 3 - (maxDate - 1);
 
@@ -1191,7 +1229,7 @@ loadingLabel.Text = "수강 정보 수집중3";
                 }
                 else
                 {
-                    for (int i = 4 - overCount; i < 4; i++)
+                    for (int i = 3 - overCount; i < 4; i++)
                     {
                         posibleDate[i] = year.ToString() + (month + 1).ToString(dateFormat) + (i - 4 + overCount + 1).ToString(dateFormat);
                     }
@@ -2099,6 +2137,7 @@ loadingLabel.Text = "수강 정보 수집중3";
             }
 
             loadinglabel.Text = "메인 세션 유지 완료";
+            portal.setBoard1();
             loadingProgressBar.Value += 15;
 
             browser.Navigate("http://bb.unist.ac.kr/webapps/blackboard/execute/announcement?method=search&context=mybb&handle=my_announcements");
@@ -2109,7 +2148,8 @@ loadingLabel.Text = "수강 정보 수집중3";
             }
 
             loadinglabel.Text = "블랙보드 세션 유지 완료";
-            loadingProgressBar.Value += 15;
+            portal.setBoard2();
+            loadingProgressBar.Value += 10;
 
             browser.Navigate("http://library.unist.ac.kr/");
 
@@ -2118,8 +2158,20 @@ loadingLabel.Text = "수강 정보 수집중3";
                 Application.DoEvents();
             }
 
+            loadinglabel.Text = "기숙사 세션 유지 완료";
+            portal.setBoard3();
+            loadingProgressBar.Value += 10;
+
+            browser.Navigate("http://dorm.unist.ac.kr/");
+
+            while (browser.ReadyState != WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
+
             loadinglabel.Text = "도서관 세션 유지 완료";
-            loadingProgressBar.Value += 15;
+            portal.setBoard4();
+            loadingProgressBar.Value += 10;
 
             browser.Navigate("http://mail.unist.ac.kr/");
 
@@ -2381,7 +2433,6 @@ loadingLabel.Text = "수강 정보 수집중3";
                 currentBoardSearchQuery[i] = "";
             }
             maxPageNumBox.Value = 3;
-            announceHideCheck.Checked = false;
 
             if (!System.Net.NetworkInformation.NetworkInterface.GetIsNetworkAvailable() && isError == false)
             {
@@ -2424,7 +2475,7 @@ loadingLabel.Text = "수강 정보 수집중3";
 
             loadinglabel.Text = "블랙보드 세션 유지 완료";
             portal.setBoard2();
-            loadingProgressBar.Value += 15;
+            loadingProgressBar.Value += 10;
 
             browser.Navigate("http://library.unist.ac.kr/");
 
@@ -2433,9 +2484,20 @@ loadingLabel.Text = "수강 정보 수집중3";
                 Application.DoEvents();
             }
 
-            loadinglabel.Text = "도서관 세션 유지 완료";
+            loadinglabel.Text = "기숙사 세션 유지 완료";
             portal.setBoard3();
-            loadingProgressBar.Value += 15;
+            loadingProgressBar.Value += 10;
+
+            browser.Navigate("http://dorm.unist.ac.kr/");
+
+            while (browser.ReadyState != WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
+
+            loadinglabel.Text = "도서관 세션 유지 완료";
+            portal.setBoard4();
+            loadingProgressBar.Value += 10;
 
             browser.Navigate("http://mail.unist.ac.kr/");
 
@@ -2445,7 +2507,6 @@ loadingLabel.Text = "수강 정보 수집중3";
             }
 
             loadinglabel.Text = "전자우편 세션 유지 완료";
-            portal.setBoard4();
             loadingProgressBar.Value = loadingProgressBar.Maximum;
 
             isLoading = false;

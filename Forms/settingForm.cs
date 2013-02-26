@@ -14,13 +14,10 @@ namespace robot
         public DevComponents.DotNetBar.Controls.SwitchButton loginSwitch;
         public DevComponents.DotNetBar.Controls.SwitchButton sayswitch;
         AutoLogin autologin;
-        Snake.SnakeForm snakeform;
 
         public SettingForm()
         {
             InitializeComponent();
-
-            snakeform = new Snake.SnakeForm();
 
             loginSwitch = this.autoLoginSwitch;
             sayswitch = this.saySwitch;
@@ -103,7 +100,7 @@ namespace robot
 
         private void label5_Click(object sender, EventArgs e)
         {
-            snakeform.Visible = true;
+            MainForm.snakeform.Visible = true;
         }
 
         private void SettingForm_VisibleChanged(object sender, EventArgs e)

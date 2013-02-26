@@ -62,7 +62,7 @@
             this.rankingGrid.RowHeadersVisible = false;
             this.rankingGrid.RowTemplate.Height = 23;
             this.rankingGrid.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.rankingGrid.Size = new System.Drawing.Size(232, 444);
+            this.rankingGrid.Size = new System.Drawing.Size(232, 413);
             this.rankingGrid.TabIndex = 0;
             // 
             // Column1
@@ -95,19 +95,19 @@
             this.groupBox1.Controls.Add(this.button1);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(12, 462);
+            this.groupBox1.Location = new System.Drawing.Point(12, 434);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(232, 65);
             this.groupBox1.TabIndex = 1;
             this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Send Score";
+            this.groupBox1.Text = "Update Score";
             // 
             // nameLabel
             // 
             this.nameLabel.AutoSize = true;
             this.nameLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.nameLabel.ForeColor = System.Drawing.Color.Black;
-            this.nameLabel.Location = new System.Drawing.Point(59, 19);
+            this.nameLabel.Location = new System.Drawing.Point(56, 19);
             this.nameLabel.Name = "nameLabel";
             this.nameLabel.Size = new System.Drawing.Size(11, 12);
             this.nameLabel.TabIndex = 5;
@@ -119,7 +119,7 @@
             this.highestScoreLabel.AutoSize = true;
             this.highestScoreLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.highestScoreLabel.ForeColor = System.Drawing.Color.Black;
-            this.highestScoreLabel.Location = new System.Drawing.Point(59, 42);
+            this.highestScoreLabel.Location = new System.Drawing.Point(56, 42);
             this.highestScoreLabel.Name = "highestScoreLabel";
             this.highestScoreLabel.Size = new System.Drawing.Size(11, 12);
             this.highestScoreLabel.TabIndex = 4;
@@ -141,9 +141,9 @@
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(149, 16);
+            this.button1.Location = new System.Drawing.Point(158, 16);
             this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(72, 40);
+            this.button1.Size = new System.Drawing.Size(63, 40);
             this.button1.TabIndex = 2;
             this.button1.Text = "Send";
             this.button1.UseVisualStyleBackColor = false;
@@ -162,7 +162,7 @@
             // 
             // browser
             // 
-            this.browser.Location = new System.Drawing.Point(200, 420);
+            this.browser.Location = new System.Drawing.Point(200, 347);
             this.browser.MinimumSize = new System.Drawing.Size(20, 20);
             this.browser.Name = "browser";
             this.browser.Size = new System.Drawing.Size(44, 36);
@@ -173,7 +173,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(256, 539);
+            this.ClientSize = new System.Drawing.Size(256, 511);
             this.Controls.Add(this.browser);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.rankingGrid);
@@ -182,8 +182,9 @@
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "SnakeRankingForm";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "UNIST RANKING";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.Manual;
+            this.Text = "EATING RANKING";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SnakeRankingForm_FormClosing);
             ((System.ComponentModel.ISupportInitialize)(this.rankingGrid)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();

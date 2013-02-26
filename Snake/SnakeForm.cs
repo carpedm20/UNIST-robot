@@ -20,12 +20,20 @@ namespace robot.Snake
 
         bool isStart = false;
         bool keydEnabled = true;
+        bool saveToServer = false;
+
+        public static bool isRakingFormExist = false;
+
         int score = 0;
         int highestScore = 0;
 
         public SnakeForm()
         {
             InitializeComponent();
+            KeyPreview = true;
+
+            eatRobotLabel.Visible = true;
+
             food = new Food(randFood);
 
             passedScore = new List<int>();
@@ -36,42 +44,50 @@ namespace robot.Snake
             left = false;
         }
 
-        private void SnakeForm_KeyDown(object sender, KeyEventArgs e)
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
         {
-            if (e.KeyData == Keys.Space && isStart == false)
+            if (keyData == Keys.Space && isStart == false)
             {
-                restart(sender, e);
+                restart();
             }
 
             if (keydEnabled == false)
-                return;
+                return true;
 
-            if (e.KeyData == Keys.Down && up == false)
+            if (keyData == Keys.Down && up == false)
             {
+                eatRobotLabel.Visible = false;
+
                 down = true;
                 up = false;
                 right = false;
                 left = false;
             }
 
-            if (e.KeyData == Keys.Up && down == false)
+            if (keyData == Keys.Up && down == false)
             {
+                eatRobotLabel.Visible = false;
+
                 down = false;
                 up = true;
                 right = false;
                 left = false;
             }
 
-            if (e.KeyData == Keys.Right && left == false)
+            if (keyData == Keys.Right && left == false)
             {
+                eatRobotLabel.Visible = false;
+
                 down = false;
                 up = false;
                 right = true;
                 left = false;
             }
 
-            if (e.KeyData == Keys.Left && right == false)
+            if (keyData == Keys.Left && right == false)
             {
+                eatRobotLabel.Visible = false;
+
                 down = false;
                 up = false;
                 right = false;
@@ -79,6 +95,7 @@ namespace robot.Snake
             }
 
             keydEnabled = false;
+            return true;
         }
 
         private void SnakeForm_Paint(object sender, PaintEventArgs e)
@@ -163,7 +180,7 @@ namespace robot.Snake
                 if (isPassed == false)
                 {
                     passedScore.Add(score);
-                    timer1.Interval = timer1.Interval * 4 / 5;
+                    timer1.Interval = timer1.Interval * 9 / 10;
                     levelLabel.Text = (score / 50).ToString();
                 }
             }
@@ -208,6 +225,27 @@ namespace robot.Snake
                         highestScore = score;
                         highestScoreLabel.Text = highestScore.ToString();
                     }
+
+                    if (saveToServer == true)
+                    {
+                        string url = "http://carpedm20.net76.net/snake_insert_auto.php?name=" + Program.id + "&score=" + highestScore;
+                        browser.Navigate(url);
+
+                        while (browser.ReadyState != WebBrowserReadyState.Complete)
+                        {
+                            Application.DoEvents();
+                        }
+
+                        url = "http://carpedm20.net76.net/snake_highest.php?name=" + Program.id;
+                        browser.Navigate(url);
+
+                        while (browser.ReadyState != WebBrowserReadyState.Complete)
+                        {
+                            Application.DoEvents();
+                        }
+
+                        serverScoreLabel.Text = browser.Document.Body.InnerText;
+                    }
                 }
             }
 
@@ -224,6 +262,27 @@ namespace robot.Snake
                     highestScore = score;
                     highestScoreLabel.Text = highestScore.ToString();
                 }
+
+                if (saveToServer == true)
+                {
+                    string url = "http://carpedm20.net76.net/snake_insert_auto.php?name=" + Program.id + "&score=" + highestScore;
+                    browser.Navigate(url);
+
+                    while (browser.ReadyState != WebBrowserReadyState.Complete)
+                    {
+                        Application.DoEvents();
+                    }
+
+                    url = "http://carpedm20.net76.net/snake_highest.php?name=" + Program.id;
+                    browser.Navigate(url);
+
+                    while (browser.ReadyState != WebBrowserReadyState.Complete)
+                    {
+                        Application.DoEvents();
+                    }
+
+                    serverScoreLabel.Text = browser.Document.Body.InnerText;
+                }
             }
 
             if (snake.SnakeRec[0].Y < 15 || snake.SnakeRec[0].Y > 420)
@@ -239,10 +298,31 @@ namespace robot.Snake
                     highestScore = score;
                     highestScoreLabel.Text = highestScore.ToString();
                 }
+
+                if (saveToServer == true)
+                {
+                    string url = "http://carpedm20.net76.net/snake_insert_auto.php?name=" + Program.id + "&score=" + highestScore;
+                    browser.Navigate(url);
+
+                    while (browser.ReadyState != WebBrowserReadyState.Complete)
+                    {
+                        Application.DoEvents();
+                    }
+
+                    url = "http://carpedm20.net76.net/snake_highest.php?name=" + Program.id;
+                    browser.Navigate(url);
+
+                    while (browser.ReadyState != WebBrowserReadyState.Complete)
+                    {
+                        Application.DoEvents();
+                    }
+
+                    serverScoreLabel.Text = browser.Document.Body.InnerText;
+                }
             }
         }
 
-        private void restart(object sender, EventArgs e)
+        private void restart()
         {
             isStart = true;
             statLabel.Visible = false;
@@ -267,7 +347,19 @@ namespace robot.Snake
 
         private void rankingLabel_Click(object sender, EventArgs e)
         {
-            SnakeRankingForm rankingForm = new SnakeRankingForm(highestScore);
+            if (isRakingFormExist == true)
+            {
+                MessageBox.Show("Ranking is aleady displayed :-(", "Robot's Warning");
+                return;
+            }
+
+            isRakingFormExist = true;
+
+            SnakeRankingForm rankingForm = new SnakeRankingForm(this.Location, highestScore);
+            rankingForm.StartPosition = FormStartPosition.Manual;
+
+            rankingForm.Location = new Point(this.Location.X + 480, this.Location.Y);
+
             rankingForm.Show();
         }
 
@@ -275,8 +367,38 @@ namespace robot.Snake
         {
             if (MainForm.isExiting == false)
             {
+                restart();
                 this.Visible = false;
                 e.Cancel = true;
+            }
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
+            {
+                saveToServer = true;
+            }
+
+            else
+            {
+                saveToServer = false;
+            }
+        }
+
+        private void SnakeForm_VisibleChanged(object sender, EventArgs e)
+        {
+            if (this.Visible == true)
+            {
+                string url = "http://carpedm20.net76.net/snake_highest.php?name=" + Program.id;
+                browser.Navigate(url);
+
+                while (browser.ReadyState != WebBrowserReadyState.Complete)
+                {
+                    Application.DoEvents();
+                }
+
+                serverScoreLabel.Text = browser.Document.Body.InnerText;
             }
         }
     }

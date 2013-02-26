@@ -56,6 +56,7 @@ namespace robot
         string[] currentBoardSearchQuery; // 1, 2, 3 만 사용
         BB bb;
         Library library;
+        int libraryMaxDate = 0;
 
         static public string mailCookie = "";
 
@@ -100,6 +101,8 @@ namespace robot
         bool nateIdSave = false;
 
         Delivery delivery;
+
+        static public Snake.SnakeForm snakeform = new Snake.SnakeForm();
         /****************************/
 
         public MainForm()
@@ -887,7 +890,6 @@ loadingLabel.Text = "수강 정보 수집중3";
 
         private void loadStudyRoomStat(string date)
         {
-
             nextMonthBtn.Enabled = false;
             previousMonthBtn.Enabled = false;
             roomNumberBox.Enabled = false;
@@ -924,7 +926,10 @@ loadingLabel.Text = "수강 정보 수집중3";
                 return;
             }
 
-            calculatePosibleDate(library.dayCount);
+            if (Convert.ToInt32(date.Substring(4)) == DateTime.Now.Month)
+                libraryMaxDate = library.dayCount;
+
+            calculatePosibleDate(libraryMaxDate);
 
             // study room grid 내용 추가
             for (int i = 0; i < library.dayCount; i++)
@@ -1213,9 +1218,9 @@ loadingLabel.Text = "수강 정보 수집중3";
 
             if (maxDate < day + 3)
             {
-                int overCount = day + 3 - (maxDate - 1);
+                int overCount = day + 3 - (maxDate);
 
-                for (int i = 0; i < 3 - overCount; i++)
+                for (int i = 0; i < 4 - overCount; i++)
                 {
                     posibleDate[i] = year.ToString() + month.ToString(dateFormat) + (day + i).ToString(dateFormat);
                 }
@@ -1229,7 +1234,7 @@ loadingLabel.Text = "수강 정보 수집중3";
                 }
                 else
                 {
-                    for (int i = 3 - overCount; i < 4; i++)
+                    for (int i = 4 - overCount; i < 4; i++)
                     {
                         posibleDate[i] = year.ToString() + (month + 1).ToString(dateFormat) + (i - 4 + overCount + 1).ToString(dateFormat);
                     }
@@ -2640,6 +2645,11 @@ loadingLabel.Text = "수강 정보 수집중3";
                 Application.Exit();
             }
              * */
+        }
+
+        private void logoPicBox_Click(object sender, EventArgs e)
+        {
+            snakeform.Visible = true;
         }
     }
 }

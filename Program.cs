@@ -71,6 +71,12 @@ namespace robot
                 }
             }
 
+            else
+            {
+                f2 = new LoginForm();
+                Application.Run(f2);
+            }
+
             if (login == true)
             {
                 f1 = new MainForm();

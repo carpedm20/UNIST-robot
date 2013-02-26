@@ -13,7 +13,7 @@ namespace robot.Snake
     {
         int highestScore = 0;
 
-        public SnakeRankingForm(int highestScore)
+        public SnakeRankingForm(Point parentLocation, int highestScore)
         {
             InitializeComponent();
 
@@ -79,6 +79,11 @@ namespace robot.Snake
             getScore();
 
             button1.Enabled = true;
+        }
+
+        private void SnakeRankingForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            SnakeForm.isRakingFormExist = false;
         }
     }
 }

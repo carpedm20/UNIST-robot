@@ -774,10 +774,12 @@
             // 
             // reviewStar
             // 
+            this.reviewStar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             // 
             // 
             // 
             this.reviewStar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.reviewStar.ForeColor = System.Drawing.Color.Black;
             this.reviewStar.IsEditable = false;
             this.reviewStar.Location = new System.Drawing.Point(451, 23);
             this.reviewStar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1931,7 +1933,9 @@
             // 
             // mailBox
             // 
+            this.mailBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.mailBox.ErrorImage = null;
+            this.mailBox.ForeColor = System.Drawing.Color.Black;
             this.mailBox.Image = ((System.Drawing.Image)(resources.GetObject("mailBox.Image")));
             this.mailBox.Location = new System.Drawing.Point(735, 13);
             this.mailBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2194,22 +2198,26 @@
             // announceHideCheck
             // 
             this.announceHideCheck.AutoSize = true;
+            this.announceHideCheck.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.announceHideCheck.ForeColor = System.Drawing.Color.Black;
             this.announceHideCheck.Location = new System.Drawing.Point(6, 16);
             this.announceHideCheck.Name = "announceHideCheck";
             this.announceHideCheck.Size = new System.Drawing.Size(100, 16);
             this.announceHideCheck.TabIndex = 43;
             this.announceHideCheck.Text = "공지글 숨기기";
-            this.announceHideCheck.UseVisualStyleBackColor = true;
+            this.announceHideCheck.UseVisualStyleBackColor = false;
             this.announceHideCheck.CheckedChanged += new System.EventHandler(this.announceHideCheck_CheckedChanged);
             // 
             // maxPageNumBox
             // 
+            this.maxPageNumBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             // 
             // 
             // 
             this.maxPageNumBox.BackgroundStyle.Class = "DateTimeInputBackground";
             this.maxPageNumBox.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.maxPageNumBox.ButtonFreeText.Shortcut = DevComponents.DotNetBar.eShortcut.F2;
+            this.maxPageNumBox.ForeColor = System.Drawing.Color.Black;
             this.maxPageNumBox.Location = new System.Drawing.Point(246, 12);
             this.maxPageNumBox.MaxValue = 10;
             this.maxPageNumBox.MinValue = 1;
@@ -2248,18 +2256,21 @@
             // 
             // portalSearchBtn
             // 
+            this.portalSearchBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.portalSearchBtn.ForeColor = System.Drawing.Color.Black;
             this.portalSearchBtn.Location = new System.Drawing.Point(629, 11);
             this.portalSearchBtn.Name = "portalSearchBtn";
             this.portalSearchBtn.Size = new System.Drawing.Size(45, 23);
             this.portalSearchBtn.TabIndex = 48;
             this.portalSearchBtn.Text = "보기";
-            this.portalSearchBtn.UseVisualStyleBackColor = true;
+            this.portalSearchBtn.UseVisualStyleBackColor = false;
             this.portalSearchBtn.Click += new System.EventHandler(this.portalSearchBtn_Click);
             // 
             // portalGroup
             // 
             this.portalGroup.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
+            this.portalGroup.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.portalGroup.Controls.Add(this.boardGrid);
             this.portalGroup.Controls.Add(this.announceHideCheck);
             this.portalGroup.Controls.Add(this.maxPageNumBox);
@@ -2267,6 +2278,7 @@
             this.portalGroup.Controls.Add(this.portalSearchBtn);
             this.portalGroup.Controls.Add(this.portalSearchLabel);
             this.portalGroup.Controls.Add(this.portalSearchTextBox);
+            this.portalGroup.ForeColor = System.Drawing.Color.Black;
             this.portalGroup.Location = new System.Drawing.Point(136, 31);
             this.portalGroup.Name = "portalGroup";
             this.portalGroup.Size = new System.Drawing.Size(678, 201);
@@ -2328,6 +2340,7 @@
             this.logoPicBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.logoPicBox.TabIndex = 0;
             this.logoPicBox.TabStop = false;
+            this.logoPicBox.Click += new System.EventHandler(this.logoPicBox_Click);
             // 
             // MainForm
             // 

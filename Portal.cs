@@ -297,6 +297,17 @@ namespace robot
 
                     index = (pageNum - 1) * 10 + i;
 
+                    if (title.innerHTML.IndexOf("red") != -1)
+                    {
+                        board4[index].color = Color.Red;
+                    }
+
+                    if (elements.ElementAt(i * 11 + 0).innerText.Trim() == "")
+                    {
+                        rows[0] = "공지";
+                        board4[index].anouncement = true;
+                    }
+
                     board4[index].rows = rows;
                     //board4[index].title = rows[1];
                     //board4[index].writer = rows[2];
@@ -308,6 +319,7 @@ namespace robot
                     board4[index].boardId = board4[index].boardId.Substring(0, board4[index].boardId.IndexOf("&"));
                     board4[index].bullId = title.innerHTML.Substring(title.innerHTML.IndexOf("bullid=")).Substring(7);
                     board4[index].bullId = board4[index].bullId.Substring(0, board4[index].bullId.IndexOf("&"));
+
                 }
 
                 if (docNum / 11 != 10)

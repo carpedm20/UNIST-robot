@@ -118,9 +118,9 @@
             this.label3.ForeColor = System.Drawing.Color.Black;
             this.label3.Location = new System.Drawing.Point(196, 463);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(96, 12);
+            this.label3.Size = new System.Drawing.Size(79, 12);
             this.label3.TabIndex = 5;
-            this.label3.Text = "Highest Score : ";
+            this.label3.Text = "High Score : ";
             // 
             // highestScoreLabel
             // 
@@ -159,12 +159,14 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
+            this.checkBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.checkBox1.ForeColor = System.Drawing.Color.Black;
             this.checkBox1.Location = new System.Drawing.Point(13, 482);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(143, 16);
             this.checkBox1.TabIndex = 10;
             this.checkBox1.Text = "Save Score to Server";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.UseVisualStyleBackColor = false;
             this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // label4
@@ -192,12 +194,14 @@
             // 
             // button1
             // 
+            this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.button1.ForeColor = System.Drawing.Color.Black;
             this.button1.Location = new System.Drawing.Point(348, 459);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 40);
             this.button1.TabIndex = 13;
             this.button1.Text = "View Ranking";
-            this.button1.UseVisualStyleBackColor = true;
+            this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.rankingLabel_Click);
             // 
             // SnakeForm

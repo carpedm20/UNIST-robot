@@ -298,12 +298,12 @@ namespace robot
 
             if (boardId == 4)
             {
-                this.Column5.Width = 0;
+                this.Column1.Width = 400;
             }
 
             else
             {
-                this.Column5.Width = 33;
+                this.Column1.Width = 425;
             }
 
             foreach (PortalBoard b in boards)
@@ -316,6 +316,14 @@ namespace robot
                     if (b.rows == null)
                         break;
                     boardGrid.Rows.Add(b.rows);
+
+                    // 셀 글자 색 추가
+                    if (b.color != Color.Black)
+                    {
+                        boardGrid.Rows[i].Cells[1].Style = new DataGridViewCellStyle { ForeColor = b.color };
+                    }
+
+                    i++;
                     continue;
                 }
 
@@ -379,12 +387,12 @@ namespace robot
 
             if (boardId == 4)
             {
-                this.Column5.Width = 0;
+                this.Column1.Width = 400;
             }
 
             else
             {
-                this.Column5.Width = 33;
+                this.Column1.Width = 425;
             }
 
             foreach (PortalBoard b in boards)
@@ -402,6 +410,14 @@ namespace robot
                     if (b.rows == null)
                         break;
                     boardGrid.Rows.Add(b.rows);
+
+                    // 셀 글자 색 추가
+                    if (b.color != Color.Black)
+                    {
+                        boardGrid.Rows[i].Cells[1].Style = new DataGridViewCellStyle { ForeColor = b.color };
+                    }
+
+                    i++;
                     continue;
                 }
 
@@ -1544,13 +1560,21 @@ loadingLabel.Text = "수강 정보 수집중3";
         private void buttonItem4_Click(object sender, EventArgs e)
         {
             gridView.Columns[4].HeaderText = "게시판";
-            announceHideCheck.Enabled = false;
+            announceHideCheck.Enabled = true;
             maxPageNumBox.Enabled = false;
             portalSearchTextBox.Enabled = false;
             portalSearchBtn.Enabled = false;
 
+            if (announceHideCheck.Checked == false)
+            {
+                showBoardGrid(4);
+            }
+            else
+            {
+                showBoardGridExceptAnnouncement(4);
+            }
+
             visiblePortal();
-            showBoardGrid(4);
         }
 
         // 도서 검색

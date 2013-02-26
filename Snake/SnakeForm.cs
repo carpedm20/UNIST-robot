@@ -27,6 +27,8 @@ namespace robot.Snake
         int score = 0;
         int highestScore = 0;
 
+        SnakeRankingForm rankingForm;
+
         public SnakeForm()
         {
             InitializeComponent();
@@ -245,6 +247,12 @@ namespace robot.Snake
                         }
 
                         serverScoreLabel.Text = browser.Document.Body.InnerText;
+
+                        if (rankingForm != null)
+                        {
+                            rankingForm.getScore();
+                            rankingForm.setScore(highestScore);
+                        }
                     }
                 }
             }
@@ -282,6 +290,12 @@ namespace robot.Snake
                     }
 
                     serverScoreLabel.Text = browser.Document.Body.InnerText;
+
+                    if (rankingForm != null)
+                    {
+                        rankingForm.getScore();
+                        rankingForm.setScore(highestScore);
+                    }
                 }
             }
 
@@ -318,6 +332,12 @@ namespace robot.Snake
                     }
 
                     serverScoreLabel.Text = browser.Document.Body.InnerText;
+
+                    if (rankingForm != null)
+                    {
+                        rankingForm.getScore();
+                        rankingForm.setScore(highestScore);
+                    }
                 }
             }
         }
@@ -355,7 +375,7 @@ namespace robot.Snake
 
             isRakingFormExist = true;
 
-            SnakeRankingForm rankingForm = new SnakeRankingForm(this.Location, highestScore);
+            rankingForm = new SnakeRankingForm(this.Location, highestScore);
             rankingForm.StartPosition = FormStartPosition.Manual;
 
             rankingForm.Location = new Point(this.Location.X + 480, this.Location.Y);
@@ -399,6 +419,7 @@ namespace robot.Snake
                 }
 
                 serverScoreLabel.Text = browser.Document.Body.InnerText;
+                eatRobotLabel.Visible = true;
             }
         }
     }

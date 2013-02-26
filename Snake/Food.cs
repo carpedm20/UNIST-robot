@@ -33,6 +33,18 @@ namespace robot.Snake
             foodRec.Y = y;
         }
 
+        public void foodMove(Random randFood)
+        {
+            x = randFood.Next(0, 2);
+            y = randFood.Next(0, 2);
+
+            if (foodRec.X + (x - 1) * 15 > 15 && foodRec.X + (x - 1) * 15 < 420)
+                foodRec.X = foodRec.X + (x - 1) * 15;
+
+            if (foodRec.Y + (y - 1) * 15 > 15 && foodRec.Y + (y - 1) * 15 < 420)
+                foodRec.Y = foodRec.Y + (y - 1) * 15;
+        }
+
         public void drawFood(Graphics paper)
         {
             foodRec.X = x;

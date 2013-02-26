@@ -12,12 +12,14 @@ namespace robot.Snake
     public partial class SnakeRankingForm : DevComponents.DotNetBar.Metro.MetroForm
     {
         int highestScore = 0;
+        static public Label highScoreLabel;
 
         public SnakeRankingForm(Point parentLocation, int highestScore)
         {
             InitializeComponent();
 
             this.highestScore = highestScore;
+            highScoreLabel = highestScoreLabel;
 
             nameLabel.Text = Program.id;
             highestScoreLabel.Text = highestScore.ToString();
@@ -25,8 +27,18 @@ namespace robot.Snake
             getScore();
         }
 
-        private void getScore()
+        public void setScore(int score)
         {
+            highScoreLabel.Text = score.ToString();
+        }
+
+        public void getScore()
+        {
+            while (rankingGrid.Rows.Count != 0)
+            {
+                rankingGrid.Rows.RemoveAt(0);
+            }
+
             // 악용하지 말아주세요 :)
             browser.Navigate("http://carpedm20.net76.net/snake_ranking.php");
 
@@ -69,11 +81,6 @@ namespace robot.Snake
             while (browser.ReadyState != WebBrowserReadyState.Complete)
             {
                 Application.DoEvents();
-            }
-
-            while (rankingGrid.Rows.Count != 0)
-            {
-                rankingGrid.Rows.RemoveAt(0);
             }
 
             getScore();

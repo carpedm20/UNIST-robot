@@ -574,8 +574,8 @@ namespace robot
              *  첫 로그인, 이름 저장, 학사 공지로 이동
              *  
              **********************************************************/
-
-            if (e.Url.ToString() == "http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp")
+            
+            if (e.Url.ToString() == "http://portal.unist.ac.kr/EP/web/portal/jsp/EP_TopFixed.jsp")
             {
                 if (isPortalComplete == false)
                 {
@@ -676,7 +676,7 @@ namespace robot
                 bb.setBoard();
 
                 bb.getCourceMenu();
-loadingLabel.Text = "수강 정보 수집중3";
+
                 DevComponents.DotNetBar.ButtonItem[] bblist = new DevComponents.DotNetBar.ButtonItem[bb.board.Count()];
                 System.Windows.Forms.ToolStripMenuItem[] trayItem = new System.Windows.Forms.ToolStripMenuItem[bb.board.Count()];
                 for (int i = 0; i < bb.board.Length; i++)

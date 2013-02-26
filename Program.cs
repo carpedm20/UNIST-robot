@@ -32,7 +32,7 @@ namespace robot
         [STAThread]
         static void Main()
         {
-            // Application.Run(new Snake.SnakeForm());
+             Application.Run(new Snake.SnakeForm());
 
             isExit = true;
 

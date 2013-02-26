@@ -1095,7 +1095,7 @@ loadingLabel.Text = "수강 정보 수집중3";
                 return;
             }
 
-            string url = "http://library.unist.ac.kr/dliweb25eng/studyroom/reserve.aspx?m_var=112&roomid=" + (roomNumberBox.SelectedIndex + 1).ToString()
+            string url = "http://library.unist.ac.kr/dliweb25Eng/studyroom/reserve.aspx?m_var=112&roomid=" + (roomNumberBox.SelectedIndex + 1).ToString()
                 + "&rdate=" + studyDate.Text.Replace(".", "") + date.Substring(2) + "&rhour=" + hour;
 
             browser.Navigate(url);

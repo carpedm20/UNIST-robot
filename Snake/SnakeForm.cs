@@ -17,6 +17,7 @@ namespace robot.Snake
         Random randFood = new Random();
         List<int> passedScore;
         Food food;
+        List<Food> unFood;
 
         bool isStart = false;
         bool keydEnabled = true;
@@ -36,7 +37,9 @@ namespace robot.Snake
 
             eatRobotLabel.Visible = true;
 
-            food = new Food(randFood);
+            food = new Food(randFood, false);
+
+            unFood = new List<Food>();
 
             passedScore = new List<int>();
 
@@ -106,14 +109,21 @@ namespace robot.Snake
             snake.drawSnake(paper);
 
             if (!snake.SnakeRec[0].IntersectsWith(food.foodRec))
+            {
                 food.drawFood(paper);
+
+                foreach (Food fl in unFood)
+                {
+                    fl.drawFood(paper);
+                }
+            }
 
             for (int i = 0; i < snake.SnakeRec.Length; i++)
             {
                 if (snake.SnakeRec[i].IntersectsWith(food.foodRec))
                 {
                     snake.growSnake();
-                    food.foodLocation(randFood);
+                    food.foodLocation(randFood, unFood);
                 }
             }
 
@@ -184,6 +194,9 @@ namespace robot.Snake
                     passedScore.Add(score);
                     timer1.Interval = timer1.Interval * 9 / 10;
                     levelLabel.Text = (score / 50).ToString();
+
+                    Food f = new Food(randFood, true);
+                    unFood.Add(f);
                 }
             }
 
@@ -201,7 +214,7 @@ namespace robot.Snake
                     snake.growSnake();
                     score += 10;
                     scoreLabel.Text = score.ToString();
-                    food.foodLocation(randFood);
+                    food.foodLocation(randFood, unFood);
                 }
             }
 
@@ -215,6 +228,51 @@ namespace robot.Snake
             for (int i = 1; i < snake.SnakeRec.Length; i++)
             {
                 if (snake.SnakeRec[0].IntersectsWith(snake.SnakeRec[i]))
+                {
+                    timer1.Stop();
+                    MessageBox.Show("snake is dead :(");
+
+                    isStart = false;
+                    statLabel.Visible = true;
+
+                    if (highestScore < score)
+                    {
+                        highestScore = score;
+                        highestScoreLabel.Text = highestScore.ToString();
+                    }
+
+                    if (saveToServer == true)
+                    {
+                        string url = "http://carpedm20.net76.net/snake_insert_auto.php?name=" + Program.id + "&score=" + highestScore;
+                        browser.Navigate(url);
+
+                        while (browser.ReadyState != WebBrowserReadyState.Complete)
+                        {
+                            Application.DoEvents();
+                        }
+
+                        url = "http://carpedm20.net76.net/snake_highest.php?name=" + Program.id;
+                        browser.Navigate(url);
+
+                        while (browser.ReadyState != WebBrowserReadyState.Complete)
+                        {
+                            Application.DoEvents();
+                        }
+
+                        serverScoreLabel.Text = browser.Document.Body.InnerText;
+
+                        if (rankingForm != null)
+                        {
+                            rankingForm.getScore();
+                            rankingForm.setScore(highestScore);
+                        }
+                    }
+                }
+            }
+
+            foreach (Food fl in unFood)
+            {
+                if (snake.SnakeRec[0].IntersectsWith(fl.foodRec))
                 {
                     timer1.Stop();
                     MessageBox.Show("snake is dead :(");
@@ -350,7 +408,8 @@ namespace robot.Snake
             timer1.Start();
 
             snake = new Snake();
-            food = new Food(randFood);
+            food = new Food(randFood, false);
+            unFood = new List<Food>();
             snake = new Snake();
             passedScore = new List<int>();
 

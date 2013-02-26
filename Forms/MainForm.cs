@@ -103,7 +103,17 @@ namespace robot
         Delivery delivery;
 
         static public Snake.SnakeForm snakeform = new Snake.SnakeForm();
-        /****************************/
+
+        bool urlError = false;
+        string bbStartUrl = "http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb";
+        string bbEndUrl = "http://bb.unist.ac.kr/webapps/portal/frameset.jsp";
+        string bbAnnounceUrl = "http://bb.unist.ac.kr/webapps/blackboard/execute/announcement?method=search&context=mybb&handle=my_announcements";
+        string libraryStartUrl = "http://library.unist.ac.kr/DLiWeb25Eng/tmaxsso/first_cs.aspx";
+        string libraryEndUrl = "http://library.unist.ac.kr/DLiWeb25Eng/default.aspx";
+        string dormStartUrl = "http://dorm.unist.ac.kr/sso/runSSO.asp";
+        string dormEndUrl = "http://dorm.unist.ac.kr/home/index_01.asp";
+        string mailStartUrl = "http://portal.unist.ac.kr/EP/web/security/jsp/SSO_unistMail.jsp";
+        string mailEndUrl = "http://mail.unist.ac.kr/mail/mailList.crd";
 
         public MainForm()
         {
@@ -532,6 +542,32 @@ namespace robot
 
                 lastestVersion = doc.GetElementById("version").InnerText.Trim();
 
+                /************************************
+                 *  작동하지 않는 서비스 있을시
+                 ************************************/
+                if (doc.GetElementById("urlError").InnerText.Trim() == "true")
+                {
+                    urlError = true;
+
+                    bbStartUrl = doc.GetElementById("bbStartUrl").InnerText.Trim();
+                    bbEndUrl = doc.GetElementById("bbEndUrl").InnerText.Trim();
+                    bbAnnounceUrl = doc.GetElementById("bbAnnounceUrl").InnerText.Trim();
+                    libraryStartUrl = doc.GetElementById("libraryStartUrl").InnerText.Trim();
+                    libraryEndUrl = doc.GetElementById("libraryEndUrl").InnerText.Trim();
+                    dormStartUrl = doc.GetElementById("dormStartUrl").InnerText.Trim();
+                    dormEndUrl = doc.GetElementById("dormEndUrl").InnerText.Trim();
+                    mailStartUrl = doc.GetElementById("mailStartUrl").InnerText.Trim();
+                    mailEndUrl = doc.GetElementById("mailEndUrl").InnerText.Trim();
+                }
+
+                /************************************
+                 * 공지사항
+                 ************************************/
+                if (doc.GetElementById("announce").InnerText != null)
+                {
+                    MessageBox.Show(doc.GetElementById("announce").InnerText, doc.GetElementById("announceTitle").InnerText);
+                }
+
                 if (currentVersion.IndexOf(lastestVersion) != -1)
                 {
                     loadingLabel.Text = "최신 버전입니다 :)";
@@ -596,12 +632,12 @@ namespace robot
 
                     isPortalComplete = true;
 
-                    browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
+                    browser.Navigate(bbStartUrl);
                 }
 
                 else
                 {
-                    browser.Navigate("http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb");
+                    browser.Navigate(bbStartUrl);
                 }
             }
         }
@@ -641,10 +677,10 @@ namespace robot
 
                 isBBComplete = false;
 
-                browser.Navigate("http://library.unist.ac.kr/DLiWeb25Eng/tmaxsso/first_cs.aspx");
+                browser.Navigate(libraryStartUrl);
             }
 
-            if (e.Url.ToString() == "http://bb.unist.ac.kr/webapps/portal/frameset.jsp")
+            if (e.Url.ToString() == bbEndUrl)
             {
                 if (isBBComplete == false)
                 {
@@ -661,11 +697,11 @@ namespace robot
 
                 else
                 {
-                    browser.Navigate("http://bb.unist.ac.kr/webapps/blackboard/execute/announcement?method=search&context=mybb&handle=my_announcements");
+                    browser.Navigate(bbAnnounceUrl);
                 }
             }
 
-            else if (e.Url.ToString() == "http://bb.unist.ac.kr/webapps/blackboard/execute/announcement?method=search&context=mybb&handle=my_announcements")
+            else if (e.Url.ToString() == bbAnnounceUrl)
             {
                 /************************************
                  *  수강 정보 수집 단계
@@ -708,7 +744,7 @@ namespace robot
                 loadingLabel.Text = "수강 정보 수집 완료";
                 loadingProgressBar.Value += 5;
 
-                browser.Navigate("http://library.unist.ac.kr/DLiWeb25Eng/tmaxsso/first_cs.aspx");
+                browser.Navigate(libraryStartUrl);
             }
 
             /**********************************************************
@@ -717,7 +753,7 @@ namespace robot
              *
              **********************************************************/
 
-            if (e.Url.ToString().IndexOf("http://library.unist.ac.kr/DLiWeb25Eng/default.aspx") != -1)
+            if (e.Url.ToString().IndexOf(libraryEndUrl) != -1)
             {
                 if (isLibraryComplete == false)
                 {
@@ -731,11 +767,11 @@ namespace robot
 
                     isLibraryComplete = true;
 
-                    browser.Navigate("http://dorm.unist.ac.kr/sso/runSSO.asp");
+                    browser.Navigate(dormStartUrl);
                 }
                 else
                 {
-                    browser.Navigate("http://dorm.unist.ac.kr/sso/runSSO.asp");
+                    browser.Navigate(dormStartUrl);
                 }
             }
 
@@ -745,7 +781,7 @@ namespace robot
             *
             **********************************************************/
 
-            if (e.Url.ToString().IndexOf("http://dorm.unist.ac.kr/home/index_01.asp") != -1)
+            if (e.Url.ToString().IndexOf(dormEndUrl) != -1)
             {
                 if (isLibraryComplete == false)
                 {
@@ -759,11 +795,11 @@ namespace robot
 
                     isLibraryComplete = true;
 
-                    browser.Navigate("http://portal.unist.ac.kr/EP/web/security/jsp/SSO_unistMail.jsp");
+                    browser.Navigate(mailStartUrl);
                 }
                 else
                 {
-                    browser.Navigate("http://portal.unist.ac.kr/EP/web/security/jsp/SSO_unistMail.jsp");
+                    browser.Navigate(mailStartUrl);
                 }
             }
 
@@ -773,7 +809,7 @@ namespace robot
              *
              **********************************************************/
 
-            if (e.Url.ToString().IndexOf("http://mail.unist.ac.kr/mail/mailList.crd") != -1)
+            if (e.Url.ToString().IndexOf(mailEndUrl) != -1)
             {
                 if (isEmailComplete == false)
                 {

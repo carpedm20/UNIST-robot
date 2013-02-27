@@ -57,7 +57,7 @@
             this.levelLabel.AutoSize = true;
             this.levelLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.levelLabel.ForeColor = System.Drawing.Color.Black;
-            this.levelLabel.Location = new System.Drawing.Point(54, 463);
+            this.levelLabel.Location = new System.Drawing.Point(54, 462);
             this.levelLabel.Name = "levelLabel";
             this.levelLabel.Size = new System.Drawing.Size(11, 12);
             this.levelLabel.TabIndex = 0;
@@ -69,7 +69,7 @@
             this.scoreLabel.AutoSize = true;
             this.scoreLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.scoreLabel.ForeColor = System.Drawing.Color.Black;
-            this.scoreLabel.Location = new System.Drawing.Point(146, 463);
+            this.scoreLabel.Location = new System.Drawing.Point(146, 462);
             this.scoreLabel.Name = "scoreLabel";
             this.scoreLabel.Size = new System.Drawing.Size(11, 12);
             this.scoreLabel.TabIndex = 1;
@@ -81,7 +81,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(11, 463);
+            this.label1.Location = new System.Drawing.Point(11, 462);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(43, 12);
             this.label1.TabIndex = 2;
@@ -92,7 +92,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(100, 463);
+            this.label2.Location = new System.Drawing.Point(100, 462);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(46, 12);
             this.label2.TabIndex = 3;
@@ -116,7 +116,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(196, 463);
+            this.label3.Location = new System.Drawing.Point(196, 462);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(79, 12);
             this.label3.TabIndex = 5;
@@ -127,7 +127,7 @@
             this.highestScoreLabel.AutoSize = true;
             this.highestScoreLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.highestScoreLabel.ForeColor = System.Drawing.Color.Black;
-            this.highestScoreLabel.Location = new System.Drawing.Point(288, 463);
+            this.highestScoreLabel.Location = new System.Drawing.Point(288, 462);
             this.highestScoreLabel.Name = "highestScoreLabel";
             this.highestScoreLabel.Size = new System.Drawing.Size(11, 12);
             this.highestScoreLabel.TabIndex = 6;
@@ -161,7 +161,7 @@
             this.checkBox1.AutoSize = true;
             this.checkBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.checkBox1.ForeColor = System.Drawing.Color.Black;
-            this.checkBox1.Location = new System.Drawing.Point(13, 482);
+            this.checkBox1.Location = new System.Drawing.Point(13, 481);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(143, 16);
             this.checkBox1.TabIndex = 10;
@@ -174,7 +174,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(196, 483);
+            this.label4.Location = new System.Drawing.Point(196, 482);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(90, 12);
             this.label4.TabIndex = 11;
@@ -185,7 +185,7 @@
             this.serverScoreLabel.AutoSize = true;
             this.serverScoreLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.serverScoreLabel.ForeColor = System.Drawing.Color.Black;
-            this.serverScoreLabel.Location = new System.Drawing.Point(288, 483);
+            this.serverScoreLabel.Location = new System.Drawing.Point(288, 482);
             this.serverScoreLabel.Name = "serverScoreLabel";
             this.serverScoreLabel.Size = new System.Drawing.Size(11, 12);
             this.serverScoreLabel.TabIndex = 12;
@@ -196,7 +196,7 @@
             // 
             this.button1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.button1.ForeColor = System.Drawing.Color.Black;
-            this.button1.Location = new System.Drawing.Point(348, 459);
+            this.button1.Location = new System.Drawing.Point(342, 458);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(100, 40);
             this.button1.TabIndex = 13;
@@ -206,9 +206,8 @@
             // 
             // SnakeForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(449, 501);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
+            this.ClientSize = new System.Drawing.Size(449, 505);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.serverScoreLabel);
             this.Controls.Add(this.label4);
@@ -222,6 +221,8 @@
             this.Controls.Add(this.label1);
             this.Controls.Add(this.scoreLabel);
             this.Controls.Add(this.levelLabel);
+            this.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MaximizeBox = false;

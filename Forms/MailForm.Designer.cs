@@ -105,7 +105,7 @@
             this.Controls.Add(this.fromLabel);
             this.Controls.Add(this.sendBox);
             this.Controls.Add(this.contentText);
-            this.Font = new System.Drawing.Font("Gulim", 9F);
+            this.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;

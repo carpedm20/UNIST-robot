@@ -15,7 +15,6 @@ using System.Linq;
 using System.Text;
 using System.Windows.Forms;
 using System.IO;
-using CustomUIControls;
 using System.Diagnostics;
 using System.Security.Cryptography;
 
@@ -27,8 +26,6 @@ namespace robot
     {
         string currentVersion = "1.0.0";
         public static string lastestVersion = "";
-
-        static public string mealUrl="http://carpedm20.net76.net/meal.html";
 
         HtmlDocument doc = null;
 
@@ -107,6 +104,9 @@ namespace robot
         static public Snake.SnakeForm snakeform = new Snake.SnakeForm();
 
         bool urlError = false;
+
+        static public string mealUrl = "http://carpedm20.net76.net/meal.html";
+
         string bbStartUrl = "http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb";
         string bbEndUrl = "http://bb.unist.ac.kr/webapps/portal/frameset.jsp";
         string bbAnnounceUrl = "http://bb.unist.ac.kr/webapps/blackboard/execute/announcement?method=search&context=mybb&handle=my_announcements";
@@ -123,6 +123,9 @@ namespace robot
         {
             InitializeComponent();
 
+            this.Font = new Font(Program.myFonts.Families[0], 9);
+            sayLabel.Font = new Font(Program.myBoldFonts.Families[0], 9, FontStyle.Bold);
+            boardSlide.Font = new Font("Malgun Gothic", 9);
             visibleLoading();
 
             /************************************
@@ -2102,15 +2105,15 @@ namespace robot
             Random r = new Random();
             int rand = r.Next(0, say.says.Count - 1);
 
-            if (say.says.ElementAt(rand).Key.Length > 42)
+            if (say.says.ElementAt(rand).Key.Length > 49)
             {
-                if (say.says.ElementAt(rand).Key[42] == '.')
+                if (say.says.ElementAt(rand).Key[49] == '.')
                 {
                     sayLabel.Text = say.says.ElementAt(rand).Key;
                 }
                 else
                 {
-                    sayLabel.Text = say.says.ElementAt(rand).Key.Substring(0, 42) + "...";
+                    sayLabel.Text = say.says.ElementAt(rand).Key.Substring(0, 49) + "...";
                 }
             }
             else
@@ -2754,5 +2757,19 @@ namespace robot
             facebookForm.Visible = true;
         }
 
+        private void 페이스북ToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (facebookForm.Visible == true)
+            {
+                MessageBox.Show("창이 이미 열려 있습니다 :(", "Robot의 경고");
+            }
+
+            facebookForm = new FacebookForm();
+
+            facebookForm.StartPosition = FormStartPosition.Manual;
+            facebookForm.Location = new Point(Screen.PrimaryScreen.Bounds.Width - 380, this.Location.Y);
+
+            facebookForm.Visible = true;
+        }
     }
 }

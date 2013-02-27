@@ -31,16 +31,6 @@
             this.components = new System.ComponentModel.Container();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle7 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle9 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.browser = new System.Windows.Forms.WebBrowser();
             this.boardGrid = new System.Windows.Forms.DataGridView();
@@ -191,6 +181,7 @@
             this.uNIST웹메일ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.네이트총재클럽ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.개인알람ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.페이스북ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.보이기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.종료ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mailBox = new System.Windows.Forms.PictureBox();
@@ -294,17 +285,11 @@
             this.boardGrid.AllowUserToAddRows = false;
             this.boardGrid.AllowUserToDeleteRows = false;
             this.boardGrid.AllowUserToResizeRows = false;
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.boardGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.boardGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.boardGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle1.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle1.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle1.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle1.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle1.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.boardGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
             this.boardGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.boardGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column5,
@@ -312,14 +297,6 @@
             this.Column2,
             this.Column3,
             this.Column4});
-            dataGridViewCellStyle2.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle2.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle2.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle2.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle2.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.boardGrid.DefaultCellStyle = dataGridViewCellStyle2;
             this.boardGrid.Location = new System.Drawing.Point(8, 39);
             this.boardGrid.MultiSelect = false;
             this.boardGrid.Name = "boardGrid";
@@ -385,7 +362,7 @@
             this.welcomeLabel.AutoSize = true;
             this.welcomeLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.welcomeLabel.ForeColor = System.Drawing.Color.Black;
-            this.welcomeLabel.Location = new System.Drawing.Point(18, 12);
+            this.welcomeLabel.Location = new System.Drawing.Point(14, 12);
             this.welcomeLabel.Name = "welcomeLabel";
             this.welcomeLabel.Size = new System.Drawing.Size(151, 12);
             this.welcomeLabel.TabIndex = 16;
@@ -858,28 +835,12 @@
             this.bookListGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.bookListGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle3.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle3.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle3.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle3.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle3.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.bookListGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle3;
             this.bookListGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.bookListGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column37,
             this.Column36,
             this.Column38,
             this.Column35});
-            dataGridViewCellStyle4.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle4.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle4.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle4.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle4.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.bookListGrid.DefaultCellStyle = dataGridViewCellStyle4;
             this.bookListGrid.EnableHeadersVisualStyles = false;
             this.bookListGrid.Location = new System.Drawing.Point(145, 85);
             this.bookListGrid.Name = "bookListGrid";
@@ -945,14 +906,6 @@
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.studyGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle5.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle5.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle5.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle5.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle5.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.studyGrid.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle5;
             this.studyGrid.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.studyGrid.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Date,
@@ -980,14 +933,6 @@
             this.Column26,
             this.Column27,
             this.Column28});
-            dataGridViewCellStyle6.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle6.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle6.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle6.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle6.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.studyGrid.DefaultCellStyle = dataGridViewCellStyle6;
             this.studyGrid.Location = new System.Drawing.Point(14, 261);
             this.studyGrid.MultiSelect = false;
             this.studyGrid.Name = "studyGrid";
@@ -1346,26 +1291,10 @@
             // dataGridView2
             // 
             this.dataGridView2.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle7.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle7.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle7.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle7.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle7.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle7.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle7.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView2.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle7;
             this.dataGridView2.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView2.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column40,
             this.Column41});
-            dataGridViewCellStyle8.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle8.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle8.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle8.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle8.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView2.DefaultCellStyle = dataGridViewCellStyle8;
             this.dataGridView2.Location = new System.Drawing.Point(648, 266);
             this.dataGridView2.Name = "dataGridView2";
             this.dataGridView2.RowHeadersVisible = false;
@@ -1392,26 +1321,10 @@
             // dataGridView1
             // 
             this.dataGridView1.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle9.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle9.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle9.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle9.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle9.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle9.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle9.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle9;
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column30,
             this.Column39});
-            dataGridViewCellStyle10.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle10.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle10.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle10.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle10.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle10.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.dataGridView1.DefaultCellStyle = dataGridViewCellStyle10;
             this.dataGridView1.Location = new System.Drawing.Point(648, 79);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersVisible = false;
@@ -1462,18 +1375,12 @@
             this.bookGridView.AllowUserToAddRows = false;
             this.bookGridView.AllowUserToDeleteRows = false;
             this.bookGridView.AllowUserToResizeRows = false;
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.bookGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.bookGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.bookGridView.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
-            dataGridViewCellStyle11.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle11.BackColor = System.Drawing.SystemColors.Control;
-            dataGridViewCellStyle11.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle11.ForeColor = System.Drawing.SystemColors.WindowText;
-            dataGridViewCellStyle11.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle11.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle11.WrapMode = System.Windows.Forms.DataGridViewTriState.True;
-            this.bookGridView.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle11;
             this.bookGridView.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.bookGridView.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
             this.Column31,
@@ -1481,14 +1388,6 @@
             this.Column33,
             this.Column34,
             this.w});
-            dataGridViewCellStyle12.Alignment = System.Windows.Forms.DataGridViewContentAlignment.MiddleLeft;
-            dataGridViewCellStyle12.BackColor = System.Drawing.SystemColors.Window;
-            dataGridViewCellStyle12.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
-            dataGridViewCellStyle12.SelectionBackColor = System.Drawing.SystemColors.Highlight;
-            dataGridViewCellStyle12.SelectionForeColor = System.Drawing.SystemColors.HighlightText;
-            dataGridViewCellStyle12.WrapMode = System.Windows.Forms.DataGridViewTriState.False;
-            this.bookGridView.DefaultCellStyle = dataGridViewCellStyle12;
             this.bookGridView.EnableHeadersVisualStyles = false;
             this.bookGridView.Location = new System.Drawing.Point(15, 56);
             this.bookGridView.MultiSelect = false;
@@ -1544,6 +1443,7 @@
             this.boardSlide.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.boardSlide.BorderStyle = DevComponents.DotNetBar.eBorderType.None;
             this.boardSlide.ExpandedPanel = this.slidePortal;
+            this.boardSlide.Font = new System.Drawing.Font("Malgun Gothic", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.boardSlide.ForeColor = System.Drawing.Color.Black;
             this.boardSlide.Location = new System.Drawing.Point(12, 39);
             this.boardSlide.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -1738,10 +1638,11 @@
             this.학정ToolStripMenuItem,
             this.바로가기ToolStripMenuItem,
             this.개인알람ToolStripMenuItem,
+            this.페이스북ToolStripMenuItem,
             this.보이기ToolStripMenuItem,
             this.종료ToolStripMenuItem});
             this.trayMenuStrip.Name = "contextMenuStrip1";
-            this.trayMenuStrip.Size = new System.Drawing.Size(127, 158);
+            this.trayMenuStrip.Size = new System.Drawing.Size(127, 180);
             this.trayMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.trayMenuStrip_Opening);
             // 
             // 포탈ToolStripMenuItem
@@ -1922,6 +1823,13 @@
             this.개인알람ToolStripMenuItem.Text = "개인 알람";
             this.개인알람ToolStripMenuItem.Click += new System.EventHandler(this.개인알람ToolStripMenuItem_Click);
             // 
+            // 페이스북ToolStripMenuItem
+            // 
+            this.페이스북ToolStripMenuItem.Name = "페이스북ToolStripMenuItem";
+            this.페이스북ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.페이스북ToolStripMenuItem.Text = "페이스북";
+            this.페이스북ToolStripMenuItem.Click += new System.EventHandler(this.페이스북ToolStripMenuItem_Click);
+            // 
             // 보이기ToolStripMenuItem
             // 
             this.보이기ToolStripMenuItem.Name = "보이기ToolStripMenuItem";
@@ -1942,7 +1850,7 @@
             this.mailBox.ErrorImage = null;
             this.mailBox.ForeColor = System.Drawing.Color.Black;
             this.mailBox.Image = ((System.Drawing.Image)(resources.GetObject("mailBox.Image")));
-            this.mailBox.Location = new System.Drawing.Point(707, 14);
+            this.mailBox.Location = new System.Drawing.Point(715, 14);
             this.mailBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mailBox.Name = "mailBox";
             this.mailBox.Size = new System.Drawing.Size(25, 13);
@@ -1957,7 +1865,7 @@
             this.settingBox.ErrorImage = null;
             this.settingBox.ForeColor = System.Drawing.Color.Black;
             this.settingBox.Image = ((System.Drawing.Image)(resources.GetObject("settingBox.Image")));
-            this.settingBox.Location = new System.Drawing.Point(792, 11);
+            this.settingBox.Location = new System.Drawing.Point(793, 12);
             this.settingBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.settingBox.Name = "settingBox";
             this.settingBox.Size = new System.Drawing.Size(18, 18);
@@ -2028,11 +1936,11 @@
             // 
             this.sayLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.sayLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.sayLabel.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Bold);
+            this.sayLabel.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.sayLabel.ForeColor = System.Drawing.Color.Black;
-            this.sayLabel.Location = new System.Drawing.Point(186, 7);
+            this.sayLabel.Location = new System.Drawing.Point(178, 7);
             this.sayLabel.Name = "sayLabel";
-            this.sayLabel.Size = new System.Drawing.Size(460, 22);
+            this.sayLabel.Size = new System.Drawing.Size(471, 22);
             this.sayLabel.TabIndex = 26;
             this.sayLabel.Text = "현재를 즐겨라";
             this.sayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2107,7 +2015,7 @@
             this.weatherBox.ErrorImage = null;
             this.weatherBox.ForeColor = System.Drawing.Color.Black;
             this.weatherBox.Image = ((System.Drawing.Image)(resources.GetObject("weatherBox.Image")));
-            this.weatherBox.Location = new System.Drawing.Point(651, 11);
+            this.weatherBox.Location = new System.Drawing.Point(664, 11);
             this.weatherBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.weatherBox.Name = "weatherBox";
             this.weatherBox.Size = new System.Drawing.Size(18, 18);
@@ -2135,7 +2043,6 @@
             // 
             this.loadingLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.loadingLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
-            this.loadingLabel.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.loadingLabel.ForeColor = System.Drawing.Color.Black;
             this.loadingLabel.Location = new System.Drawing.Point(276, 323);
             this.loadingLabel.Name = "loadingLabel";
@@ -2150,7 +2057,7 @@
             this.reloadBox.ErrorImage = null;
             this.reloadBox.ForeColor = System.Drawing.Color.Black;
             this.reloadBox.Image = ((System.Drawing.Image)(resources.GetObject("reloadBox.Image")));
-            this.reloadBox.Location = new System.Drawing.Point(765, 11);
+            this.reloadBox.Location = new System.Drawing.Point(768, 12);
             this.reloadBox.Name = "reloadBox";
             this.reloadBox.Size = new System.Drawing.Size(20, 16);
             this.reloadBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2172,7 +2079,7 @@
             this.weatherClickBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.weatherClickBox.ForeColor = System.Drawing.Color.Black;
             this.weatherClickBox.Image = ((System.Drawing.Image)(resources.GetObject("weatherClickBox.Image")));
-            this.weatherClickBox.Location = new System.Drawing.Point(651, 11);
+            this.weatherClickBox.Location = new System.Drawing.Point(664, 11);
             this.weatherClickBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.weatherClickBox.Name = "weatherClickBox";
             this.weatherClickBox.Size = new System.Drawing.Size(18, 18);
@@ -2188,7 +2095,7 @@
             this.mailClickBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.mailClickBox.ForeColor = System.Drawing.Color.Black;
             this.mailClickBox.Image = ((System.Drawing.Image)(resources.GetObject("mailClickBox.Image")));
-            this.mailClickBox.Location = new System.Drawing.Point(707, 14);
+            this.mailClickBox.Location = new System.Drawing.Point(715, 14);
             this.mailClickBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mailClickBox.Name = "mailClickBox";
             this.mailClickBox.Size = new System.Drawing.Size(25, 13);
@@ -2203,7 +2110,7 @@
             this.reloadClickBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.reloadClickBox.ForeColor = System.Drawing.Color.Black;
             this.reloadClickBox.Image = ((System.Drawing.Image)(resources.GetObject("reloadClickBox.Image")));
-            this.reloadClickBox.Location = new System.Drawing.Point(765, 11);
+            this.reloadClickBox.Location = new System.Drawing.Point(768, 12);
             this.reloadClickBox.Name = "reloadClickBox";
             this.reloadClickBox.Size = new System.Drawing.Size(20, 16);
             this.reloadClickBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2216,7 +2123,7 @@
             this.settingClickBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.settingClickBox.ForeColor = System.Drawing.Color.Black;
             this.settingClickBox.Image = ((System.Drawing.Image)(resources.GetObject("settingClickBox.Image")));
-            this.settingClickBox.Location = new System.Drawing.Point(792, 11);
+            this.settingClickBox.Location = new System.Drawing.Point(793, 12);
             this.settingClickBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.settingClickBox.Name = "settingClickBox";
             this.settingClickBox.Size = new System.Drawing.Size(18, 18);
@@ -2316,7 +2223,7 @@
             this.portalGroup.Controls.Add(this.portalSearchLabel);
             this.portalGroup.Controls.Add(this.portalSearchTextBox);
             this.portalGroup.ForeColor = System.Drawing.Color.Black;
-            this.portalGroup.Location = new System.Drawing.Point(136, 31);
+            this.portalGroup.Location = new System.Drawing.Point(144, 31);
             this.portalGroup.Name = "portalGroup";
             this.portalGroup.Size = new System.Drawing.Size(678, 201);
             this.portalGroup.TabIndex = 50;
@@ -2339,7 +2246,7 @@
             this.notifyBox.ForeColor = System.Drawing.Color.Black;
             this.notifyBox.Image = ((System.Drawing.Image)(resources.GetObject("notifyBox.Image")));
             this.notifyBox.InitialImage = null;
-            this.notifyBox.Location = new System.Drawing.Point(677, 13);
+            this.notifyBox.Location = new System.Drawing.Point(687, 13);
             this.notifyBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.notifyBox.Name = "notifyBox";
             this.notifyBox.Size = new System.Drawing.Size(24, 15);
@@ -2355,7 +2262,7 @@
             this.notifyClickBox.ForeColor = System.Drawing.Color.Black;
             this.notifyClickBox.Image = ((System.Drawing.Image)(resources.GetObject("notifyClickBox.Image")));
             this.notifyClickBox.InitialImage = null;
-            this.notifyClickBox.Location = new System.Drawing.Point(677, 13);
+            this.notifyClickBox.Location = new System.Drawing.Point(687, 13);
             this.notifyClickBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.notifyClickBox.Name = "notifyClickBox";
             this.notifyClickBox.Size = new System.Drawing.Size(24, 15);
@@ -2387,8 +2294,10 @@
             // 
             // facebookBox
             // 
+            this.facebookBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.facebookBox.ForeColor = System.Drawing.Color.Black;
             this.facebookBox.Image = ((System.Drawing.Image)(resources.GetObject("facebookBox.Image")));
-            this.facebookBox.Location = new System.Drawing.Point(740, 12);
+            this.facebookBox.Location = new System.Drawing.Point(745, 12);
             this.facebookBox.Name = "facebookBox";
             this.facebookBox.Size = new System.Drawing.Size(19, 16);
             this.facebookBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2398,8 +2307,10 @@
             // 
             // facebookClickBox
             // 
+            this.facebookClickBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.facebookClickBox.ForeColor = System.Drawing.Color.Black;
             this.facebookClickBox.Image = ((System.Drawing.Image)(resources.GetObject("facebookClickBox.Image")));
-            this.facebookClickBox.Location = new System.Drawing.Point(740, 12);
+            this.facebookClickBox.Location = new System.Drawing.Point(745, 12);
             this.facebookClickBox.Name = "facebookClickBox";
             this.facebookClickBox.Size = new System.Drawing.Size(19, 16);
             this.facebookClickBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -2445,7 +2356,6 @@
             this.Controls.Add(this.studyDate);
             this.Controls.Add(this.nextMonthBtn);
             this.Controls.Add(this.browser);
-            this.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(842, 681);
             this.Name = "MainForm";
@@ -2694,6 +2604,7 @@
         private System.Windows.Forms.PictureBox logoPicBox;
         private System.Windows.Forms.PictureBox facebookBox;
         private System.Windows.Forms.PictureBox facebookClickBox;
+        private System.Windows.Forms.ToolStripMenuItem 페이스북ToolStripMenuItem;
     }
 }
 

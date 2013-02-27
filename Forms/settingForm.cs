@@ -19,6 +19,8 @@ namespace robot
         {
             InitializeComponent();
 
+            this.Font = new Font(Program.myFonts.Families[0], 9);
+
             loginSwitch = this.autoLoginSwitch;
             sayswitch = this.saySwitch;
 

@@ -20,6 +20,8 @@ namespace robot.Forms
         {
             InitializeComponent();
 
+            this.Font = new Font(Program.myFonts.Families[0], 9);
+
             browser.Navigate(url);
 
             this.cookie = cookie;

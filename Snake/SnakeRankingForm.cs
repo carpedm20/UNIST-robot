@@ -18,6 +18,9 @@ namespace robot.Snake
         {
             InitializeComponent();
 
+            this.Font = new Font(Program.myFonts.Families[0], 9);
+            rankingGrid.DefaultCellStyle.Font = new Font(Program.myFonts.Families[0], 9);
+
             this.highestScore = highestScore;
             highScoreLabel = highestScoreLabel;
 

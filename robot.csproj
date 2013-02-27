@@ -48,6 +48,7 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <UseVSHostingProcess>false</UseVSHostingProcess>
   </PropertyGroup>
   <PropertyGroup>
     <ManifestCertificateThumbprint>D0937860C66BE1BF69FDAB854158A825613CC43B</ManifestCertificateThumbprint>
@@ -215,6 +216,10 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="Resources\malgun.ttf" />
+    <None Include="Resources\malgunbd.ttf" />
+    <None Include="Resources\NanumGothic.ttf" />
+    <None Include="Resources\NanumGothicBold.ttf" />
     <None Include="robot_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

@@ -154,7 +154,6 @@
             this.ClientSize = new System.Drawing.Size(343, 696);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.browser);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Name = "FacebookForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

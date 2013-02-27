@@ -17,7 +17,7 @@ using System.Drawing.Drawing2D;
 using System.Windows.Forms;
 using System.Runtime.InteropServices;
 
-namespace CustomUIControls
+namespace robot
 {
 	/// <summary>
 	/// TaskbarNotifier allows to display MSN style/Skinned instant messaging popups
@@ -40,10 +40,10 @@ namespace CustomUIControls
 		protected Color hoverTitleColor = Color.FromArgb(0,0,0);
 		protected Color normalContentColor = Color.FromArgb(0,0,0);
 		protected Color hoverContentColor = Color.FromArgb(0,0,0x66);
-        protected Font normalTitleFont = new Font("Gulim", 12, FontStyle.Regular, GraphicsUnit.Pixel);
-        protected Font hoverTitleFont = new Font("Gulim", 12, FontStyle.Bold, GraphicsUnit.Pixel);
-        protected Font normalContentFont = new Font("Gulim", 11, FontStyle.Regular, GraphicsUnit.Pixel);
-        protected Font hoverContentFont = new Font("Gulim", 11, FontStyle.Regular, GraphicsUnit.Pixel);
+        protected Font normalTitleFont = new Font(Program.myFonts.Families[0], 12, FontStyle.Regular, GraphicsUnit.Pixel);
+        protected Font hoverTitleFont = new Font(Program.myFonts.Families[0], 12, FontStyle.Bold, GraphicsUnit.Pixel);
+        protected Font normalContentFont = new Font(Program.myFonts.Families[0], 11, FontStyle.Regular, GraphicsUnit.Pixel);
+        protected Font hoverContentFont = new Font(Program.myFonts.Families[0], 11, FontStyle.Regular, GraphicsUnit.Pixel);
 		protected int nShowEvents;
 		protected int nHideEvents;
 		protected int nVisibleEvents;

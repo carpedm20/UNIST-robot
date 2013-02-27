@@ -134,6 +134,7 @@ namespace robot
                 bbsideItem[i].Name = "bbsideItem" + i.ToString();
                 bbsideItem[i].Text = board[i].name;
 
+                bbsideBar[i].Font = new Font("Malgun Gothic", 9);
                 bbsideBar[i].AccessibleRole = System.Windows.Forms.AccessibleRole.ToolBar;
                 bbsideBar[i].AllowUserCustomize = false;
                 bbsideBar[i].BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));

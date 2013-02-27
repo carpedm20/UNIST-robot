@@ -285,8 +285,7 @@
             // 
             // BrowserForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1041, 696);
             this.Controls.Add(this.nightMealBtn);
             this.Controls.Add(this.pictureBox1);

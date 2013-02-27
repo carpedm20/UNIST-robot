@@ -177,7 +177,7 @@
             // AlarmForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(257, 208);
+            this.ClientSize = new System.Drawing.Size(257, 206);
             this.Controls.Add(this.countLabel);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.groupBox1);

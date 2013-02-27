@@ -29,6 +29,8 @@ namespace robot
         {
             InitializeComponent();
 
+            this.Font = new Font(Program.myFonts.Families[0], 9);
+
             messageCheck = false;
             toCheck = false;
             this.cookie = cookie;

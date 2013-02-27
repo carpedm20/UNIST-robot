@@ -25,6 +25,9 @@ namespace robot
         public LoginForm()
         {
             InitializeComponent();
+
+            this.Font = new Font(Program.myFonts.Families[0], 9);
+
             browser.ScriptErrorsSuppressed = true;
             loginReg = new AutoLogin();
         }

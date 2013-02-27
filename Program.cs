@@ -12,6 +12,8 @@ using System.Windows.Forms;
 using System.IO;
 using System.Web;
 using System.Net;
+using System.Drawing.Text;
+using System.Runtime.InteropServices;
 
 namespace robot
 {
@@ -26,6 +28,10 @@ namespace robot
 
         public static bool isExit = true;
 
+        public static PrivateFontCollection myFonts;
+        public static PrivateFontCollection myBoldFonts;
+        public static IntPtr fontBuffer;
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
@@ -34,7 +40,25 @@ namespace robot
         {
             // Application.Run(new Snake.SnakeForm());
             // Application.Run(new FacebookForm());
-            
+
+            if (myFonts == null)
+            {
+                myFonts = new PrivateFontCollection();
+                byte[] font = Properties.Resources.malgun;
+                fontBuffer = Marshal.AllocCoTaskMem(font.Length);
+                Marshal.Copy(font, 0, fontBuffer, font.Length);
+                myFonts.AddMemoryFont(fontBuffer, font.Length);
+            }
+
+            if (myBoldFonts == null)
+            {
+                myBoldFonts = new PrivateFontCollection();
+                byte[] font = Properties.Resources.malgunbd;
+                fontBuffer = Marshal.AllocCoTaskMem(font.Length);
+                Marshal.Copy(font, 0, fontBuffer, font.Length);
+                myBoldFonts.AddMemoryFont(fontBuffer, font.Length);
+            }
+
             isExit = true;
 
             Application.EnableVisualStyles();
@@ -67,7 +91,7 @@ namespace robot
                     password = regPw;
                     autoLogin = true;
 
-                    MainForm f1 = new MainForm();
+                    f1 = new MainForm();
                     Application.Run(f1);
                 }
             }

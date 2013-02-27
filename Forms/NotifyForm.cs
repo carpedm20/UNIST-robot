@@ -6,7 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Windows.Forms;
-using CustomUIControls;
 
 namespace robot
 {
@@ -52,6 +51,8 @@ namespace robot
         public AlarmForm()
         {
             InitializeComponent();
+
+            this.Font = new Font(Program.myFonts.Families[0], 9);
 
             taskCount = 0;
         }

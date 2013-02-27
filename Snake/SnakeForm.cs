@@ -35,6 +35,9 @@ namespace robot.Snake
         public SnakeForm()
         {
             InitializeComponent();
+
+            this.Font = new Font(Program.myFonts.Families[0], 9);
+
             KeyPreview = true;
 
             eatRobotLabel.Visible = true;

@@ -73,19 +73,5 @@ namespace robot.Properties {
                 return ((byte[])(obj));
             }
         }
-        
-        internal static byte[] NanumGothic {
-            get {
-                object obj = ResourceManager.GetObject("NanumGothic", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
-        
-        internal static byte[] NanumGothicBold {
-            get {
-                object obj = ResourceManager.GetObject("NanumGothicBold", resourceCulture);
-                return ((byte[])(obj));
-            }
-        }
     }
 }

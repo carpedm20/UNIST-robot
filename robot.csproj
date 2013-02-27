@@ -218,8 +218,6 @@
     </Compile>
     <None Include="Resources\malgun.ttf" />
     <None Include="Resources\malgunbd.ttf" />
-    <None Include="Resources\NanumGothic.ttf" />
-    <None Include="Resources\NanumGothicBold.ttf" />
     <None Include="robot_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>

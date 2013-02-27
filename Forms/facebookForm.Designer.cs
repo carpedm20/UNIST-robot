@@ -38,6 +38,7 @@
             this.label2 = new System.Windows.Forms.Label();
             this.passBox = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.ieUpdateLabel = new System.Windows.Forms.Label();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -71,7 +72,7 @@
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.idBox);
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(35, 267);
+            this.groupBox1.Location = new System.Drawing.Point(22, 21);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(273, 163);
             this.groupBox1.TabIndex = 2;
@@ -147,11 +148,24 @@
             this.label1.TabIndex = 1;
             this.label1.Text = "이메일 또는 휴대폰";
             // 
+            // ieUpdateLabel
+            // 
+            this.ieUpdateLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.ieUpdateLabel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.ieUpdateLabel.ForeColor = System.Drawing.Color.Black;
+            this.ieUpdateLabel.Location = new System.Drawing.Point(18, 298);
+            this.ieUpdateLabel.Name = "ieUpdateLabel";
+            this.ieUpdateLabel.Size = new System.Drawing.Size(307, 101);
+            this.ieUpdateLabel.TabIndex = 5;
+            this.ieUpdateLabel.Text = "익스플로러 버전이 낮아 오류가 발생할 수 있습니다.\r\n\r\n익스플로러 10으로 업데이트를 권고합니다 :)\r\n\r\n클릭하면 사라집니다.";
+            this.ieUpdateLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.ieUpdateLabel.Click += new System.EventHandler(this.ieUpdateLabel_Click);
+            // 
             // FacebookForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(343, 696);
+            this.Controls.Add(this.ieUpdateLabel);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.browser);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
@@ -178,5 +192,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox passBox;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label ieUpdateLabel;
     }
 }

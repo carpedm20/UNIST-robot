@@ -311,7 +311,7 @@
             this.boardGrid.ShowCellToolTips = false;
             this.boardGrid.ShowEditingIcon = false;
             this.boardGrid.ShowRowErrors = false;
-            this.boardGrid.Size = new System.Drawing.Size(661, 157);
+            this.boardGrid.Size = new System.Drawing.Size(661, 151);
             this.boardGrid.TabIndex = 2;
             this.boardGrid.SelectionChanged += new System.EventHandler(this.boardGrid_SelectionChanged);
             // 
@@ -398,7 +398,7 @@
             this.studyDateLabel.AutoSize = true;
             this.studyDateLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyDateLabel.ForeColor = System.Drawing.Color.Black;
-            this.studyDateLabel.Location = new System.Drawing.Point(85, 26);
+            this.studyDateLabel.Location = new System.Drawing.Point(85, 24);
             this.studyDateLabel.Name = "studyDateLabel";
             this.studyDateLabel.Size = new System.Drawing.Size(140, 12);
             this.studyDateLabel.TabIndex = 21;
@@ -408,7 +408,7 @@
             // 
             this.studyEtc.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyEtc.ForeColor = System.Drawing.Color.Black;
-            this.studyEtc.Location = new System.Drawing.Point(88, 118);
+            this.studyEtc.Location = new System.Drawing.Point(88, 116);
             this.studyEtc.Name = "studyEtc";
             this.studyEtc.Size = new System.Drawing.Size(199, 21);
             this.studyEtc.TabIndex = 25;
@@ -418,7 +418,7 @@
             this.label7.AutoSize = true;
             this.label7.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label7.ForeColor = System.Drawing.Color.Black;
-            this.label7.Location = new System.Drawing.Point(18, 122);
+            this.label7.Location = new System.Drawing.Point(18, 120);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(29, 12);
             this.label7.TabIndex = 24;
@@ -428,7 +428,7 @@
             // 
             this.studyReserveBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyReserveBtn.ForeColor = System.Drawing.Color.Black;
-            this.studyReserveBtn.Location = new System.Drawing.Point(203, 152);
+            this.studyReserveBtn.Location = new System.Drawing.Point(203, 150);
             this.studyReserveBtn.Name = "studyReserveBtn";
             this.studyReserveBtn.Size = new System.Drawing.Size(84, 26);
             this.studyReserveBtn.TabIndex = 23;
@@ -458,7 +458,7 @@
             this.groupBox1.Controls.Add(this.label5);
             this.groupBox1.Controls.Add(this.studyStudentId1);
             this.groupBox1.ForeColor = System.Drawing.Color.Black;
-            this.groupBox1.Location = new System.Drawing.Point(314, 20);
+            this.groupBox1.Location = new System.Drawing.Point(314, 18);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(338, 158);
             this.groupBox1.TabIndex = 12;
@@ -650,7 +650,7 @@
             this.label4.AutoSize = true;
             this.label4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label4.ForeColor = System.Drawing.Color.Black;
-            this.label4.Location = new System.Drawing.Point(18, 26);
+            this.label4.Location = new System.Drawing.Point(18, 24);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(57, 12);
             this.label4.TabIndex = 7;
@@ -661,7 +661,7 @@
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label3.ForeColor = System.Drawing.Color.Black;
-            this.label3.Location = new System.Drawing.Point(18, 157);
+            this.label3.Location = new System.Drawing.Point(18, 155);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(57, 12);
             this.label3.TabIndex = 5;
@@ -677,7 +677,7 @@
             "1 시간",
             "2 시간",
             "3 시간"});
-            this.studyTimeBox.Location = new System.Drawing.Point(88, 154);
+            this.studyTimeBox.Location = new System.Drawing.Point(88, 152);
             this.studyTimeBox.Name = "studyTimeBox";
             this.studyTimeBox.Size = new System.Drawing.Size(81, 20);
             this.studyTimeBox.TabIndex = 4;
@@ -686,7 +686,7 @@
             // 
             this.studyEmail.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyEmail.ForeColor = System.Drawing.Color.Black;
-            this.studyEmail.Location = new System.Drawing.Point(88, 85);
+            this.studyEmail.Location = new System.Drawing.Point(88, 83);
             this.studyEmail.Name = "studyEmail";
             this.studyEmail.Size = new System.Drawing.Size(199, 21);
             this.studyEmail.TabIndex = 3;
@@ -696,7 +696,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(18, 88);
+            this.label2.Location = new System.Drawing.Point(18, 86);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(43, 12);
             this.label2.TabIndex = 2;
@@ -706,7 +706,7 @@
             // 
             this.studyPhoneNumber.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.studyPhoneNumber.ForeColor = System.Drawing.Color.Black;
-            this.studyPhoneNumber.Location = new System.Drawing.Point(88, 52);
+            this.studyPhoneNumber.Location = new System.Drawing.Point(88, 50);
             this.studyPhoneNumber.Name = "studyPhoneNumber";
             this.studyPhoneNumber.Size = new System.Drawing.Size(199, 21);
             this.studyPhoneNumber.TabIndex = 1;
@@ -716,7 +716,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(18, 56);
+            this.label1.Location = new System.Drawing.Point(18, 54);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(57, 12);
             this.label1.TabIndex = 0;
@@ -747,7 +747,7 @@
             this.bookInfo.AutoSize = true;
             this.bookInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookInfo.ForeColor = System.Drawing.Color.Black;
-            this.bookInfo.Location = new System.Drawing.Point(142, 61);
+            this.bookInfo.Location = new System.Drawing.Point(142, 59);
             this.bookInfo.Name = "bookInfo";
             this.bookInfo.Size = new System.Drawing.Size(29, 12);
             this.bookInfo.TabIndex = 10;
@@ -762,7 +762,7 @@
             this.reviewStar.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.reviewStar.ForeColor = System.Drawing.Color.Black;
             this.reviewStar.IsEditable = false;
-            this.reviewStar.Location = new System.Drawing.Point(451, 23);
+            this.reviewStar.Location = new System.Drawing.Point(451, 21);
             this.reviewStar.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.reviewStar.Name = "reviewStar";
             this.reviewStar.Size = new System.Drawing.Size(68, 18);
@@ -773,7 +773,7 @@
             // 
             // reviewBrowser
             // 
-            this.reviewBrowser.Location = new System.Drawing.Point(365, 14);
+            this.reviewBrowser.Location = new System.Drawing.Point(365, 12);
             this.reviewBrowser.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.reviewBrowser.MinimumSize = new System.Drawing.Size(20, 16);
             this.reviewBrowser.Name = "reviewBrowser";
@@ -787,7 +787,7 @@
             this.bookReview.AutoSize = true;
             this.bookReview.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookReview.ForeColor = System.Drawing.Color.Black;
-            this.bookReview.Location = new System.Drawing.Point(520, 25);
+            this.bookReview.Location = new System.Drawing.Point(520, 23);
             this.bookReview.Name = "bookReview";
             this.bookReview.Size = new System.Drawing.Size(9, 12);
             this.bookReview.TabIndex = 7;
@@ -797,7 +797,7 @@
             // 
             this.bookReviewBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookReviewBtn.ForeColor = System.Drawing.Color.Black;
-            this.bookReviewBtn.Location = new System.Drawing.Point(593, 18);
+            this.bookReviewBtn.Location = new System.Drawing.Point(593, 16);
             this.bookReviewBtn.Name = "bookReviewBtn";
             this.bookReviewBtn.Size = new System.Drawing.Size(68, 27);
             this.bookReviewBtn.TabIndex = 5;
@@ -810,7 +810,7 @@
             this.bookTitle.AutoSize = true;
             this.bookTitle.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookTitle.ForeColor = System.Drawing.Color.Black;
-            this.bookTitle.Location = new System.Drawing.Point(142, 26);
+            this.bookTitle.Location = new System.Drawing.Point(142, 24);
             this.bookTitle.Name = "bookTitle";
             this.bookTitle.Size = new System.Drawing.Size(45, 12);
             this.bookTitle.TabIndex = 3;
@@ -820,7 +820,7 @@
             // 
             this.bookPic.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.bookPic.ForeColor = System.Drawing.Color.Black;
-            this.bookPic.Location = new System.Drawing.Point(15, 18);
+            this.bookPic.Location = new System.Drawing.Point(15, 16);
             this.bookPic.Name = "bookPic";
             this.bookPic.Size = new System.Drawing.Size(112, 164);
             this.bookPic.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
@@ -842,7 +842,7 @@
             this.Column38,
             this.Column35});
             this.bookListGrid.EnableHeadersVisualStyles = false;
-            this.bookListGrid.Location = new System.Drawing.Point(145, 85);
+            this.bookListGrid.Location = new System.Drawing.Point(145, 83);
             this.bookListGrid.Name = "bookListGrid";
             this.bookListGrid.RowHeadersVisible = false;
             this.bookListGrid.RowTemplate.Height = 23;
@@ -2194,7 +2194,7 @@
             this.portalSearchTextBox.ForeColor = System.Drawing.Color.Black;
             this.portalSearchTextBox.Location = new System.Drawing.Point(387, 13);
             this.portalSearchTextBox.Name = "portalSearchTextBox";
-            this.portalSearchTextBox.Size = new System.Drawing.Size(232, 21);
+            this.portalSearchTextBox.Size = new System.Drawing.Size(221, 21);
             this.portalSearchTextBox.TabIndex = 47;
             this.portalSearchTextBox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.maxPageNumBox_KeyDown);
             // 
@@ -2202,9 +2202,9 @@
             // 
             this.portalSearchBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.portalSearchBtn.ForeColor = System.Drawing.Color.Black;
-            this.portalSearchBtn.Location = new System.Drawing.Point(629, 11);
+            this.portalSearchBtn.Location = new System.Drawing.Point(622, 13);
             this.portalSearchBtn.Name = "portalSearchBtn";
-            this.portalSearchBtn.Size = new System.Drawing.Size(45, 23);
+            this.portalSearchBtn.Size = new System.Drawing.Size(45, 21);
             this.portalSearchBtn.TabIndex = 48;
             this.portalSearchBtn.Text = "보기";
             this.portalSearchBtn.UseVisualStyleBackColor = false;
@@ -2324,6 +2324,7 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(826, 696);
+            this.Controls.Add(this.studyGroup);
             this.Controls.Add(this.facebookClickBox);
             this.Controls.Add(this.sayBrowser);
             this.Controls.Add(this.logoPicBox);
@@ -2331,10 +2332,7 @@
             this.Controls.Add(this.mainBrowser);
             this.Controls.Add(this.facebookBox);
             this.Controls.Add(this.bbPanel);
-            this.Controls.Add(this.bookInfoGroup);
             this.Controls.Add(this.bookGroup);
-            this.Controls.Add(this.studyGroup);
-            this.Controls.Add(this.portalGroup);
             this.Controls.Add(this.settingClickBox);
             this.Controls.Add(this.reloadClickBox);
             this.Controls.Add(this.notifyClickBox);
@@ -2356,6 +2354,8 @@
             this.Controls.Add(this.studyDate);
             this.Controls.Add(this.nextMonthBtn);
             this.Controls.Add(this.browser);
+            this.Controls.Add(this.portalGroup);
+            this.Controls.Add(this.bookInfoGroup);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MinimumSize = new System.Drawing.Size(842, 681);
             this.Name = "MainForm";

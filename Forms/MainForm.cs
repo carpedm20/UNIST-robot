@@ -119,6 +119,8 @@ namespace robot
         string mailEndUrl = "http://mail.unist.ac.kr/main.crd";
         string bgmUrl = "http://carpedm20.net76.net/music.html";
 
+        static public bool ieUpdateChecked = false;
+
         public MainForm()
         {
             InitializeComponent();
@@ -2759,17 +2761,25 @@ namespace robot
 
         private void 페이스북ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            if (facebookForm.Visible == true)
+            if (facebookForm == null)
             {
-                MessageBox.Show("창이 이미 열려 있습니다 :(", "Robot의 경고");
+                facebookForm = new FacebookForm();
             }
 
-            facebookForm = new FacebookForm();
+            else
+            {
+                if (facebookForm.Visible == true)
+                {
+                    MessageBox.Show("창이 이미 열려 있습니다 :(", "Robot의 경고");
+                }
 
-            facebookForm.StartPosition = FormStartPosition.Manual;
-            facebookForm.Location = new Point(Screen.PrimaryScreen.Bounds.Width - 380, this.Location.Y);
+                facebookForm = new FacebookForm();
 
-            facebookForm.Visible = true;
+                facebookForm.StartPosition = FormStartPosition.Manual;
+                facebookForm.Location = new Point(Screen.PrimaryScreen.Bounds.Width - 380, this.Location.Y);
+
+                facebookForm.Visible = true;
+            }
         }
     }
 }

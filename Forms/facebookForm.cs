@@ -13,9 +13,28 @@ namespace robot
     {
         string url="";
 
+        string ieVersion;
+
         public FacebookForm()
         {
             InitializeComponent();
+
+            this.Font = new Font(Program.myFonts.Families[0], 9);
+
+            ieVersion = Microsoft.Win32.Registry.LocalMachine.OpenSubKey(@"Software\Microsoft\Internet Explorer").GetValue("Version").ToString();
+
+            if (ieVersion.IndexOf("9.10.") != -1)
+            {
+                ieUpdateLabel.Visible = false;
+            }
+
+            else
+            {
+                if (MainForm.ieUpdateChecked == true)
+                {
+                    ieUpdateLabel.Visible = false;
+                }
+            }
 
             browser.ScriptErrorsSuppressed = true; // 자바 스크립트 에러 무시
 
@@ -53,16 +72,26 @@ namespace robot
 
         private void browser_DocumentCompleted(object sender, WebBrowserDocumentCompletedEventArgs e)
         {
-            if (url != browser.Url.ToString())
+            // ie version이 10 이하인경우
+            if (ieVersion.IndexOf("9.10.") == -1)
             {
-                if(e.Url.ToString().IndexOf("side-area") == -1)
-                    browser.Refresh(); // IE의 고질적인 문제 때문에 refresh
-                url = browser.Url.ToString();
+                if (url != browser.Url.ToString())
+                {
+                    if (e.Url.ToString().IndexOf("side-area") == -1)
+                        browser.Refresh(); // IE 9 이하의 고질적인 문제 때문에 refresh
+                    url = browser.Url.ToString();
+                }
+
+                else
+                {
+                    url = browser.Url.ToString();
+                }
             }
-            else
-            {
-                url = browser.Url.ToString();
-            }
+        }
+
+        private void ieUpdateLabel_Click(object sender, EventArgs e)
+        {
+            ieUpdateLabel.Visible = false;
         }
     }
 }

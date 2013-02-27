@@ -111,9 +111,10 @@ namespace robot
         string libraryStartUrl = "http://library.unist.ac.kr/DLiWeb25Eng/tmaxsso/first_cs.aspx";
         string libraryEndUrl = "http://library.unist.ac.kr/DLiWeb25Eng/default.aspx";
         string dormStartUrl = "http://dorm.unist.ac.kr/sso/runSSO.asp";
-        string dormEndUrl = "http://dorm.unist.ac.kr/home/index_01.asp";
+        // string dormEndUrl = "http://dorm.unist.ac.kr/home/index_01.asp";
+        string dormEndUrl = "http://dorm.unist.ac.kr/sso/tmaxssologin.asp";
         string mailStartUrl = "http://portal.unist.ac.kr/EP/web/security/jsp/SSO_unistMail.jsp";
-        string mailEndUrl = "http://mail.unist.ac.kr/mail/mailList.crd";
+        string mailEndUrl = "http://mail.unist.ac.kr/main.crd";
 
         public MainForm()
         {
@@ -1782,7 +1783,8 @@ namespace robot
 
         private void browser_NewWindow(object sender, CancelEventArgs e)
         {
-            e.Cancel = true;
+            if (isEmailComplete != true)
+                e.Cancel = true;
         }
 
         /**********************************************************

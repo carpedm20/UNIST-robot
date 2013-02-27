@@ -68,15 +68,29 @@ namespace robot
 
         private string makeArgument()
         {
-            //send_mail_type=now&body=++++%3Cstyle%3E+%09%09++%09+%23mailBodyContentDiv+%7B+font-family+%3A+Dotum%2C+Verdana%2C+Arial%2C+Helvetica+%3B+background-color%3A+%23ffffff%3Bfont-size%3A10pt%3B%7D++++%09%09+%23mailBodyContentDiv+BODY+%7B+background-color%3A+%23ffffff%3B%7D++++++++++++%23mailBodyContentDiv+BODY%2C+TD%2C+TH+%7B+color%3A+black%3B+font-family%3A+Dotum%2C+Verdana%2C+Arial%2C+Helvetica%3B+font-size%3A+10pt%3B+%7D++++++++++++%23mailBodyContentDiv+P+%7B+margin%3A+0px%3B+padding%3A2px%3B%7D+++++%3C%2Fstyle%3E++++%3Cdiv+id%3D%22mailBodyContentDiv%22+style%3D%22width%3A100%25%22%3E+%3Cspan+style%3D%22font-family%3A+Dotum%3B+font-size%3A+small%3B%22%3E123123123%EC%95%88%EB%85%95%ED%95%98%EC%84%B8%EC%9A%94%3C%2Fspan%3E++++%3C%2Fdiv%3E+&charset=EUC-KR&sender_mail=carpedm20%40unist.ac.kr&to=carpedm20%40gmail.com&subject=hello&SenderName=%EA%B9%80%ED%83%9C%ED%9B%88&uploadServer=mail.unist.ac.kr&uploadPort=80&userId=Y2FycGVkbTIwQHVuaXN0LmFjLmty&sender_name=%EA%B9%80%ED%83%9C%ED%9B%88&send_dt_ymd=20130213&send_dt_hour=10&send_dt_min=54
+            /* old
+             * send_mail_type=now&body=++++%3Cstyle%3E+%09%09++%09+%23mailBodyContentDiv+%7B+font-family+%3A+Dotum%2C+Verdana%2C+Arial%2C+Helvetica+%3B+background-color%3A+%23ffffff%3Bfont-size%3A10pt%3B%7D++++%09%09+%23mailBodyContentDiv+BODY+%7B+background-color%3A+%23ffffff%3B%7D++++++++++++%23mailBodyContentDiv+BODY%2C+TD%2C+TH+%7B+color%3A+black%3B+font-family%3A+Dotum%2C+Verdana%2C+Arial%2C+Helvetica%3B+font-size%3A+10pt%3B+%7D++++++++++++%23mailBodyContentDiv+P+%7B+margin%3A+0px%3B+padding%3A2px%3B%7D+++++%3C%2Fstyle%3E++++%3Cdiv+id%3D%22mailBodyContentDiv%22+style%3D%22width%3A100%25%22%3E+%3Cspan+style%3D%22font-family%3A+Dotum%3B+font-size%3A+small%3B%22%3E123123123%EC%95%88%EB%85%95%ED%95%98%EC%84%B8%EC%9A%94%3C%2Fspan%3E++++%3C%2Fdiv%3E+&charset=EUC-KR&sender_mail=carpedm20%40unist.ac.kr&to=carpedm20%40gmail.com&subject=hello&SenderName=%EA%B9%80%ED%83%9C%ED%9B%88&uploadServer=mail.unist.ac.kr&uploadPort=80&userId=Y2FycGVkbTIwQHVuaXN0LmFjLmty&sender_name=%EA%B9%80%ED%83%9C%ED%9B%88&send_dt_ymd=20130213&send_dt_hour=10&send_dt_min=54
+             * 
+             * string arg = "send_mail_type=now&body=++++%3Cstyle%3E+%09%09++%09+%23mailBodyContentDiv+%7B+font-family+%3A+Dotum%2C+Verdana%2C+Arial%2C+Helvetica+%3B+background-color%3A+%23ffffff%3Bfont-size%3A10pt%3B%7D++++%09%09+%23mailBodyContentDiv+BODY+%7B+background-color%3A+%23ffffff%3B%7D++++++++++++%23mailBodyContentDiv+BODY%2C+TD%2C+TH+%7B+color%3A+black%3B+font-family%3A+Dotum%2C+Verdana%2C+Arial%2C+Helvetica%3B+font-size%3A+10pt%3B+%7D++++++++++++%23mailBodyContentDiv+P+%7B+margin%3A+0px%3B+padding%3A2px%3B%7D+++++%3C%2Fstyle%3E++++%3Cdiv+id%3D%22mailBodyContentDiv%22+style%3D%22width%3A100%25%22%3E+%3Cspan+style%3D%22font-family%3A+Dotum%3B+font-size%3A+small%3B%22%3E";
+             * arg += contentText.Text.Replace("\r\n", "<br/>");
+             * arg += "%3C%2Fspan%3E++++%3C%2Fdiv%3E+&charset=EUC-KR&sender_mail=";
+             * arg += Program.id + "%40unist.ac.kr&to=" + HttpUtility.UrlEncode(toBox.Text) + "&subject=" + "Robot 리포트";
+             * arg += "&SenderName="+MainForm.userName+"&uploadServer=mail.unist.ac.kr&uploadPort=80";
+             * arg += "&userId=";
+             * arg += "&sender_name=" + MainForm.userName;
+             * 
+             */
 
-            string arg = "send_mail_type=now&body=++++%3Cstyle%3E+%09%09++%09+%23mailBodyContentDiv+%7B+font-family+%3A+Dotum%2C+Verdana%2C+Arial%2C+Helvetica+%3B+background-color%3A+%23ffffff%3Bfont-size%3A10pt%3B%7D++++%09%09+%23mailBodyContentDiv+BODY+%7B+background-color%3A+%23ffffff%3B%7D++++++++++++%23mailBodyContentDiv+BODY%2C+TD%2C+TH+%7B+color%3A+black%3B+font-family%3A+Dotum%2C+Verdana%2C+Arial%2C+Helvetica%3B+font-size%3A+10pt%3B+%7D++++++++++++%23mailBodyContentDiv+P+%7B+margin%3A+0px%3B+padding%3A2px%3B%7D+++++%3C%2Fstyle%3E++++%3Cdiv+id%3D%22mailBodyContentDiv%22+style%3D%22width%3A100%25%22%3E+%3Cspan+style%3D%22font-family%3A+Dotum%3B+font-size%3A+small%3B%22%3E";
+            /* new
+             * method_=&send_mail_type=now&textbody=123123123&body=123123123&sender_info=%22%EA%B9%80%ED%83%9C%ED%9B%88%22%3Ccarpedm20%40unist.ac.kr%3E&mailCcBccDisplay=t&to=carpedm20%40gmail.com&subject=title
+             */
+
+            string arg = "method_=&send_mail_type=now&textbody=";
             arg += contentText.Text.Replace("\r\n", "<br/>");
-            arg += "%3C%2Fspan%3E++++%3C%2Fdiv%3E+&charset=EUC-KR&sender_mail=";
-            arg += Program.id + "%40unist.ac.kr&to=" + HttpUtility.UrlEncode(toBox.Text) + "&subject=" + "Robot 리포트";
-            arg += "&SenderName="+MainForm.userName+"&uploadServer=mail.unist.ac.kr&uploadPort=80";
-            arg += "&userId=";
-            arg += "&sender_name=" + MainForm.userName;
+            arg += "&body=" + contentText.Text.Replace("\r\n", "<br/>");
+            arg += "&sender_info=\"" + MainForm.userName + "\"<" + Program.id + "@unist.ac.kr>";
+            arg += "&mailCcBccDisplay=t&to=" + toBox.Text;
+            arg += "&subject="+"Robot_Report";
 
             return arg;
         }
@@ -97,12 +111,11 @@ namespace robot
                 uri = new Uri(url);
                 wReq = (HttpWebRequest)WebRequest.Create(uri);
                 wReq.Method = "POST";
-                wReq.CookieContainer = new CookieContainer();
-                wReq.CookieContainer.SetCookies(uri, cookie);
-
-                wReq.Headers.Add("Origin: http://mail.unist.ac.kr");
+                // wReq.CookieContainer = new CookieContainer();
+                // wReq.CookieContainer.SetCookies(uri, cookie);
+                wReq.Headers.Add("Cookie: " + cookie);
+                wReq.Headers.Add("Origin: http://mail.unist.ac.kr");                
                 wReq.ContentType = "application/x-www-form-urlencoded";
-                wReq.Referer = "http://mail.unist.ac.kr/mail/toMailWrite.crd";
 
                 byte[] byteArray = Encoding.UTF8.GetBytes(data);
 

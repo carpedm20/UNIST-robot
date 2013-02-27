@@ -73,11 +73,13 @@ namespace robot
         static public ProgressBar loadingprogress;
         static public Label loadinglabel;
         static public Forms.BrowserForm browserForm;
+        static public FacebookForm facebookForm;
 
         static public PictureBox weatherClick;
         static public PictureBox notifyPic;
         static public PictureBox notifyClick;
         static public PictureBox mailClick;
+        static public PictureBox facebookClick;
         static public PictureBox reloadClick;
         static public PictureBox settingClick;
 
@@ -115,6 +117,7 @@ namespace robot
         string dormEndUrl = "http://dorm.unist.ac.kr/sso/tmaxssologin.asp";
         string mailStartUrl = "http://portal.unist.ac.kr/EP/web/security/jsp/SSO_unistMail.jsp";
         string mailEndUrl = "http://mail.unist.ac.kr/main.crd";
+        string bgmUrl = "http://carpedm20.net76.net/music.html";
 
         public MainForm()
         {
@@ -156,16 +159,19 @@ namespace robot
             notifyPic = this.notifyBox;
             notifyClick = this.notifyClickBox;
             mailClick = this.mailClickBox;
+            facebookClick = this.facebookClickBox;
             reloadClick = this.reloadClickBox;
             settingClick = this.settingClickBox;
 
             mailBox.Click -= new System.EventHandler(mailBox_Click);
+            facebookBox.Click -= new System.EventHandler(facebookBox_Click);
             settingBox.Click -= new System.EventHandler(settingBox_Click);
             weatherBox.Click -= new System.EventHandler(weatherBox_Click);
             notifyBox.Click -= new System.EventHandler(notifyBox_Click);
             reloadBox.Click -= new System.EventHandler(reloadBox_Click);
 
             mailBox.Click += new System.EventHandler(loadingPictureBox_Click);
+            facebookBox.Click += new System.EventHandler(loadingPictureBox_Click);
             settingBox.Click += new System.EventHandler(loadingPictureBox_Click);
             weatherBox.Click += new System.EventHandler(loadingPictureBox_Click);
             notifyBox.Click += new System.EventHandler(loadingPictureBox_Click);
@@ -829,6 +835,7 @@ namespace robot
                     loadingProgressBar.Visible = false;
 
                     mailBox.Click += new System.EventHandler(mailBox_Click);
+                    facebookBox.Click += new System.EventHandler(facebookBox_Click);
                     settingBox.Click += new System.EventHandler(settingBox_Click);
                     weatherBox.Click += new System.EventHandler(weatherBox_Click);
                     weatherClick.Click += new System.EventHandler(weatherBox_Click);
@@ -836,6 +843,7 @@ namespace robot
                     reloadBox.Click += new System.EventHandler(reloadBox_Click);
 
                     mailBox.Click -= new System.EventHandler(loadingPictureBox_Click);
+                    facebookBox.Click -= new System.EventHandler(loadingPictureBox_Click);
                     settingBox.Click -= new System.EventHandler(loadingPictureBox_Click);
                     weatherBox.Click -= new System.EventHandler(loadingPictureBox_Click);
                     notifyBox.Click -= new System.EventHandler(loadingPictureBox_Click);
@@ -2094,8 +2102,17 @@ namespace robot
             Random r = new Random();
             int rand = r.Next(0, say.says.Count - 1);
 
-            if (say.says.ElementAt(rand).Key.Length > 40)
-                sayLabel.Text = say.says.ElementAt(rand).Key.Substring(0, 40) + "...";
+            if (say.says.ElementAt(rand).Key.Length > 42)
+            {
+                if (say.says.ElementAt(rand).Key[42] == '.')
+                {
+                    sayLabel.Text = say.says.ElementAt(rand).Key;
+                }
+                else
+                {
+                    sayLabel.Text = say.says.ElementAt(rand).Key.Substring(0, 42) + "...";
+                }
+            }
             else
                 sayLabel.Text = say.says.ElementAt(rand).Key;
 
@@ -2112,7 +2129,7 @@ namespace robot
             {
                 sayTimer.Stop();
                 sayTimerStop=true;
-                sayBrowser.Navigate("http://pds2.bgmstore.net/bgm_/5aLTJ.swf");
+                sayBrowser.Navigate(bgmUrl);
             }
         }
 
@@ -2229,7 +2246,7 @@ namespace robot
             portal.setBoard3();
             loadingProgressBar.Value += 10;
 
-            browser.Navigate("http://dorm.unist.ac.kr/");
+            browser.Navigate("http://dorm.unist.ac.kr/home/sub04/sub04_01.asp");
 
             while (browser.ReadyState != WebBrowserReadyState.Complete)
             {
@@ -2555,7 +2572,7 @@ namespace robot
             portal.setBoard3();
             loadingProgressBar.Value += 10;
 
-            browser.Navigate("http://dorm.unist.ac.kr/");
+            browser.Navigate("http://dorm.unist.ac.kr/home/sub04/sub04_01.asp");
 
             while (browser.ReadyState != WebBrowserReadyState.Complete)
             {
@@ -2622,6 +2639,11 @@ namespace robot
         }
 
         private void mailClickBox_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("창이 이미 열려 있습니다 :(", "Robot의 경고");
+        }
+
+        private void facebookClickBox_Click(object sender, EventArgs e)
         {
             MessageBox.Show("창이 이미 열려 있습니다 :(", "Robot의 경고");
         }
@@ -2713,5 +2735,24 @@ namespace robot
         {
             snakeform.Visible = true;
         }
+
+        private void facebookBox_Click(object sender, EventArgs e)
+        {
+            facebookForm = new FacebookForm();
+            facebookForm.StartPosition = FormStartPosition.Manual;
+
+            if (Screen.PrimaryScreen.Bounds.Width - this.Location.X - 850 - 359 < 0)
+            {
+                facebookForm.Location = new Point(Screen.PrimaryScreen.Bounds.Width - 380, this.Location.Y);
+            }
+
+            else
+            {
+                facebookForm.Location = new Point(this.Location.X + 850, this.Location.Y);
+            }
+
+            facebookForm.Visible = true;
+        }
+
     }
 }

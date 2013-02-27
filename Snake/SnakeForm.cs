@@ -25,6 +25,8 @@ namespace robot.Snake
 
         public static bool isRakingFormExist = false;
 
+        static public Point snakeHeadPos;
+
         int score = 0;
         int highestScore = 0;
 
@@ -122,6 +124,7 @@ namespace robot.Snake
             {
                 if (snake.SnakeRec[i].IntersectsWith(food.foodRec))
                 {
+                    snakeHeadPos = snake.SnakeRec[i].Location;
                     snake.growSnake();
                     food.foodLocation(randFood, unFood);
                 }
@@ -211,6 +214,7 @@ namespace robot.Snake
             {
                 if (snake.SnakeRec[i].IntersectsWith(food.foodRec))
                 {
+                    snakeHeadPos = snake.SnakeRec[i].Location;
                     snake.growSnake();
                     score += 10;
                     scoreLabel.Text = score.ToString();

@@ -40,6 +40,7 @@
             this.nateClubBtn = new System.Windows.Forms.Button();
             this.mailBtn = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.browser = new ExtendedWebBrowser();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.closeMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.닫기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +49,6 @@
             this.mealBtn = new System.Windows.Forms.Button();
             this.calendarBtn = new System.Windows.Forms.Button();
             this.nightMealBtn = new System.Windows.Forms.Button();
-            this.browser = new ExtendedWebBrowser();
             this.tabPage1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.closeMenuStrip.SuspendLayout();
@@ -179,6 +179,17 @@
             this.tabPage1.Text = " ";
             this.tabPage1.UseVisualStyleBackColor = true;
             // 
+            // browser
+            // 
+            this.browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.browser.Location = new System.Drawing.Point(3, 3);
+            this.browser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.browser.Name = "browser";
+            this.browser.Size = new System.Drawing.Size(1016, 595);
+            this.browser.TabIndex = 0;
+            // 
             // tabControl
             // 
             this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
@@ -271,17 +282,6 @@
             this.nightMealBtn.Text = "야식 정보";
             this.nightMealBtn.UseVisualStyleBackColor = false;
             this.nightMealBtn.Click += new System.EventHandler(this.nightMealBtn_Click);
-            // 
-            // browser
-            // 
-            this.browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.browser.Location = new System.Drawing.Point(3, 3);
-            this.browser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.browser.Name = "browser";
-            this.browser.Size = new System.Drawing.Size(1016, 595);
-            this.browser.TabIndex = 0;
             // 
             // BrowserForm
             // 

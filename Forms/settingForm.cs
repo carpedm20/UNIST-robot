@@ -119,5 +119,17 @@ namespace robot
         {
             MessageBox.Show("Lastest version : "+MainForm.lastestVersion, ":^)");
         }
+
+        private void facebookSwitch_ValueChanged(object sender, EventArgs e)
+        {
+            if (facebookSwitch.Value == true)
+            {
+                MainForm.facebookForm.TopMost = true;
+            }
+            else
+            {
+                MainForm.facebookForm.TopMost = false;
+            }
+        }
     }
 }

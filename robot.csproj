@@ -93,6 +93,12 @@
     <Compile Include="ExtendedWebBrowser.cs">
       <SubType>Component</SubType>
     </Compile>
+    <Compile Include="Forms\facebookForm.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Forms\facebookForm.Designer.cs">
+      <DependentUpon>facebookForm.cs</DependentUpon>
+    </Compile>
     <Compile Include="Forms\BrowserForm.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -159,6 +165,9 @@
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="weather.cs" />
+    <EmbeddedResource Include="Forms\facebookForm.resx">
+      <DependentUpon>facebookForm.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Forms\BrowserForm.resx">
       <DependentUpon>BrowserForm.cs</DependentUpon>
     </EmbeddedResource>

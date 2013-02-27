@@ -51,17 +51,43 @@ namespace robot.Snake
             x = randFood.Next(1, 28) * 15;
             y = randFood.Next(1, 28) * 15;
 
+            List<Point> unFoodRec = new List<Point>();
+
             foreach (Food f in unFood)
             {
-                Point p = new Point(x, y);
-                Point up = new Point(f.x, f.y);
+                unFoodRec.Add(f.foodRec.Location);
+            }
 
-                while (p == up)
+            for (int i = -2; i < 3; i++)
+            {
+                for (int j = -2; j < 3; j++)
+                {
+                    unFoodRec.Add(new Point (SnakeForm.snakeHeadPos.X + i, SnakeForm.snakeHeadPos.Y + j));
+                }
+            }
+
+            Point p = new Point(x, y);
+            bool isOverlaped=false;
+
+            while (true)
+            {
+                foreach (Point uFRP in unFoodRec)
+                {
+                    if (uFRP == p)
+                    {
+                        isOverlaped = true;
+                    }
+                }
+
+                if (isOverlaped == true)
                 {
                     x = randFood.Next(1, 28) * 15;
                     y = randFood.Next(1, 28) * 15;
-
                     p = new Point(x, y);
+                }
+                else
+                {
+                    break;
                 }
             }
 

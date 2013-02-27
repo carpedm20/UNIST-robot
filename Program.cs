@@ -33,7 +33,8 @@ namespace robot
         static void Main()
         {
             // Application.Run(new Snake.SnakeForm());
-
+            // Application.Run(new FacebookForm());
+            
             isExit = true;
 
             Application.EnableVisualStyles();

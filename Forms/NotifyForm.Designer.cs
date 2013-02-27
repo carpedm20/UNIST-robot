@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AlarmForm));
             this.contentText = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             this.reserveBtn = new System.Windows.Forms.Button();
@@ -183,8 +184,8 @@
             this.Controls.Add(this.reserveBtn);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.contentText);
-            this.DoubleBuffered = true;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
             this.Name = "AlarmForm";

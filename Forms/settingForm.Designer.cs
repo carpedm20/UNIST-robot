@@ -41,6 +41,8 @@
             this.sayTip = new System.Windows.Forms.ToolTip(this.components);
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.facebookSwitch = new DevComponents.DotNetBar.Controls.SwitchButton();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -137,7 +139,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.pictureBox1.ForeColor = System.Drawing.Color.Black;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(16, 121);
+            this.pictureBox1.Location = new System.Drawing.Point(14, 157);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(201, 84);
             this.pictureBox1.TabIndex = 9;
@@ -149,17 +151,49 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(78, 207);
+            this.label1.Location = new System.Drawing.Point(76, 243);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 12);
             this.label1.TabIndex = 10;
             this.label1.Text = "version 1.0.0";
             this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.label2.ForeColor = System.Drawing.Color.Black;
+            this.label2.Location = new System.Drawing.Point(12, 133);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(97, 12);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "페이스북 항상 위";
+            // 
+            // facebookSwitch
+            // 
+            this.facebookSwitch.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            // 
+            // 
+            // 
+            this.facebookSwitch.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
+            this.facebookSwitch.ForeColor = System.Drawing.Color.Black;
+            this.facebookSwitch.Location = new System.Drawing.Point(149, 129);
+            this.facebookSwitch.Name = "facebookSwitch";
+            this.facebookSwitch.OffText = "끔";
+            this.facebookSwitch.OnText = "켬";
+            this.facebookSwitch.Size = new System.Drawing.Size(66, 22);
+            this.facebookSwitch.Style = DevComponents.DotNetBar.eDotNetBarStyle.StyleManagerControlled;
+            this.facebookSwitch.TabIndex = 11;
+            this.facebookSwitch.Value = true;
+            this.facebookSwitch.ValueObject = "Y";
+            this.facebookSwitch.ValueChanged += new System.EventHandler(this.facebookSwitch_ValueChanged);
+            // 
             // SettingForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(233, 226);
+            this.ClientSize = new System.Drawing.Size(233, 260);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.facebookSwitch);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.sayLabel);
@@ -169,7 +203,7 @@
             this.Controls.Add(this.alarmSwitch);
             this.Controls.Add(this.alarmLabel);
             this.Font = new System.Drawing.Font("Gulim", 9F);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Fixed3D;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MaximizeBox = false;
             this.MinimizeBox = false;
@@ -197,5 +231,7 @@
         private System.Windows.Forms.ToolTip sayTip;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label label2;
+        private DevComponents.DotNetBar.Controls.SwitchButton facebookSwitch;
     }
 }

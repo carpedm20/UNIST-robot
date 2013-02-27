@@ -239,6 +239,8 @@
             this.notifyClickBox = new System.Windows.Forms.PictureBox();
             this.trayIcon = new System.Windows.Forms.NotifyIcon(this.components);
             this.logoPicBox = new System.Windows.Forms.PictureBox();
+            this.facebookBox = new System.Windows.Forms.PictureBox();
+            this.facebookClickBox = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.boardGrid)).BeginInit();
             this.studyGroup.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -267,6 +269,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.notifyBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.notifyClickBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoPicBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.facebookBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.facebookClickBox)).BeginInit();
             this.SuspendLayout();
             // 
             // browser
@@ -921,8 +925,9 @@
             this.bbPanel.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.bbPanel.AutoScroll = true;
-            this.bbPanel.BackColor = System.Drawing.Color.White;
+            this.bbPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(211)))), ((int)(((byte)(211)))), ((int)(((byte)(211)))));
             this.bbPanel.BackgroundImageLayout = System.Windows.Forms.ImageLayout.None;
+            this.bbPanel.ForeColor = System.Drawing.Color.Black;
             this.bbPanel.Location = new System.Drawing.Point(136, 39);
             this.bbPanel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.bbPanel.Name = "bbPanel";
@@ -1937,7 +1942,7 @@
             this.mailBox.ErrorImage = null;
             this.mailBox.ForeColor = System.Drawing.Color.Black;
             this.mailBox.Image = ((System.Drawing.Image)(resources.GetObject("mailBox.Image")));
-            this.mailBox.Location = new System.Drawing.Point(735, 13);
+            this.mailBox.Location = new System.Drawing.Point(707, 14);
             this.mailBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mailBox.Name = "mailBox";
             this.mailBox.Size = new System.Drawing.Size(25, 13);
@@ -1948,7 +1953,9 @@
             // 
             // settingBox
             // 
+            this.settingBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.settingBox.ErrorImage = null;
+            this.settingBox.ForeColor = System.Drawing.Color.Black;
             this.settingBox.Image = ((System.Drawing.Image)(resources.GetObject("settingBox.Image")));
             this.settingBox.Location = new System.Drawing.Point(792, 11);
             this.settingBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2019,11 +2026,13 @@
             // 
             // sayLabel
             // 
+            this.sayLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.sayLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.sayLabel.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Bold);
-            this.sayLabel.Location = new System.Drawing.Point(185, 7);
+            this.sayLabel.ForeColor = System.Drawing.Color.Black;
+            this.sayLabel.Location = new System.Drawing.Point(186, 7);
             this.sayLabel.Name = "sayLabel";
-            this.sayLabel.Size = new System.Drawing.Size(486, 22);
+            this.sayLabel.Size = new System.Drawing.Size(460, 22);
             this.sayLabel.TabIndex = 26;
             this.sayLabel.Text = "현재를 즐겨라";
             this.sayLabel.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -2050,6 +2059,8 @@
             // 
             // nextMonthBtn
             // 
+            this.nextMonthBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.nextMonthBtn.ForeColor = System.Drawing.Color.Black;
             this.nextMonthBtn.Image = ((System.Drawing.Image)(resources.GetObject("nextMonthBtn.Image")));
             this.nextMonthBtn.Location = new System.Drawing.Point(782, 241);
             this.nextMonthBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2063,6 +2074,8 @@
             // studyDate
             // 
             this.studyDate.AutoSize = true;
+            this.studyDate.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.studyDate.ForeColor = System.Drawing.Color.Black;
             this.studyDate.Location = new System.Drawing.Point(722, 240);
             this.studyDate.Name = "studyDate";
             this.studyDate.Size = new System.Drawing.Size(49, 12);
@@ -2071,6 +2084,8 @@
             // 
             // previousMonthBtn
             // 
+            this.previousMonthBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.previousMonthBtn.ForeColor = System.Drawing.Color.Black;
             this.previousMonthBtn.Image = ((System.Drawing.Image)(resources.GetObject("previousMonthBtn.Image")));
             this.previousMonthBtn.Location = new System.Drawing.Point(697, 240);
             this.previousMonthBtn.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2088,9 +2103,11 @@
             // 
             // weatherBox
             // 
+            this.weatherBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.weatherBox.ErrorImage = null;
+            this.weatherBox.ForeColor = System.Drawing.Color.Black;
             this.weatherBox.Image = ((System.Drawing.Image)(resources.GetObject("weatherBox.Image")));
-            this.weatherBox.Location = new System.Drawing.Point(679, 10);
+            this.weatherBox.Location = new System.Drawing.Point(651, 11);
             this.weatherBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.weatherBox.Name = "weatherBox";
             this.weatherBox.Size = new System.Drawing.Size(18, 18);
@@ -2106,6 +2123,8 @@
             // 
             // loadingProgressBar
             // 
+            this.loadingProgressBar.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.loadingProgressBar.ForeColor = System.Drawing.Color.Black;
             this.loadingProgressBar.Location = new System.Drawing.Point(276, 354);
             this.loadingProgressBar.Maximum = 80;
             this.loadingProgressBar.Name = "loadingProgressBar";
@@ -2114,8 +2133,10 @@
             // 
             // loadingLabel
             // 
+            this.loadingLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.loadingLabel.BorderStyle = System.Windows.Forms.BorderStyle.Fixed3D;
             this.loadingLabel.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.loadingLabel.ForeColor = System.Drawing.Color.Black;
             this.loadingLabel.Location = new System.Drawing.Point(276, 323);
             this.loadingLabel.Name = "loadingLabel";
             this.loadingLabel.Size = new System.Drawing.Size(241, 22);
@@ -2125,7 +2146,9 @@
             // 
             // reloadBox
             // 
+            this.reloadBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.reloadBox.ErrorImage = null;
+            this.reloadBox.ForeColor = System.Drawing.Color.Black;
             this.reloadBox.Image = ((System.Drawing.Image)(resources.GetObject("reloadBox.Image")));
             this.reloadBox.Location = new System.Drawing.Point(765, 11);
             this.reloadBox.Name = "reloadBox";
@@ -2140,14 +2163,16 @@
             this.sayBrowser.Location = new System.Drawing.Point(214, -10);
             this.sayBrowser.MinimumSize = new System.Drawing.Size(20, 20);
             this.sayBrowser.Name = "sayBrowser";
-            this.sayBrowser.Size = new System.Drawing.Size(43, 38);
+            this.sayBrowser.Size = new System.Drawing.Size(54, 44);
             this.sayBrowser.TabIndex = 36;
             this.sayBrowser.Visible = false;
             // 
             // weatherClickBox
             // 
+            this.weatherClickBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.weatherClickBox.ForeColor = System.Drawing.Color.Black;
             this.weatherClickBox.Image = ((System.Drawing.Image)(resources.GetObject("weatherClickBox.Image")));
-            this.weatherClickBox.Location = new System.Drawing.Point(679, 10);
+            this.weatherClickBox.Location = new System.Drawing.Point(651, 11);
             this.weatherClickBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.weatherClickBox.Name = "weatherClickBox";
             this.weatherClickBox.Size = new System.Drawing.Size(18, 18);
@@ -2160,8 +2185,10 @@
             // 
             // mailClickBox
             // 
+            this.mailClickBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.mailClickBox.ForeColor = System.Drawing.Color.Black;
             this.mailClickBox.Image = ((System.Drawing.Image)(resources.GetObject("mailClickBox.Image")));
-            this.mailClickBox.Location = new System.Drawing.Point(735, 13);
+            this.mailClickBox.Location = new System.Drawing.Point(707, 14);
             this.mailClickBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.mailClickBox.Name = "mailClickBox";
             this.mailClickBox.Size = new System.Drawing.Size(25, 13);
@@ -2173,6 +2200,8 @@
             // 
             // reloadClickBox
             // 
+            this.reloadClickBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.reloadClickBox.ForeColor = System.Drawing.Color.Black;
             this.reloadClickBox.Image = ((System.Drawing.Image)(resources.GetObject("reloadClickBox.Image")));
             this.reloadClickBox.Location = new System.Drawing.Point(765, 11);
             this.reloadClickBox.Name = "reloadClickBox";
@@ -2184,6 +2213,8 @@
             // 
             // settingClickBox
             // 
+            this.settingClickBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.settingClickBox.ForeColor = System.Drawing.Color.Black;
             this.settingClickBox.Image = ((System.Drawing.Image)(resources.GetObject("settingClickBox.Image")));
             this.settingClickBox.Location = new System.Drawing.Point(792, 11);
             this.settingClickBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -2231,6 +2262,8 @@
             // maxPageCountLabel
             // 
             this.maxPageCountLabel.AutoSize = true;
+            this.maxPageCountLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.maxPageCountLabel.ForeColor = System.Drawing.Color.Black;
             this.maxPageCountLabel.Location = new System.Drawing.Point(123, 17);
             this.maxPageCountLabel.Name = "maxPageCountLabel";
             this.maxPageCountLabel.Size = new System.Drawing.Size(117, 12);
@@ -2240,6 +2273,8 @@
             // portalSearchLabel
             // 
             this.portalSearchLabel.AutoSize = true;
+            this.portalSearchLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.portalSearchLabel.ForeColor = System.Drawing.Color.Black;
             this.portalSearchLabel.Location = new System.Drawing.Point(344, 16);
             this.portalSearchLabel.Name = "portalSearchLabel";
             this.portalSearchLabel.Size = new System.Drawing.Size(37, 12);
@@ -2248,6 +2283,8 @@
             // 
             // portalSearchTextBox
             // 
+            this.portalSearchTextBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.portalSearchTextBox.ForeColor = System.Drawing.Color.Black;
             this.portalSearchTextBox.Location = new System.Drawing.Point(387, 13);
             this.portalSearchTextBox.Name = "portalSearchTextBox";
             this.portalSearchTextBox.Size = new System.Drawing.Size(232, 21);
@@ -2298,9 +2335,11 @@
             // 
             // notifyBox
             // 
+            this.notifyBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.notifyBox.ForeColor = System.Drawing.Color.Black;
             this.notifyBox.Image = ((System.Drawing.Image)(resources.GetObject("notifyBox.Image")));
             this.notifyBox.InitialImage = null;
-            this.notifyBox.Location = new System.Drawing.Point(705, 12);
+            this.notifyBox.Location = new System.Drawing.Point(677, 13);
             this.notifyBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.notifyBox.Name = "notifyBox";
             this.notifyBox.Size = new System.Drawing.Size(24, 15);
@@ -2311,10 +2350,12 @@
             // 
             // notifyClickBox
             // 
+            this.notifyClickBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.notifyClickBox.ErrorImage = null;
+            this.notifyClickBox.ForeColor = System.Drawing.Color.Black;
             this.notifyClickBox.Image = ((System.Drawing.Image)(resources.GetObject("notifyClickBox.Image")));
             this.notifyClickBox.InitialImage = null;
-            this.notifyClickBox.Location = new System.Drawing.Point(705, 12);
+            this.notifyClickBox.Location = new System.Drawing.Point(677, 13);
             this.notifyClickBox.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.notifyClickBox.Name = "notifyClickBox";
             this.notifyClickBox.Size = new System.Drawing.Size(24, 15);
@@ -2333,6 +2374,8 @@
             // 
             // logoPicBox
             // 
+            this.logoPicBox.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.logoPicBox.ForeColor = System.Drawing.Color.Black;
             this.logoPicBox.Image = ((System.Drawing.Image)(resources.GetObject("logoPicBox.Image")));
             this.logoPicBox.Location = new System.Drawing.Point(159, 43);
             this.logoPicBox.Name = "logoPicBox";
@@ -2342,35 +2385,60 @@
             this.logoPicBox.TabStop = false;
             this.logoPicBox.Click += new System.EventHandler(this.logoPicBox_Click);
             // 
+            // facebookBox
+            // 
+            this.facebookBox.Image = ((System.Drawing.Image)(resources.GetObject("facebookBox.Image")));
+            this.facebookBox.Location = new System.Drawing.Point(740, 12);
+            this.facebookBox.Name = "facebookBox";
+            this.facebookBox.Size = new System.Drawing.Size(19, 16);
+            this.facebookBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.facebookBox.TabIndex = 51;
+            this.facebookBox.TabStop = false;
+            this.facebookBox.Click += new System.EventHandler(this.facebookBox_Click);
+            // 
+            // facebookClickBox
+            // 
+            this.facebookClickBox.Image = ((System.Drawing.Image)(resources.GetObject("facebookClickBox.Image")));
+            this.facebookClickBox.Location = new System.Drawing.Point(740, 12);
+            this.facebookClickBox.Name = "facebookClickBox";
+            this.facebookClickBox.Size = new System.Drawing.Size(19, 16);
+            this.facebookClickBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.facebookClickBox.TabIndex = 52;
+            this.facebookClickBox.TabStop = false;
+            this.facebookClickBox.Visible = false;
+            this.facebookClickBox.Click += new System.EventHandler(this.facebookClickBox_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.ClientSize = new System.Drawing.Size(826, 696);
+            this.Controls.Add(this.facebookClickBox);
+            this.Controls.Add(this.sayBrowser);
             this.Controls.Add(this.logoPicBox);
             this.Controls.Add(this.boardSlide);
             this.Controls.Add(this.mainBrowser);
+            this.Controls.Add(this.facebookBox);
             this.Controls.Add(this.bbPanel);
             this.Controls.Add(this.bookInfoGroup);
             this.Controls.Add(this.bookGroup);
             this.Controls.Add(this.studyGroup);
             this.Controls.Add(this.portalGroup);
-            this.Controls.Add(this.notifyClickBox);
             this.Controls.Add(this.settingClickBox);
             this.Controls.Add(this.reloadClickBox);
-            this.Controls.Add(this.weatherClickBox);
-            this.Controls.Add(this.sayBrowser);
-            this.Controls.Add(this.mailClickBox);
+            this.Controls.Add(this.notifyClickBox);
             this.Controls.Add(this.reloadBox);
+            this.Controls.Add(this.weatherClickBox);
+            this.Controls.Add(this.loadingLabel);
+            this.Controls.Add(this.mailClickBox);
+            this.Controls.Add(this.loadingProgressBar);
             this.Controls.Add(this.weatherBox);
             this.Controls.Add(this.notifyBox);
-            this.Controls.Add(this.loadingLabel);
-            this.Controls.Add(this.loadingProgressBar);
             this.Controls.Add(this.sayLabel);
             this.Controls.Add(this.settingBox);
-            this.Controls.Add(this.mailBox);
             this.Controls.Add(this.roomNumberLabel);
             this.Controls.Add(this.roomNumberBox);
+            this.Controls.Add(this.mailBox);
             this.Controls.Add(this.studyGrid);
             this.Controls.Add(this.welcomeLabel);
             this.Controls.Add(this.previousMonthBtn);
@@ -2418,6 +2486,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.notifyBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.notifyClickBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.logoPicBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.facebookBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.facebookClickBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2622,6 +2692,8 @@
         private System.Windows.Forms.ToolStripMenuItem 야식정보ToolStripMenuItem;
         private System.Windows.Forms.NotifyIcon trayIcon;
         private System.Windows.Forms.PictureBox logoPicBox;
+        private System.Windows.Forms.PictureBox facebookBox;
+        private System.Windows.Forms.PictureBox facebookClickBox;
     }
 }
 

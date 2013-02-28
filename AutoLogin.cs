@@ -18,12 +18,33 @@ namespace robot
             RegistryKey reg = Registry.LocalMachine.CreateSubKey("SoftWare").CreateSubKey("robot_carpedm20");
             id = reg.GetValue("ID", "").ToString();
             pw = reg.GetValue("PW", "").ToString();
+
             if (id == "" || id == "" && pw == "")
                 return false;
-            return true;
+            else
+                return true;
         }
 
         public void WriteRegistry(string id, string pw)
+        {
+            RegistryKey reg = Registry.LocalMachine.CreateSubKey("SoftWare").CreateSubKey("robot_carpedm20");
+            reg.SetValue("ID", id);
+            reg.SetValue("PW", pw);
+        }
+
+        public bool NateReadRegistry(ref string id, ref string pw, ref string nate)
+        {
+            RegistryKey reg = Registry.LocalMachine.CreateSubKey("SoftWare").CreateSubKey("robot_carpedm20");
+            id = reg.GetValue("ID", "").ToString();
+            pw = reg.GetValue("PW", "").ToString();
+
+            if (id == "" && pw == "")
+                return false;
+            else
+                return true;
+        }
+
+        public void NateWriteRegistry(string id, string pw, string nate)
         {
             RegistryKey reg = Registry.LocalMachine.CreateSubKey("SoftWare").CreateSubKey("robot_carpedm20");
             reg.SetValue("ID", id);

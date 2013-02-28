@@ -36,6 +36,20 @@ namespace robot.Forms
         {
             ExtendedWebBrowser web=(ExtendedWebBrowser)sender;
 
+            if (web.Url.ToString().IndexOf("http://loginsvc.cyworld.com/ims/") != -1)
+            {
+                tabControl.SelectedIndex = tabControl.SelectedIndex - 1;
+                tabControl.TabPages.RemoveAt(tabControl.SelectedIndex + 1);
+
+                if (tabControl.SelectedIndex == -1)
+                {
+                    if (tabControl.TabPages.Count != 0)
+                    {
+                        tabControl.SelectedIndex = 0;
+                    }
+                }
+            }
+
             if (web.CanGoBack)
             {
                 backBtn.Enabled = true;
@@ -59,9 +73,25 @@ namespace robot.Forms
             ((TabPage)(web.Parent)).Text = web.DocumentTitle;
         }
 
-        private void browser_NewWindow(object sender, CancelEventArgs e)
+        /*
+        private void browser_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
-            // e.Cancel = true;
+            ExtendedWebBrowser web = (ExtendedWebBrowser)sender;
+
+            if (e.Url.ToString().IndexOf("http://dorm.unist.ac.kr/home/popup/pop.asp?board_nm=dorm_notice") != -1)
+            {
+                e.Cancel = true;
+            }
+        }
+        */
+
+        private void cancel_newWindow(object sender, CancelEventArgs e)
+        {
+            if (((ExtendedWebBrowser)sender).Url.ToString().IndexOf("http://dorm.unist.ac.kr/home/index_01.asp") != -1)
+                e.Cancel = true;
+            if (((ExtendedWebBrowser)sender).Url.ToString() == "http://portal.unist.ac.kr/EP/web/portal/jsp/EP_Default1.jsp")
+                e.Cancel = true;
+
         }
 
         private void currentUrlLabel_KeyDown(object sender, KeyEventArgs e)
@@ -95,14 +125,22 @@ namespace robot.Forms
         {
             SourceBrowser.ScriptErrorsSuppressed = true;
 
+            SourceBrowser.NewWindow += new CancelEventHandler(cancel_newWindow);
             SourceBrowser.NewWindow2 += new EventHandler<NewWindow2EventArgs>(SourceBrowser_NewWindow2);
             SourceBrowser.DocumentCompleted += new System.Windows.Forms.WebBrowserDocumentCompletedEventHandler(browser_DocumentCompleted);
+            // SourceBrowser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(browser_Navigating);
         }
 
         void SourceBrowser_NewWindow2(object sender, NewWindow2EventArgs e)
         {
             TabPage NewTabPage = new TabPage();
 
+            /*
+            if (((ExtendedWebBrowser)sender).Url.ToString().IndexOf("cyworld") != -1 || ((ExtendedWebBrowser)sender).Url.ToString().IndexOf("nate") != -1)
+            {
+                return;
+            }
+            */
             ExtendedWebBrowser NewTabBrowser = new ExtendedWebBrowser()
             {
                 Parent = NewTabPage,
@@ -355,6 +393,7 @@ namespace robot.Forms
             };
 
             NewTabBrowser.Navigate("http://club.cyworld.com/ClubV1/Home.cy/53814181");
+            // NewTabBrowser.Navigate("http://xo.nate.com/Notfound.sk?redirect=http://club.cyworld.com/uniallstar&cpurl=www_ndr.nate.com%2flogin&viewnid=null&viewcid=null&flag=Y&e_url=http://www.nate.com/&mode=");
             InitializeBrowserEvents(NewTabBrowser);
 
             tabControl.TabPages.Add(NewTabPage);
@@ -390,6 +429,14 @@ namespace robot.Forms
         {
             ExtendedWebBrowser ex = (ExtendedWebBrowser)(tabControl.SelectedTab.Controls[0]);
             ex.Refresh();
+        }
+
+        private void tabControl_ControlRemoved(object sender, ControlEventArgs e)
+        {
+            if (clickedTabIndex == tabControl.SelectedIndex)
+            {
+                tabControl.SelectedIndex = tabControl.SelectedIndex - 1;
+            }
         }
     }
 }

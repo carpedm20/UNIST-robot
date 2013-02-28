@@ -97,11 +97,7 @@ namespace robot
 
         Weather weather;
 
-        bool nateIdSave = false;
-
-        Delivery delivery;
-
-        static public Snake.SnakeForm snakeform = new Snake.SnakeForm();
+        static public Snake.SnakeForm snakeform;
 
         bool urlError = false;
 
@@ -113,8 +109,8 @@ namespace robot
         string libraryStartUrl = "http://library.unist.ac.kr/DLiWeb25Eng/tmaxsso/first_cs.aspx";
         string libraryEndUrl = "http://library.unist.ac.kr/DLiWeb25Eng/default.aspx";
         string dormStartUrl = "http://dorm.unist.ac.kr/sso/runSSO.asp";
-        // string dormEndUrl = "http://dorm.unist.ac.kr/home/index_01.asp";
-        string dormEndUrl = "http://dorm.unist.ac.kr/sso/tmaxssologin.asp";
+        string dormEndUrl = "http://dorm.unist.ac.kr/home/index_01.asp";
+        // string dormEndUrl = "http://dorm.unist.ac.kr/sso/tmaxssologin.asp";
         string mailStartUrl = "http://portal.unist.ac.kr/EP/web/security/jsp/SSO_unistMail.jsp";
         string mailEndUrl = "http://mail.unist.ac.kr/main.crd";
         string bgmUrl = "http://carpedm20.net76.net/music.html";
@@ -2107,15 +2103,15 @@ namespace robot
             Random r = new Random();
             int rand = r.Next(0, say.says.Count - 1);
 
-            if (say.says.ElementAt(rand).Key.Length > 49)
+            if (say.says.ElementAt(rand).Key.Length > 46)
             {
-                if (say.says.ElementAt(rand).Key[49] == '.')
+                if (say.says.ElementAt(rand).Key[46] == '.')
                 {
                     sayLabel.Text = say.says.ElementAt(rand).Key;
                 }
                 else
                 {
-                    sayLabel.Text = say.says.ElementAt(rand).Key.Substring(0, 49) + "...";
+                    sayLabel.Text = say.says.ElementAt(rand).Key.Substring(0, 46) + "...";
                 }
             }
             else
@@ -2443,7 +2439,9 @@ namespace robot
 
         private void 네이트총재클럽ToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            System.Diagnostics.Process.Start("http://club.cyworld.com/ClubV1/Home.cy/53814181");
+            // System.Diagnostics.Process.Start("http://club.cyworld.com/ClubV1/Home.cy/53814181");
+            browserForm = new Forms.BrowserForm("http://club.cyworld.com/ClubV1/Home.cy/53814181", portalCookie);
+            browserForm.Show();
         }
 
         private void notifyBox_Click(object sender, EventArgs e)
@@ -2738,6 +2736,11 @@ namespace robot
 
         private void logoPicBox_Click(object sender, EventArgs e)
         {
+            if (snakeform == null)
+            {
+                snakeform = new Snake.SnakeForm();
+            }
+
             snakeform.Visible = true;
         }
 

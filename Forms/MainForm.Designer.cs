@@ -1642,7 +1642,7 @@
             this.보이기ToolStripMenuItem,
             this.종료ToolStripMenuItem});
             this.trayMenuStrip.Name = "contextMenuStrip1";
-            this.trayMenuStrip.Size = new System.Drawing.Size(127, 180);
+            this.trayMenuStrip.Size = new System.Drawing.Size(153, 202);
             this.trayMenuStrip.Opening += new System.ComponentModel.CancelEventHandler(this.trayMenuStrip_Opening);
             // 
             // 포탈ToolStripMenuItem
@@ -1653,7 +1653,7 @@
             this.대학원공지ToolStripMenuItem,
             this.최신게시물ToolStripMenuItem});
             this.포탈ToolStripMenuItem.Name = "포탈ToolStripMenuItem";
-            this.포탈ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.포탈ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.포탈ToolStripMenuItem.Text = "포탈";
             // 
             // 학사공지ToolStripMenuItem
@@ -1687,7 +1687,7 @@
             // 블랙보드ToolStripMenuItem
             // 
             this.블랙보드ToolStripMenuItem.Name = "블랙보드ToolStripMenuItem";
-            this.블랙보드ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.블랙보드ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.블랙보드ToolStripMenuItem.Text = "블랙보드";
             // 
             // 학정ToolStripMenuItem
@@ -1698,7 +1698,7 @@
             this.열람실좌석현황ToolStripMenuItem,
             this.myLibraryToolStripMenuItem});
             this.학정ToolStripMenuItem.Name = "학정ToolStripMenuItem";
-            this.학정ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.학정ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.학정ToolStripMenuItem.Text = "학정";
             // 
             // 도서검색ToolStripMenuItem
@@ -1764,7 +1764,7 @@
             this.uNIST웹메일ToolStripMenuItem,
             this.네이트총재클럽ToolStripMenuItem});
             this.바로가기ToolStripMenuItem.Name = "바로가기ToolStripMenuItem";
-            this.바로가기ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.바로가기ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.바로가기ToolStripMenuItem.Text = "바로가기";
             // 
             // 포탈홈페이지ToolStripMenuItem
@@ -1819,28 +1819,28 @@
             // 개인알람ToolStripMenuItem
             // 
             this.개인알람ToolStripMenuItem.Name = "개인알람ToolStripMenuItem";
-            this.개인알람ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.개인알람ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.개인알람ToolStripMenuItem.Text = "개인 알람";
             this.개인알람ToolStripMenuItem.Click += new System.EventHandler(this.개인알람ToolStripMenuItem_Click);
             // 
             // 페이스북ToolStripMenuItem
             // 
             this.페이스북ToolStripMenuItem.Name = "페이스북ToolStripMenuItem";
-            this.페이스북ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.페이스북ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.페이스북ToolStripMenuItem.Text = "페이스북";
             this.페이스북ToolStripMenuItem.Click += new System.EventHandler(this.페이스북ToolStripMenuItem_Click);
             // 
             // 보이기ToolStripMenuItem
             // 
             this.보이기ToolStripMenuItem.Name = "보이기ToolStripMenuItem";
-            this.보이기ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.보이기ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.보이기ToolStripMenuItem.Text = "보이기";
             this.보이기ToolStripMenuItem.Click += new System.EventHandler(this.보이기ToolStripMenuItem_Click);
             // 
             // 종료ToolStripMenuItem
             // 
             this.종료ToolStripMenuItem.Name = "종료ToolStripMenuItem";
-            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.종료ToolStripMenuItem.Text = "종료";
             this.종료ToolStripMenuItem.Click += new System.EventHandler(this.종료ToolStripMenuItem_Click);
             // 

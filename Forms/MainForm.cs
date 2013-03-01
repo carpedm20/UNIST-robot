@@ -71,6 +71,7 @@ namespace robot
         static public Label loadinglabel;
         static public Forms.BrowserForm browserForm;
         static public FacebookForm facebookForm;
+        static public ExtraForm extraForm;
 
         static public PictureBox weatherClick;
         static public PictureBox notifyPic;
@@ -106,8 +107,10 @@ namespace robot
         string bbStartUrl = "http://portal.unist.ac.kr/EP/tmaxsso/runUEE.jsp?host=bb";
         string bbEndUrl = "http://bb.unist.ac.kr/webapps/portal/frameset.jsp";
         string bbAnnounceUrl = "http://bb.unist.ac.kr/webapps/blackboard/execute/announcement?method=search&context=mybb&handle=my_announcements";
-        string libraryStartUrl = "http://library.unist.ac.kr/DLiWeb25Eng/tmaxsso/first_cs.aspx";
-        string libraryEndUrl = "http://library.unist.ac.kr/DLiWeb25Eng/default.aspx";
+        // string libraryStartUrl = "http://library.unist.ac.kr/DLiWeb25Eng/tmaxsso/first_cs.aspx";
+        string libraryStartUrl = "http://library.unist.ac.kr/index";
+        // string libraryEndUrl = "http://library.unist.ac.kr/DLiWeb25Eng/default.aspx";
+        string libraryEndUrl = "http://library.unist.ac.kr/index";
         string dormStartUrl = "http://dorm.unist.ac.kr/sso/runSSO.asp";
         string dormEndUrl = "http://dorm.unist.ac.kr/home/index_01.asp";
         // string dormEndUrl = "http://dorm.unist.ac.kr/sso/tmaxssologin.asp";
@@ -212,6 +215,8 @@ namespace robot
             announceTip.SetToolTip(announceHideCheck, "리스트에서 공지글을 숨길 수 있습니다 :^)");
             portalSearchTip.SetToolTip(portalSearchLabel, "포탈 공지에서 제목 검색을 할 수 있습니다 ;-)");
             sayTimer.Start();
+
+            facebookForm = new FacebookForm();
         }
 
         private void autoLoginSetup()
@@ -1071,6 +1076,16 @@ namespace robot
                 }
             }
 
+            while (browser.ReadyState != WebBrowserReadyState.Complete)
+            {
+                Application.DoEvents();
+            }
+
+            if (browser.Url.ToString().IndexOf("rdate") != -1)
+            {
+                MessageBox.Show("입력한 값에 오류가 있습니다 :&", "Robot의 경고");
+            }
+
             if (isLoading == true)
                 return;
 
@@ -1141,7 +1156,7 @@ namespace robot
                 return;
             }
 
-            string url = "http://library.unist.ac.kr/dliweb25Eng/studyroom/reserve.aspx?m_var=112&roomid=" + (roomNumberBox.SelectedIndex + 1).ToString()
+            string url = "http://114.70.3.72/DLiWeb25Fr/studyroom/reserve.aspx?m_var=112&roomid=" + (roomNumberBox.SelectedIndex + 1).ToString()
                 + "&rdate=" + studyDate.Text.Replace(".", "") + date.Substring(2) + "&rhour=" + hour;
 
             browser.Navigate(url);
@@ -1167,49 +1182,59 @@ namespace robot
             else
             {
                 doc = browser.Document as HtmlDocument;
-                IEnumerable<HtmlElement> elements = ElementsByClass(doc, "empty_trbg");
 
-                HtmlElementCollection inputs = elements.ElementAt(6).GetElementsByTagName("input");
+                if (browser.Document.Body.InnerText.IndexOf("Member Login") != -1)
+                {
+                    extraForm = new ExtraForm(browser.Url.ToString());
+                    extraForm.Show();
+                }
 
-                studyPhoneNumber.Text = inputs[0].GetAttribute("value");
-                studyEmail.Text = inputs[1].GetAttribute("value");
-
-                studyDateLabel.Text = DateTime.Now.Year.ToString() + "년 " + date.Substring(0, 2) + "월 " + date.Substring(2) + "일 " + hour + "시";
-                studyGroup.Enabled = true;
-
-                if (e.ColumnIndex + 1 < grid.Columns.Count && grid.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value.ToString() == "R")
-                {
-                    studyTimeBox.Items.Clear();
-                    studyTimeBox.Items.AddRange(new object[] {
-                    "1 시간"});
-                }
-                else if (e.ColumnIndex + 1 == grid.Columns.Count)
-                {
-                    studyTimeBox.Items.Clear();
-                    studyTimeBox.Items.AddRange(new object[] {
-                    "1 시간"});
-                }
-                else if (e.ColumnIndex + 2 < grid.Columns.Count && grid.Rows[e.RowIndex].Cells[e.ColumnIndex + 2].Value.ToString() == "R")
-                {
-                    studyTimeBox.Items.Clear();
-                    studyTimeBox.Items.AddRange(new object[] {
-                    "1 시간",
-                    "2 시간"});
-                }
-                else if (e.ColumnIndex + 2 == grid.Columns.Count)
-                {
-                    studyTimeBox.Items.Clear();
-                    studyTimeBox.Items.AddRange(new object[] {
-                    "1 시간",
-                    "2 시간"});
-                }
                 else
                 {
-                    studyTimeBox.Items.Clear();
-                    studyTimeBox.Items.AddRange(new object[] {
+                    IEnumerable<HtmlElement> elements = ElementsByClass(doc, "empty_trbg");
+
+                    HtmlElementCollection inputs = elements.ElementAt(6).GetElementsByTagName("input");
+
+                    studyPhoneNumber.Text = inputs[0].GetAttribute("value");
+                    studyEmail.Text = inputs[1].GetAttribute("value");
+
+                    studyDateLabel.Text = DateTime.Now.Year.ToString() + "년 " + date.Substring(0, 2) + "월 " + date.Substring(2) + "일 " + hour + "시";
+                    studyGroup.Enabled = true;
+
+                    if (e.ColumnIndex + 1 < grid.Columns.Count && grid.Rows[e.RowIndex].Cells[e.ColumnIndex + 1].Value.ToString() == "R")
+                    {
+                        studyTimeBox.Items.Clear();
+                        studyTimeBox.Items.AddRange(new object[] {
+                    "1 시간"});
+                    }
+                    else if (e.ColumnIndex + 1 == grid.Columns.Count)
+                    {
+                        studyTimeBox.Items.Clear();
+                        studyTimeBox.Items.AddRange(new object[] {
+                    "1 시간"});
+                    }
+                    else if (e.ColumnIndex + 2 < grid.Columns.Count && grid.Rows[e.RowIndex].Cells[e.ColumnIndex + 2].Value.ToString() == "R")
+                    {
+                        studyTimeBox.Items.Clear();
+                        studyTimeBox.Items.AddRange(new object[] {
+                    "1 시간",
+                    "2 시간"});
+                    }
+                    else if (e.ColumnIndex + 2 == grid.Columns.Count)
+                    {
+                        studyTimeBox.Items.Clear();
+                        studyTimeBox.Items.AddRange(new object[] {
+                    "1 시간",
+                    "2 시간"});
+                    }
+                    else
+                    {
+                        studyTimeBox.Items.Clear();
+                        studyTimeBox.Items.AddRange(new object[] {
                     "1 시간",
                     "2 시간",
                     "3 시간"});
+                    }
                 }
             }
         }
@@ -1442,7 +1467,9 @@ namespace robot
 
             if (url != "" && isError == false)
             {
-                bookPic.Load("http://library.unist.ac.kr/DLiWeb25/comp/search/thumb.axd?url=" + url.Split('=')[1]);
+                // new : http://114.70.3.72/DLiWeb25/comp/search/thumb.axd?url=http://10.4.1.62/Thumbnail/000/364/00364206.jpg
+                // old : http://library.unist.ac.kr/DLiWeb25/comp/search/thumb.axd?url=
+                bookPic.Load("http://114.70.3.72/DLiWeb25/comp/search/thumb.axd?url=" + url.Split('=')[1]);
                 bookPic.Visible = true;
             }
 
@@ -2103,15 +2130,15 @@ namespace robot
             Random r = new Random();
             int rand = r.Next(0, say.says.Count - 1);
 
-            if (say.says.ElementAt(rand).Key.Length > 46)
+            if (say.says.ElementAt(rand).Key.Length > 44)
             {
-                if (say.says.ElementAt(rand).Key[46] == '.')
+                if (say.says.ElementAt(rand).Key[44] == '.')
                 {
                     sayLabel.Text = say.says.ElementAt(rand).Key;
                 }
                 else
                 {
-                    sayLabel.Text = say.says.ElementAt(rand).Key.Substring(0, 46) + "...";
+                    sayLabel.Text = say.says.ElementAt(rand).Key.Substring(0, 44) + "...";
                 }
             }
             else

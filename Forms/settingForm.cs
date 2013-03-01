@@ -102,6 +102,11 @@ namespace robot
 
         private void label5_Click(object sender, EventArgs e)
         {
+            if (MainForm.snakeform == null)
+            {
+                MainForm.snakeform = new Snake.SnakeForm();
+            }
+
             MainForm.snakeform.Visible = true;
         }
 

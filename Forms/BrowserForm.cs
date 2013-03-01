@@ -38,15 +38,16 @@ namespace robot.Forms
 
             if (web.Url.ToString().IndexOf("http://loginsvc.cyworld.com/ims/") != -1)
             {
-                tabControl.SelectedIndex = tabControl.SelectedIndex - 1;
-                tabControl.TabPages.RemoveAt(tabControl.SelectedIndex + 1);
-
-                if (tabControl.SelectedIndex == -1)
+                int s = tabControl.SelectedIndex;
+                tabControl.TabPages.RemoveAt(tabControl.SelectedIndex);
+                if (s != 0)
                 {
-                    if (tabControl.TabPages.Count != 0)
-                    {
-                        tabControl.SelectedIndex = 0;
-                    }
+                    tabControl.SelectedIndex = s - 1;
+                }
+
+                else
+                {
+                    tabControl.SelectedIndex = 0;
                 }
             }
 
@@ -159,7 +160,7 @@ namespace robot.Forms
         {
             ExtendedWebBrowser ex;
 
-            if (tabControl.SelectedTab == null)
+            if (tabControl.TabPages.Count == 0)
             {
                 this.Visible = false;
                 return;

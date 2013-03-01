@@ -59,7 +59,10 @@ namespace robot
 
             bookQuery = queryMake();
 
-            string url = "http://library.unist.ac.kr/DLiWeb25Eng/comp/search/Results.aspx?" + bookQuery;
+            // new : http://114.70.3.72/DLiWeb25Fr/comp/search/Results.aspx?
+            // old : http://library.unist.ac.kr/DLiWeb25Eng/comp/search/Results.aspx?
+
+            string url = "http://114.70.3.72/DLiWeb25Fr/comp/search/Results.aspx?" + bookQuery;
             if (!getResponse(url))
             {
                 return;
@@ -131,15 +134,18 @@ namespace robot
                 books[i].rows = rows;
             }
 
-            //http://library.unist.ac.kr/DLiWeb25Eng/comp/search/Results.aspx?method=2&field=TITL,AUTH,PUBN&keyword=%ED%95%B4%ED%82%B9,%ED%95%B4%ED%82%B9,%ED%95%B4%ED%82%B9&operator=0,1,3&branch=01&classid=24,27,1,60,32,65,21,23,25,39,75,2,22,41,38,74,88,52,33,6,19,80,29,59,85,89,63,5,28,16,77,30,73,53,34,64,79,26,90,35,3,4,15,20,42,76,86,91&max=300&classifyname=KDC&classify=&cntperpage=20&viewoption=1&sort=DEFAULT
+            // http://114.70.3.72/DLiWeb25Fr/comp/search/Results.aspx?m_var=421&querytype=2&srv=31&method=2&field=TITL&keyword=%EC%95%84&operator=0&branch=01&classid=24,27,1,60,32,65,21,23,25,39,75,2,22,41,38,74,88,52,33,6,19,80,29,59,85,89,5,28,16,77,30,73,53,34,79,64,26,90,35,3,4,15,20,42,76,86,91&max=300&cntperpage=20&viewoption=1&sort=DEFAULT
+            // new : http://library.unist.ac.kr/DLiWeb25Fr/comp/search/Results.aspx?method=2&field=TITL&keyword=%EC%95%84&operator=0&branch=01&classid=24,27,1,60,32,65,21,23,25,39,75,2,22,41,38,74,88,52,33,6,19,80,29,59,85,89,5,28,16,77,30,73,53,34,79,64,26,90,35,3,4,15,20,42,76,86,91&max=300&cntperpage=20&viewoption=1&sort=DEFAULT
+            // old : http://library.unist.ac.kr/DLiWeb25Eng/comp/search/Results.aspx?method=2&field=TITL,AUTH,PUBN&keyword=%ED%95%B4%ED%82%B9,%ED%95%B4%ED%82%B9,%ED%95%B4%ED%82%B9&operator=0,1,3&branch=01&classid=24,27,1,60,32,65,21,23,25,39,75,2,22,41,38,74,88,52,33,6,19,80,29,59,85,89,63,5,28,16,77,30,73,53,34,64,79,26,90,35,3,4,15,20,42,76,86,91&max=300&classifyname=KDC&classify=&cntperpage=20&viewoption=1&sort=DEFAULT
         }
 
         public string[] loadBookStat(string cid)
         {
-            // http://library.unist.ac.kr/DLiWeb25Eng/comp/search/SearchHandler.aspx?action=stock&cid=357465
+            // new : http://114.70.3.72/DLiWeb25Fr/comp/search/SearchHandler.aspx?action=stock&cid=357465
+            // old : http://library.unist.ac.kr/DLiWeb25Eng/comp/search/SearchHandler.aspx?action=stock&cid=357465
             // | 번호 | 등록 번호 | 소장 위치 | 도서 상태 | 청구 기호 | 출력 |
 
-            string url = "http://library.unist.ac.kr/DLiWeb25Eng/comp/search/SearchHandler.aspx?action=stock&cid=" + cid;
+            string url = "http://114.70.3.72/DLiWeb25Fr/comp/search/SearchHandler.aspx?action=stock&cid=" + cid;
 
             if (!getResponse(url))
             {
@@ -343,9 +349,10 @@ namespace robot
                     p.Kill();
             }
 
-            //http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=1
+            // new : http://114.70.3.72/dliweb25fr/studyroom/detail.aspx?m_var=112&roomid=1
+            // old : http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=1
 
-            string url = "http://library.unist.ac.kr/dliweb25eng/studyroom/detail.aspx?m_var=112&roomid=" + roomNum.ToString() + "&yearmonth=" + date;
+            string url = "http://114.70.3.72/dliweb25fr/studyroom/detail.aspx?m_var=112&roomid=" + roomNum.ToString() + "&yearmonth=" + date;
             if (!getResponse(url))
             {
                 return;

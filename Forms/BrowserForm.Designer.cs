@@ -40,6 +40,7 @@
             this.nateClubBtn = new System.Windows.Forms.Button();
             this.mailBtn = new System.Windows.Forms.Button();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.browser = new ExtendedWebBrowser();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.closeMenuStrip = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.닫기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -48,7 +49,6 @@
             this.mealBtn = new System.Windows.Forms.Button();
             this.calendarBtn = new System.Windows.Forms.Button();
             this.nightMealBtn = new System.Windows.Forms.Button();
-            this.browser = new ExtendedWebBrowser();
             this.tabPage1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.closeMenuStrip.SuspendLayout();
@@ -133,7 +133,7 @@
             this.dormBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.dormBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.dormBtn.ForeColor = System.Drawing.Color.Black;
-            this.dormBtn.Location = new System.Drawing.Point(482, 32);
+            this.dormBtn.Location = new System.Drawing.Point(386, 32);
             this.dormBtn.Name = "dormBtn";
             this.dormBtn.Size = new System.Drawing.Size(90, 23);
             this.dormBtn.TabIndex = 9;
@@ -146,7 +146,7 @@
             this.nateClubBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.nateClubBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.nateClubBtn.ForeColor = System.Drawing.Color.Black;
-            this.nateClubBtn.Location = new System.Drawing.Point(866, 32);
+            this.nateClubBtn.Location = new System.Drawing.Point(770, 32);
             this.nateClubBtn.Name = "nateClubBtn";
             this.nateClubBtn.Size = new System.Drawing.Size(90, 23);
             this.nateClubBtn.TabIndex = 10;
@@ -159,7 +159,7 @@
             this.mailBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.mailBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.mailBtn.ForeColor = System.Drawing.Color.Black;
-            this.mailBtn.Location = new System.Drawing.Point(578, 32);
+            this.mailBtn.Location = new System.Drawing.Point(482, 32);
             this.mailBtn.Name = "mailBtn";
             this.mailBtn.Size = new System.Drawing.Size(90, 23);
             this.mailBtn.TabIndex = 11;
@@ -178,6 +178,17 @@
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = " ";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // browser
+            // 
+            this.browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
+                        | System.Windows.Forms.AnchorStyles.Left)
+                        | System.Windows.Forms.AnchorStyles.Right)));
+            this.browser.Location = new System.Drawing.Point(3, 3);
+            this.browser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.browser.Name = "browser";
+            this.browser.Size = new System.Drawing.Size(1016, 595);
+            this.browser.TabIndex = 0;
             // 
             // tabControl
             // 
@@ -239,12 +250,13 @@
             this.mealBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.mealBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.mealBtn.ForeColor = System.Drawing.Color.Black;
-            this.mealBtn.Location = new System.Drawing.Point(386, 32);
+            this.mealBtn.Location = new System.Drawing.Point(350, -3);
             this.mealBtn.Name = "mealBtn";
             this.mealBtn.Size = new System.Drawing.Size(90, 23);
             this.mealBtn.TabIndex = 15;
             this.mealBtn.Text = "주간 식단";
             this.mealBtn.UseVisualStyleBackColor = false;
+            this.mealBtn.Visible = false;
             this.mealBtn.Click += new System.EventHandler(this.mealBtn_Click);
             // 
             // calendarBtn
@@ -252,7 +264,7 @@
             this.calendarBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.calendarBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.calendarBtn.ForeColor = System.Drawing.Color.Black;
-            this.calendarBtn.Location = new System.Drawing.Point(674, 32);
+            this.calendarBtn.Location = new System.Drawing.Point(578, 32);
             this.calendarBtn.Name = "calendarBtn";
             this.calendarBtn.Size = new System.Drawing.Size(90, 23);
             this.calendarBtn.TabIndex = 16;
@@ -265,7 +277,7 @@
             this.nightMealBtn.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.nightMealBtn.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.nightMealBtn.ForeColor = System.Drawing.Color.Black;
-            this.nightMealBtn.Location = new System.Drawing.Point(770, 32);
+            this.nightMealBtn.Location = new System.Drawing.Point(674, 32);
             this.nightMealBtn.Name = "nightMealBtn";
             this.nightMealBtn.Size = new System.Drawing.Size(90, 23);
             this.nightMealBtn.TabIndex = 17;
@@ -273,32 +285,21 @@
             this.nightMealBtn.UseVisualStyleBackColor = false;
             this.nightMealBtn.Click += new System.EventHandler(this.nightMealBtn_Click);
             // 
-            // browser
-            // 
-            this.browser.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
-                        | System.Windows.Forms.AnchorStyles.Left)
-                        | System.Windows.Forms.AnchorStyles.Right)));
-            this.browser.Location = new System.Drawing.Point(3, 3);
-            this.browser.MinimumSize = new System.Drawing.Size(20, 20);
-            this.browser.Name = "browser";
-            this.browser.Size = new System.Drawing.Size(1016, 595);
-            this.browser.TabIndex = 0;
-            // 
             // BrowserForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
             this.ClientSize = new System.Drawing.Size(1041, 696);
-            this.Controls.Add(this.nightMealBtn);
             this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.nightMealBtn);
+            this.Controls.Add(this.epBtn);
             this.Controls.Add(this.calendarBtn);
             this.Controls.Add(this.mealBtn);
-            this.Controls.Add(this.epBtn);
             this.Controls.Add(this.tabControl);
-            this.Controls.Add(this.nateClubBtn);
             this.Controls.Add(this.portalBtn);
+            this.Controls.Add(this.nateClubBtn);
+            this.Controls.Add(this.libraryBtn);
             this.Controls.Add(this.mailBtn);
             this.Controls.Add(this.dormBtn);
-            this.Controls.Add(this.libraryBtn);
             this.Controls.Add(this.nextBtn);
             this.Controls.Add(this.bbBtn);
             this.Controls.Add(this.backBtn);

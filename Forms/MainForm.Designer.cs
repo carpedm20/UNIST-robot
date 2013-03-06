@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.browser = new System.Windows.Forms.WebBrowser();
             this.boardGrid = new System.Windows.Forms.DataGridView();
@@ -151,7 +151,6 @@
             this.buttonItem16 = new DevComponents.DotNetBar.ButtonItem();
             this.sideBarPanelItem1 = new DevComponents.DotNetBar.SideBarPanelItem();
             this.buttonItem8 = new DevComponents.DotNetBar.ButtonItem();
-            this.buttonItem12 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem17 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem11 = new DevComponents.DotNetBar.ButtonItem();
             this.buttonItem10 = new DevComponents.DotNetBar.ButtonItem();
@@ -175,7 +174,6 @@
             this.바로가기ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.포탈홈페이지ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.종합정보ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.주간식단ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.학사일정ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.야식정보ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.uNIST웹메일ToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -285,8 +283,8 @@
             this.boardGrid.AllowUserToAddRows = false;
             this.boardGrid.AllowUserToDeleteRows = false;
             this.boardGrid.AllowUserToResizeRows = false;
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.boardGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle3.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.boardGrid.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
             this.boardGrid.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
             this.boardGrid.BackgroundColor = System.Drawing.SystemColors.ControlLightLight;
@@ -1375,8 +1373,8 @@
             this.bookGridView.AllowUserToAddRows = false;
             this.bookGridView.AllowUserToDeleteRows = false;
             this.bookGridView.AllowUserToResizeRows = false;
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
-            this.bookGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle4.Font = new System.Drawing.Font("Gulim", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(129)));
+            this.bookGridView.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
             this.bookGridView.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom)
                         | System.Windows.Forms.AnchorStyles.Left)
                         | System.Windows.Forms.AnchorStyles.Right)));
@@ -1574,7 +1572,6 @@
             this.sideBarPanelItem1.Name = "sideBarPanelItem1";
             this.sideBarPanelItem1.SubItems.AddRange(new DevComponents.DotNetBar.BaseItem[] {
             this.buttonItem8,
-            this.buttonItem12,
             this.buttonItem17,
             this.buttonItem11,
             this.buttonItem10,
@@ -1588,14 +1585,6 @@
             this.buttonItem8.Name = "buttonItem8";
             this.buttonItem8.Text = "포탈 홈페이지";
             this.buttonItem8.Click += new System.EventHandler(this.buttonItem8_Click);
-            // 
-            // buttonItem12
-            // 
-            this.buttonItem12.ButtonStyle = DevComponents.DotNetBar.eButtonStyle.ImageAndText;
-            this.buttonItem12.CanCustomize = false;
-            this.buttonItem12.Name = "buttonItem12";
-            this.buttonItem12.Text = "주간 식단";
-            this.buttonItem12.Click += new System.EventHandler(this.buttonItem12_Click);
             // 
             // buttonItem17
             // 
@@ -1653,7 +1642,7 @@
             this.대학원공지ToolStripMenuItem,
             this.최신게시물ToolStripMenuItem});
             this.포탈ToolStripMenuItem.Name = "포탈ToolStripMenuItem";
-            this.포탈ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.포탈ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.포탈ToolStripMenuItem.Text = "포탈";
             // 
             // 학사공지ToolStripMenuItem
@@ -1687,7 +1676,7 @@
             // 블랙보드ToolStripMenuItem
             // 
             this.블랙보드ToolStripMenuItem.Name = "블랙보드ToolStripMenuItem";
-            this.블랙보드ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.블랙보드ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.블랙보드ToolStripMenuItem.Text = "블랙보드";
             // 
             // 학정ToolStripMenuItem
@@ -1698,7 +1687,7 @@
             this.열람실좌석현황ToolStripMenuItem,
             this.myLibraryToolStripMenuItem});
             this.학정ToolStripMenuItem.Name = "학정ToolStripMenuItem";
-            this.학정ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.학정ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.학정ToolStripMenuItem.Text = "학정";
             // 
             // 도서검색ToolStripMenuItem
@@ -1758,13 +1747,12 @@
             this.바로가기ToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.포탈홈페이지ToolStripMenuItem,
             this.종합정보ToolStripMenuItem,
-            this.주간식단ToolStripMenuItem,
             this.학사일정ToolStripMenuItem,
             this.야식정보ToolStripMenuItem,
             this.uNIST웹메일ToolStripMenuItem,
             this.네이트총재클럽ToolStripMenuItem});
             this.바로가기ToolStripMenuItem.Name = "바로가기ToolStripMenuItem";
-            this.바로가기ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.바로가기ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.바로가기ToolStripMenuItem.Text = "바로가기";
             // 
             // 포탈홈페이지ToolStripMenuItem
@@ -1780,13 +1768,6 @@
             this.종합정보ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
             this.종합정보ToolStripMenuItem.Text = "종합 정보";
             this.종합정보ToolStripMenuItem.Click += new System.EventHandler(this.종합정보ToolStripMenuItem_Click);
-            // 
-            // 주간식단ToolStripMenuItem
-            // 
-            this.주간식단ToolStripMenuItem.Name = "주간식단ToolStripMenuItem";
-            this.주간식단ToolStripMenuItem.Size = new System.Drawing.Size(166, 22);
-            this.주간식단ToolStripMenuItem.Text = "주간 식단";
-            this.주간식단ToolStripMenuItem.Click += new System.EventHandler(this.주간식단ToolStripMenuItem_Click);
             // 
             // 학사일정ToolStripMenuItem
             // 
@@ -1819,28 +1800,28 @@
             // 개인알람ToolStripMenuItem
             // 
             this.개인알람ToolStripMenuItem.Name = "개인알람ToolStripMenuItem";
-            this.개인알람ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.개인알람ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.개인알람ToolStripMenuItem.Text = "개인 알람";
             this.개인알람ToolStripMenuItem.Click += new System.EventHandler(this.개인알람ToolStripMenuItem_Click);
             // 
             // 페이스북ToolStripMenuItem
             // 
             this.페이스북ToolStripMenuItem.Name = "페이스북ToolStripMenuItem";
-            this.페이스북ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.페이스북ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.페이스북ToolStripMenuItem.Text = "페이스북";
             this.페이스북ToolStripMenuItem.Click += new System.EventHandler(this.페이스북ToolStripMenuItem_Click);
             // 
             // 보이기ToolStripMenuItem
             // 
             this.보이기ToolStripMenuItem.Name = "보이기ToolStripMenuItem";
-            this.보이기ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.보이기ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.보이기ToolStripMenuItem.Text = "보이기";
             this.보이기ToolStripMenuItem.Click += new System.EventHandler(this.보이기ToolStripMenuItem_Click);
             // 
             // 종료ToolStripMenuItem
             // 
             this.종료ToolStripMenuItem.Name = "종료ToolStripMenuItem";
-            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(126, 22);
+            this.종료ToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.종료ToolStripMenuItem.Text = "종료";
             this.종료ToolStripMenuItem.Click += new System.EventHandler(this.종료ToolStripMenuItem_Click);
             // 
@@ -2006,7 +1987,7 @@
             // 
             // sessionTimer
             // 
-            this.sessionTimer.Interval = 180000;
+            this.sessionTimer.Interval = 600000;
             this.sessionTimer.Tick += new System.EventHandler(this.sessionTimer_Tick);
             // 
             // weatherBox
@@ -2584,8 +2565,6 @@
         private DevComponents.DotNetBar.ButtonItem buttonItem4;
         private System.Windows.Forms.WebBrowser mainBrowser;
         private System.Windows.Forms.ToolStripMenuItem 종합정보ToolStripMenuItem;
-        private DevComponents.DotNetBar.ButtonItem buttonItem12;
-        private System.Windows.Forms.ToolStripMenuItem 주간식단ToolStripMenuItem;
         private System.Windows.Forms.PictureBox notifyBox;
         private System.Windows.Forms.PictureBox notifyClickBox;
         private DevComponents.DotNetBar.ButtonItem buttonItem13;

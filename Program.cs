@@ -38,6 +38,7 @@ namespace robot
         [STAThread]
         static void Main()
         {
+            
             if (myFonts == null)
             {
                 myFonts = new PrivateFontCollection();
@@ -55,6 +56,7 @@ namespace robot
                 Marshal.Copy(font, 0, fontBuffer, font.Length);
                 myBoldFonts.AddMemoryFont(fontBuffer, font.Length);
             }
+            
 
             // Application.Run(new Snake.SnakeForm());
             // Application.Run(new FacebookForm());

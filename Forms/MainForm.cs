@@ -120,13 +120,18 @@ namespace robot
 
         static public bool ieUpdateChecked = false;
 
+        bool pmsError = false;
+
         public MainForm()
         {
             InitializeComponent();
 
+            
             this.Font = new Font(Program.myFonts.Families[0], 9);
             sayLabel.Font = new Font(Program.myBoldFonts.Families[0], 9, FontStyle.Bold);
             boardSlide.Font = new Font("Malgun Gothic", 9);
+            
+
             visibleLoading();
 
             /************************************
@@ -533,10 +538,28 @@ namespace robot
         {
             /**********************************************************
              * 
-             *  최신 버전 확인
+             *  PMS 막힘 확인 확인
              *  
              **********************************************************/
 
+            if (e.Url.ToString().IndexOf("http://10.99.1.4/IIWeb/default.htm") != -1 && pmsError == false)
+            {
+                pmsError = true;
+                MessageBox.Show("PMS를 설치 혹은 우회 하셔야 합니다 :(", "Robot의 경고");
+                System.Diagnostics.Process.Start("http://10.99.1.4/IIWeb/default.htm");
+
+                System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
+                foreach (System.Diagnostics.Process p in mProcess)
+                    p.Kill();
+                Application.Exit();
+            }
+
+            /**********************************************************
+             * 
+             *  최신 버전 확인
+             *  
+             **********************************************************/
+            
             if (e.Url.ToString().IndexOf("carpedm20.net76.net/robot_version.html") != -1)
             {
                 doc = mainBrowser.Document as HtmlDocument;
@@ -671,6 +694,25 @@ namespace robot
 
             if (isLoading == false && studyGrid.Visible != true)
                 browser.Visible = true;
+
+            /**********************************************************
+             * 
+             *  PMS 막힘 확인 확인
+             *  
+             **********************************************************/
+
+            if (e.Url.ToString().IndexOf("http://10.99.1.4/IIWeb/default.htm") != -1 && pmsError == false)
+            {
+                pmsError = true;
+
+                MessageBox.Show("PMS를 설치 혹은 우회 하셔야 합니다 :(", "Robot의 경고");
+                System.Diagnostics.Process.Start("http://10.99.1.4/IIWeb/default.htm");
+
+                System.Diagnostics.Process[] mProcess = System.Diagnostics.Process.GetProcessesByName(Application.ProductName);
+                foreach (System.Diagnostics.Process p in mProcess)
+                    p.Kill();
+                Application.Exit();
+            }
 
             /**********************************************************
              * 
@@ -831,7 +873,7 @@ namespace robot
                     isLoading = false;
                     visiblePortal();
 
-                    notifyTimer.Start();
+                    // notifyTimer.Start();
                     sayTimer.Start();
                     sessionTimer.Start();
 
@@ -1081,7 +1123,7 @@ namespace robot
                 Application.DoEvents();
             }
 
-            if (browser.Url.ToString().IndexOf("rdate") != -1)
+            if (browser.Url.ToString().IndexOf("Detail.aspx") == -1)
             {
                 MessageBox.Show("입력한 값에 오류가 있습니다 :&", "Robot의 경고");
             }
@@ -2380,7 +2422,7 @@ namespace robot
             this.Visible = true;
 
             visiblePortal();
-
+                    
             browser.Navigate("http://seat.unist.ac.kr/EZ5500/RoomStatus/room_status.asp");
 
             logoPicBox.Visible = true;

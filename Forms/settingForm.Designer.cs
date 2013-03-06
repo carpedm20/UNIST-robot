@@ -56,6 +56,7 @@
             this.alarmLabel.Size = new System.Drawing.Size(73, 12);
             this.alarmLabel.TabIndex = 2;
             this.alarmLabel.Text = "새 글 알리미";
+            this.alarmLabel.Visible = false;
             // 
             // alarmSwitch
             // 
@@ -74,6 +75,7 @@
             this.alarmSwitch.TabIndex = 3;
             this.alarmSwitch.Value = true;
             this.alarmSwitch.ValueObject = "Y";
+            this.alarmSwitch.Visible = false;
             this.alarmSwitch.ValueChanged += new System.EventHandler(this.alarmSwitch_ValueChanged);
             // 
             // autoLoginLabel
@@ -81,7 +83,7 @@
             this.autoLoginLabel.AutoSize = true;
             this.autoLoginLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.autoLoginLabel.ForeColor = System.Drawing.Color.Black;
-            this.autoLoginLabel.Location = new System.Drawing.Point(12, 56);
+            this.autoLoginLabel.Location = new System.Drawing.Point(12, 18);
             this.autoLoginLabel.Name = "autoLoginLabel";
             this.autoLoginLabel.Size = new System.Drawing.Size(69, 12);
             this.autoLoginLabel.TabIndex = 4;
@@ -95,7 +97,7 @@
             // 
             this.autoLoginSwitch.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.autoLoginSwitch.ForeColor = System.Drawing.Color.Black;
-            this.autoLoginSwitch.Location = new System.Drawing.Point(149, 51);
+            this.autoLoginSwitch.Location = new System.Drawing.Point(149, 13);
             this.autoLoginSwitch.Name = "autoLoginSwitch";
             this.autoLoginSwitch.OffText = "끔";
             this.autoLoginSwitch.OnText = "켬";
@@ -112,7 +114,7 @@
             // 
             this.saySwitch.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.saySwitch.ForeColor = System.Drawing.Color.Black;
-            this.saySwitch.Location = new System.Drawing.Point(149, 91);
+            this.saySwitch.Location = new System.Drawing.Point(149, 53);
             this.saySwitch.Name = "saySwitch";
             this.saySwitch.OffText = "끔";
             this.saySwitch.OnText = "켬";
@@ -128,7 +130,7 @@
             this.sayLabel.AutoSize = true;
             this.sayLabel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.sayLabel.ForeColor = System.Drawing.Color.Black;
-            this.sayLabel.Location = new System.Drawing.Point(12, 95);
+            this.sayLabel.Location = new System.Drawing.Point(12, 57);
             this.sayLabel.Name = "sayLabel";
             this.sayLabel.Size = new System.Drawing.Size(97, 12);
             this.sayLabel.TabIndex = 7;
@@ -139,7 +141,7 @@
             this.pictureBox1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.pictureBox1.ForeColor = System.Drawing.Color.Black;
             this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(14, 157);
+            this.pictureBox1.Location = new System.Drawing.Point(14, 119);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(201, 84);
             this.pictureBox1.TabIndex = 9;
@@ -151,7 +153,7 @@
             this.label1.AutoSize = true;
             this.label1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label1.ForeColor = System.Drawing.Color.Black;
-            this.label1.Location = new System.Drawing.Point(76, 243);
+            this.label1.Location = new System.Drawing.Point(76, 205);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(76, 12);
             this.label1.TabIndex = 10;
@@ -163,7 +165,7 @@
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
             this.label2.ForeColor = System.Drawing.Color.Black;
-            this.label2.Location = new System.Drawing.Point(12, 133);
+            this.label2.Location = new System.Drawing.Point(12, 95);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(97, 12);
             this.label2.TabIndex = 12;
@@ -177,7 +179,7 @@
             // 
             this.facebookSwitch.BackgroundStyle.CornerType = DevComponents.DotNetBar.eCornerType.Square;
             this.facebookSwitch.ForeColor = System.Drawing.Color.Black;
-            this.facebookSwitch.Location = new System.Drawing.Point(149, 129);
+            this.facebookSwitch.Location = new System.Drawing.Point(149, 91);
             this.facebookSwitch.Name = "facebookSwitch";
             this.facebookSwitch.OffText = "끔";
             this.facebookSwitch.OnText = "켬";
@@ -191,7 +193,7 @@
             // SettingForm
             // 
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.None;
-            this.ClientSize = new System.Drawing.Size(233, 260);
+            this.ClientSize = new System.Drawing.Size(233, 226);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.facebookSwitch);
             this.Controls.Add(this.label1);

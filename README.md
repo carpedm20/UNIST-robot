@@ -9,7 +9,7 @@ The main motivation of this program is that the access to UNIST web services is 
 
 Currently, this project is closed because of UNIST portal bot.
 
-Related post : http://carpedm20.blogspot.kr/2013/03/robot.html
+More info : http://carpedm20.blogspot.kr/2013/03/robot.html
 
 Copyright (c) 2013 Kim Tae Hoon
 
